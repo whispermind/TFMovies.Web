@@ -49,6 +49,10 @@ export const mainTheme = createTheme({
   typography: {
     fontFamily: "Archivo",
 
+    Input: {
+      fontSize: "0.9375rem",
+      lineHeight: "1.5rem",
+    },
     HHeader: {
       fontSize: "3.25rem",
       lineHeight: "4.875rem",

@@ -1,3 +1,4 @@
+import React from "react";
 import {
   AccentColors,
   mainColors,
@@ -45,6 +46,7 @@ declare module "@mui/material/styles" {
   }
 
   interface TypographyVariants {
+    Input: React.CSSProperties
     HHeader: React.CSSProperties;
     HBody: React.CSSProperties;
     HBodyBold: React.CSSProperties;
@@ -59,6 +61,7 @@ declare module "@mui/material/styles" {
   }
 
   interface TypographyVariantsOptions {
+    Input: React.CSSProperties
     HHeader: React.CSSProperties;
     HBody: React.CSSProperties;
     HBodyBold: React.CSSProperties;
@@ -75,6 +78,7 @@ declare module "@mui/material/styles" {
 
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
+    Input: true;
     HHeader: true;
     HBody: true;
     HBodyBold: true;

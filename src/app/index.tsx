@@ -1,3 +1,8 @@
+import { ThemeProvider, CssBaseline } from "@mui/material"
+import { mainTheme } from "../theme"
+
 export const App = () => (
-  <p>Start working from here...</p>
+  <ThemeProvider theme={mainTheme}>
+    <CssBaseline />
+  </ThemeProvider>
 )

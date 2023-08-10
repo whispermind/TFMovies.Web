@@ -1,10 +1,11 @@
-import React from "react";
+import { CSSProperties } from "react";
+
 import {
   AccentColors,
   mainColors,
   greyColors,
   additionalColors,
-} from "../../theme/theme";
+} from "../styles/theme";
 
 declare module "@mui/material/styles" {
   interface PaletteColor {
@@ -46,33 +47,33 @@ declare module "@mui/material/styles" {
   }
 
   interface TypographyVariants {
-    Input: React.CSSProperties
-    HHeader: React.CSSProperties;
-    HBody: React.CSSProperties;
-    HBodyBold: React.CSSProperties;
-    Sector: React.CSSProperties;
-    ABody: React.CSSProperties;
-    ABodyBold: React.CSSProperties;
-    ABodyItalic: React.CSSProperties;
-    ABodyUnderlined: React.CSSProperties;
-    ABodyHyperlink: React.CSSProperties;
-    ASubheader: React.CSSProperties;
-    ASecondHeader: React.CSSProperties;
+    Input: CSSProperties;
+    HHeader: CSSProperties;
+    HBody: CSSProperties;
+    HBodyBold: CSSProperties;
+    Sector: CSSProperties;
+    ABody: CSSProperties;
+    ABodyBold: CSSProperties;
+    ABodyItalic: CSSProperties;
+    ABodyUnderlined: CSSProperties;
+    ABodyHyperlink: CSSProperties;
+    ASubheader: CSSProperties;
+    ASecondHeader: CSSProperties;
   }
 
   interface TypographyVariantsOptions {
-    Input: React.CSSProperties
-    HHeader: React.CSSProperties;
-    HBody: React.CSSProperties;
-    HBodyBold: React.CSSProperties;
-    Sector: React.CSSProperties;
-    ABody: React.CSSProperties;
-    ABodyBold: React.CSSProperties;
-    ABodyItalic: React.CSSProperties;
-    ABodyUnderlined: React.CSSProperties;
-    ABodyHyperlink: React.CSSProperties;
-    ASubheader: React.CSSProperties;
-    ASecondHeader: React.CSSProperties;
+    Input: CSSProperties;
+    HHeader: CSSProperties;
+    HBody: CSSProperties;
+    HBodyBold: CSSProperties;
+    Sector: CSSProperties;
+    ABody: CSSProperties;
+    ABodyBold: CSSProperties;
+    ABodyItalic: CSSProperties;
+    ABodyUnderlined: CSSProperties;
+    ABodyHyperlink: CSSProperties;
+    ASubheader: CSSProperties;
+    ASecondHeader: CSSProperties;
   }
 }
 

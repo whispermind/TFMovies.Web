@@ -1,7 +1,8 @@
 import { createTheme } from "@mui/material";
-import ArchivoItalic from "./../fonts/Archivo-Italic.ttf";
-import ArchivoRegular from "./../fonts/Archivo-Regular.ttf";
-import ArchivoBold from "./../fonts/Archivo-Bold.ttf";
+
+import ArchivoItalic from "../assets/fonts/Archivo-Italic.ttf";
+import ArchivoRegular from "../assets/fonts/Archivo-Regular.ttf";
+import ArchivoBold from "../assets/fonts/Archivo-Bold.ttf";
 
 export interface mainColors {
   main?: string;

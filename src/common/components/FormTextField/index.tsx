@@ -1,22 +1,23 @@
+import { useCallback, useState, forwardRef } from "react";
 import { TextField, TextFieldProps } from "@mui/material";
-import { useCallback, useState } from "react";
 
-export const FormTextField = (props: TextFieldProps) => {
-  const { sx, variant } = props
+export const FormTextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
+  const { variant } = props
   const [inputValue, setInputValue] = useState("")
 
   const onChange = useCallback(({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(value);
   }, [setInputValue])
-  return <TextField {...props} onChange={onChange} value={inputValue} variant={variant || "outlined"} sx={sx} InputProps={
+
+  return <TextField ref={ref} onChange={onChange} value={inputValue} variant={variant || "outlined"} {...props} InputProps={
     {
       ...props.InputProps,
       style: {
-        borderRadius: "8px",
-        height: "44px",
-        border: "2px",
-        padding: "10px, 16px, 10px, 16px",
+        borderRadius: "0.5rem",
+        height: "2.75rem",
+        border: "0.125rem",
+        padding: "0.625rem 1rem",
       }
     }
   } />
-}
+})

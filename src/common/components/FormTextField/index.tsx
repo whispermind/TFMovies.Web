@@ -19,6 +19,8 @@ export const FormTextField = forwardRef<HTMLInputElement, TextFieldProps>((props
             },
           } = theme;
 
+          const additionalStyles = typeof InputProps?.sx === 'function' ? InputProps.sx(theme) : InputProps?.sx || {};
+
           return {
             height: "2.75rem",
             border: `0.125rem solid ${strokeGrey}`,
@@ -31,8 +33,9 @@ export const FormTextField = forwardRef<HTMLInputElement, TextFieldProps>((props
               padding: 0
             },
 
-            "& input:placeholder-shown": {
+            "& input::placeholder": {
               color: grey,
+              opacity: 1
             },
 
             ":hover": {
@@ -60,7 +63,7 @@ export const FormTextField = forwardRef<HTMLInputElement, TextFieldProps>((props
               borderColor: "#b54f4f",
               "& input::placeholder": { color: "transparent" },
             },
-            ...InputProps?.sx
+            ...additionalStyles
           }
         },
       }

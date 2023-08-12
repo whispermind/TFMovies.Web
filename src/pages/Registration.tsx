@@ -1,7 +1,11 @@
-import { Registration } from '../modules/registration'
+import { RegistrationForm } from '../modules/registration/RegistrationForm'
+import { RegistrationDivider } from '../modules/registration'
 
 export const RegistrationPage = () => {
   return (
-    <Registration />
+    <>
+      <RegistrationForm />
+      <RegistrationDivider />
+    </>
   )
 }

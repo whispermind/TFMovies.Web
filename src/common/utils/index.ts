@@ -1,3 +1,2 @@
-export { UserIcon } from '../icons/User';
-export { EmailIcon } from "../icons/Email";
-export { PasswordIcon } from "../icons/Password"
+export { passwordRegExp } from "./regexp/password";
+export { emailRegExp } from "./regexp/email";

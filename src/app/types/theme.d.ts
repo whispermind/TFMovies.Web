@@ -7,98 +7,62 @@ import {
   additionalColors,
 } from "../styles/theme";
 
+interface IPalette {
+  mainColors: mainColors;
+  accentColors: AccentColors;
+  greyColors: greyColors;
+  additionalColors: additionalColors;
+}
+
+interface IPaletteColors {
+  white?: string;
+  lightGrey?: string;
+  black?: string;
+  graphite?: string;
+  red?: string;
+  lightOrange?: string;
+  grey?: string;
+  strokeGrey?: string;
+  errorRed?: string;
+}
+
+interface ITypoVariants {
+  Input: CSSProperties;
+  HHeader: CSSProperties;
+  HBody: CSSProperties;
+  HBodyBold: CSSProperties;
+  Sector: CSSProperties;
+  ABody: CSSProperties;
+  ABodyBold: CSSProperties;
+  ABodyItalic: CSSProperties;
+  ABodyUnderlined: CSSProperties;
+  ABodyHyperlink: CSSProperties;
+  ASubheader: CSSProperties;
+  ASecondHeader: CSSProperties;
+}
+
 declare module "@mui/material/styles" {
-  interface PaletteColor {
-    white?: string;
-    lightGrey?: string;
-    black?: string;
-    graphite?: string;
-    red?: string;
-    lightOrange?: string;
-    grey?: string;
-    strokeGrey?: string;
-    errorRed?: string;
-  }
+  interface PaletteColor extends IPaletteColors {}
 
-  interface SimplePaletteColorOptions {
-    white?: string;
-    lightGrey?: string;
-    black?: string;
-    graphite?: string;
-    red?: string;
-    lightOrange?: string;
-    grey?: string;
-    strokeGrey?: string;
-    errorRed?: string;
-  }
+  interface SimplePaletteColorOptions extends IPaletteColors {}
 
-  interface Palette {
-    mainColors: mainColors;
-    accentColors: AccentColors;
-    greyColors: greyColors;
-    additionalColors: additionalColors;
-  }
+  interface Palette extends IPalette {}
 
-  interface PaletteOptions {
-    mainColors?: mainColors;
-    accentColors?: AccentColors;
-    greyColors?: greyColors;
-    additionalColors?: additionalColors;
-  }
+  interface PaletteOptions extends IPalette {}
 
-  interface TypographyVariants {
-    Input: CSSProperties;
-    HHeader: CSSProperties;
-    HBody: CSSProperties;
-    HBodyBold: CSSProperties;
-    Sector: CSSProperties;
-    ABody: CSSProperties;
-    ABodyBold: CSSProperties;
-    ABodyItalic: CSSProperties;
-    ABodyUnderlined: CSSProperties;
-    ABodyHyperlink: CSSProperties;
-    ASubheader: CSSProperties;
-    ASecondHeader: CSSProperties;
-  }
+  interface TypographyVariants extends ITypoVariants {}
 
-  interface TypographyVariantsOptions {
-    Input: CSSProperties;
-    HHeader: CSSProperties;
-    HBody: CSSProperties;
-    HBodyBold: CSSProperties;
-    Sector: CSSProperties;
-    ABody: CSSProperties;
-    ABodyBold: CSSProperties;
-    ABodyItalic: CSSProperties;
-    ABodyUnderlined: CSSProperties;
-    ABodyHyperlink: CSSProperties;
-    ASubheader: CSSProperties;
-    ASecondHeader: CSSProperties;
-  }
+  interface TypographyVariantsOptions extends ITypoVariants {}
 }
 
 declare module "@mui/material/Typography" {
-  interface TypographyPropsVariantOverrides {
-    Input: true;
-    HHeader: true;
-    HBody: true;
-    HBodyBold: true;
-    Sector: true;
-    ABody: true;
-    ABodyBold: true;
-    ABodyItalic: true;
-    ABodyUnderlined: true;
-    ABodyHyperlink: true;
-    ASubheader: true;
-    ASecondHeader: true;
-  }
+  interface TypographyPropsVariantOverrides extends Record<keyof ITypoVariants, true> {}
 }
 
 declare module "@mui/material/Button" {
-  interface ButtonPropsColorOverrides {
-    mainColors: true;
-    accentColors: true;
-    greyColors: true;
-    additionalColors: true;
-  }
+  interface ButtonPropsColorOverrides extends IPaletteColors {}
+}
+
+declare module "@mui/material/TextField" {
+  interface TextFieldPropsColorOverrides extends IPaletteColors {}
 }

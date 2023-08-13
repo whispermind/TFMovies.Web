@@ -1,9 +1,11 @@
 export { PassswordIcon } from "./Icons/password";
 export { UserIcon } from "./Icons/user";
 export { EmailIcon } from "./Icons/email";
-export { FormTextFieldIconed } from "./FormTextFieldIconed";
+export { PrimaryButton } from "./Buttons/PrimaryButton/index";
 export { SignUpButton } from "./Buttons/SignUpButton";
-export { StyledSignUpButton } from "./Buttons/SignUpButton/styled";
-export { FormTextField } from "./FormTextField";
+export { FormTextFieldIconed } from "./Inputs/FormTextFieldIconed";
+export { FormTextField } from "./Inputs/FormTextField";
 
-export type { TFormTextFieldIconedProps } from "./FormTextFieldIconed";
+export type { TFormTextFieldIconedProps } from "./Inputs/FormTextFieldIconed";
+export type { IWithIconProps } from "./Inputs/FormTextFieldIconed/index";
+export type { IPrimaryButtonProps } from "./Buttons/PrimaryButton/index";

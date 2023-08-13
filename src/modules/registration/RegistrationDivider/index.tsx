@@ -1,9 +1,10 @@
-import { DividerProps, Typography } from "@mui/material"
-
-import { StyledDivider } from "./styled"
+import { DividerProps, Divider, Typography } from "@mui/material"
 
 export const RegistrationDivider = (props: DividerProps) => (
-<StyledDivider {...props}>
-  <Typography variant="HBody">or</Typography>
-</StyledDivider>
+  <Divider {...props} sx={{
+    margin: "2rem 0",
+    "& > span": { padding: "0 2.5rem" }
+  }}>
+    <Typography variant="HBody">or</Typography>
+  </Divider>
 )

@@ -11,6 +11,7 @@ export const FormTextField = forwardRef<HTMLInputElement, TextFieldProps>((props
         disableUnderline: true,
         sx: (theme) => {
           const {
+            shape: { borderRadius },
             typography: { Input: { fontSize, lineHeight } },
             palette: {
               greyColors: { strokeGrey, grey },
@@ -22,9 +23,9 @@ export const FormTextField = forwardRef<HTMLInputElement, TextFieldProps>((props
           const additionalStyles = typeof InputProps?.sx === 'function' ? InputProps.sx(theme) : InputProps?.sx || {};
 
           return {
-            height: "2.75rem",
-            border: `0.125rem solid ${strokeGrey}`,
-            borderRadius: "0.5rem",
+            height: "44px",
+            border: `2px solid ${strokeGrey}`,
+            borderRadius: `${borderRadius}px`,
             padding: "0.625rem 1rem",
             fontSize,
             lineHeight,
@@ -63,6 +64,7 @@ export const FormTextField = forwardRef<HTMLInputElement, TextFieldProps>((props
               borderColor: "#b54f4f",
               "& input::placeholder": { color: "transparent" },
             },
+
             ...additionalStyles
           }
         },

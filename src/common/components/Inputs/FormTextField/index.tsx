@@ -20,7 +20,7 @@ export const FormTextField = forwardRef<HTMLInputElement, TextFieldProps>((props
             },
           } = theme;
 
-          const additionalStyles = typeof InputProps?.sx === 'function' ? InputProps.sx(theme) : InputProps?.sx || {};
+          const additionalStyles = typeof InputProps?.sx === 'function' ? InputProps.sx(theme) : InputProps?.sx;
 
           return {
             height: "44px",

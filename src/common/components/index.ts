@@ -1,6 +1,6 @@
-export { PassswordIcon } from "./Icons/password";
-export { UserIcon } from "./Icons/user";
-export { EmailIcon } from "./Icons/email";
+export { PassswordIcon } from "./Icons/PasswordIcon";
+export { UserIcon } from "./Icons/UserIcon";
+export { EmailIcon } from "./Icons/EmailIcon";
 export { PrimaryButton } from "./Buttons/PrimaryButton/index";
 export { SignUpButton } from "./Buttons/SignUpButton";
 export { FormTextFieldIconed } from "./Inputs/FormTextFieldIconed";

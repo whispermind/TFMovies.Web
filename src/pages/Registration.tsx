@@ -1,13 +1,17 @@
-import { RegistrationForm } from '../modules/registration/RegistrationForm'
-import { RegistrationDivider } from '../modules/registration'
-import { PrimaryButton } from '../common/components'
+import { Grid } from '@mui/material';
+import { Registration } from "../modules/registration"
+import { FormWrapper } from '../common/components/FormWrapper';
 
 export const RegistrationPage = () => {
   return (
     <>
-      <RegistrationForm />
-      <RegistrationDivider />
-      <PrimaryButton  innerText="Sign Up" variant="second" disableRipple sx={{width: "100%"}}/>
+      <Grid container maxWidth="xl" justifyContent="center" margin="0 auto">
+        <Grid item xl={8}>
+          <FormWrapper>
+            <Registration />
+          </FormWrapper>
+        </Grid>
+      </Grid>
     </>
   )
 }

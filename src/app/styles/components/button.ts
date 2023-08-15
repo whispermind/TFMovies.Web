@@ -18,7 +18,6 @@ export const MuiButton: StylesOverrides<
       style: {
         height: "44px",
         border: `2px solid ${main}`,
-        borderRadius: "8px",
         color: main,
         textTransform: "capitalize",
         backgroundColor: "transparent",
@@ -33,7 +32,6 @@ export const MuiButton: StylesOverrides<
       props: { variant: "ghost" },
       style: {
         height: "44px",
-        borderRadius: "8px",
         color: graphite,
         textTransform: "capitalize",
         backgroundColor: "transparent",
@@ -49,7 +47,6 @@ export const MuiButton: StylesOverrides<
       style: {
         height: "44px",
         border: `2px solid ${strokeGrey}`,
-        borderRadius: "8px",
         color: graphite,
         textTransform: "capitalize",
         backgroundColor: "transparent",
@@ -66,7 +63,6 @@ export const MuiButton: StylesOverrides<
       style: {
         height: "44px",
         padding: "0 0.75rem",
-        borderRadius: "8px",
         columnGap: "1.375rem",
         fontSize: "0.9375rem",
         color: white,

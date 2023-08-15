@@ -20,6 +20,7 @@ export const typography = {
     lineHeight: "1.5rem",
     fontWeight: "normal",
     fontStyle: "normal",
+    textAlign: "center" as const,
   },
 
   HBodyBold: {

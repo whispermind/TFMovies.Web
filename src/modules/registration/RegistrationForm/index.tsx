@@ -64,5 +64,6 @@ export const RegistrationForm = () => {
         <SignUpButton />
       </Stack>
     </form>
+    
   )
 }

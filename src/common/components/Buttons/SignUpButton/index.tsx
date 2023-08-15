@@ -1,6 +1,6 @@
 import { ButtonProps, Button } from "@mui/material";
 
-import { EmailIcon } from "../../Icons/email";
+import { EmailIcon } from "../../Icons/EmailIcon";
 
 
 export const SignUpButton = (props: ButtonProps) => {

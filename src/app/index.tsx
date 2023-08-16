@@ -1,14 +1,18 @@
-
-import { ThemeProvider, CssBaseline, Grid } from "@mui/material"
+import { ThemeProvider, CssBaseline, Grid, Container } from "@mui/material"
+import { Outlet } from "react-router-dom"
 
 import { mainTheme } from "./styles/theme"
-import { RegistrationPage } from "../pages/Registration"
+
 
 export const App = () => (
   <ThemeProvider theme={mainTheme}>
     <CssBaseline />
-    <Grid container maxWidth="xl" justifyContent="center" margin="0 auto" xl={8}>
-      <RegistrationPage />
-    </Grid>
+    <Container maxWidth="xl">
+      <Grid container justifyContent="center" margin="0 auto" xl={8.15}>
+        <Grid item width="100%">
+          <Outlet />
+        </Grid>
+      </Grid>
+    </Container>
   </ThemeProvider>
 )

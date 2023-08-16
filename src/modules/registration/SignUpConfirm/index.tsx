@@ -21,13 +21,17 @@ export const SignUpConfirm = ({ email }: ISignUpCofnrimProps) => {
     setTimeout(() => setThrottle(false), throttleTiming);
   }, [throttle, setThrottle]);
 
+  const heading = "Thank you for Registering";
+  const description = `Thank you for registering on the Portal! We are sure that together with you we can be even better.
+  We have sent a letter confirming your registration to the specified email. If you didn't receive it,
+  please check your spam folder or click the "Send again" button below`;
+
+
   return (
     <>
       <AuthWrapper>
-        <LogoHeading marginBottom={3.75} headingText="Thank you for Registering">
-          Thank you for registering on the Portal! We are sure that together with you we can be even better.
-          We have sent a letter confirming your registration to the specified email. If you didn't receive it,
-          please check your spam folder or click the "Send again" button below
+        <LogoHeading marginBottom={3.75} headingText={heading}>
+          {description}
         </LogoHeading>
         <PrimaryButton disabled={throttle} onClick={onClick} innerText="Send mail again" variant="customOutlined" disableRipple fullWidth />
       </AuthWrapper>

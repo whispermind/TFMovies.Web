@@ -1,8 +1,8 @@
 import { useState, useCallback } from "react";
 
-import { SignUp, SignUpConfirm, ISignUpForm } from "../modules/registration";
+import { SignUp, SignUpConfirm, ISignUpForm } from "../../modules/registration";
 
-export const RegistrationPage = () => {
+export const SignUpPage = () => {
   const [submitedMail, setSubmitedMail] = useState('');
 
   const onSubmit = useCallback((formData: ISignUpForm) => {

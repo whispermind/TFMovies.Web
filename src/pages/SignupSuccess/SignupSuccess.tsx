@@ -1,6 +1,6 @@
-import { AuthWrapper, LogoHeading, PrimaryButton } from '../common/components';
+import { AuthWrapper, LogoHeading, PrimaryButton } from '../../common/components';
 
-export const RegistrationSucessPage = () => {
+export const SignUpSuccessPage = () => {
   return (
     <>
       <AuthWrapper>

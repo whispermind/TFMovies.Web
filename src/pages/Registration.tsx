@@ -1,17 +1,15 @@
-import { Grid } from '@mui/material';
-import { Registration } from "../modules/registration"
-import { FormWrapper } from '../common/components/FormWrapper';
+import { useState, useCallback } from "react";
+
+import { SignUp, SignUpConfirm, ISignUpForm } from "../modules/registration";
 
 export const RegistrationPage = () => {
+  const [submitedMail, setSubmitedMail] = useState('');
+
+  const onSubmit = useCallback((formData: ISignUpForm) => {
+    setSubmitedMail(formData.email)
+  }, [setSubmitedMail])
+
   return (
-    <>
-      <Grid container maxWidth="xl" justifyContent="center" margin="0 auto">
-        <Grid item xl={8}>
-          <FormWrapper>
-            <Registration />
-          </FormWrapper>
-        </Grid>
-      </Grid>
-    </>
+    submitedMail ? <SignUpConfirm email={submitedMail} /> : <SignUp onSubmit={onSubmit} />
   )
 }

@@ -26,6 +26,10 @@ export const MuiButton: StylesOverrides<
           color: white,
           backgroundColor: main,
         },
+
+        ":disabled": {
+          opacity: "0.3",
+        },
       },
     },
     {

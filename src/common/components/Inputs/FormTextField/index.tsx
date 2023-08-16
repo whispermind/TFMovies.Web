@@ -24,9 +24,9 @@ export const FormTextField = forwardRef<HTMLInputElement, TextFieldProps>((props
 
           return {
             height: "44px",
+            padding: "0.625rem 1rem",
             border: `2px solid ${strokeGrey}`,
             borderRadius: `${borderRadius}px`,
-            padding: "0.625rem 1rem",
             fontSize,
             lineHeight,
 

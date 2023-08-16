@@ -4,11 +4,11 @@ import { PropsWithChildren } from "react";
 import { LogoIcon } from "../Icons/LogoIcon"
 import { Tagline } from "../Tagline";
 
-interface IRegistrationHeadingProps {
+export interface ILogoHeadingProps {
   headingText?: string;
 }
 
-export const LogoHeading = ({ headingText, children, ...restProps }: PropsWithChildren<IRegistrationHeadingProps & StackProps>) => {
+export const LogoHeading = ({ headingText, children, ...restProps }: PropsWithChildren<ILogoHeadingProps & StackProps>) => {
   return (
     <Stack rowGap="0.75rem" alignItems="center" {...restProps}>
       <LogoIcon sx={{ width: "120px", height: "115px" }} />

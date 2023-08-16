@@ -3,16 +3,27 @@ import { Stack } from '@mui/material'
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from 'yup'
 
-import { FormTextFieldIconed, TFormTextFieldIconedProps, SignUpButton } from '../../../common/components'
+import {
+  PassswordIcon,
+  UserIcon,
+  EmailIcon,
+  FormTextFieldIconed,
+  TFormTextFieldIconedProps,
+  SignUpButton
+} from '../../../common/components'
 import { emailRegExp, passwordRegExp } from '../../../common/utils'
 import { withController } from '../../../common/hocs'
-import { PassswordIcon, UserIcon, EmailIcon } from '../../../common/components'
 
-interface ISignUpForm {
+
+export interface ISignUpForm {
   nickname: string,
   email: string,
   password: string,
   passwordConfirm: string
+}
+
+export interface ISignUpFormProps {
+  onSubmit: (data: ISignUpForm) => void
 }
 
 const schema = yup.object().shape({
@@ -31,7 +42,7 @@ const schema = yup.object().shape({
     .oneOf([yup.ref('password')], "The password must be the same")
 })
 
-export const RegistrationForm = () => {
+export const SignUpForm = ({ onSubmit }: ISignUpFormProps) => {
   const { handleSubmit, control } = useForm<ISignUpForm>({
     defaultValues: {
       nickname: "",
@@ -48,12 +59,8 @@ export const RegistrationForm = () => {
   const Password = withController<ISignUpForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
   const PasswordConfirm = withController<ISignUpForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
 
-  const onSubmit = handleSubmit((formData: ISignUpForm) => {
-    console.log(formData)
-  })
-
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Stack sx={{
         rowGap: "1.75rem",
       }}>
@@ -64,6 +71,6 @@ export const RegistrationForm = () => {
         <SignUpButton />
       </Stack>
     </form>
-    
+
   )
 }

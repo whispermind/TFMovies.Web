@@ -1,6 +1,6 @@
 import { styled, Box } from "@mui/material";
 
-export const FormWrapper = styled(Box)(({ theme }) => {
+export const AuthWrapper = styled(Box)(({ theme }) => {
   const { palette: {
     mainColors: { white },
     greyColors: { strokeGrey }

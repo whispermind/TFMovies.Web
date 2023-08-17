@@ -23,7 +23,7 @@ export const schema = yup.object().shape({
     .string()
     .required("Nickname is required")
     .min(2, "Minimum nickname length is 2")
-    .max(16, "Maximum nickname length is 16 ")
+    .max(16, "Maximum nickname length is 16")
     .matches(nicknameRegExp, "Nickname must contain only letters"),
   email: yup.string().required("The email is required").matches(emailRegExp, "The email must be correct"),
   password: yup
@@ -59,11 +59,7 @@ export const SignUpForm = ({ onSubmit }: ISignUpFormProps) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Stack
-        sx={{
-          rowGap: "1.75rem"
-        }}
-      >
+      <Stack rowGap={3.5}>
         <Nickname
           type="text"
           name="nickname"

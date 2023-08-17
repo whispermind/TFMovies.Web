@@ -1,3 +1,4 @@
-export { SignUpPage } from "./SignUp/Signup";
-export { SignUpSuccessPage } from "./SignupSuccess/SignupSuccess";
+export { SignUpPage } from "./SignUpPage/Signup";
+export { SignUpSuccessPage } from "./SignupSuccessPage/SignupSuccess";
 export { ErrorPage } from "./ErrorPage";
+export { SignInPage } from "./SignInPage";

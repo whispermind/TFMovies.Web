@@ -56,6 +56,7 @@ interface ITypoVariants {
   ABodyHyperlink: CSSProperties;
   ASubheader: CSSProperties;
   ASecondHeader: CSSProperties;
+  FormHyperLink: CSSProperties;
 }
 
 declare module "@mui/material/styles" {

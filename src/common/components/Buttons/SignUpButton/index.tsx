@@ -7,7 +7,6 @@ export const SignUpButton = (props: ButtonProps) => {
     <Button
       variant="signup"
       type="submit"
-      disableRipple
       {...props}
     >
       <EmailIcon

@@ -17,7 +17,6 @@
     "import/prefer-default-export": 0,
     "react/jsx-props-no-spreading": 0,
     "react/require-default-props": 0,
-    "@typescript-eslint/comma-dangle": "off",
     "@typescript-eslint/no-unused-vars": 1,
     "max-len": ["error", {"code": 160}],
     "function-call-argument-newline": "warn",

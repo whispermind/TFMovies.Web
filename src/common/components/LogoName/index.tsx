@@ -1,6 +1,6 @@
 import { Typography, TypographyProps } from "@mui/material";
 
-export const Tagline = (props: TypographyProps) => {
+export const LogoName = (props: TypographyProps) => {
   return (
     <Typography {...props}>
       Media

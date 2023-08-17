@@ -86,5 +86,13 @@ export const typography = {
     lineHeight: "2.5rem",
     fontWeight: "bold",
     fontStyle: "normal"
+  },
+
+  FormHyperLink: {
+    fontSize: "0.875rem",
+    lineHeight: "1.875rem",
+    fontWeight: "500",
+    fontStyle: "normal",
+    textAlign: "center" as const
   }
 };

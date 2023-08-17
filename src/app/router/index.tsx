@@ -1,7 +1,7 @@
 import { createRoutesFromElements, createBrowserRouter, Route } from "react-router-dom";
 
 import { App } from "..";
-import { ErrorPage, SignUpSuccessPage, SignUpPage } from "../../pages";
+import { ErrorPage, SignUpSuccessPage, SignUpPage, SignInPage } from "../../pages";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,6 +17,10 @@ export const router = createBrowserRouter(
       <Route
         path="signup/:uuid"
         element={<SignUpSuccessPage />}
+      />
+      <Route
+        path="signin"
+        element={<SignInPage />}
       />
     </Route>
   )

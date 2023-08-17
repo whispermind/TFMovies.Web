@@ -1,9 +1,8 @@
 import { createTheme } from "@mui/material";
 
+import { MuiLink, MuiButtonBase, MuiButton, MuiCssBaseline } from "./components";
 import { typography } from "./typography";
 import { palette } from "./palette";
-import { MuiCssBaseline } from "./components/cssbaseline";
-import { MuiButton } from "./components/button";
 import { breakpoints } from "./breakpoints";
 
 export const mainTheme = createTheme({
@@ -15,6 +14,8 @@ export const mainTheme = createTheme({
   breakpoints,
   components: {
     MuiCssBaseline,
-    MuiButton
+    MuiButton,
+    MuiButtonBase,
+    MuiLink
   }
 });

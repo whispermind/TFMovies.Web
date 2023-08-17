@@ -1,6 +1,7 @@
 import { ButtonProps, Interpolation, Theme } from "@mui/material";
 
 import { palette } from "../palette";
+import { MuiRouterLink } from "../../../common/components";
 
 const {
   mainColors: { graphite, main, white, black },
@@ -76,4 +77,10 @@ export const MuiButton: StylesOverrides<ButtonProps["variant"], Interpolation<{ 
       }
     }
   ]
+};
+
+export const MuiButtonBase = {
+  defaultProps: {
+    LinkComponent: MuiRouterLink
+  }
 };

@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-import { PrimaryButton, AuthWrapper, LogoHeading } from "../../../common/components";
+import { PrimaryButton, LogAuthWrapper, LogoHeading } from "../../../common/components";
 
 const throttleTiming = 20000;
 
@@ -26,10 +26,10 @@ export const SignUpConfirm = ({ email }: ISignUpCofnrimProps) => {
   please check your spam folder or click the "Send again" button below`;
 
   return (
-    <AuthWrapper>
+    <LogAuthWrapper>
       <LogoHeading
-        marginBottom={3.75}
-        headingText={heading}
+        marginBottom={6.5}
+        heading={heading}
       >
         {description}
       </LogoHeading>
@@ -38,9 +38,8 @@ export const SignUpConfirm = ({ email }: ISignUpCofnrimProps) => {
         onClick={onClick}
         innerText="Send mail again"
         variant="customOutlined"
-        disableRipple
         fullWidth
       />
-    </AuthWrapper>
+    </LogAuthWrapper>
   );
 };

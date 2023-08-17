@@ -6,20 +6,20 @@ export const palette = {
     white: "#FFF",
     lightGrey: "#F5F5F5",
     black: "#060606",
-    graphite: "#242424",
+    graphite: "#242424"
   },
 
   accentColors: {
     orange: "#F26601",
-    lightOrange: "#FFECDE",
+    lightOrange: "#FFECDE"
   },
 
   greyColors: {
     grey: "#676767",
-    strokeGrey: "#D4D4D4",
+    strokeGrey: "#D4D4D4"
   },
 
   additionalColors: {
-    errorRed: "#EA0000",
-  },
-}
+    errorRed: "#EA0000"
+  }
+};

@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 
-export interface mainColors {
+export interface IMainColors {
   main?: string;
   white?: string;
   lightGrey?: string;
@@ -8,27 +8,27 @@ export interface mainColors {
   graphite?: string;
 }
 
-export interface AccentColors {
+export interface IAccentColors {
   orange?: string;
   lightOrange?: string;
 }
 
-export interface greyColors {
+export interface IGreyColors {
   grey?: string;
   strokeGrey?: string;
 }
 
-export interface additionalColors {
+export interface IAdditionalColors {
   errorRed?: string;
 }
 
 type TExtendedButtonsVariants = "customOutlined" | "second" | "ghost" | "signup";
 
 interface IPalette {
-  mainColors: mainColors;
-  accentColors: AccentColors;
-  greyColors: greyColors;
-  additionalColors: additionalColors;
+  mainColors: IMainColors;
+  accentColors: IAccentColors;
+  greyColors: IGreyColors;
+  additionalColors: IAdditionalColors;
 }
 
 interface IPaletteColors {
@@ -73,14 +73,12 @@ declare module "@mui/material/styles" {
 }
 
 declare module "@mui/material/Typography" {
-  interface TypographyPropsVariantOverrides
-    extends Record<keyof ITypoVariants, true> {}
+  interface TypographyPropsVariantOverrides extends Record<keyof ITypoVariants, true> {}
 }
 
 declare module "@mui/material/Button" {
   interface ButtonPropsColorOverrides extends IPaletteColors {}
-  interface ButtonPropsVariantOverrides
-    extends Record<TExtendedButtonsVariants, true> {}
+  interface ButtonPropsVariantOverrides extends Record<TExtendedButtonsVariants, true> {}
 }
 
 declare module "@mui/material/TextField" {

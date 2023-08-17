@@ -1,20 +1,19 @@
-import { useCallback, useState } from "react"
+import { useCallback, useState } from "react";
 
-import { PrimaryButton, AuthWrapper, LogoHeading } from "../../../common/components"
-
+import { PrimaryButton, AuthWrapper, LogoHeading } from "../../../common/components";
 
 const throttleTiming = 20000;
 
 interface ISignUpCofnrimProps {
-  email: string
+  email: string;
 }
 
-export const SignUpConfirm = ({ email }: ISignUpCofnrimProps) => {
+export function SignUpConfirm({ email }: ISignUpCofnrimProps) {
   const [throttle, setThrottle] = useState(false);
 
   const onClick = useCallback(() => {
     if (throttle) {
-      return
+      return;
     }
 
     setThrottle(true);
@@ -26,15 +25,19 @@ export const SignUpConfirm = ({ email }: ISignUpCofnrimProps) => {
   We have sent a letter confirming your registration to the specified email. If you didn't receive it,
   please check your spam folder or click the "Send again" button below`;
 
-
   return (
-    <>
-      <AuthWrapper>
-        <LogoHeading marginBottom={3.75} headingText={heading}>
-          {description}
-        </LogoHeading>
-        <PrimaryButton disabled={throttle} onClick={onClick} innerText="Send mail again" variant="customOutlined" disableRipple fullWidth />
-      </AuthWrapper>
-    </>
-  )
+    <AuthWrapper>
+      <LogoHeading marginBottom={3.75} headingText={heading}>
+        {description}
+      </LogoHeading>
+      <PrimaryButton
+        disabled={throttle}
+        onClick={onClick}
+        innerText="Send mail again"
+        variant="customOutlined"
+        disableRipple
+        fullWidth
+      />
+    </AuthWrapper>
+  );
 }

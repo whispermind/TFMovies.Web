@@ -30,5 +30,5 @@ export const MuiCssBaseline = {
     font-display: swap;
     src: url(${ArchivoRegular});
   }
-`,
+`
 };

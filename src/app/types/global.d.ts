@@ -5,6 +5,6 @@ declare interface Reffered<T> {
 declare interface StylesOverrides<T, S> {
   variants: {
     props: { variant: T };
-    style: S
+    style: S;
   }[];
 }

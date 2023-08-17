@@ -2,14 +2,15 @@ import { useState, useCallback } from "react";
 
 import { SignUp, SignUpConfirm, ISignUpForm } from "../../modules/registration";
 
-export const SignUpPage = () => {
-  const [submitedMail, setSubmitedMail] = useState('');
+export function SignUpPage() {
+  const [submitedMail, setSubmitedMail] = useState("");
 
-  const onSubmit = useCallback((formData: ISignUpForm) => {
-    setSubmitedMail(formData.email)
-  }, [setSubmitedMail])
+  const onSubmit = useCallback(
+    (formData: ISignUpForm) => {
+      setSubmitedMail(formData.email);
+    },
+    [setSubmitedMail]
+  );
 
-  return (
-    submitedMail ? <SignUpConfirm email={submitedMail} /> : <SignUp onSubmit={onSubmit} />
-  )
+  return submitedMail ? <SignUpConfirm email={submitedMail} /> : <SignUp onSubmit={onSubmit} />;
 }

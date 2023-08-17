@@ -2,25 +2,30 @@ import { forwardRef } from "react";
 import { TextField, TextFieldProps } from "@mui/material";
 
 export const FormTextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
-  const { InputProps } = props
+  const { InputProps } = props;
 
-  return <TextField ref={ref} {...props} variant="standard"
-    InputProps={
-      {
+  return (
+    <TextField
+      ref={ref}
+      {...props}
+      variant="standard"
+      InputProps={{
         ...InputProps,
         disableUnderline: true,
         sx: (theme) => {
           const {
             shape: { borderRadius },
-            typography: { Input: { fontSize, lineHeight } },
+            typography: {
+              Input: { fontSize, lineHeight }
+            },
             palette: {
               greyColors: { strokeGrey, grey },
               mainColors: { black },
               additionalColors: { errorRed }
-            },
+            }
           } = theme;
 
-          const additionalStyles = typeof InputProps?.sx === 'function' ? InputProps.sx(theme) : InputProps?.sx;
+          const additionalStyles = typeof InputProps?.sx === "function" ? InputProps.sx(theme) : InputProps?.sx;
 
           return {
             height: "44px",
@@ -40,7 +45,7 @@ export const FormTextField = forwardRef<HTMLInputElement, TextFieldProps>((props
             },
 
             ":hover": {
-              borderColor: grey,
+              borderColor: grey
             },
 
             "&:has(+ .Mui-error)": {
@@ -52,7 +57,7 @@ export const FormTextField = forwardRef<HTMLInputElement, TextFieldProps>((props
             },
 
             "&:has(input:active)": {
-              borderColor: "#b54f4f",
+              borderColor: "#b54f4f"
             },
 
             "&:has(input:not(:placeholder-shown))": {
@@ -62,13 +67,13 @@ export const FormTextField = forwardRef<HTMLInputElement, TextFieldProps>((props
             "&.Mui-focused": {
               color: black,
               borderColor: "#b54f4f",
-              "& input::placeholder": { color: "transparent" },
+              "& input::placeholder": { color: "transparent" }
             },
 
             ...additionalStyles
-          }
-        },
-      }
-    }
-  />
-})
+          };
+        }
+      }}
+    />
+  );
+});

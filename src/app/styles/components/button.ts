@@ -5,13 +5,10 @@ import { palette } from "../palette";
 const {
   mainColors: { graphite, main, white, black },
   accentColors: { lightOrange },
-  greyColors: { strokeGrey },
+  greyColors: { strokeGrey }
 } = palette;
 
-export const MuiButton: StylesOverrides<
-  ButtonProps["variant"],
-  Interpolation<{ theme: Theme }>
-> = {
+export const MuiButton: StylesOverrides<ButtonProps["variant"], Interpolation<{ theme: Theme }>> = {
   variants: [
     {
       props: { variant: "customOutlined" },
@@ -24,13 +21,13 @@ export const MuiButton: StylesOverrides<
 
         ":hover": {
           color: white,
-          backgroundColor: main,
+          backgroundColor: main
         },
 
         ":disabled": {
-          opacity: "0.3",
-        },
-      },
+          opacity: "0.3"
+        }
+      }
     },
     {
       props: { variant: "ghost" },
@@ -42,9 +39,9 @@ export const MuiButton: StylesOverrides<
 
         ":hover": {
           color: main,
-          backgroundColor: lightOrange,
-        },
-      },
+          backgroundColor: lightOrange
+        }
+      }
     },
     {
       props: { variant: "second" },
@@ -58,9 +55,9 @@ export const MuiButton: StylesOverrides<
         ":hover": {
           borderColor: "transparent",
           color: main,
-          backgroundColor: lightOrange,
-        },
-      },
+          backgroundColor: lightOrange
+        }
+      }
     },
     {
       props: { variant: "signup" },
@@ -74,9 +71,9 @@ export const MuiButton: StylesOverrides<
         backgroundColor: graphite,
 
         ":hover": {
-          backgroundColor: black,
-        },
-      },
-    },
-  ],
+          backgroundColor: black
+        }
+      }
+    }
+  ]
 };

@@ -2,9 +2,14 @@ import { ButtonProps, Button } from "@mui/material";
 
 import { EmailIcon } from "../../Icons/EmailIcon";
 
-export function SignUpButton(props: ButtonProps) {
+export const SignUpButton = (props: ButtonProps) => {
   return (
-    <Button variant="signup" type="submit" disableRipple {...props}>
+    <Button
+      variant="signup"
+      type="submit"
+      disableRipple
+      {...props}
+    >
       <EmailIcon
         sx={({
           palette: {
@@ -15,4 +20,4 @@ export function SignUpButton(props: ButtonProps) {
       Sign up with Email
     </Button>
   );
-}
+};

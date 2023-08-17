@@ -3,15 +3,8 @@ import { Stack } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import {
-  PassswordIcon,
-  UserIcon,
-  EmailIcon,
-  FormTextFieldIconed,
-  TFormTextFieldIconedProps,
-  SignUpButton
-} from "../../../common/components";
-import { emailRegExp, passwordRegExp } from "../../../common/utils";
+import { PassswordIcon, UserIcon, EmailIcon, FormTextFieldIconed, TFormTextFieldIconedProps, SignUpButton } from "../../../common/components";
+import { emailRegExp, passwordRegExp, nicknameRegExp } from "../../../common/utils";
 import { withController } from "../../../common/hocs";
 
 export interface ISignUpForm {
@@ -25,19 +18,21 @@ export interface ISignUpFormProps {
   onSubmit: (data: ISignUpForm) => void;
 }
 
-const schema = yup.object().shape({
+export const schema = yup.object().shape({
   nickname: yup
     .string()
     .required("Nickname is required")
-    .min(4, "Minimum nickname length is 4")
-    .max(16, "Maximum nickname length is 16 "),
+    .min(2, "Minimum nickname length is 2")
+    .max(16, "Maximum nickname length is 16 ")
+    .matches(nicknameRegExp, "Nickname must contain only letters"),
   email: yup.string().required("The email is required").matches(emailRegExp, "The email must be correct"),
   password: yup
     .string()
     .required("The password is required")
     .matches(
       passwordRegExp,
-      "The password must contain minimum 8 and maximum 16 characters, at least one uppercase letter, one lowercase letter, one number and special character"
+      `The password must contain minimum 8 and maximum 16 characters, 
+      at least one uppercase letter, one lowercase letter, one number and special character`
     ),
   passwordConfirm: yup
     .string()
@@ -45,7 +40,7 @@ const schema = yup.object().shape({
     .oneOf([yup.ref("password")], "The password must be the same")
 });
 
-export function SignUpForm({ onSubmit }: ISignUpFormProps) {
+export const SignUpForm = ({ onSubmit }: ISignUpFormProps) => {
   const { handleSubmit, control } = useForm<ISignUpForm>({
     defaultValues: {
       nickname: "",
@@ -105,4 +100,4 @@ export function SignUpForm({ onSubmit }: ISignUpFormProps) {
       </Stack>
     </form>
   );
-}
+};

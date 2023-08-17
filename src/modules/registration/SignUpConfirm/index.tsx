@@ -8,7 +8,7 @@ interface ISignUpCofnrimProps {
   email: string;
 }
 
-export function SignUpConfirm({ email }: ISignUpCofnrimProps) {
+export const SignUpConfirm = ({ email }: ISignUpCofnrimProps) => {
   const [throttle, setThrottle] = useState(false);
 
   const onClick = useCallback(() => {
@@ -27,7 +27,10 @@ export function SignUpConfirm({ email }: ISignUpCofnrimProps) {
 
   return (
     <AuthWrapper>
-      <LogoHeading marginBottom={3.75} headingText={heading}>
+      <LogoHeading
+        marginBottom={3.75}
+        headingText={heading}
+      >
         {description}
       </LogoHeading>
       <PrimaryButton
@@ -40,4 +43,4 @@ export function SignUpConfirm({ email }: ISignUpCofnrimProps) {
       />
     </AuthWrapper>
   );
-}
+};

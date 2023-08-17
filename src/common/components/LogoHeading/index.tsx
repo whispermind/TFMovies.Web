@@ -8,16 +8,16 @@ export interface ILogoHeadingProps {
   headingText?: string;
 }
 
-export function LogoHeading({
-  headingText,
-  children,
-  ...restProps
-}: PropsWithChildren<ILogoHeadingProps & StackProps>) {
+export const LogoHeading = ({ headingText, children, ...restProps }: PropsWithChildren<ILogoHeadingProps & StackProps>) => {
   return (
-    <Stack rowGap="0.75rem" alignItems="center" {...restProps}>
+    <Stack
+      rowGap="0.75rem"
+      alignItems="center"
+      {...restProps}
+    >
       <LogoIcon sx={{ width: "120px", height: "115px" }} />
       <Typography variant="HHeader">{headingText || <Tagline variant="HHeader" />}</Typography>
       <Typography variant="HBody">{children}</Typography>
     </Stack>
   );
-}
+};

@@ -18,7 +18,26 @@
     "react/jsx-props-no-spreading": 0,
     "react/require-default-props": 0,
     "@typescript-eslint/comma-dangle": "off",
-    "@typescript-eslint/indent": 2,
-    "@typescript-eslint/no-unused-vars": 1
+    "@typescript-eslint/no-unused-vars": 1,
+    "max-len": ["error", {"code": 160}],
+    "function-call-argument-newline": "warn",
+    "react/function-component-definition": [2, {"namedComponents": "arrow-function", "unnamedComponents": "arrow-function"}],
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 160,
+        "arrowParens": "always",
+        "useEditorConfig": false,
+        "useTabs": false,
+        "singleAttributePerLine": true,
+        "configPath": ".prettierrc.json",
+        "trailingComma" : "none",
+        "editor.tabSize": 2,
+        "editor.tabCompletion": "on",
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": false
+      }
+    ]
   }
 }

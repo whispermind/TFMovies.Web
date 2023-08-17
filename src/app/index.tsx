@@ -3,17 +3,25 @@ import { Outlet } from "react-router-dom";
 
 import { mainTheme } from "./styles/theme";
 
-export function App() {
+export const App = () => {
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
       <Container maxWidth="xl">
-        <Grid container justifyContent="center" margin="0 auto" xl={8.15}>
-          <Grid item width="100%">
+        <Grid
+          container
+          justifyContent="center"
+          margin="0 auto"
+          xl={8.15}
+        >
+          <Grid
+            item
+            width="100%"
+          >
             <Outlet />
           </Grid>
         </Grid>
       </Container>
     </ThemeProvider>
   );
-}
+};

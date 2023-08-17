@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import { DividerProps, Divider, Typography } from "@mui/material";
 
-export function FormDivider({ sx, children, ...restProps }: PropsWithChildren<DividerProps>) {
+export const FormDivider = ({ sx, children, ...restProps }: PropsWithChildren<DividerProps>) => {
   return (
     <Divider
       {...restProps}
@@ -14,4 +14,4 @@ export function FormDivider({ sx, children, ...restProps }: PropsWithChildren<Di
       <Typography variant="HBody">{children}</Typography>
     </Divider>
   );
-}
+};

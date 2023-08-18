@@ -34,7 +34,8 @@ export const typography = {
     fontSize: "1.5rem",
     lineHeight: "2.25rem",
     fontWeight: "bold",
-    fontStyle: "normal"
+    fontStyle: "normal",
+    textAlign: "center" as const
   },
 
   ABody: {

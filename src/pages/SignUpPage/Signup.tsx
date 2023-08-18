@@ -24,24 +24,28 @@ export const SignUpPage = () => {
     [setSubmitedMail]
   );
 
-  return submitedMail ? (
+  return (
     <LogAuthWrapper>
-      <LogoHeading
-        marginBottom={7.5}
-        heading={heading}
-      >
-        {description}
-      </LogoHeading>
-      <SignUpForm onSubmit={onSubmit} />
-      <FormDivider>or</FormDivider>
-      <PrimaryButton
-        innerText="Log in"
-        variant="ghost"
-        href="/signin"
-        fullWidth
-      />
+      {submitedMail ? (
+        <SignUpConfirm email={submitedMail} />
+      ) : (
+        <>
+          <LogoHeading
+            marginBottom={7.5}
+            heading={heading}
+          >
+            {description}
+          </LogoHeading>
+          <SignUpForm onSubmit={onSubmit} />
+          <FormDivider>or</FormDivider>
+          <PrimaryButton
+            innerText="Log in"
+            variant="ghost"
+            href="/signin"
+            fullWidth
+          />
+        </>
+      )}
     </LogAuthWrapper>
-  ) : (
-    <SignUpConfirm email={submitedMail} />
   );
 };

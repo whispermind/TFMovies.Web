@@ -1,7 +1,7 @@
 import { createRoutesFromElements, createBrowserRouter, Route } from "react-router-dom";
 
 import { App } from "..";
-import { ErrorPage, SignUpSuccessPage, SignUpPage, SignInPage } from "../../pages";
+import { ErrorPage, SignUpSuccessPage, SignUpPage, SignInPage, PassRecoveryPage, ForgotPassPage } from "../../pages";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +21,14 @@ export const router = createBrowserRouter(
       <Route
         path="signin"
         element={<SignInPage />}
+      />
+      <Route
+        path="passrecovery"
+        element={<PassRecoveryPage />}
+      />
+      <Route
+        path="passforgot"
+        element={<ForgotPassPage />}
       />
     </Route>
   )

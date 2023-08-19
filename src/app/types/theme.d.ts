@@ -1,104 +1,153 @@
 import { CSSProperties } from "react";
 
+ 
+
 import {
+
   AccentColors,
+
   mainColors,
+
   greyColors,
+
   additionalColors,
+
 } from "../styles/theme";
 
-declare module "@mui/material/styles" {
-  interface PaletteColor {
-    white?: string;
-    lightGrey?: string;
-    black?: string;
-    graphite?: string;
-    red?: string;
-    lightOrange?: string;
-    grey?: string;
-    strokeGrey?: string;
-    errorRed?: string;
-  }
+ 
 
-  interface SimplePaletteColorOptions {
-    white?: string;
-    lightGrey?: string;
-    black?: string;
-    graphite?: string;
-    red?: string;
-    lightOrange?: string;
-    grey?: string;
-    strokeGrey?: string;
-    errorRed?: string;
-  }
+interface IPalette {
 
-  interface Palette {
-    mainColors: mainColors;
-    accentColors: AccentColors;
-    greyColors: greyColors;
-    additionalColors: additionalColors;
-  }
+  mainColors: mainColors;
 
-  interface PaletteOptions {
-    mainColors?: mainColors;
-    accentColors?: AccentColors;
-    greyColors?: greyColors;
-    additionalColors?: additionalColors;
-  }
+  accentColors: AccentColors;
 
-  interface TypographyVariants {
-    Input: CSSProperties;
-    HHeader: CSSProperties;
-    HBody: CSSProperties;
-    HBodyBold: CSSProperties;
-    Sector: CSSProperties;
-    ABody: CSSProperties;
-    ABodyBold: CSSProperties;
-    ABodyItalic: CSSProperties;
-    ABodyUnderlined: CSSProperties;
-    ABodyHyperlink: CSSProperties;
-    ASubheader: CSSProperties;
-    ASecondHeader: CSSProperties;
-  }
+  greyColors: greyColors;
 
-  interface TypographyVariantsOptions {
-    Input: CSSProperties;
-    HHeader: CSSProperties;
-    HBody: CSSProperties;
-    HBodyBold: CSSProperties;
-    Sector: CSSProperties;
-    ABody: CSSProperties;
-    ABodyBold: CSSProperties;
-    ABodyItalic: CSSProperties;
-    ABodyUnderlined: CSSProperties;
-    ABodyHyperlink: CSSProperties;
-    ASubheader: CSSProperties;
-    ASecondHeader: CSSProperties;
-  }
+  additionalColors: additionalColors;
+
 }
+
+ 
+
+interface IPaletteColors {
+
+  white?: string;
+
+  lightGrey?: string;
+
+  black?: string;
+
+  graphite?: string;
+
+  red?: string;
+
+  lightOrange?: string;
+
+  grey?: string;
+
+  strokeGrey?: string;
+
+  errorRed?: string;
+
+}
+
+ 
+
+interface ITypoVariants {
+
+  Input: CSSProperties;
+
+  HHeader: CSSProperties;
+
+  HBody: CSSProperties;
+
+  HBodyBold: CSSProperties;
+
+  Sector: CSSProperties;
+
+  ABody: CSSProperties;
+
+  ABodyBold: CSSProperties;
+
+  ABodyItalic: CSSProperties;
+
+  ABodyUnderlined: CSSProperties;
+
+  ABodyHyperlink: CSSProperties;
+
+  ASubheader: CSSProperties;
+
+  ASecondHeader: CSSProperties;
+
+	Logo: CSSProperties;
+
+	SectorLink: CSSProperties;
+
+	SBody: CSSProperties;
+
+}
+
+ 
+
+declare module "@mui/material/styles" {
+
+  interface PaletteColor extends IPaletteColors {}
+
+ 
+
+  interface SimplePaletteColorOptions extends IPaletteColors {}
+
+ 
+
+  interface Palette extends IPalette {}
+
+ 
+
+  interface PaletteOptions extends IPalette {}
+
+ 
+
+  interface TypographyVariants extends ITypoVariants {}
+
+ 
+
+  interface TypographyVariantsOptions extends ITypoVariants {}
+
+}
+
+ 
 
 declare module "@mui/material/Typography" {
-  interface TypographyPropsVariantOverrides {
-    Input: true;
-    HHeader: true;
-    HBody: true;
-    HBodyBold: true;
-    Sector: true;
-    ABody: true;
-    ABodyBold: true;
-    ABodyItalic: true;
-    ABodyUnderlined: true;
-    ABodyHyperlink: true;
-    ASubheader: true;
-    ASecondHeader: true;
-  }
+
+  interface TypographyPropsVariantOverrides extends Record<keyof ITypoVariants, true> {}
+
 }
 
+ 
+
 declare module "@mui/material/Button" {
-  interface ButtonPropsColorOverrides {
-    mainColors: true;
-    accentColors: true;
-    greyColors: true;
-    additionalColors: true;
-  }
+
+  interface ButtonPropsColorOverrides extends IPaletteColors {}
+
+}
+
+ 
+
+declare module "@mui/material/TextField" {
+
+  interface TextFieldPropsColorOverrides extends IPaletteColors {}
+
+}
+
+declare module "@mui/material/AppBar" {
+	
+  interface AppBarPropsColorOverrides extends IPaletteColors {}
+
+}
+
+declare module "@mui/material/Link" {
+	
+  interface LinkPropsColorOverrides extends IPaletteColors {}
+
 }

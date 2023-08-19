@@ -3,6 +3,7 @@ import { createTheme } from "@mui/material";
 import ArchivoItalic from "../assets/fonts/Archivo-Italic.ttf";
 import ArchivoRegular from "../assets/fonts/Archivo-Regular.ttf";
 import ArchivoBold from "../assets/fonts/Archivo-Bold.ttf";
+import ArchivoSemiBold from "../assets/fonts/Archivo-SemiBold.ttf";
 
 export interface mainColors {
   main?: string;
@@ -19,6 +20,7 @@ export interface AccentColors {
 
 export interface greyColors {
   grey?: string;
+	softGrey?: string;
   strokeGrey?: string;
 }
 
@@ -41,6 +43,7 @@ export const mainTheme = createTheme({
     },
     greyColors: {
       grey: "#676767",
+			softGrey: "#939393",
       strokeGrey: "#D4D4D4",
     },
     additionalColors: {
@@ -73,6 +76,17 @@ export const mainTheme = createTheme({
       lineHeight: "2.25rem",
       fontWeight: "bold",
     },
+		SectorLink: {
+			fontSize: "1.25rem",
+			lineHeight: '1.875rem',
+			fontWeight: '600',
+			textDecoration: 'none'
+		},
+		SBody: {
+			fontSize: '1rem',
+			lineHeight: '2rem',
+			fontWeight: '400',
+		},
     ABody: {
       fontSize: "1.25rem",
       lineHeight: "2.125rem",
@@ -108,10 +122,31 @@ export const mainTheme = createTheme({
       lineHeight: "2.5rem",
       fontWeight: "bold",
     },
+		Logo: {
+			fontSize: "2.5rem",
+      lineHeight: "2.25rem",
+      fontWeight: "bold",
+		},
   },
   components: {
     MuiCssBaseline: {
       styleOverrides: `
+			@font-face {
+        font-family: 'Archivo';
+        font-style: italic;
+        font-weight: 400;
+        font-stretch: 100%;
+        font-display: swap;
+        src: url(${ArchivoItalic});
+      }
+			@font-face {
+        font-family: 'Archivo';
+        font-style: 'normal;
+        font-weight: 700;
+        font-stretch: 100%;
+        font-display: swap;
+        src: url(${ArchivoBold});
+      }
       @font-face {
         font-family: 'Archivo';
         font-style: normal;
@@ -120,22 +155,15 @@ export const mainTheme = createTheme({
         font-display: swap;
         src: url(${ArchivoRegular});
       }
-      @font-face {
+			@font-face {
         font-family: 'Archivo';
-        font-style: italic;
-        font-weight: 400;
+        font-style: normal;
+        font-weight: 600;
         font-stretch: 100%;
         font-display: swap;
-        src: url(${ArchivoItalic});
+        src: url(${ArchivoSemiBold});
       }
-      @font-face {
-        font-family: 'Archivo';
-        font-style: 'normal;
-        font-weight: 700;
-        font-stretch: 100%;
-        font-display: swap;
-        src: url(${ArchivoBold});
-      }`,
+      `,
     },
   },
 });

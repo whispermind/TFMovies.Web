@@ -27,7 +27,7 @@ export const router = createBrowserRouter(
         element={<PassRecoveryPage />}
       />
       <Route
-        path="passforgot"
+        path="forgotpass"
         element={<ForgotPassPage />}
       />
     </Route>

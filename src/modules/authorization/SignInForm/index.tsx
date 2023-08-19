@@ -47,7 +47,7 @@ export const SignInForm = () => {
           position="start"
         />
         <Link
-          href="/passwordrecovery"
+          href="/forgotpass"
           variant="FormHyperLink"
           color="mainColors.black"
         >

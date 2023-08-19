@@ -7,13 +7,16 @@ import * as yup from "yup";
 import { EmailIcon, FormTextFieldIconed, TFormTextFieldIconedProps, PrimaryButton } from "../../../common/components";
 import { emailRegExp } from "../../../common/utils";
 import { withController } from "../../../common/hocs";
+import { yupErrorMessages } from "../../../common/utils/yupErrorMessages";
 
 export interface IForgotPassForm {
   email: string;
 }
 
-export const schema = yup.object().shape({
-  email: yup.string().required("The email is required").matches(emailRegExp, "The email must be correct")
+const { requiredError, emailError } = yupErrorMessages;
+
+const schema = yup.object().shape({
+  email: yup.string().required(requiredError()).matches(emailRegExp, emailError())
 });
 
 export const ForgotPassForm = () => {

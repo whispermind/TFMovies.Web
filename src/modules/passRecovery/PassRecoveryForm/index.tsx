@@ -7,25 +7,21 @@ import * as yup from "yup";
 import { PassswordIcon, FormTextFieldIconed, TFormTextFieldIconedProps, PrimaryButton } from "../../../common/components";
 import { passwordRegExp } from "../../../common/utils";
 import { withController } from "../../../common/hocs";
+import { yupErrorMessages } from "../../../common/utils/yupErrorMessages";
 
 export interface IPassRecoveryForm {
   password: string;
   passwordConfirm: string;
 }
 
-export const schema = yup.object().shape({
-  password: yup
-    .string()
-    .required("The password is required")
-    .matches(
-      passwordRegExp,
-      `The password must contain minimum 8 and maximum 16 characters, 
-      at least one uppercase letter, one lowercase letter, one number and special character`
-    ),
+const { passwordConfirmError, passwordError, requiredError } = yupErrorMessages;
+
+const schema = yup.object().shape({
+  password: yup.string().required(requiredError()).matches(passwordRegExp, passwordError()),
   passwordConfirm: yup
     .string()
-    .required("The password is required")
-    .oneOf([yup.ref("password")], "The password must be the same")
+    .required(requiredError())
+    .oneOf([yup.ref("password")], passwordConfirmError())
 });
 
 export const PassRecoveryForm = () => {

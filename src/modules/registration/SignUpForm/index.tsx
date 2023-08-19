@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { PassswordIcon, UserIcon, EmailIcon, FormTextFieldIconed, TFormTextFieldIconedProps, SignUpButton } from "../../../common/components";
 import { emailRegExp, passwordRegExp, nicknameRegExp } from "../../../common/utils";
 import { withController } from "../../../common/hocs";
+import { yupErrorMessages } from "../../../common/utils/yupErrorMessages";
 
 export interface ISignUpForm {
   nickname: string;
@@ -18,26 +19,16 @@ export interface ISignUpFormProps {
   onSubmit: (data: ISignUpForm) => void;
 }
 
+const { requiredError, maxError, minError, passwordError, passwordConfirmError, emailError, onlyLettersError } = yupErrorMessages;
+
 export const schema = yup.object().shape({
-  nickname: yup
-    .string()
-    .required("Nickname is required")
-    .min(2, "Minimum nickname length is 2")
-    .max(16, "Maximum nickname length is 16")
-    .matches(nicknameRegExp, "Nickname must contain only letters"),
-  email: yup.string().required("The email is required").matches(emailRegExp, "The email must be correct"),
-  password: yup
-    .string()
-    .required("The password is required")
-    .matches(
-      passwordRegExp,
-      `The password must contain minimum 8 and maximum 16 characters, 
-      at least one uppercase letter, one lowercase letter, one number and special character`
-    ),
+  nickname: yup.string().required(requiredError()).min(2, minError(2)).max(16, maxError(16)).matches(nicknameRegExp, onlyLettersError()),
+  email: yup.string().required(requiredError()).matches(emailRegExp, emailError()),
+  password: yup.string().required(requiredError()).matches(passwordRegExp, passwordError()),
   passwordConfirm: yup
     .string()
-    .required("The password is required")
-    .oneOf([yup.ref("password")], "The password must be the same")
+    .required(requiredError())
+    .oneOf([yup.ref("password")], passwordConfirmError())
 });
 
 export const SignUpForm = ({ onSubmit }: ISignUpFormProps) => {

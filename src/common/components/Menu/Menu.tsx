@@ -1,4 +1,4 @@
-import { Box, Link, List, ListItem, ListItemButton, ListItemIcon, Typography } from "@mui/material";
+import { Box, List, ListItem, ListItemIcon, Typography } from "@mui/material";
 // import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 // import TagOutlinedIcon from '@mui/icons-material/TagOutlined';
 // import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
@@ -9,8 +9,6 @@ import { HashtagIcon } from "../icons/HashtagIcon";
 import { FavoriteIcon } from "../icons/FavoriteIcon";
 import { EmailIcon } from "../icons/EmailIcon";
 import { RulesIcon } from "../icons/RulesIcon";
-
-
 
 export const CustomMenu = () => {
 	return (

@@ -16,13 +16,14 @@ export interface IAccentColors {
 export interface IGreyColors {
   grey?: string;
   strokeGrey?: string;
+  softGrey?: string;
 }
 
 export interface IAdditionalColors {
   errorRed?: string;
 }
 
-type TExtendedButtonsVariants = "customOutlined" | "second" | "ghost" | "signup";
+type TExtendedButtonsVariants = "customOutlined" | "second" | "ghost" | "signup" | "close";
 
 interface IPalette {
   mainColors: IMainColors;
@@ -57,6 +58,9 @@ interface ITypoVariants {
   ASubheader: CSSProperties;
   ASecondHeader: CSSProperties;
   FormHyperLink: CSSProperties;
+  Logo: CSSProperties;
+  SectorLink: CSSProperties;
+  SBody: CSSProperties;
 }
 
 declare module "@mui/material/styles" {
@@ -84,4 +88,12 @@ declare module "@mui/material/Button" {
 
 declare module "@mui/material/TextField" {
   interface TextFieldPropsColorOverrides extends IPaletteColors {}
+}
+
+declare module "@mui/material/AppBar" {
+  interface AppBarPropsColorOverrides extends IPaletteColors {}
+}
+
+declare module "@mui/material/Link" {
+  interface LinkPropsColorOverrides extends IPaletteColors {}
 }

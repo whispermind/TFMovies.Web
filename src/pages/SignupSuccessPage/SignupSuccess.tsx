@@ -5,19 +5,20 @@ export const SignUpSuccessPage = () => {
   const description = "Thank you, your registration has been successfully confirmed!";
 
   return (
-    <LogAuthWrapper>
+    <LogAuthWrapper maxWidth="66%">
       <LogoHeading
-        marginBottom={6.5}
+        mb={6.5}
         heading={heading}
       >
         {description}
       </LogoHeading>
       <PrimaryButton
-        innerText="Back to Login In"
         variant="customOutlined"
         href="/signin"
         fullWidth
-      />
+      >
+        Back to Login In
+      </PrimaryButton>
     </LogAuthWrapper>
   );
 };

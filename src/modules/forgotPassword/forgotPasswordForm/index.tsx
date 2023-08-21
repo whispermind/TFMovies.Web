@@ -45,9 +45,10 @@ export const ForgotPassForm = () => {
         />
         <PrimaryButton
           variant="customOutlined"
-          innerText="Send me the instructions"
           fullWidth
-        />
+        >
+          Send me the instructions
+        </PrimaryButton>
       </Stack>
     </form>
   );

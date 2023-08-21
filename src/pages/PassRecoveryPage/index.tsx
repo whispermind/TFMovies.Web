@@ -1,14 +1,14 @@
 import { Typography } from "@mui/material";
 
-import { PassRecoveryForm } from "../../modules/passRecovery";
+import { PassRecoveryForm } from "../../modules/PassRecovery";
 import { LogAuthWrapper } from "../../common/components";
 
 export const PassRecoveryPage = () => {
   return (
-    <LogAuthWrapper>
+    <LogAuthWrapper maxWidth="49%">
       <Typography
         variant="Sector"
-        marginBottom={5}
+        mb={5}
         display="block"
       >
         Password Recovery

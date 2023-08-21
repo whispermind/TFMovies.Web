@@ -29,14 +29,15 @@ export const FormTextField = forwardRef<HTMLInputElement, TextFieldProps>((props
 
           return {
             height: "44px",
-            padding: "0.625rem 1rem",
+            p: "0.625rem 1rem",
             border: `2px solid ${strokeGrey}`,
             borderRadius: `${borderRadius}px`,
             fontSize,
             lineHeight,
+            cursor: "pointer",
 
             "& input": {
-              padding: 0
+              p: 0
             },
 
             "& input::placeholder": {
@@ -51,8 +52,8 @@ export const FormTextField = forwardRef<HTMLInputElement, TextFieldProps>((props
             "&:has(+ .Mui-error)": {
               borderColor: errorRed,
               "& + .Mui-error": {
-                marginTop: 0,
-                marginLeft: "0.75rem"
+                mt: 0,
+                ml: "0.75rem"
               }
             },
 

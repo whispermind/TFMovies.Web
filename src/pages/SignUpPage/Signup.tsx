@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 
-import { SignUpConfirm, ISignUpForm, SignUpForm } from "../../modules/registration";
+import { SignUpConfirm, ISignUpForm, SignUpForm } from "../../modules/Registration";
 import { FormDivider, LogoHeading, LogAuthWrapper, PrimaryButton, LogoName } from "../../common/components";
 import { capitalizer } from "../../common/utils";
 
@@ -25,13 +25,13 @@ export const SignUpPage = () => {
   );
 
   return (
-    <LogAuthWrapper>
+    <LogAuthWrapper maxWidth="66%">
       {submitedMail ? (
         <SignUpConfirm email={submitedMail} />
       ) : (
         <>
           <LogoHeading
-            marginBottom={7.5}
+            mb={7.5}
             heading={heading}
           >
             {description}
@@ -39,11 +39,12 @@ export const SignUpPage = () => {
           <SignUpForm onSubmit={onSubmit} />
           <FormDivider>or</FormDivider>
           <PrimaryButton
-            innerText="Log in"
             variant="ghost"
             href="/signin"
             fullWidth
-          />
+          >
+            Log in
+          </PrimaryButton>
         </>
       )}
     </LogAuthWrapper>

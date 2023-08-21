@@ -1,15 +1,10 @@
+import { PropsWithChildren } from "react";
 import { Button, ButtonProps, Typography } from "@mui/material";
 
-export interface IPrimaryButtonProps extends ButtonProps {
-  innerText: string;
-}
-
-export const PrimaryButton = (props: IPrimaryButtonProps) => {
-  const { innerText, ...restProps } = props;
-
+export const PrimaryButton = ({ children, ...restProps }: PropsWithChildren<ButtonProps>) => {
   return (
     <Button {...restProps}>
-      <Typography variant="Input">{innerText}</Typography>
+      <Typography variant="Input">{children}</Typography>
     </Button>
   );
 };

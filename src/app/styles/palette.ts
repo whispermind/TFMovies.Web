@@ -16,7 +16,8 @@ export const palette = {
 
   greyColors: {
     grey: "#676767",
-    strokeGrey: "#D4D4D4"
+    strokeGrey: "#D4D4D4",
+    softGrey: "#939393"
   },
 
   additionalColors: {

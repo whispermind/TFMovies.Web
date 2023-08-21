@@ -12,7 +12,8 @@ export const typography = {
     fontSize: "3.25rem",
     lineHeight: "4.875rem",
     fontWeight: "bold",
-    fontStyle: "normal"
+    fontStyle: "normal",
+    textAlign: "center" as const
   },
 
   HBody: {
@@ -95,5 +96,24 @@ export const typography = {
     fontWeight: "500",
     fontStyle: "normal",
     textAlign: "center" as const
+  },
+
+  Logo: {
+    fontSize: "2.5rem",
+    lineHeight: "2.25rem",
+    fontWeight: "bold"
+  },
+
+  SectorLink: {
+    fontSize: "1.25rem",
+    lineHeight: "1.875rem",
+    fontWeight: "600",
+    textDecoration: "none"
+  },
+
+  SBody: {
+    fontSize: "1rem",
+    lineHeight: "2rem",
+    fontWeight: "400"
   }
 };

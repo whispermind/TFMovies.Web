@@ -61,9 +61,10 @@ export const PassRecoveryForm = () => {
         <PrimaryButton
           variant="customOutlined"
           type="submit"
-          innerText="Save this new password"
           fullWidth
-        />
+        >
+          Save this new password
+        </PrimaryButton>
       </Stack>
     </form>
   );

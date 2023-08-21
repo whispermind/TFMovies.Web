@@ -1,27 +1,16 @@
-import { ThemeProvider, CssBaseline, Grid, Container } from "@mui/material";
+import { ThemeProvider, CssBaseline } from "@mui/material";
 import { Outlet } from "react-router-dom";
 
+import { AppLayout } from "../modules/AppLayout";
 import { mainTheme } from "./styles/theme";
 
 export const App = () => {
   return (
     <ThemeProvider theme={mainTheme}>
       <CssBaseline />
-      <Container maxWidth="xl">
-        <Grid
-          container
-          justifyContent="center"
-          margin="0 auto"
-          xl={8.15}
-        >
-          <Grid
-            item
-            width="100%"
-          >
-            <Outlet />
-          </Grid>
-        </Grid>
-      </Container>
+      <AppLayout>
+        <Outlet />
+      </AppLayout>
     </ThemeProvider>
   );
 };

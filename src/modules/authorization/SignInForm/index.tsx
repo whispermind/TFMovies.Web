@@ -55,9 +55,10 @@ export const SignInForm = () => {
         </Link>
         <PrimaryButton
           variant="customOutlined"
-          innerText="Log In"
           onSubmit={onLogin}
-        />
+        >
+          Log In
+        </PrimaryButton>
       </Stack>
     </form>
   );

@@ -28,7 +28,7 @@ export const SignUpConfirm = ({ email }: ISignUpCofnrimProps) => {
   return (
     <>
       <LogoHeading
-        marginBottom={6.5}
+        mb={6.5}
         heading={heading}
       >
         {description}
@@ -36,10 +36,11 @@ export const SignUpConfirm = ({ email }: ISignUpCofnrimProps) => {
       <PrimaryButton
         disabled={throttle}
         onClick={onClick}
-        innerText="Send mail again"
         variant="customOutlined"
         fullWidth
-      />
+      >
+        Send mail again
+      </PrimaryButton>
     </>
   );
 };

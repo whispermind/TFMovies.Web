@@ -75,6 +75,31 @@ export const MuiButton: StylesOverrides<ButtonProps["variant"], Interpolation<{ 
           backgroundColor: black
         }
       }
+    },
+    {
+      props: { variant: "close" },
+      style: {
+        height: "44px",
+        padding: "10px",
+        display: "flex",
+        alignItems: "center",
+        columnGap: "14px",
+        textTransform: "none",
+        border: `solid 2px ${white}`,
+
+        ":hover": {
+          border: `solid 2px ${main}`,
+          transition: "ease"
+        },
+        ":hover span": {
+          color: main,
+          transition: "ease .2s"
+        },
+        ":hover svg": {
+          fill: main,
+          transition: "ease .2s"
+        }
+      }
     }
   ]
 };

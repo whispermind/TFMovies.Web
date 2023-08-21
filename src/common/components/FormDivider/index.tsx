@@ -6,8 +6,8 @@ export const FormDivider = ({ sx, children, ...restProps }: PropsWithChildren<Di
     <Divider
       {...restProps}
       sx={{
-        margin: "1.5rem 0",
-        "& > span": { padding: "0 2.5rem" },
+        m: "1.5rem 0",
+        "& > span": { p: "0 2.5rem" },
         ...sx
       }}
     >

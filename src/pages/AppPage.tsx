@@ -1,6 +1,7 @@
 import { styled } from "@mui/material"
 import { Footer } from "../common/components/Footer/Footer"
 import { Header } from "../common/components/Header/Header"
+import { CustomMenu } from "../common/components/Menu/Menu";
 
 const StyledMain = styled('main')(({ theme }) => {
 	const { palette: { mainColors: { lightGrey } } } = theme;
@@ -23,7 +24,7 @@ export const AppPage = () => {
 
 			<StyledMain>
 
-				{/* CONTENT */}
+				<CustomMenu />
 
 			</StyledMain>
 

@@ -1,6 +1,6 @@
 import { Link, styled } from "@mui/material";
 
-export const CustomLink = styled(Link)(({ theme }) => {
+export const CustomMenuLink = styled(Link)(({ theme }) => {
 	const { palette: { mainColors: { main, graphite }, accentColors: { lightOrange } } } = theme;
 
 	return {
@@ -16,7 +16,7 @@ export const CustomLink = styled(Link)(({ theme }) => {
 		":hover": {
 			backgroundColor: lightOrange
 		},
-		":hover svg": {
+		":hover path": {
 			fill: main,
 			transition: '.3s',
 		},

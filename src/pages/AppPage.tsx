@@ -1,7 +1,8 @@
-import { styled } from "@mui/material"
+import { Container, styled } from "@mui/material"
 import { Footer } from "../common/components/Footer/Footer"
 import { Header } from "../common/components/Header/Header"
-import { CustomMenu } from "../common/components/Menu/Menu";
+import { MenuBlock } from "../common/components/MenuBlock";
+
 
 const StyledMain = styled('main')(({ theme }) => {
 	const { palette: { mainColors: { lightGrey } } } = theme;
@@ -9,6 +10,7 @@ const StyledMain = styled('main')(({ theme }) => {
 	return {
 		flexGrow: '1',
 		backgroundColor: lightGrey,
+		padding: '105px 0'
 	}
 })
 
@@ -24,7 +26,10 @@ export const AppPage = () => {
 
 			<StyledMain>
 
-				<CustomMenu />
+				<Container maxWidth='xl' sx={{ display: 'flex', justifyContent: 'space-between' }}>
+					<MenuBlock />
+				</Container>
+
 
 			</StyledMain>
 

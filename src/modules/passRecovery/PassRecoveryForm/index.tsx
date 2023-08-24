@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import { PassswordIcon, FormTextFieldIconed, TFormTextFieldIconedProps, PrimaryButton } from "../../../common/components";
-import { passwordRegExp } from "../../../common/utils";
+import { formValidation } from "../../../common/utils";
 import { withController } from "../../../common/hocs";
 import { yupErrorMessages } from "../../../common/utils/yupErrorMessages";
 
@@ -15,9 +15,10 @@ export interface IPassRecoveryForm {
 }
 
 const { passwordConfirmError, passwordError, requiredError } = yupErrorMessages;
+const { password } = formValidation;
 
 const schema = yup.object().shape({
-  password: yup.string().required(requiredError()).matches(passwordRegExp, passwordError()),
+  password: yup.string().required(requiredError()).matches(password, passwordError()),
   passwordConfirm: yup
     .string()
     .required(requiredError())

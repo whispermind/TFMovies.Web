@@ -1,5 +1,5 @@
-import { SignInForm } from "../../modules/Authorization";
-import { FormDivider, SignUpButton, LogAuthWrapper, LogoHeading, LogoName } from "../../common/components";
+import { SignInForm } from "..";
+import { FormDivider, SignUpButton, LogAuthWrapper, LogoHeading, LogoName } from "../../../common/components";
 
 export const SignInPage = () => {
   const description =
@@ -10,7 +10,7 @@ export const SignInPage = () => {
     </>
   );
   return (
-    <LogAuthWrapper maxWidth="66%">
+    <LogAuthWrapper maxWidth="65%">
       <LogoHeading
         mb={7.5}
         heading={heading}

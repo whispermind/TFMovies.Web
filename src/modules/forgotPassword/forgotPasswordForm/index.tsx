@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import { EmailIcon, FormTextFieldIconed, TFormTextFieldIconedProps, PrimaryButton } from "../../../common/components";
-import { emailRegExp } from "../../../common/utils";
+import { formValidation } from "../../../common/utils";
 import { withController } from "../../../common/hocs";
 import { yupErrorMessages } from "../../../common/utils/yupErrorMessages";
 
@@ -14,9 +14,10 @@ export interface IForgotPassForm {
 }
 
 const { requiredError, emailError } = yupErrorMessages;
+const { email } = formValidation;
 
 const schema = yup.object().shape({
-  email: yup.string().required(requiredError()).matches(emailRegExp, emailError())
+  email: yup.string().required(requiredError()).matches(email, emailError())
 });
 
 export const ForgotPassForm = () => {

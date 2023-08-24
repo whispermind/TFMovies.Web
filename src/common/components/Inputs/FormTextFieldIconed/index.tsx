@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { InputAdornment, TextFieldProps, SvgIconProps } from "@mui/material";
 
-import { FormTextField } from "../FormTextField";
+import * as S from "./styled";
 
 export interface IWithIconProps {
   icon: (props: SvgIconProps) => JSX.Element;
@@ -15,7 +15,7 @@ export const FormTextFieldIconed = forwardRef<HTMLInputElement, TFormTextFieldIc
   const { position, icon: Icon, InputProps, iconProps, ...restProps } = props;
 
   return (
-    <FormTextField
+    <S.FormTextField
       ref={ref}
       {...restProps}
       InputProps={{
@@ -24,29 +24,7 @@ export const FormTextFieldIconed = forwardRef<HTMLInputElement, TFormTextFieldIc
           <InputAdornment position={position}>
             <Icon {...iconProps} />
           </InputAdornment>
-        ),
-        sx: (theme) => {
-          const {
-            palette: {
-              mainColors: { black },
-              greyColors: { grey }
-            }
-          } = theme;
-
-          return {
-            "& path": {
-              fill: grey
-            },
-
-            "&:has(input:not(:placeholder-shown)) path": {
-              fill: black
-            },
-
-            "&.Mui-focused path": {
-              fill: black
-            }
-          };
-        }
+        )
       }}
     />
   );

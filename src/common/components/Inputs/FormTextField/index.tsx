@@ -1,80 +1,38 @@
-import { forwardRef } from "react";
-import { TextField, TextFieldProps } from "@mui/material";
+import { forwardRef, useState, FocusEvent, useCallback } from "react";
+import { TextFieldProps } from "@mui/material";
 
-export const FormTextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
-  const { InputProps } = props;
+import * as S from "./styled";
 
-  return (
-    <TextField
-      ref={ref}
-      {...props}
-      variant="standard"
-      InputProps={{
-        ...InputProps,
-        disableUnderline: true,
-        sx: (theme) => {
-          const {
-            shape: { borderRadius },
-            typography: {
-              Input: { fontSize, lineHeight }
-            },
-            palette: {
-              greyColors: { strokeGrey, grey },
-              mainColors: { black },
-              additionalColors: { errorRed }
-            }
-          } = theme;
+export const FormTextField = forwardRef<HTMLInputElement, TextFieldProps>(
+  ({ placeholder, onFocus: propsOnFocus, onBlur: propsOnBlur, InputProps, ...restProps }, ref) => {
+    const [placeholderStatus, setPlaceholderStatus] = useState(true);
 
-          const additionalStyles = typeof InputProps?.sx === "function" ? InputProps.sx(theme) : InputProps?.sx;
+    const onFocus = useCallback(
+      (e: FocusEvent<HTMLInputElement>) => {
+        if (propsOnFocus) propsOnFocus(e);
+        setPlaceholderStatus(false);
+      },
+      [propsOnFocus, setPlaceholderStatus]
+    );
 
-          return {
-            height: "44px",
-            p: "0.625rem 1rem",
-            border: `2px solid ${strokeGrey}`,
-            borderRadius: `${borderRadius}px`,
-            fontSize,
-            lineHeight,
-            cursor: "pointer",
+    const onBlur = useCallback(
+      (e: FocusEvent<HTMLInputElement>) => {
+        if (propsOnBlur) propsOnBlur(e);
+        setPlaceholderStatus(true);
+      },
+      [propsOnBlur, setPlaceholderStatus]
+    );
 
-            "& input": {
-              p: 0
-            },
-
-            "& input::placeholder": {
-              color: grey,
-              opacity: 1
-            },
-
-            ":hover": {
-              borderColor: grey
-            },
-
-            "&:has(+ .Mui-error)": {
-              borderColor: errorRed,
-              "& + .Mui-error": {
-                mt: 0,
-                ml: "0.75rem"
-              }
-            },
-
-            "&:has(input:active)": {
-              borderColor: "#b54f4f"
-            },
-
-            "&:has(input:not(:placeholder-shown))": {
-              color: black
-            },
-
-            "&.Mui-focused": {
-              color: black,
-              borderColor: "#b54f4f",
-              "& input::placeholder": { color: "transparent" }
-            },
-
-            ...additionalStyles
-          };
-        }
-      }}
-    />
-  );
-});
+    return (
+      <S.TextField
+        ref={ref}
+        {...restProps}
+        variant="standard"
+        placeholder={(placeholderStatus && placeholder) || ""}
+        InputProps={{ ...InputProps, disableUnderline: true }}
+        onBlur={onBlur}
+        onFocus={onFocus}
+      />
+    );
+  }
+);

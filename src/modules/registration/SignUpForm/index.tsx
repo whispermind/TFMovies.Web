@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import { PassswordIcon, UserIcon, EmailIcon, FormTextFieldIconed, TFormTextFieldIconedProps, SignUpButton } from "../../../common/components";
-import { emailRegExp, passwordRegExp, nicknameRegExp } from "../../../common/utils";
+import { formValidation } from "../../../common/utils";
 import { withController } from "../../../common/hocs";
 import { yupErrorMessages } from "../../../common/utils/yupErrorMessages";
 
@@ -20,11 +20,12 @@ export interface ISignUpFormProps {
 }
 
 const { requiredError, maxError, minError, passwordError, passwordConfirmError, emailError, onlyLettersError } = yupErrorMessages;
+const { email, password, nickname } = formValidation;
 
 export const schema = yup.object().shape({
-  nickname: yup.string().required(requiredError()).min(2, minError(2)).max(16, maxError(16)).matches(nicknameRegExp, onlyLettersError()),
-  email: yup.string().required(requiredError()).matches(emailRegExp, emailError()),
-  password: yup.string().required(requiredError()).matches(passwordRegExp, passwordError()),
+  nickname: yup.string().required(requiredError()).min(2, minError(2)).max(16, maxError(16)).matches(nickname, onlyLettersError()),
+  email: yup.string().required(requiredError()).matches(email, emailError()),
+  password: yup.string().required(requiredError()).matches(password, passwordError()),
   passwordConfirm: yup
     .string()
     .required(requiredError())

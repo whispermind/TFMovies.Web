@@ -1,4 +1,4 @@
-import { Box, TypographyProps, BoxProps } from "@mui/material";
+import { Box, TypographyProps, BoxProps, Button } from "@mui/material";
 
 import { LogoIcon } from "../Icons/LogoIcon";
 import { LogoName } from "../LogoName";
@@ -9,19 +9,27 @@ interface INamedLogoProps extends TypographyProps {
 
 export const NamedLogo = ({ boxProps, ...typoProps }: INamedLogoProps) => {
   return (
-    <Box
-      {...boxProps}
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        ...boxProps?.sx
-      }}
+    <Button
+      href="/"
+      color="inherit"
     >
-      <LogoIcon sx={{ width: "44px", height: "44px", mr: "1.5rem" }} />
-      <LogoName
-        {...typoProps}
-        variant="Logo"
-      />
-    </Box>
+      <Box
+        {...boxProps}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          ...boxProps?.sx
+        }}
+      >
+        <LogoIcon
+          disabled
+          sx={{ width: "44px", height: "44px", mr: "1.5rem" }}
+        />
+        <LogoName
+          {...typoProps}
+          variant="Logo"
+        />
+      </Box>
+    </Button>
   );
 };

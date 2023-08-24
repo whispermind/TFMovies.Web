@@ -1,8 +1,8 @@
 import { useState, useCallback } from "react";
 
-import { SignUpConfirm, ISignUpForm, SignUpForm } from "../../modules/Registration";
-import { FormDivider, LogoHeading, LogAuthWrapper, PrimaryButton, LogoName } from "../../common/components";
-import { capitalizer } from "../../common/utils";
+import { SignUpConfirm, ISignUpForm, SignUpForm } from "..";
+import { FormDivider, LogoHeading, LogAuthWrapper, PrimaryButton, LogoName } from "../../../common/components";
+import { capitalizer } from "../../../common/utils";
 
 export const SignUpPage = () => {
   const [submitedMail, setSubmitedMail] = useState("");
@@ -25,7 +25,7 @@ export const SignUpPage = () => {
   );
 
   return (
-    <LogAuthWrapper maxWidth="66%">
+    <LogAuthWrapper maxWidth="65%">
       {submitedMail ? (
         <SignUpConfirm email={submitedMail} />
       ) : (

@@ -23,7 +23,7 @@ export const Footer = () => {
             alignItems="flex-start"
             columnGap={33}
           >
-            <NamedLogo />
+            <NamedLogo color="mainColors.white" />
             <Stack
               width="36.5vw"
               direction="row"

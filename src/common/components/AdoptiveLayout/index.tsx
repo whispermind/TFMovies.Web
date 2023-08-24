@@ -20,6 +20,7 @@ export const AdoptiveLayout = ({ children, ...stackProps }: PropsWithChildren<St
         <Stack
           alignItems="center"
           justifyContent="center"
+          direction="row"
           {...stackProps}
         >
           {children}

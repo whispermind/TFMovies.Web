@@ -1,11 +1,11 @@
-import { LogAuthWrapper, LogoHeading, PrimaryButton } from "../../common/components";
+import { LogAuthWrapper, LogoHeading, PrimaryButton } from "../../../common/components";
 
 export const SignUpSuccessPage = () => {
   const heading = "Registration confirmed";
   const description = "Thank you, your registration has been successfully confirmed!";
 
   return (
-    <LogAuthWrapper maxWidth="66%">
+    <LogAuthWrapper maxWidth="65%">
       <LogoHeading
         mb={6.5}
         heading={heading}

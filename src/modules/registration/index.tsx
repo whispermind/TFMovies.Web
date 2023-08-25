@@ -1,5 +1,4 @@
-export const Registration = () => {
-  return (
-    <p>Registration Module</p>
-  )
-}
+export { SignUpForm } from "./SignUpForm";
+export { SignUpConfirm } from "./SignUpConfirm";
+
+export type { ISignUpForm, ISignUpFormProps } from "./SignUpForm";

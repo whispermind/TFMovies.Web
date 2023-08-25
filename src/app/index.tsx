@@ -1,11 +1,16 @@
-import { ThemeProvider, CssBaseline } from "@mui/material"
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import { Outlet } from "react-router-dom";
 
-import { mainTheme } from "./styles/theme"
-import { AppPage } from "../pages/AppPage"
+import { AppLayout } from "../modules/AppLayout";
+import { mainTheme } from "./styles/theme";
 
-export const App = () => (
-	<ThemeProvider theme={mainTheme}>
-		<CssBaseline />
-		<AppPage />
-	</ThemeProvider>
-)
+export const App = () => {
+  return (
+    <ThemeProvider theme={mainTheme}>
+      <CssBaseline />
+      <AppLayout>
+        <Outlet />
+      </AppLayout>
+    </ThemeProvider>
+  );
+};

@@ -22,8 +22,8 @@ export const HeaderAvatar = ({ username, access }: IHeaderAvatarProps) => {
           {username}
         </Typography>
         <Typography
-          lineHeight="24px"
-          fontSize="14px"
+          lineHeight="1.5rem"
+          fontSize="0.875rem"
           fontWeight="500"
           color="greyColors.grey"
         >

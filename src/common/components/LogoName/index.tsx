@@ -3,6 +3,7 @@ import { Typography, TypographyProps } from "@mui/material";
 export const LogoName = (props: TypographyProps) => {
   return (
     <Typography
+      noWrap
       color="mainColors.black"
       {...props}
     >

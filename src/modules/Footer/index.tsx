@@ -21,7 +21,7 @@ export const Footer = () => {
           <Stack
             direction="row"
             alignItems="flex-start"
-            columnGap={33}
+            columnGap="13.75vw"
           >
             <NamedLogo color="mainColors.white" />
             <Stack

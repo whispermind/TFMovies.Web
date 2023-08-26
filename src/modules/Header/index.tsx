@@ -1,6 +1,8 @@
-import { Toolbar } from "@mui/material";
+import { Stack } from "@mui/material";
 
-import { NamedLogo, CloseButton, AdoptiveLayout } from "../../common/components";
+import { NamedLogo, AdoptiveLayout } from "../../common/components";
+import { UnauthorizedState, AuthorizedState } from "./states";
+import { HeaderSearchInput } from "./HeaderSearchInput";
 import * as S from "./styled";
 
 export const Header = () => {
@@ -9,11 +11,19 @@ export const Header = () => {
       <S.Toolbar disableGutters>
         <AdoptiveLayout
           direction="row"
-          justifyContent="space-between"
           alignItems="center"
+          columnGap={7.5}
         >
           <NamedLogo color="mainColors.black" />
-          <CloseButton />
+          <Stack
+            flexGrow="1"
+            direction="row"
+            justifyContent="space-between"
+            columnGap={3}
+          >
+            <HeaderSearchInput />
+            <UnauthorizedState />
+          </Stack>
         </AdoptiveLayout>
       </S.Toolbar>
     </S.AppBar>

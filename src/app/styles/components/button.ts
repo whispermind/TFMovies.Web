@@ -17,7 +17,7 @@ export const MuiButton: StylesOverrides<ButtonProps["variant"], Interpolation<{ 
         height: "44px",
         border: `2px solid ${main}`,
         color: main,
-        textTransform: "capitalize",
+        textTransform: "none",
         backgroundColor: "transparent",
 
         ":hover": {

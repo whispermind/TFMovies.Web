@@ -3,11 +3,11 @@ import { useState, useCallback } from "react";
 import { SignUpConfirm, ISignUpForm, SignUpForm } from "..";
 import { FormDivider, LogoHeading, LogAuthWrapper, PrimaryButton, LogoName } from "../../../common/components";
 import { capitalizer } from "../../../common/utils";
-import { useSignupMutation } from "../../../app/api";
+import { useSignUpMutation } from "../../../app/api";
 
 export const SignUpPage = () => {
   const [submitedMail, setSubmitedMail] = useState("");
-  const [signUp] = useSignupMutation();
+  const [signUp] = useSignUpMutation();
 
   const description = `We are the largest society of movies enthusiasts.
   Here you are sure to find like - minded people! To create an account,
@@ -22,7 +22,7 @@ export const SignUpPage = () => {
     async (formData: ISignUpForm) => {
       const capitalizedData = { ...formData, nickname: capitalizer(formData.nickname) };
       try {
-        const response = await signUp(capitalizedData).unwrap();
+        await signUp(capitalizedData).unwrap();
         setSubmitedMail(formData.email);
       } catch (e) {
         console.log(e);

@@ -5,6 +5,8 @@ import { useCallback } from "react";
 
 import { PassswordIcon, EmailIcon, FormTextFieldIconed, TFormTextFieldIconedProps, PrimaryButton } from "../../../common/components";
 import { withController } from "../../../common/hocs";
+import { useSignInMutation, useAppDispatch } from "../../../common/hooks";
+import { signIn } from "../AuthSlice";
 
 export interface ISignInForm {
   email: string;
@@ -12,7 +14,10 @@ export interface ISignInForm {
 }
 
 export const SignInForm = () => {
+  const [signInReq] = useSignInMutation();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   const { handleSubmit, control } = useForm<ISignInForm>({
     defaultValues: {
       email: "",
@@ -22,9 +27,11 @@ export const SignInForm = () => {
 
   const onLogin = useCallback(
     async (creds: ISignInForm) => {
+      const userData = await signInReq(creds);
+      dispatch(signIn(userData));
       navigate("/");
     },
-    [navigate]
+    [navigate, dispatch, signInReq]
   );
 
   const Email = withController<ISignInForm, TFormTextFieldIconedProps>(FormTextFieldIconed);

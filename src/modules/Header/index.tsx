@@ -1,5 +1,3 @@
-import { Toolbar } from "@mui/material";
-
 import { NamedLogo, CloseButton, AdoptiveLayout } from "../../common/components";
 import * as S from "./styled";
 

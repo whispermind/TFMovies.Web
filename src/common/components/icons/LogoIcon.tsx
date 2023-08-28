@@ -1,4 +1,4 @@
-import { SvgIcon, SvgIconProps, Button } from "@mui/material";
+import { SvgIcon, SvgIconProps } from "@mui/material";
 
 export const LogoIcon = (props: SvgIconProps) => {
   return (

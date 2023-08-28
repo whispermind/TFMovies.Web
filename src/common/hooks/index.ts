@@ -1,4 +1,1 @@
-// re-export hooks here
-// ex. export { Button } from './Button'
-
-export {};
+export { useAppDispatch, useAppSelector } from "./store";

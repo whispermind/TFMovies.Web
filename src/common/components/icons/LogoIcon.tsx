@@ -1,15 +1,8 @@
 import { SvgIcon, SvgIconProps, Button } from "@mui/material";
 
-export interface ILogoIcon {
-  disabled?: boolean;
-}
-
-export const LogoIcon = ({ disabled, ...svgProps }: SvgIconProps & ILogoIcon) => (
-  <Button
-    href="/"
-    disabled={disabled}
-  >
-    <SvgIcon {...svgProps}>
+export const LogoIcon = (props: SvgIconProps) => {
+  return (
+    <SvgIcon {...props}>
       <svg
         width="44"
         height="44"
@@ -31,5 +24,5 @@ export const LogoIcon = ({ disabled, ...svgProps }: SvgIconProps & ILogoIcon) =>
         />
       </svg>
     </SvgIcon>
-  </Button>
-);
+  );
+};

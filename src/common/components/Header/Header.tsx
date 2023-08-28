@@ -28,7 +28,7 @@ export const Header = () => {
 					{/* /LOGO */}
 
 					{/* CLOSE BUTTON */}
-					<Box
+					{/* <Box
 						component={Button}
 						sx={{ ...closeButton, mr: '-10px' }}>
 						<Typography
@@ -52,7 +52,7 @@ export const Header = () => {
 									color: graphite
 								}
 							}} />
-					</Box>
+					</Box> */}
 					{/* CLOSE BUTTON */}
 				</Toolbar>
 			</Container>

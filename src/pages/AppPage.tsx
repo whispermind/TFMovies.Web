@@ -2,6 +2,8 @@ import { Container, styled } from "@mui/material"
 import { Footer } from "../common/components/Footer/Footer"
 import { Header } from "../common/components/Header/Header"
 import { MenuBlock } from "../common/components/MenuBlock";
+import { AuthorsAndTagsBlock } from "../common/components/AuthorsAndTagsBlock/AuthorsAndTagsBlock";
+import { Post } from "../common/components/Post/Post";
 
 
 const StyledMain = styled('main')(({ theme }) => {
@@ -26,8 +28,10 @@ export const AppPage = () => {
 
 			<StyledMain>
 
-				<Container maxWidth='xl' sx={{ display: 'flex', justifyContent: 'space-between' }}>
+				<Container maxWidth='xl' sx={{ display: 'flex', justifyContent: 'space-between', gap: '40px' }}>
 					<MenuBlock />
+					<Post />
+					<AuthorsAndTagsBlock />
 				</Container>
 
 

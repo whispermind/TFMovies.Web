@@ -3,10 +3,6 @@ import { Box, List, ListItem, ListItemIcon, Typography, styled } from "@mui/mate
 import { CustomMenuLink } from "../CustomMenuLink";
 import { HomePageIcon, HashtagIcon, FavoriteIcon } from "../../icons";
 
-const CustomList = styled(List)({
-	marginBottom: '40px'
-})
-
 export const NavigationMenu = () => {
 	const linksData = {
 		'Home Page': HomePageIcon,
@@ -16,7 +12,7 @@ export const NavigationMenu = () => {
 
 	const links = Object.entries(linksData).map(([text, Icon]) => (
 		<CustomMenuLink key={text}>
-			<ListItem>
+			<ListItem sx={{ pt: '0px' }}>
 				<ListItemIcon>
 					<Icon />
 				</ListItemIcon>
@@ -27,9 +23,9 @@ export const NavigationMenu = () => {
 
 	return (
 		<Box width='240px'>
-			<CustomList>
+			<List sx={{ marginBottom: '40px', paddingTop: '0px' }}>
 				{links}
-			</CustomList>
+			</List>
 		</Box>
 	)
 }

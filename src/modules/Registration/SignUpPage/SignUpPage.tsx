@@ -24,7 +24,8 @@ export const SignUpPage = () => {
       try {
         const response = await signUp(capitalizedData).unwrap();
         setSubmitedMail(formData.email);
-      } catch {
+      } catch (e) {
+        console.log(e);
       }
     },
     [setSubmitedMail, signUp]

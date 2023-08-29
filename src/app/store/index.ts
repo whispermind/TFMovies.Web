@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 import { apiSlice } from "../api";
+import { authSlice } from "../../modules/Authorization/AuthSlice";
 
 export const store = configureStore({
   reducer: {
+    auth: authSlice.reducer,
     [apiSlice.reducerPath]: apiSlice.reducer
   },
-  middleware: (gDM) => gDM().concat(apiSlice.middleware)
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware)
 });
 
 type DispatchFunc = () => AppDispatch;

@@ -1,22 +1,29 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 
+import { refreshBaseQuery } from "./refreshBaseQuery";
 import type { ISignUpForm } from "../../modules/Registration";
+import type { ISignInForm, IAuthState } from "../../modules/Authorization";
 
-interface ISignUpResponse {
-  token: string;
-}
+interface ISignUpResponse {}
 
 export const apiSlice = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_URL }),
+  baseQuery: refreshBaseQuery,
   endpoints: (builder) => ({
-    signup: builder.mutation<ISignUpResponse, ISignUpForm>({
+    signUp: builder.mutation<ISignUpResponse, ISignUpForm>({
       query: (user) => ({
         url: "/api/v1/users",
         method: "POST",
         body: user
       })
+    }),
+    signIn: builder.mutation<IAuthState, ISignInForm>({
+      query: (credentials) => ({
+        url: "/api/v1/auth",
+        method: "POST",
+        body: credentials
+      })
     })
   })
 });
 
-export const { useSignupMutation } = apiSlice;
+export const { useSignUpMutation, useSignInMutation } = apiSlice;

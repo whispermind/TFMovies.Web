@@ -11,6 +11,7 @@ export { LogAuthWrapper } from "./LogAuthWrapper";
 export { MuiRouterLink } from "./MuiRouterLink";
 export { AdoptiveLayout } from "./AdoptiveLayout";
 export { Avatar } from "./Avatar";
+export {MenuBlock} from "./MenuBlock"
 
 export type { TFormTextFieldIconedProps } from "./Inputs/FormTextFieldIconed";
 export type { IWithIconProps } from "./Inputs/FormTextFieldIconed/index";

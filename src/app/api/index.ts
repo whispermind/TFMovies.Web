@@ -17,10 +17,10 @@ export const apiSlice = createApi({
       })
     }),
     signIn: builder.mutation<IAuthState, ISignInForm>({
-      query: (creds) => ({
+      query: (credentials) => ({
         url: "/api/v1/auth",
         method: "POST",
-        body: creds
+        body: credentials
       })
     })
   })

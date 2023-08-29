@@ -9,7 +9,7 @@ export const store = configureStore({
     auth: authSlice.reducer,
     [apiSlice.reducerPath]: apiSlice.reducer
   },
-  middleware: (gDM) => gDM().concat(apiSlice.middleware)
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware)
 });
 
 type DispatchFunc = () => AppDispatch;

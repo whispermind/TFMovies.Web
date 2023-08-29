@@ -26,10 +26,14 @@ export const SignInForm = () => {
   });
 
   const onLogin = useCallback(
-    async (creds: ISignInForm) => {
-      const userData = await signInReq(creds);
-      dispatch(signIn(userData));
-      navigate("/");
+    async (credentials: ISignInForm) => {
+      try {
+        const userData = await signInReq(credentials).unwrap();
+        dispatch(signIn(userData));
+        navigate("/");
+      } catch (e) {
+        console.log(e);
+      }
     },
     [navigate, dispatch, signInReq]
   );

@@ -13,6 +13,7 @@ export { AdoptiveLayout } from "./AdoptiveLayout";
 export { Avatar } from "./Avatar";
 export { MenuBlock } from "./MenuBlock"
 export { AuthorsAndTagsBlock } from "./AuthorsAndTagsBlock/AuthorsAndTagsBlock"
+export { Post } from  "./Post/Post"
 
 export type { TFormTextFieldIconedProps } from "./Inputs/FormTextFieldIconed";
 export type { IWithIconProps } from "./Inputs/FormTextFieldIconed/index";

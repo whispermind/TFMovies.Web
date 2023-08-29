@@ -6,24 +6,24 @@ import { Footer } from "../Footer";
 import { AdoptiveLayout } from "../../common/components";
 
 export const AppLayout = ({ children }: PropsWithChildren) => {
-  return (
-    <Stack minHeight="100vh">
-      <Header />
-      <Stack
-        p="50px 0"
-        bgcolor="mainColors.lightGrey"
-        flexGrow={1}
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Stack
-          maxWidth="xl"
-          justifyContent="center"
-          alignItems="center"
-        />
-        <AdoptiveLayout>{children}</AdoptiveLayout>
-      </Stack>
-      <Footer />
-    </Stack>
-  );
+	return (
+		<Stack minHeight="100vh">
+			<Header />
+			<Stack
+				p="50px 0"
+				bgcolor="mainColors.lightGrey"
+				flexGrow={1}
+				justifyContent="center"
+				alignItems="center"
+			>
+				<Stack
+					maxWidth="xl"
+					justifyContent="center"
+					alignItems="center"
+				/>
+				<AdoptiveLayout alignItems='normal' gap='40px'>{children}</AdoptiveLayout>
+			</Stack>
+			<Footer />
+		</Stack>
+	);
 };

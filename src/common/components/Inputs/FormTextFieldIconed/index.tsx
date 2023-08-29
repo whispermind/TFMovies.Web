@@ -20,7 +20,7 @@ export const FormTextFieldIconed = forwardRef<HTMLInputElement, TFormTextFieldIc
       {...restProps}
       InputProps={{
         ...InputProps,
-        startAdornment: (
+        [`${position}Adornment`]: (
           <InputAdornment position={position}>
             <Icon {...iconProps} />
           </InputAdornment>

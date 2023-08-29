@@ -1,7 +1,7 @@
 import { createRoutesFromElements, createBrowserRouter, Route } from "react-router-dom";
 
 import { App } from "..";
-import { ErrorPage, SignUpSuccessPage, SignUpPage, SignInPage, PassRecoveryPage, ForgotPassPage } from "../../pages";
+import { ErrorPage, SignInPage, PassRecoveryPage, ForgotPassPage } from "../../pages";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -10,14 +10,6 @@ export const router = createBrowserRouter(
       element={<App />}
       errorElement={<ErrorPage />}
     >
-      <Route
-        path="signup"
-        element={<SignUpPage />}
-      />
-      <Route
-        path="signup/:uuid"
-        element={<SignUpSuccessPage />}
-      />
       <Route
         path="signin"
         element={<SignInPage />}

@@ -1,9 +1,18 @@
-import { SvgIcon, SvgIconProps } from "@mui/material";
+import { SvgIcon, SvgIconProps, Button } from "@mui/material";
 
-export const LogoIcon = (props: SvgIconProps) => {
-  return (
-    <SvgIcon {...props}>
+export interface ILogoIcon {
+  disabled?: boolean;
+}
+
+export const LogoIcon = ({ disabled, ...svgProps }: SvgIconProps & ILogoIcon) => (
+  <Button
+    href="/"
+    disabled={disabled}
+  >
+    <SvgIcon {...svgProps}>
       <svg
+        width="44"
+        height="44"
         viewBox="0 0 434 593"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -22,5 +31,5 @@ export const LogoIcon = (props: SvgIconProps) => {
         />
       </svg>
     </SvgIcon>
-  );
-};
+  </Button>
+);

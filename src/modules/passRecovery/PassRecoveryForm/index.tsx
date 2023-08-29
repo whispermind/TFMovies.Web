@@ -4,7 +4,8 @@ import { Stack } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import { PassswordIcon, FormTextFieldIconed, TFormTextFieldIconedProps, PrimaryButton } from "../../../common/components";
+import { FormTextFieldIconed, TFormTextFieldIconedProps, PrimaryButton } from "../../../common/components";
+import { PassswordIcon } from "../../../common/components/icons";
 import { formValidation } from "../../../common/utils";
 import { withController } from "../../../common/hocs";
 import { yupErrorMessages } from "../../../common/utils/yupErrorMessages";

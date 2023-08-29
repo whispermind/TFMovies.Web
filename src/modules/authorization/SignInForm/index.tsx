@@ -3,7 +3,8 @@ import { Stack, Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useCallback } from "react";
 
-import { PassswordIcon, EmailIcon, FormTextFieldIconed, TFormTextFieldIconedProps, PrimaryButton } from "../../../common/components";
+import { FormTextFieldIconed, TFormTextFieldIconedProps, PrimaryButton } from "../../../common/components";
+import { PassswordIcon, EmailIcon } from "../../../common/components/icons";
 import { withController } from "../../../common/hocs";
 import { useSignInMutation, useAppDispatch } from "../../../common/hooks";
 import { signIn } from "../AuthSlice";

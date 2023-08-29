@@ -1,5 +1,5 @@
 import { FormTextFieldIconed } from "../../../common/components";
-import { SearchIcon } from "../../../common/components/Icons/SearchIcon";
+import { SearchIcon } from "../../../common/components/icons";
 
 export const HeaderSearchInput = () => {
   return (

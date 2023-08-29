@@ -1,5 +1,5 @@
 import { Button, Typography } from "@mui/material";
-import { CloseIcon } from "../../Icons/CloseIcon";
+import { CloseIcon } from "../../icons";
 
 export const CloseButton = () => {
   return (

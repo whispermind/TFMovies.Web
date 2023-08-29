@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 import { AppLayout } from "../modules/AppLayout";
 import { mainTheme } from "./styles/theme";
 import { store } from "./store";
-import { MenuBlock } from "../common/components";
+import { AuthorsAndTagsBlock, MenuBlock } from "../common/components";
 
 export const App = () => {
 	return (
@@ -15,6 +15,7 @@ export const App = () => {
 				<AppLayout>
 					<Outlet />
 					<MenuBlock />
+					<AuthorsAndTagsBlock />
 				</AppLayout>
 			</ThemeProvider>
 		</Provider>

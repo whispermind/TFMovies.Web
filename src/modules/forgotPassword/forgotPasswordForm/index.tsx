@@ -2,12 +2,14 @@ import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { Stack } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
 import { EmailIcon, FormTextFieldIconed, TFormTextFieldIconedProps, PrimaryButton } from "../../../common/components";
 import { formValidation } from "../../../common/utils";
 import { withController } from "../../../common/hocs";
 import { yupErrorMessages } from "../../../common/utils/yupErrorMessages";
+import { useForgotPassword } from "../../../common/hooks";
 
 export interface IForgotPassForm {
   email: string;
@@ -28,10 +30,22 @@ export const ForgotPassForm = () => {
     resolver: yupResolver(schema),
     mode: "onBlur"
   });
+  const [forgotPasswordReq] = useForgotPassword();
+  const navigate = useNavigate();
 
   const Email = withController<IForgotPassForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
 
-  const onSubmit = useCallback(() => {}, []);
+  const onSubmit = useCallback(
+    async ({ email: submitedEmail }: IForgotPassForm) => {
+      try {
+        await forgotPasswordReq(submitedEmail);
+        navigate("/");
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    [forgotPasswordReq, navigate]
+  );
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

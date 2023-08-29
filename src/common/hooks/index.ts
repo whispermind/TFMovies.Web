@@ -1,2 +1,7 @@
 export { useAppDispatch, useAppSelector } from "../../app/store";
-export { useSignInMutation, useSignUpMutation } from "../../app/api";
+export {
+  useSignInMutation as useSignIn,
+  useSignUpMutation as useSignUp,
+  useSignUpConfirmationMutation as useSignUpConfirmation,
+  useForgotPasswordMutation as useForgotPassword
+} from "../../app/api";

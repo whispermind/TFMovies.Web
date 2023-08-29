@@ -5,7 +5,7 @@ import { useCallback } from "react";
 
 import { PassswordIcon, EmailIcon, FormTextFieldIconed, TFormTextFieldIconedProps, PrimaryButton } from "../../../common/components";
 import { withController } from "../../../common/hocs";
-import { useSignInMutation, useAppDispatch } from "../../../common/hooks";
+import { useSignIn, useAppDispatch } from "../../../common/hooks";
 import { signIn } from "../AuthSlice";
 
 export interface ISignInForm {
@@ -14,7 +14,7 @@ export interface ISignInForm {
 }
 
 export const SignInForm = () => {
-  const [signInReq] = useSignInMutation();
+  const [signInReq] = useSignIn();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -25,11 +25,11 @@ export const SignInForm = () => {
     }
   });
 
-  const onLogin = useCallback(
+  const onSignIn = useCallback(
     async (credentials: ISignInForm) => {
       try {
-        const userData = await signInReq(credentials).unwrap();
-        dispatch(signIn(userData));
+        const authData = await signInReq(credentials).unwrap();
+        dispatch(signIn(authData));
         navigate("/");
       } catch (e) {
         console.log(e);
@@ -42,7 +42,7 @@ export const SignInForm = () => {
   const Password = withController<ISignInForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
 
   return (
-    <form onSubmit={handleSubmit(onLogin)}>
+    <form onSubmit={handleSubmit(onSignIn)}>
       <Stack rowGap={3.5}>
         <Email
           type="email"

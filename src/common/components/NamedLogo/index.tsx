@@ -21,10 +21,7 @@ export const NamedLogo = ({ boxProps, ...typoProps }: INamedLogoProps) => {
           ...boxProps?.sx
         }}
       >
-        <LogoIcon
-          disabled
-          sx={{ width: "44px", height: "44px", mr: "1.5rem" }}
-        />
+        <LogoIcon sx={{ width: "44px", height: "44px", mr: "1.5rem" }} />
         <LogoName
           {...typoProps}
           variant="Logo"

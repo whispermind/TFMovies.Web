@@ -20,9 +20,12 @@ export const SignInForm = () => {
     }
   });
 
-  const onLogin = useCallback(() => {
-    navigate("/");
-  }, [navigate]);
+  const onLogin = useCallback(
+    async (creds: ISignInForm) => {
+      navigate("/");
+    },
+    [navigate]
+  );
 
   const Email = withController<ISignInForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
   const Password = withController<ISignInForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
@@ -55,7 +58,7 @@ export const SignInForm = () => {
         </Link>
         <PrimaryButton
           variant="customOutlined"
-          onSubmit={onLogin}
+          type="submit"
         >
           Log In
         </PrimaryButton>

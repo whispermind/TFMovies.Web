@@ -1,8 +1,8 @@
 import { Link } from "@mui/material";
 
-import { LinksWrapper } from "../LinksWrapper";
+import { FooterLinksWrapper } from "../FooterLinksWrapper";
 
-export const Sector = () => {
+export const FooterSectors = () => {
   const linksData = {
     "/": "Home Page",
     "/tags": "Tags",
@@ -22,5 +22,5 @@ export const Sector = () => {
     </Link>
   ));
 
-  return <LinksWrapper heading="Sectors">{links}</LinksWrapper>;
+  return <FooterLinksWrapper heading="Sectors">{links}</FooterLinksWrapper>;
 };

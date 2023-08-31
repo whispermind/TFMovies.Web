@@ -15,7 +15,7 @@ export const router = createBrowserRouter(
         element={<SignUpPage />}
       />
       <Route
-        path="signup/:uuid"
+        path="signup/:token"
         element={<SignUpSuccessPage />}
       />
       <Route
@@ -23,7 +23,7 @@ export const router = createBrowserRouter(
         element={<SignInPage />}
       />
       <Route
-        path="passrecovery"
+        path="passrecovery/:token"
         element={<PassRecoveryPage />}
       />
       <Route

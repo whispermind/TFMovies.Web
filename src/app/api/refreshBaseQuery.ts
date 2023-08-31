@@ -8,10 +8,10 @@ const mutex = new Mutex();
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_API_URL,
   prepareHeaders: (headers, { getState }) => {
-    const { acessToken } = (getState() as RootState).auth;
+    const { accessToken } = (getState() as RootState).auth;
 
-    if (acessToken) {
-      headers.set("authorization", `Bearer ${acessToken}`);
+    if (accessToken) {
+      headers.set("authorization", `Bearer ${accessToken}`);
     }
 
     return headers;

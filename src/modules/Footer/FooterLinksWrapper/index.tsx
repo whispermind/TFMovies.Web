@@ -5,7 +5,7 @@ interface ILinksWrapper extends PropsWithChildren {
   heading: string;
 }
 
-export const LinksWrapper = ({ heading, children }: ILinksWrapper) => {
+export const FooterLinksWrapper = ({ heading, children }: ILinksWrapper) => {
   return (
     <div>
       <Typography variant="Sector">{heading}</Typography>

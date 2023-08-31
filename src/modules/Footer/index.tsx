@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 
-import { Sector } from "./Sectors";
-import { FollowUs } from "./FollowUs";
+import { FooterSectors } from "./FooterSectors";
+import { FooterFollowUs } from "./FooterFollowUs";
 import { FooterCopyright } from "./FooterCopyright";
 import { AdoptiveLayout, NamedLogo } from "../../common/components";
 
@@ -29,8 +29,8 @@ export const Footer = () => {
               direction="row"
               justifyContent="space-between"
             >
-              <Sector />
-              <FollowUs />
+              <FooterSectors />
+              <FooterFollowUs />
             </Stack>
           </Stack>
           <FooterCopyright />

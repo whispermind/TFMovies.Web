@@ -1,9 +1,9 @@
 import { Link, Stack } from "@mui/material";
 import { Instagram, Twitter, Facebook } from "@mui/icons-material";
 
-import { LinksWrapper } from "../LinksWrapper";
+import { FooterLinksWrapper } from "../FooterLinksWrapper";
 
-export const FollowUs = () => {
+export const FooterFollowUs = () => {
   const linksData = {
     "https://facebook.com/": Facebook,
     "https://www.instagram.com": Instagram,
@@ -20,13 +20,13 @@ export const FollowUs = () => {
   ));
 
   return (
-    <LinksWrapper heading="Follow Us">
+    <FooterLinksWrapper heading="Follow Us">
       <Stack
         direction="row"
         columnGap={3}
       >
         {links}
       </Stack>
-    </LinksWrapper>
+    </FooterLinksWrapper>
   );
 };

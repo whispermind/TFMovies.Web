@@ -3,6 +3,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { refreshBaseQuery } from "./refreshBaseQuery";
 import type { ISignUpForm } from "../../modules/Registration";
 import type { ISignInForm, IAuthState } from "../../modules/Authorization";
+import { IPassRecoveryForm } from "../../modules/PassRecovery";
 
 export const apiSlice = createApi({
   baseQuery: refreshBaseQuery,
@@ -21,21 +22,50 @@ export const apiSlice = createApi({
         body: credentials
       })
     }),
-    signUpConfirmation: builder.mutation<void, string>({
+    signUpEmailConfirmation: builder.mutation<void, string>({
       query: (email) => ({
         url: "/users/send-activation-email",
         method: "POST",
-        body: email
+        body: { email }
+      })
+    }),
+    signUpVerification: builder.mutation<void, string>({
+      query: (token) => ({
+        url: "/users/verify-email",
+        method: "POST",
+        body: { token }
       })
     }),
     forgotPassword: builder.mutation<void, string>({
       query: (email) => ({
-        url: "/users/send-activation-email",
+        url: "/users/forgot-password",
         method: "POST",
-        body: email
+        body: { email }
+      })
+    }),
+    validateResetToken: builder.mutation<void, string>({
+      query: (token) => ({
+        url: "/users/validate-reset-token",
+        method: "POST",
+        body: { token }
+      })
+    }),
+    resetPassword: builder.mutation<void, IPassRecoveryForm & { token: string }>({
+      query: (credentials) => ({
+        url: "/users/reset-password",
+        method: "POST",
+        body: credentials
       })
     })
   })
 });
 
-export const { useSignUpMutation, useSignInMutation, useSignUpConfirmationMutation, useForgotPasswordMutation } = apiSlice;
+export const {
+  useResetPasswordMutation,
+  useValidateResetTokenMutation,
+  useSignInMutation,
+  useSignUpEmailConfirmationMutation,
+  useForgotPasswordMutation,
+  useSignUpVerificationMutation,
+  useSignUpMutation
+} = apiSlice;

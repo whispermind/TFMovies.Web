@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { Stack } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,26 +9,30 @@ import { withController } from "../../../common/hocs";
 import { yupErrorMessages } from "../../../common/utils/yupErrorMessages";
 
 export interface IPassRecoveryForm {
-  password: string;
-  passwordConfirm: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+interface IPassRecoveryFormProps {
+  onSubmit: (data: IPassRecoveryForm) => void;
 }
 
 const { passwordConfirmError, passwordError, requiredError } = yupErrorMessages;
 const { password } = formValidation;
 
 const schema = yup.object().shape({
-  password: yup.string().required(requiredError()).matches(password, passwordError()),
-  passwordConfirm: yup
+  newPassword: yup.string().required(requiredError()).matches(password, passwordError()),
+  confirmPassword: yup
     .string()
     .required(requiredError())
-    .oneOf([yup.ref("password")], passwordConfirmError())
+    .oneOf([yup.ref("newPassword")], passwordConfirmError())
 });
 
-export const PassRecoveryForm = () => {
+export const PassRecoveryForm = ({ onSubmit }: IPassRecoveryFormProps) => {
   const { handleSubmit, control } = useForm<IPassRecoveryForm>({
     defaultValues: {
-      password: "",
-      passwordConfirm: ""
+      newPassword: "",
+      confirmPassword: ""
     },
     resolver: yupResolver(schema),
     mode: "onBlur"
@@ -38,14 +41,12 @@ export const PassRecoveryForm = () => {
   const Password = withController<IPassRecoveryForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
   const PasswordConfirm = withController<IPassRecoveryForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
 
-  const onSubmit = useCallback(() => {}, []);
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack rowGap={4}>
         <Password
           type="password"
-          name="password"
+          name="newPassword"
           placeholder="Enter the password..."
           control={control}
           icon={PassswordIcon}
@@ -53,7 +54,7 @@ export const PassRecoveryForm = () => {
         />
         <PasswordConfirm
           type="password"
-          name="passwordConfirm"
+          name="confirmPassword"
           placeholder="Enter the password again..."
           control={control}
           icon={PassswordIcon}

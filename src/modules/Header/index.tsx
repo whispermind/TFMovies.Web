@@ -1,11 +1,15 @@
 import { Stack } from "@mui/material";
 
 import { NamedLogo, AdoptiveLayout } from "../../common/components";
-import { UnauthorizedState, AuthorizedState } from "./states";
+import { UnauthorizedState, AuthorizedState } from "./HeaderStates";
 import { HeaderSearchInput } from "./HeaderSearchInput";
+import { useAppSelector } from "../../common/hooks";
+import { authSelector } from "../Authorization/AuthSlice";
 import * as S from "./styled";
 
 export const Header = () => {
+  const { accessToken } = useAppSelector(authSelector);
+
   return (
     <S.AppBar position="static">
       <S.Toolbar disableGutters>
@@ -22,7 +26,7 @@ export const Header = () => {
             columnGap={3}
           >
             <HeaderSearchInput />
-            <UnauthorizedState />
+            {accessToken ? <AuthorizedState /> : <UnauthorizedState />}
           </Stack>
         </AdoptiveLayout>
       </S.Toolbar>

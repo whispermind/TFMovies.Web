@@ -1,23 +1,19 @@
 import { useForm } from "react-hook-form";
 import { Stack, Link } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { useCallback } from "react";
 
 import { PassswordIcon, EmailIcon, FormTextFieldIconed, TFormTextFieldIconedProps, PrimaryButton } from "../../../common/components";
 import { withController } from "../../../common/hocs";
-import { useSignInMutation, useAppDispatch } from "../../../common/hooks";
-import { signIn } from "../AuthSlice";
 
 export interface ISignInForm {
   email: string;
   password: string;
 }
 
-export const SignInForm = () => {
-  const [signInReq] = useSignInMutation();
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+interface ISignInProps {
+  onSubmit: (data: ISignInForm) => void;
+}
 
+export const SignInForm = ({ onSubmit }: ISignInProps) => {
   const { handleSubmit, control } = useForm<ISignInForm>({
     defaultValues: {
       email: "",
@@ -25,24 +21,11 @@ export const SignInForm = () => {
     }
   });
 
-  const onLogin = useCallback(
-    async (credentials: ISignInForm) => {
-      try {
-        const userData = await signInReq(credentials).unwrap();
-        dispatch(signIn(userData));
-        navigate("/");
-      } catch (e) {
-        console.log(e);
-      }
-    },
-    [navigate, dispatch, signInReq]
-  );
-
   const Email = withController<ISignInForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
   const Password = withController<ISignInForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
 
   return (
-    <form onSubmit={handleSubmit(onLogin)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Stack rowGap={3.5}>
         <Email
           type="email"

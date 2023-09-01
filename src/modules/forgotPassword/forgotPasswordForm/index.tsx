@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { Stack } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -13,6 +12,10 @@ export interface IForgotPassForm {
   email: string;
 }
 
+interface IForgotPassFormProps {
+  onSubmit: (data: IForgotPassForm) => void;
+}
+
 const { requiredError, emailError } = yupErrorMessages;
 const { email } = formValidation;
 
@@ -20,7 +23,7 @@ const schema = yup.object().shape({
   email: yup.string().required(requiredError()).matches(email, emailError())
 });
 
-export const ForgotPassForm = () => {
+export const ForgotPassForm = ({ onSubmit }: IForgotPassFormProps) => {
   const { handleSubmit, control } = useForm<IForgotPassForm>({
     defaultValues: {
       email: ""
@@ -30,8 +33,6 @@ export const ForgotPassForm = () => {
   });
 
   const Email = withController<IForgotPassForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
-
-  const onSubmit = useCallback(() => {}, []);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -45,6 +46,7 @@ export const ForgotPassForm = () => {
           position="start"
         />
         <PrimaryButton
+          type="submit"
           variant="customOutlined"
           fullWidth
         >

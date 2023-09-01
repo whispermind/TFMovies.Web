@@ -1,7 +1,5 @@
 import { Button, Stack } from "@mui/material";
 
-import { HeaderSearchInput } from "../../HeaderSearchInput";
-
 export const UnauthorizedState = () => {
   return (
     <Stack

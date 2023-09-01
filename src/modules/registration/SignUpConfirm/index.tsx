@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 
 import { PrimaryButton, LogoHeading } from "../../../common/components";
+import { useSignUpEmailConfirmation } from "../../../common/hooks";
 
 const throttleTiming = 20000;
 
@@ -10,15 +11,22 @@ interface ISignUpCofnrimProps {
 
 export const SignUpConfirm = ({ email }: ISignUpCofnrimProps) => {
   const [throttle, setThrottle] = useState(false);
+  const [signUpEmailConfirmationReq] = useSignUpEmailConfirmation();
 
-  const onClick = useCallback(() => {
+  const onClick = useCallback(async () => {
     if (throttle) {
       return;
     }
 
     setThrottle(true);
     setTimeout(() => setThrottle(false), throttleTiming);
-  }, [throttle, setThrottle]);
+
+    try {
+      await signUpEmailConfirmationReq(email).unwrap();
+    } catch (e) {
+      console.log(e);
+    }
+  }, [throttle, setThrottle, signUpEmailConfirmationReq, email]);
 
   const heading = "Thank you for Registering";
   const description = `Thank you for registering on the Portal! We are sure that together with you we can be even better.

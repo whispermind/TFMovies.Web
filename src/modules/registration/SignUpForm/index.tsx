@@ -12,7 +12,7 @@ export interface ISignUpForm {
   nickname: string;
   email: string;
   password: string;
-  passwordConfirm: string;
+  confirmPassword: string;
 }
 
 export interface ISignUpFormProps {
@@ -26,7 +26,7 @@ export const schema = yup.object().shape({
   nickname: yup.string().required(requiredError()).min(2, minError(2)).max(16, maxError(16)).matches(nickname, onlyLettersError()),
   email: yup.string().required(requiredError()).matches(email, emailError()),
   password: yup.string().required(requiredError()).matches(password, passwordError()),
-  passwordConfirm: yup
+  confirmPassword: yup
     .string()
     .required(requiredError())
     .oneOf([yup.ref("password")], passwordConfirmError())
@@ -38,7 +38,7 @@ export const SignUpForm = ({ onSubmit }: ISignUpFormProps) => {
       nickname: "",
       email: "",
       password: "",
-      passwordConfirm: ""
+      confirmPassword: ""
     },
     resolver: yupResolver(schema),
     mode: "onBlur"
@@ -78,7 +78,7 @@ export const SignUpForm = ({ onSubmit }: ISignUpFormProps) => {
         />
         <PasswordConfirm
           type="password"
-          name="passwordConfirm"
+          name="confirmPassword"
           placeholder="Enter the password again..."
           control={control}
           icon={PassswordIcon}

@@ -1,8 +1,3 @@
-export { CloseIcon } from "./Icons/CloseIcon";
-export { PassswordIcon } from "./Icons/PasswordIcon";
-export { UserIcon } from "./Icons/UserIcon";
-export { EmailIcon } from "./Icons/EmailIcon";
-export { LogoIcon } from "./Icons/LogoIcon";
 export { PrimaryButton } from "./Buttons/PrimaryButton/index";
 export { SignUpButton } from "./Buttons/SignUpButton";
 export { CloseButton } from "./Buttons/CloseButton";

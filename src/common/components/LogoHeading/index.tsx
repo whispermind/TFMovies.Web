@@ -1,7 +1,7 @@
 import { Typography, Stack, StackProps } from "@mui/material";
 import { PropsWithChildren } from "react";
 
-import { LogoIcon } from "../Icons/LogoIcon";
+import { LogoIcon } from "../icons";
 
 export interface ILogoHeadingProps {
   heading?: JSX.Element | string;

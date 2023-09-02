@@ -7,14 +7,14 @@ import { mainTheme } from "./styles/theme";
 import { store } from "./store";
 
 export const App = () => {
-  return (
-    <Provider store={store}>
-      <ThemeProvider theme={mainTheme}>
-        <CssBaseline />
-        <AppLayout>
-          <Outlet />
-        </AppLayout>
-      </ThemeProvider>
-    </Provider>
-  );
+	return (
+		<Provider store={store}>
+			<ThemeProvider theme={mainTheme}>
+				<CssBaseline />
+				<AppLayout>
+					<Outlet />
+				</AppLayout>
+			</ThemeProvider>
+		</Provider>
+	);
 };

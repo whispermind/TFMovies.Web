@@ -1,6 +1,6 @@
 import { Box, TypographyProps, BoxProps, Button } from "@mui/material";
 
-import { LogoIcon } from "../Icons/LogoIcon";
+import { LogoIcon } from "../icons";
 import { LogoName } from "../LogoName";
 
 interface INamedLogoProps extends TypographyProps {

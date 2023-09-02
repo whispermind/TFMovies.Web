@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
 import { Stack, Link } from "@mui/material";
 
-import { PassswordIcon, EmailIcon, FormTextFieldIconed, TFormTextFieldIconedProps, PrimaryButton } from "../../../common/components";
+import { FormTextFieldIconed, TFormTextFieldIconedProps, PrimaryButton } from "../../../common/components";
+import { PassswordIcon, EmailIcon } from "../../../common/components/icons";
 import { withController } from "../../../common/hocs";
 
 export interface ISignInForm {

@@ -1,63 +1,76 @@
 import { useForm } from "react-hook-form";
 import { Stack, Link } from "@mui/material";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 import { FormTextFieldIconed, TFormTextFieldIconedProps, PrimaryButton } from "../../../common/components";
-import { PassswordIcon, EmailIcon } from "../../../common/components/icons";
-import { withController } from "../../../common/hocs";
+import { PassswordIcon, EmailIcon } from "../../../common/components/Icons";
+import { withController, withButtonLoader } from "../../../common/hocs";
+import { yupErrorMessages } from "../../../common/utils/yupErrorMessages";
+import { formValidation } from "../../../common/utils";
 
 export interface ISignInForm {
-  email: string;
-  password: string;
+	email: string;
+	password: string;
 }
 
-interface ISignInProps {
-  onSubmit: (data: ISignInForm) => void;
-}
+const { email, password } = formValidation;
+const { emailError, passwordError, requiredError } = yupErrorMessages;
 
-export const SignInForm = ({ onSubmit }: ISignInProps) => {
-  const { handleSubmit, control } = useForm<ISignInForm>({
-    defaultValues: {
-      email: "",
-      password: ""
-    }
-  });
+export const schema = yup.object().shape({
+	email: yup.string().required(requiredError()).matches(email, emailError()),
+	password: yup.string().required(requiredError()).matches(password, passwordError())
+});
 
-  const Email = withController<ISignInForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
-  const Password = withController<ISignInForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
+export const SignInForm = ({ onSubmit, isLoading }: IStatedForm<ISignInForm>) => {
+	const { handleSubmit, control } = useForm<ISignInForm>({
+		defaultValues: {
+			email: "",
+			password: ""
+		},
+		resolver: yupResolver(schema),
+		mode: "onBlur"
+	});
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Stack rowGap={3.5}>
-        <Email
-          type="email"
-          name="email"
-          placeholder="Enter the email..."
-          control={control}
-          icon={EmailIcon}
-          position="start"
-        />
-        <Password
-          type="password"
-          name="password"
-          placeholder="Enter the password..."
-          control={control}
-          icon={PassswordIcon}
-          position="start"
-        />
-        <Link
-          href="/forgotpass"
-          variant="FormHyperLink"
-          color="mainColors.black"
-        >
-          Forgot Your Password?
-        </Link>
-        <PrimaryButton
-          variant="customOutlined"
-          type="submit"
-        >
-          Log In
-        </PrimaryButton>
-      </Stack>
-    </form>
-  );
+	const Email = withController<ISignInForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
+	const Password = withController<ISignInForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
+	const SubmitButton = withButtonLoader(PrimaryButton);
+
+	return (
+		<form onSubmit={handleSubmit(onSubmit)}>
+			<Stack rowGap={3.5}>
+				<Email
+					type="email"
+					name="email"
+					placeholder="Enter the email..."
+					control={control}
+					icon={EmailIcon}
+					position="start"
+				/>
+				<Password
+					type="password"
+					name="password"
+					placeholder="Enter the password..."
+					control={control}
+					icon={PassswordIcon}
+					position="start"
+				/>
+				<Link
+					href="/forgotpass"
+					variant="FormHyperLink"
+					color="mainColors.black"
+				>
+					Forgot Your Password?
+				</Link>
+				<SubmitButton
+					variant="customOutlined"
+					type="submit"
+					disabled={isLoading}
+					fullWidth
+				>
+					Log In
+				</SubmitButton>
+			</Stack>
+		</form>
+	);
 };

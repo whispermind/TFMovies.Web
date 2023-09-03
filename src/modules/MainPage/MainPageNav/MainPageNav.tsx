@@ -1,20 +1,19 @@
-import { Box, List, ListItem, ListItemIcon, Typography, styled } from "@mui/material";
+import { Box, List, ListItem, ListItemIcon, Typography } from "@mui/material";
 
 import { CustomMenuLink } from "./CustomMenuLink";
-import { HomePageIcon, HashtagIcon, FavoriteIcon, EmailIcon, RulesIcon } from "../../../common/components/icons";
-
+import { HomePageIcon, HashtagIcon, FavoriteIcon, EmailIcon, RulesIcon } from "../../../common/components/Icons";
 
 export const MainPageNav = () => {
 	const linksData = {
-		'Home Page': HomePageIcon,
-		'Tags': HashtagIcon,
-		'Favorites': FavoriteIcon,
-	}
+		"Home Page": HomePageIcon,
+		Tags: HashtagIcon,
+		Favorites: FavoriteIcon
+	};
 
 	const otherLinksData = {
-		'Contact with Us': EmailIcon,
-		'Rules': RulesIcon,
-	}
+		"Contact with Us": EmailIcon,
+		Rules: RulesIcon
+	};
 
 	const links = Object.entries(linksData).map(([text, Icon]) => (
 		<CustomMenuLink key={text}>
@@ -39,14 +38,10 @@ export const MainPageNav = () => {
 	));
 
 	return (
-		<Box minWidth='240px'>
-			<List sx={{ marginBottom: '30px', paddingTop: '0px' }}>
-				{links}
-			</List>
+		<Box minWidth="240px">
+			<List sx={{ marginBottom: "30px", paddingTop: "0px" }}>{links}</List>
 			<Typography variant="Sector">Other</Typography>
-			<List>
-				{otherLinks}
-			</List>
+			<List>{otherLinks}</List>
 		</Box>
-	)
-}
+	);
+};

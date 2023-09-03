@@ -5,9 +5,12 @@ import { TopTagsFiltering } from "./TopTagsFiltering/TopTagsFiltering";
 
 export const ArticleTopFiltering = () => {
 	return (
-		<Stack alignItems='normal' gap='32px'>
+		<Stack
+			alignItems="normal"
+			gap="32px"
+		>
 			<TopTagsFiltering />
 			<TopAuthorsFiltering />
 		</Stack>
 	);
-}
+};

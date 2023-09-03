@@ -5,7 +5,7 @@ import ArchivoMedium from "../../assets/fonts/Archivo-Medium.ttf";
 import ArchivoSemiBold from "../../assets/fonts/Archivo-SemiBold.ttf";
 
 export const MuiCssBaseline = {
-  styleOverrides: `
+	styleOverrides: `
   @font-face {
     font-family: 'Archivo';
     src: url(${ArchivoItalic});

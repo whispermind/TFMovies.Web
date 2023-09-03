@@ -6,16 +6,16 @@ import { palette } from "./palette";
 import { breakpoints } from "./breakpoints";
 
 export const mainTheme = createTheme({
-  shape: {
-    borderRadius: 8
-  },
-  typography,
-  palette,
-  breakpoints,
-  components: {
-    MuiCssBaseline,
-    MuiButton,
-    MuiButtonBase,
-    MuiLink
-  }
+	shape: {
+		borderRadius: 8
+	},
+	typography,
+	palette,
+	breakpoints,
+	components: {
+		MuiCssBaseline,
+		MuiButton,
+		MuiButtonBase,
+		MuiLink
+	}
 });

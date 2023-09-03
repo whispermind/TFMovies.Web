@@ -4,29 +4,29 @@ import { Instagram, Twitter, Facebook } from "@mui/icons-material";
 import { FooterLinksWrapper } from "../FooterLinksWrapper";
 
 export const FooterFollowUs = () => {
-  const linksData = {
-    "https://facebook.com/": Facebook,
-    "https://www.instagram.com": Instagram,
-    "https://twitter.com/": Twitter
-  };
+	const linksData = {
+		"https://facebook.com/": Facebook,
+		"https://www.instagram.com": Instagram,
+		"https://twitter.com/": Twitter
+	};
 
-  const links = Object.entries(linksData).map(([href, Icon]) => (
-    <Link
-      href={href}
-      key={href}
-    >
-      <Icon fontSize="large" />
-    </Link>
-  ));
+	const links = Object.entries(linksData).map(([href, Icon]) => (
+		<Link
+			href={href}
+			key={href}
+		>
+			<Icon fontSize="large" />
+		</Link>
+	));
 
-  return (
-    <FooterLinksWrapper heading="Follow Us">
-      <Stack
-        direction="row"
-        columnGap={3}
-      >
-        {links}
-      </Stack>
-    </FooterLinksWrapper>
-  );
+	return (
+		<FooterLinksWrapper heading="Follow Us">
+			<Stack
+				direction="row"
+				columnGap={3}
+			>
+				{links}
+			</Stack>
+		</FooterLinksWrapper>
+	);
 };

@@ -1,9 +1,8 @@
-import { Grid, List, ListItem, Stack } from "@mui/material"
+import { Grid, List, ListItem } from "@mui/material";
 
-import { MainPageNav } from "./MainPageNav/MainPageNav"
-import { Article } from "./Article/Article"
-import { ArticleTopFiltering } from "./FilteringOptions/ArticleTopFiltering"
-
+import { MainPageNav } from "./MainPageNav/MainPageNav";
+import { Article } from "./Article/Article";
+import { ArticleTopFiltering } from "./FilteringOptions/ArticleTopFiltering";
 
 export const MainPage = () => {
 	return (
@@ -13,14 +12,14 @@ export const MainPage = () => {
 			justifyContent="space-between"
 			alignItems="normal"
 			flexWrap="nowrap"
-			gap='40px'
+			gap="40px"
 		>
 			<Grid item>
 				<MainPageNav />
 			</Grid>
 			<Grid item>
 				<List sx={{ p: 0 }}>
-					<ListItem sx={{ p: '0', mb: '20px' }}>
+					<ListItem sx={{ p: "0", mb: "20px" }}>
 						<Article />
 					</ListItem>
 				</List>
@@ -29,5 +28,5 @@ export const MainPage = () => {
 				<ArticleTopFiltering />
 			</Grid>
 		</Grid>
-	)
-}
+	);
+};

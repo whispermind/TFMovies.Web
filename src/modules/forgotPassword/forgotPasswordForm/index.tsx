@@ -4,56 +4,54 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import { FormTextFieldIconed, TFormTextFieldIconedProps, PrimaryButton } from "../../../common/components";
-import { EmailIcon } from "../../../common/components/icons";
+import { EmailIcon } from "../../../common/components/Icons";
 import { formValidation } from "../../../common/utils";
-import { withController } from "../../../common/hocs";
+import { withController, withButtonLoader } from "../../../common/hocs";
 import { yupErrorMessages } from "../../../common/utils/yupErrorMessages";
 
 export interface IForgotPassForm {
-  email: string;
-}
-
-interface IForgotPassFormProps {
-  onSubmit: (data: IForgotPassForm) => void;
+	email: string;
 }
 
 const { requiredError, emailError } = yupErrorMessages;
 const { email } = formValidation;
 
 const schema = yup.object().shape({
-  email: yup.string().required(requiredError()).matches(email, emailError())
+	email: yup.string().required(requiredError()).matches(email, emailError())
 });
 
-export const ForgotPassForm = ({ onSubmit }: IForgotPassFormProps) => {
-  const { handleSubmit, control } = useForm<IForgotPassForm>({
-    defaultValues: {
-      email: ""
-    },
-    resolver: yupResolver(schema),
-    mode: "onBlur"
-  });
+export const ForgotPassForm = ({ onSubmit, isLoading }: IStatedForm<IForgotPassForm>) => {
+	const { handleSubmit, control } = useForm<IForgotPassForm>({
+		defaultValues: {
+			email: ""
+		},
+		resolver: yupResolver(schema),
+		mode: "onBlur"
+	});
 
-  const Email = withController<IForgotPassForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
+	const Email = withController<IForgotPassForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
+	const SubmitButton = withButtonLoader(PrimaryButton);
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Stack rowGap={4}>
-        <Email
-          type="email"
-          name="email"
-          placeholder="Enter the email..."
-          control={control}
-          icon={EmailIcon}
-          position="start"
-        />
-        <PrimaryButton
-          type="submit"
-          variant="customOutlined"
-          fullWidth
-        >
-          Send me the instructions
-        </PrimaryButton>
-      </Stack>
-    </form>
-  );
+	return (
+		<form onSubmit={handleSubmit(onSubmit)}>
+			<Stack rowGap={4}>
+				<Email
+					type="email"
+					name="email"
+					placeholder="Enter the email..."
+					control={control}
+					icon={EmailIcon}
+					position="start"
+				/>
+				<SubmitButton
+					type="submit"
+					variant="customOutlined"
+					fullWidth
+					disabled={isLoading}
+				>
+					Send me the instructions
+				</SubmitButton>
+			</Stack>
+		</form>
+	);
 };

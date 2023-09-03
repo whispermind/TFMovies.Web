@@ -2,8 +2,8 @@ import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Typography, Stack } from "@mui/material";
 
-import { ForgotPassForm, IForgotPassForm } from "../forgotPasswordForm";
-import { LogAuthWrapper, Loader } from "../../../common/components";
+import { ForgotPassForm, IForgotPassForm } from "../ForgotPasswordForm";
+import { LogAuthWrapper } from "../../../common/components";
 import { useForgotPassword } from "../../../common/hooks";
 
 export const ForgotPassPage = () => {
@@ -25,9 +25,7 @@ export const ForgotPassPage = () => {
 		[forgotPasswordReq, navigate]
 	);
 
-	return isLoading ? (
-		<Loader />
-	) : (
+	return (
 		<LogAuthWrapper maxWidth="50%">
 			<Stack
 				rowGap={1.5}
@@ -36,7 +34,10 @@ export const ForgotPassPage = () => {
 				<Typography variant="Sector">{heading}</Typography>
 				<Typography variant="HBody">{description}</Typography>
 			</Stack>
-			<ForgotPassForm onSubmit={onSubmit} />
+			<ForgotPassForm
+				onSubmit={onSubmit}
+				isLoading={isLoading}
+			/>
 		</LogAuthWrapper>
 	);
 };

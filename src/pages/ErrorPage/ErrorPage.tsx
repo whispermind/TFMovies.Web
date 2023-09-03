@@ -1,3 +1,3 @@
 export const ErrorPage = () => {
-  return <div>ERROR</div>;
+	return <div>ERROR</div>;
 };

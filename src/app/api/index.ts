@@ -29,13 +29,6 @@ export const apiSlice = createApi({
 				body: { email }
 			})
 		}),
-		signUpVerification: builder.mutation<void, string>({
-			query: (token) => ({
-				url: "/users/verify-email",
-				method: "POST",
-				body: { token }
-			})
-		}),
 		forgotPassword: builder.mutation<void, string>({
 			query: (email) => ({
 				url: "/users/forgot-password",
@@ -43,9 +36,9 @@ export const apiSlice = createApi({
 				body: { email }
 			})
 		}),
-		validateResetToken: builder.mutation<void, string>({
-			query: (token) => ({
-				url: "/users/validate-reset-token",
+		validateToken: builder.mutation<void, { token: string; endpoint: string }>({
+			query: ({ token, endpoint }) => ({
+				url: `/users/${endpoint}`,
 				method: "POST",
 				body: { token }
 			})
@@ -62,10 +55,9 @@ export const apiSlice = createApi({
 
 export const {
 	useResetPasswordMutation,
-	useValidateResetTokenMutation,
+	useValidateTokenMutation,
 	useSignInMutation,
 	useSignUpEmailConfirmationMutation,
 	useForgotPasswordMutation,
-	useSignUpVerificationMutation,
 	useSignUpMutation
 } = apiSlice;

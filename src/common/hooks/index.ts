@@ -4,7 +4,6 @@ export {
 	useSignUpMutation as useSignUp,
 	useSignUpEmailConfirmationMutation as useSignUpEmailConfirmation,
 	useForgotPasswordMutation as useForgotPassword,
-	useSignUpVerificationMutation as useSignUpVerification,
-	useResetPasswordMutation as useResetPassword,
-	useValidateResetTokenMutation as useValidateResetToken
+	useValidateTokenMutation as useValidateToken,
+	useResetPasswordMutation as useResetPassword
 } from "../../app/api";

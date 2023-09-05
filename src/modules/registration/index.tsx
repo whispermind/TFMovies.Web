@@ -1,6 +1,5 @@
 export { SignUpForm } from "./SignUpForm";
-export { SignUpConfirm } from "./SignUpConfirm";
-export { SignUpTokenValidator } from "./SignUpTokenValidator";
+export { SignUpConfirmation } from "./SignUpConfirmation";
 export { SignUpSuccessPage } from "./SignUpSuccessPage";
 
 export type { ISignUpForm } from "./SignUpForm";

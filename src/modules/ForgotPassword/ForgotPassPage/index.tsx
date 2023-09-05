@@ -1,10 +1,13 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Typography, Stack } from "@mui/material";
+import { enqueueSnackbar } from "notistack";
 
 import { ForgotPassForm, IForgotPassForm } from "../ForgotPasswordForm";
 import { LogAuthWrapper } from "../../../common/components";
 import { useForgotPassword } from "../../../common/hooks";
+import { isApiError } from "../../../common/utils/helpers/errorHelpers";
+import { snackBarMessages } from "../../../common/utils";
 
 export const ForgotPassPage = () => {
 	const [forgotPasswordReq, { isLoading }] = useForgotPassword();
@@ -17,9 +20,12 @@ export const ForgotPassPage = () => {
 		async ({ email }: IForgotPassForm) => {
 			try {
 				await forgotPasswordReq(email).unwrap();
+				enqueueSnackbar(snackBarMessages.instructions, { variant: "success" });
 				navigate("/");
 			} catch (e) {
-				console.log(e);
+				if (isApiError(e)) {
+					enqueueSnackbar(e.data.ErrorMessage, { variant: "error" });
+				}
 			}
 		},
 		[forgotPasswordReq, navigate]

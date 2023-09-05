@@ -15,8 +15,8 @@ export const yupErrorMessages = {
 		return "The field may contain only letters";
 	},
 	passwordError() {
-		return `The password must contain minimum 8 and maximum 16 characters, 
-    at least one uppercase letter, one lowercase letter, one number and special character`;
+		return `The password field must be at least 8 characters long and contain only Latin letters, 
+		at least one uppercase letter, one lowercase letter, one number, and one special character from this list  -, _, +, =.`;
 	},
 	passwordConfirmError() {
 		return "The password must be the same";

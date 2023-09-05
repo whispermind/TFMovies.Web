@@ -1,11 +1,14 @@
 import { useCallback } from "react";
 import { Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
+import { enqueueSnackbar } from "notistack";
 
 import { PassRecoveryForm, IPassRecoveryForm } from "..";
 import { LogAuthWrapper } from "../../../common/components";
 import { useResetPassword } from "../../../common/hooks";
-import { PassRecoveryTokenValidator } from "../PassRecoveryTokenValidator";
+import { TokenValidator } from "../../../common/components/TokenValidator";
+import { isApiError } from "../../../common/utils/helpers/errorHelpers";
+import { snackBarMessages } from "../../../common/utils";
 
 export const PassRecoveryPage = () => {
 	const [resetPassReq, { isLoading }] = useResetPassword();
@@ -17,9 +20,12 @@ export const PassRecoveryPage = () => {
 			if (token) {
 				try {
 					await resetPassReq({ ...credentials, token }).unwrap();
+					enqueueSnackbar(snackBarMessages.passRecovery, { variant: "success" });
 					navigate("/signin");
 				} catch (e) {
-					console.log(e);
+					if (isApiError(e)) {
+						enqueueSnackbar(e.data.ErrorMessage, { variant: "error" });
+					}
 					navigate("/");
 				}
 			}
@@ -28,7 +34,10 @@ export const PassRecoveryPage = () => {
 	);
 
 	return (
-		<PassRecoveryTokenValidator token={token || ""}>
+		<TokenValidator
+			token={token || ""}
+			endpoint="validate-reset-token"
+		>
 			<LogAuthWrapper
 				maxWidth="50%"
 				flexGrow="1"
@@ -45,6 +54,6 @@ export const PassRecoveryPage = () => {
 					isLoading={isLoading}
 				/>
 			</LogAuthWrapper>
-		</PassRecoveryTokenValidator>
+		</TokenValidator>
 	);
 };

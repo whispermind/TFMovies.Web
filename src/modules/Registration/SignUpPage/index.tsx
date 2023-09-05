@@ -1,9 +1,11 @@
 import { useState, useCallback } from "react";
+import { enqueueSnackbar } from "notistack";
 
-import { SignUpConfirm, ISignUpForm, SignUpForm } from "..";
+import { SignUpConfirmation, ISignUpForm, SignUpForm } from "..";
 import { FormDivider, LogoHeading, LogAuthWrapper, PrimaryButton, LogoName } from "../../../common/components";
-import { capitalizer } from "../../../common/utils";
+import { capitalizer, snackBarMessages } from "../../../common/utils";
 import { useSignUp } from "../../../common/hooks";
+import { isApiError } from "../../../common/utils/helpers/errorHelpers";
 
 export const SignUpPage = () => {
 	const [submitedMail, setSubmitedMail] = useState("");
@@ -24,8 +26,11 @@ export const SignUpPage = () => {
 			try {
 				await signUpReq(capitalizedData).unwrap();
 				setSubmitedMail(formData.email);
+				enqueueSnackbar(snackBarMessages.instructions, { variant: "success" });
 			} catch (e) {
-				console.log(e);
+				if (isApiError(e)) {
+					enqueueSnackbar(e.data.ErrorMessage, { variant: "error" });
+				}
 			}
 		},
 		[setSubmitedMail, signUpReq]
@@ -34,7 +39,7 @@ export const SignUpPage = () => {
 	return (
 		<LogAuthWrapper maxWidth="65%">
 			{submitedMail ? (
-				<SignUpConfirm email={submitedMail} />
+				<SignUpConfirmation email={submitedMail} />
 			) : (
 				<>
 					<LogoHeading

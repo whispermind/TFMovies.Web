@@ -1,10 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useCallback } from "react";
+import { enqueueSnackbar } from "notistack";
 
 import { SignInForm, ISignInForm } from "..";
 import { FormDivider, SignUpButton, LogAuthWrapper, LogoHeading, LogoName } from "../../../common/components";
 import { useSignIn, useAppDispatch } from "../../../common/hooks";
 import { signIn } from "../AuthSlice";
+import { isApiError } from "../../../common/utils/helpers/errorHelpers";
+import { snackBarMessages } from "../../../common/utils";
 
 export const SignInPage = () => {
 	const [signInReq, { isLoading }] = useSignIn();
@@ -24,9 +27,12 @@ export const SignInPage = () => {
 			try {
 				const authData = await signInReq(credentials).unwrap();
 				dispatch(signIn(authData));
+				enqueueSnackbar(snackBarMessages.signIn, { variant: "success" });
 				navigate("/");
 			} catch (e) {
-				console.log(e);
+				if (isApiError(e)) {
+					enqueueSnackbar(e.data.ErrorMessage, { variant: "error" });
+				}
 			}
 		},
 		[navigate, dispatch, signInReq]

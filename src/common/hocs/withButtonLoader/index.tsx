@@ -12,7 +12,7 @@ export const withButtonLoader =
 				<Button {...buttonProps} />
 				{disabled && (
 					<Spinner
-						disableShrink
+						// disableShrink
 						size={25}
 					/>
 				)}

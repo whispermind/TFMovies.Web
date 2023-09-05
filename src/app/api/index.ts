@@ -22,6 +22,13 @@ export const apiSlice = createApi({
 				body: credentials
 			})
 		}),
+		signOut: builder.mutation<void, Omit<IAuthState, "currentUser">>({
+			query: (tokens) => ({
+				url: "/users/logout",
+				method: "POST",
+				body: tokens
+			})
+		}),
 		signUpEmailConfirmation: builder.mutation<void, string>({
 			query: (email) => ({
 				url: "/users/send-activation-email",
@@ -57,6 +64,7 @@ export const {
 	useResetPasswordMutation,
 	useValidateTokenMutation,
 	useSignInMutation,
+	useSignOutMutation,
 	useSignUpEmailConfirmationMutation,
 	useForgotPasswordMutation,
 	useSignUpMutation

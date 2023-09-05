@@ -7,8 +7,7 @@ import { PassRecoveryForm, IPassRecoveryForm } from "..";
 import { LogAuthWrapper } from "../../../common/components";
 import { useResetPassword } from "../../../common/hooks";
 import { TokenValidator } from "../../../common/components/TokenValidator";
-import { isApiError } from "../../../common/utils/helpers/errorHelpers";
-import { snackBarMessages } from "../../../common/utils";
+import { snackBarMessages, isApiError } from "../../../common/utils";
 
 export const PassRecoveryPage = () => {
 	const [resetPassReq, { isLoading }] = useResetPassword();
@@ -24,7 +23,7 @@ export const PassRecoveryPage = () => {
 					navigate("/signin");
 				} catch (e) {
 					if (isApiError(e)) {
-						enqueueSnackbar(e.data.ErrorMessage, { variant: "error" });
+						enqueueSnackbar(e.data.errorMessage, { variant: "error" });
 					}
 					navigate("/");
 				}
@@ -44,7 +43,7 @@ export const PassRecoveryPage = () => {
 			>
 				<Typography
 					display="block"
-					variant="Sector"
+					variant="Section"
 					mb={5}
 				>
 					Password Recovery

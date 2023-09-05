@@ -12,8 +12,8 @@ export const TopArticleAuthor = () => {
 				direction="column"
 				alignItems="start"
 			>
-				<Typography variant="Sector">Harold</Typography>
-				<Typography variant="Sector">Painless</Typography>
+				<Typography variant="Section">Harold</Typography>
+				<Typography variant="Section">Painless</Typography>
 			</Stack>
 		</Stack>
 	);

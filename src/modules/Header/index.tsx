@@ -4,11 +4,11 @@ import { NamedLogo, AdoptiveLayout } from "../../common/components";
 import { UnauthorizedState, AuthorizedState } from "./HeaderStates";
 import { HeaderSearchInput } from "./HeaderSearchInput";
 import { useAppSelector } from "../../common/hooks";
-import { authSelector } from "../Authorization/AuthSlice";
+import { selectAuth } from "../Authorization/AuthSlice";
 import * as S from "./styled";
 
 export const Header = () => {
-	const { accessToken } = useAppSelector(authSelector);
+	const { accessToken } = useAppSelector(selectAuth);
 
 	return (
 		<S.AppBar position="static">
@@ -23,6 +23,7 @@ export const Header = () => {
 						flexGrow="1"
 						direction="row"
 						justifyContent="space-between"
+						alignItems="center"
 						columnGap={3}
 					>
 						<HeaderSearchInput />

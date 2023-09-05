@@ -11,7 +11,7 @@ export const MainPageNav = () => {
 	};
 
 	const otherLinksData = {
-		"Contact with Us": EmailIcon,
+		"Contact Us": EmailIcon,
 		Rules: RulesIcon
 	};
 
@@ -40,7 +40,7 @@ export const MainPageNav = () => {
 	return (
 		<Box minWidth="240px">
 			<List sx={{ marginBottom: "30px", paddingTop: "0px" }}>{links}</List>
-			<Typography variant="Sector">Other</Typography>
+			<Typography variant="Section">Other</Typography>
 			<List>{otherLinks}</List>
 		</Box>
 	);

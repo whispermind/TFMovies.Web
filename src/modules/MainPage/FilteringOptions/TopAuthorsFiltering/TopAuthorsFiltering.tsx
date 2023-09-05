@@ -7,10 +7,10 @@ export const TopAuthorsFiltering = () => {
 	return (
 		<CustomBox>
 			<Box sx={{ mb: "28px" }}>
-				<Typography variant="Sector">
+				<Typography variant="Section">
 					Top
 					<Typography
-						variant="Sector"
+						variant="Section"
 						color="mainColors.main"
 					>
 						{" "}

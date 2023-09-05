@@ -4,7 +4,10 @@ import type { RootState } from "../../../app/store/index";
 export interface IAuthState {
 	accessToken: string | null;
 	refreshToken: string | null;
-	currentUser: unknown | null;
+	currentUser: {
+		nickname: string;
+		role: string;
+	} | null;
 }
 
 const initialState: IAuthState = {
@@ -24,4 +27,4 @@ export const authSlice = createSlice({
 
 export const { signIn, signOut } = authSlice.actions;
 
-export const authSelector = ({ auth }: RootState) => auth;
+export const selectAuth = ({ auth }: RootState) => auth;

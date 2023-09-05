@@ -3,9 +3,8 @@ import { enqueueSnackbar } from "notistack";
 
 import { SignUpConfirmation, ISignUpForm, SignUpForm } from "..";
 import { FormDivider, LogoHeading, LogAuthWrapper, PrimaryButton, LogoName } from "../../../common/components";
-import { capitalizer, snackBarMessages } from "../../../common/utils";
+import { capitalizer, snackBarMessages, isApiError } from "../../../common/utils";
 import { useSignUp } from "../../../common/hooks";
-import { isApiError } from "../../../common/utils/helpers/errorHelpers";
 
 export const SignUpPage = () => {
 	const [submitedMail, setSubmitedMail] = useState("");
@@ -29,7 +28,7 @@ export const SignUpPage = () => {
 				enqueueSnackbar(snackBarMessages.instructions, { variant: "success" });
 			} catch (e) {
 				if (isApiError(e)) {
-					enqueueSnackbar(e.data.ErrorMessage, { variant: "error" });
+					enqueueSnackbar(e.data.errorMessage, { variant: "error" });
 				}
 			}
 		},

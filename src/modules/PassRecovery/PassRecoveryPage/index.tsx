@@ -1,64 +1,59 @@
-import { useEffect, useCallback } from "react";
+import { useCallback } from "react";
 import { Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
+import { enqueueSnackbar } from "notistack";
 
 import { PassRecoveryForm, IPassRecoveryForm } from "..";
-import { LogAuthWrapper, Loader } from "../../../common/components";
-import { useValidateResetToken, useResetPassword } from "../../../common/hooks";
+import { LogAuthWrapper } from "../../../common/components";
+import { useResetPassword } from "../../../common/hooks";
+import { TokenValidator } from "../../../common/components/TokenValidator";
+import { isApiError } from "../../../common/utils/helpers/errorHelpers";
+import { snackBarMessages } from "../../../common/utils";
 
 export const PassRecoveryPage = () => {
-  const [validateResetTokenReq] = useValidateResetToken();
-  const [resetPassReq, { isLoading: isReseting }] = useResetPassword();
-  const navigate = useNavigate();
-  const { token } = useParams();
+	const [resetPassReq, { isLoading }] = useResetPassword();
+	const navigate = useNavigate();
+	const { token } = useParams();
 
-  useEffect(() => {
-    const fetcher = async () => {
-      if (token) {
-        try {
-          await validateResetTokenReq(token).unwrap();
-        } catch (e) {
-          navigate("/");
-        }
-      }
-    };
-    fetcher();
-  }, [navigate, validateResetTokenReq, token]);
+	const onSubmit = useCallback(
+		async (credentials: IPassRecoveryForm) => {
+			if (token) {
+				try {
+					await resetPassReq({ ...credentials, token }).unwrap();
+					enqueueSnackbar(snackBarMessages.passRecovery, { variant: "success" });
+					navigate("/signin");
+				} catch (e) {
+					if (isApiError(e)) {
+						enqueueSnackbar(e.data.ErrorMessage, { variant: "error" });
+					}
+					navigate("/");
+				}
+			}
+		},
+		[resetPassReq, navigate, token]
+	);
 
-  const onSubmit = useCallback(
-    async (credentials: IPassRecoveryForm) => {
-      if (token) {
-        try {
-          await resetPassReq({ ...credentials, token }).unwrap();
-          navigate("/signin");
-        } catch (e) {
-          console.log(e);
-          navigate("/");
-        }
-      }
-    },
-    [resetPassReq, navigate, token]
-  );
-
-  return (
-    <LogAuthWrapper
-      maxWidth="50%"
-      flexGrow="1"
-    >
-      {isReseting ? (
-        <Loader />
-      ) : (
-        <>
-          <Typography
-            display="block"
-            variant="Sector"
-            mb={5}
-          >
-            Password Recovery
-          </Typography>
-          <PassRecoveryForm onSubmit={onSubmit} />
-        </>
-      )}
-    </LogAuthWrapper>
-  );
+	return (
+		<TokenValidator
+			token={token || ""}
+			endpoint="validate-reset-token"
+		>
+			<LogAuthWrapper
+				maxWidth="50%"
+				flexGrow="1"
+			>
+				<Typography
+					display="block"
+					variant="Sector"
+					mb={5}
+				>
+					Password Recovery
+				</Typography>
+				<PassRecoveryForm
+					onSubmit={onSubmit}
+					isLoading={isLoading}
+				/>
+			</LogAuthWrapper>
+		</TokenValidator>
+	);
 };

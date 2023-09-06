@@ -4,9 +4,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import { FormTextFieldIconed, TFormTextFieldIconedProps, SignUpButton } from "../../../common/components";
-import { PassswordIcon, UserIcon, EmailIcon } from "../../../common/components/icons";
+import { PassswordIcon, UserIcon, EmailIcon } from "../../../common/components/Icons";
 import { formValidation } from "../../../common/utils";
-import { withController } from "../../../common/hocs";
+import { withController, withButtonLoader } from "../../../common/hocs";
 import { yupErrorMessages } from "../../../common/utils/yupErrorMessages";
 
 export interface ISignUpForm {
@@ -14,10 +14,6 @@ export interface ISignUpForm {
 	email: string;
 	password: string;
 	confirmPassword: string;
-}
-
-export interface ISignUpFormProps {
-	onSubmit: (data: ISignUpForm) => void;
 }
 
 const { requiredError, maxError, minError, passwordError, passwordConfirmError, emailError, onlyLettersError } = yupErrorMessages;
@@ -33,7 +29,7 @@ export const schema = yup.object().shape({
 		.oneOf([yup.ref("password")], passwordConfirmError())
 });
 
-export const SignUpForm = ({ onSubmit }: ISignUpFormProps) => {
+export const SignUpForm = ({ onSubmit, isLoading }: IStatedForm<ISignUpForm>) => {
 	const { handleSubmit, control } = useForm<ISignUpForm>({
 		defaultValues: {
 			nickname: "",
@@ -49,6 +45,7 @@ export const SignUpForm = ({ onSubmit }: ISignUpFormProps) => {
 	const Email = withController<ISignUpForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
 	const Password = withController<ISignUpForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
 	const PasswordConfirm = withController<ISignUpForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
+	const SubmitButton = withButtonLoader(SignUpButton);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
@@ -85,7 +82,11 @@ export const SignUpForm = ({ onSubmit }: ISignUpFormProps) => {
 					icon={PassswordIcon}
 					position="start"
 				/>
-				<SignUpButton />
+				<SubmitButton
+					type="submit"
+					fullWidth
+					disabled={isLoading}
+				/>
 			</Stack>
 		</form>
 	);

@@ -11,7 +11,8 @@ export { LogAuthWrapper } from "./LogAuthWrapper";
 export { MuiRouterLink } from "./MuiRouterLink";
 export { AdoptiveLayout } from "./AdoptiveLayout";
 export { Avatar } from "./Avatar";
-export { Loader } from "./Loader/Loader";
+export { Spinner } from "./Spinner";
+export { TokenValidator } from "./TokenValidator";
 
 export type { TFormTextFieldIconedProps } from "./Inputs/FormTextFieldIconed";
 export type { IWithIconProps } from "./Inputs/FormTextFieldIconed/index";

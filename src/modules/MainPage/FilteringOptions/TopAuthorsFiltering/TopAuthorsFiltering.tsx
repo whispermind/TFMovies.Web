@@ -6,20 +6,30 @@ import { TopArticleAuthor } from "../TopArticleAuthor/TopArticleAuthor";
 export const TopAuthorsFiltering = () => {
 	return (
 		<CustomBox>
-			<Box sx={{ mb: '28px' }}>
-				<Typography variant="Sector">Top
-					<Typography variant="Sector" color="mainColors.main"> Authors</Typography>
+			<Box sx={{ mb: "28px" }}>
+				<Typography variant="Sector">
+					Top
+					<Typography
+						variant="Sector"
+						color="mainColors.main"
+					>
+						{" "}
+						Authors
+					</Typography>
 				</Typography>
 			</Box>
 			<Box>
-				<List sx={{ p: '0' }}>
-					<ListItem sx={{ p: '0' }}>
-						<Link sx={{ textDecoration: 'none' }}>
+				<List sx={{ p: "0" }}>
+					<ListItem sx={{ p: "0" }}>
+						<Link
+							href="/"
+							sx={{ textDecoration: "none" }}
+						>
 							<TopArticleAuthor />
 						</Link>
 					</ListItem>
 				</List>
 			</Box>
-		</CustomBox >
+		</CustomBox>
 	);
-}
+};

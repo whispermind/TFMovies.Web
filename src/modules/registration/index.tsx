@@ -1,4 +1,5 @@
 export { SignUpForm } from "./SignUpForm";
-export { SignUpConfirm } from "./SignUpConfirm";
+export { SignUpConfirmation } from "./SignUpConfirmation";
+export { SignUpSuccessPage } from "./SignUpSuccessPage";
 
-export type { ISignUpForm, ISignUpFormProps } from "./SignUpForm";
+export type { ISignUpForm } from "./SignUpForm";

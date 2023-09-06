@@ -5,11 +5,11 @@ import { apiSlice } from "../api";
 import { authSlice } from "../../modules/Authorization/AuthSlice";
 
 export const store = configureStore({
-  reducer: {
-    auth: authSlice.reducer,
-    [apiSlice.reducerPath]: apiSlice.reducer
-  },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware)
+	reducer: {
+		auth: authSlice.reducer,
+		[apiSlice.reducerPath]: apiSlice.reducer
+	},
+	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware)
 });
 
 type DispatchFunc = () => AppDispatch;

@@ -1,16 +1,22 @@
+import persistStore from "redux-persist/es/persistStore";
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { FLUSH, REHYDRATE, PAUSE, PERSIST, REGISTER, PURGE } from "redux-persist";
 
+import { rootReducer } from "./rootReducer";
 import { apiSlice } from "../api";
-import { authSlice } from "../../modules/Authorization/AuthSlice";
 
 export const store = configureStore({
-	reducer: {
-		auth: authSlice.reducer,
-		[apiSlice.reducerPath]: apiSlice.reducer
-	},
-	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware)
+	reducer: rootReducer,
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+			}
+		}).concat(apiSlice.middleware)
 });
+
+export const persistor = persistStore(store);
 
 type DispatchFunc = () => AppDispatch;
 export type RootState = ReturnType<typeof store.getState>;

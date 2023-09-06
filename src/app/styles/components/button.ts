@@ -1,6 +1,5 @@
 import { ButtonProps, Interpolation, Theme } from "@mui/material";
 
-import { Opacity } from "@mui/icons-material";
 import { palette } from "../palette";
 import { MuiRouterLink } from "../../../common/components";
 

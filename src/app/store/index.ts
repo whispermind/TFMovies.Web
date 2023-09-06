@@ -5,6 +5,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 import { rootReducer } from "./rootReducer";
 import { apiSlice } from "../api";
+import { errorMiddleware } from "./errorMiddleware";
 
 export const store = configureStore({
 	reducer: rootReducer,
@@ -13,7 +14,7 @@ export const store = configureStore({
 			serializableCheck: {
 				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
 			}
-		}).concat(apiSlice.middleware)
+		}).concat(apiSlice.middleware, errorMiddleware)
 });
 
 export const persistor = persistStore(store);

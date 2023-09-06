@@ -3,7 +3,7 @@ import { enqueueSnackbar } from "notistack";
 
 import { PrimaryButton, LogoHeading } from "../../../common/components";
 import { useSignUpEmailConfirmation } from "../../../common/hooks";
-import { snackBarMessages, isApiError } from "../../../common/utils";
+import { snackBarMessages } from "../../../common/utils";
 
 const throttleTiming = 20000;
 
@@ -27,9 +27,7 @@ export const SignUpConfirmation = ({ email }: ISignUpCofnrimProps) => {
 			await signUpEmailConfirmationReq(email).unwrap();
 			enqueueSnackbar(snackBarMessages.instructions, { variant: "success" });
 		} catch (e) {
-			if (isApiError(e)) {
-				enqueueSnackbar(e.data.errorMessage, { variant: "error" });
-			}
+			// handled by middleware
 		}
 	}, [throttle, setThrottle, signUpEmailConfirmationReq, email]);
 

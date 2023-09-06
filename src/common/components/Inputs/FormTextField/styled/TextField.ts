@@ -8,7 +8,7 @@ export const TextField = styled(_TextField)(({ theme }) => {
 		},
 		palette: {
 			greyColors: { strokeGrey, grey },
-			mainColors: { black, white },
+			mainColors: { black },
 			additionalColors: { errorRed }
 		}
 	} = theme;

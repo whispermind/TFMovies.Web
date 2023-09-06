@@ -1,9 +1,7 @@
 import { fetchBaseQuery, BaseQueryFn, FetchArgs, FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { Mutex } from "async-mutex";
-import { enqueueSnackbar } from "notistack";
 
 import { signIn, signOut, IAuthState } from "../../modules/Authorization/AuthSlice";
-import { isApiError } from "../../common/utils";
 import type { RootState } from "../store";
 
 const mutex = new Mutex();
@@ -33,10 +31,6 @@ export const refreshBaseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBas
 					result = await baseQuery(args, api, extraOptions);
 				} else {
 					api.dispatch(signOut());
-				}
-			} catch (e) {
-				if (isApiError(e)) {
-					enqueueSnackbar(e.data.errorMessage, { variant: "error" });
 				}
 			} finally {
 				release();

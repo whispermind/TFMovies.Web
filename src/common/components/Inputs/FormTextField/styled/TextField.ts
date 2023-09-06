@@ -42,10 +42,6 @@ export const TextField = styled(_TextField)(({ theme }) => {
 				"::placeholder": {
 					opacity: "1",
 					color: grey
-				},
-
-				"&:not(:placeholder-shown)": {
-					backgroundColor: `${white} !important`
 				}
 			},
 

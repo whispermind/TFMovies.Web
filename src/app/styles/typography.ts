@@ -31,7 +31,7 @@ export const typography = {
 		fontStyle: "normal"
 	},
 
-	Sector: {
+	Section: {
 		fontSize: "1.5rem",
 		lineHeight: "2.25rem",
 		fontWeight: "bold",
@@ -104,7 +104,7 @@ export const typography = {
 		fontWeight: "bold"
 	},
 
-	SectorLink: {
+	SectionLink: {
 		fontSize: "1.25rem",
 		lineHeight: "1.875rem",
 		fontWeight: "600",

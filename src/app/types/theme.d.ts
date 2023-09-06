@@ -49,7 +49,7 @@ interface ITypoVariants {
 	HHeader: CSSProperties;
 	HBody: CSSProperties;
 	HBodyBold: CSSProperties;
-	Sector: CSSProperties;
+	Section: CSSProperties;
 	ABody: CSSProperties;
 	ABodyBold: CSSProperties;
 	ABodyItalic: CSSProperties;
@@ -59,7 +59,7 @@ interface ITypoVariants {
 	ASecondHeader: CSSProperties;
 	FormHyperLink: CSSProperties;
 	Logo: CSSProperties;
-	SectorLink: CSSProperties;
+	SectionLink: CSSProperties;
 	SBody: CSSProperties;
 }
 

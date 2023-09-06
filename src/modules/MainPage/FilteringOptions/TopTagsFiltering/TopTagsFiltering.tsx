@@ -6,10 +6,10 @@ export const TopTagsFiltering = () => {
 	return (
 		<CustomBox>
 			<Box sx={{ mb: "28px" }}>
-				<Typography variant="Sector">
+				<Typography variant="Section">
 					Top
 					<Typography
-						variant="Sector"
+						variant="Section"
 						color="mainColors.main"
 					>
 						{" "}
@@ -21,7 +21,7 @@ export const TopTagsFiltering = () => {
 				<List sx={{ p: "0" }}>
 					<ListItem sx={{ p: "0" }}>
 						<Link href="/">
-							<Typography variant="SectorLink">#car</Typography>
+							<Typography variant="SectionLink">#car</Typography>
 						</Link>
 					</ListItem>
 				</List>

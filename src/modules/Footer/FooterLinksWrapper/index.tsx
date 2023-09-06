@@ -8,7 +8,7 @@ interface ILinksWrapper extends PropsWithChildren {
 export const FooterLinksWrapper = ({ heading, children }: ILinksWrapper) => {
 	return (
 		<div>
-			<Typography variant="Sector">{heading}</Typography>
+			<Typography variant="Section">{heading}</Typography>
 			<Stack
 				mt={1.5}
 				direction="column"

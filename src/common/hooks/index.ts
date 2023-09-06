@@ -5,5 +5,6 @@ export {
 	useSignUpEmailConfirmationMutation as useSignUpEmailConfirmation,
 	useForgotPasswordMutation as useForgotPassword,
 	useValidateTokenMutation as useValidateToken,
-	useResetPasswordMutation as useResetPassword
+	useResetPasswordMutation as useResetPassword,
+	useSignOutMutation as useSignOut
 } from "../../app/api";

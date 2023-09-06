@@ -8,7 +8,7 @@ export const TextField = styled(_TextField)(({ theme }) => {
 		},
 		palette: {
 			greyColors: { strokeGrey, grey },
-			mainColors: { black },
+			mainColors: { black, white },
 			additionalColors: { errorRed }
 		}
 	} = theme;
@@ -42,6 +42,10 @@ export const TextField = styled(_TextField)(({ theme }) => {
 				"::placeholder": {
 					opacity: "1",
 					color: grey
+				},
+
+				"&:not(:placeholder-shown)": {
+					backgroundColor: `${white} !important`
 				}
 			},
 

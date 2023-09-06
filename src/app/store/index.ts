@@ -1,7 +1,7 @@
 import persistStore from "redux-persist/es/persistStore";
 import { configureStore } from "@reduxjs/toolkit";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { FLUSH, REHYDRATE, PAUSE, PERSIST, REGISTER, PURGE } from "redux-persist";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 import { rootReducer } from "./rootReducer";
 import { apiSlice } from "../api";

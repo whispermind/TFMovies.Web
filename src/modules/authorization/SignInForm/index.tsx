@@ -14,12 +14,12 @@ export interface ISignInForm {
 	password: string;
 }
 
-const { email, password } = formValidation;
-const { emailError, passwordError, requiredError } = yupErrorMessages;
+const { email } = formValidation;
+const { emailError, requiredError } = yupErrorMessages;
 
 export const schema = yup.object().shape({
 	email: yup.string().required(requiredError()).matches(email, emailError()),
-	password: yup.string().required(requiredError()).matches(password, passwordError())
+	password: yup.string().required(requiredError())
 });
 
 export const SignInForm = ({ onSubmit, isLoading }: IStatedForm<ISignInForm>) => {

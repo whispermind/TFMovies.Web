@@ -3,7 +3,7 @@ import { enqueueSnackbar } from "notistack";
 
 import { SignUpConfirmation, ISignUpForm, SignUpForm } from "..";
 import { FormDivider, LogoHeading, LogAuthWrapper, PrimaryButton, LogoName } from "../../../common/components";
-import { capitalizer, snackBarMessages, isApiError } from "../../../common/utils";
+import { capitalizer, snackBarMessages } from "../../../common/utils";
 import { useSignUp } from "../../../common/hooks";
 
 export const SignUpPage = () => {
@@ -27,9 +27,7 @@ export const SignUpPage = () => {
 				setSubmitedMail(formData.email);
 				enqueueSnackbar(snackBarMessages.instructions, { variant: "success" });
 			} catch (e) {
-				if (isApiError(e)) {
-					enqueueSnackbar(e.data.errorMessage, { variant: "error" });
-				}
+				// handled by middleware
 			}
 		},
 		[setSubmitedMail, signUpReq]

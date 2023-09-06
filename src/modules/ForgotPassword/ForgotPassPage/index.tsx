@@ -6,7 +6,7 @@ import { enqueueSnackbar } from "notistack";
 import { ForgotPassForm, IForgotPassForm } from "../ForgotPasswordForm";
 import { LogAuthWrapper } from "../../../common/components";
 import { useForgotPassword } from "../../../common/hooks";
-import { snackBarMessages, isApiError } from "../../../common/utils";
+import { snackBarMessages } from "../../../common/utils";
 
 export const ForgotPassPage = () => {
 	const [forgotPasswordReq, { isLoading }] = useForgotPassword();
@@ -22,9 +22,7 @@ export const ForgotPassPage = () => {
 				enqueueSnackbar(snackBarMessages.instructions, { variant: "success" });
 				navigate("/");
 			} catch (e) {
-				if (isApiError(e)) {
-					enqueueSnackbar(e.data.errorMessage, { variant: "error" });
-				}
+				// handled by middleware
 			}
 		},
 		[forgotPasswordReq, navigate]

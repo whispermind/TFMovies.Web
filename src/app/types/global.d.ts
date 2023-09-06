@@ -17,3 +17,10 @@ declare interface StylesOverrides<T, S> {
 		style: S;
 	}[];
 }
+
+declare interface IApiResponse {
+	status: number;
+	data?: {
+		errorMessage: string;
+	};
+}

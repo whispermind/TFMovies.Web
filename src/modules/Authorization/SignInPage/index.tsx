@@ -6,7 +6,7 @@ import { SignInForm, ISignInForm } from "..";
 import { FormDivider, SignUpButton, LogAuthWrapper, LogoHeading, LogoName } from "../../../common/components";
 import { useSignIn, useAppDispatch } from "../../../common/hooks";
 import { signIn } from "../AuthSlice";
-import { snackBarMessages, isApiError } from "../../../common/utils";
+import { snackBarMessages } from "../../../common/utils";
 
 export const SignInPage = () => {
 	const [signInReq, { isLoading }] = useSignIn();
@@ -29,9 +29,7 @@ export const SignInPage = () => {
 				enqueueSnackbar(snackBarMessages.signIn, { variant: "success" });
 				navigate("/");
 			} catch (e) {
-				if (isApiError(e)) {
-					enqueueSnackbar(e.data.errorMessage, { variant: "error" });
-				}
+				// handled by middleware
 			}
 		},
 		[navigate, dispatch, signInReq]

@@ -7,7 +7,7 @@ import { selectAuth, signOut } from "../../Authorization/AuthSlice";
 import { useAppSelector, useSignOut, useAppDispatch } from "../../../common/hooks";
 import { Avatar } from "../../../common/components";
 import { HeaderUserInfo } from "../HeaderUserInfo";
-import { snackBarMessages, isApiError } from "../../../common/utils";
+import { snackBarMessages } from "../../../common/utils";
 import * as S from "./styled";
 
 export const HeaderAccount = () => {
@@ -36,9 +36,7 @@ export const HeaderAccount = () => {
 			dispatch(signOut());
 			enqueueSnackbar(snackBarMessages.signOut, { variant: "success" });
 		} catch (e) {
-			if (isApiError(e)) {
-				enqueueSnackbar(e.data.errorMessage, { variant: "error" });
-			}
+			// handled by middleware
 		}
 	}, [accessToken, refreshToken, signOutReq, handleClose, dispatch]);
 

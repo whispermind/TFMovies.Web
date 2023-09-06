@@ -18,7 +18,7 @@ export const TokenValidator = ({ children, token, endpoint }: PropsWithChildren<
 		const fetcher = async () => {
 			try {
 				await validateTokenReq({ token, endpoint }).unwrap();
-			} catch (e) {
+			} catch {
 				navigate("/");
 			}
 		};

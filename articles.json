@@ -1,0 +1,47 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "MOCKED TITLE",
+      "createdAt": "sfafsafafsa",
+      "authorNickname": "MIRANA KIDAET ARROW",
+      "themeName": "PUCK NAZHIMAET SHIFT",
+      "tagNames": ["#TAG1", "#TAG2", "#TAG3"],
+      "htmlContent": "<div>123</div>",
+      "coverImageUrl": "https://media.newyorker.com/photos/63937f9e6627f9c77e1d1ea9/master/w_2240,c_limit/Brody-Random-Acts-Of-Flyness-S2.jpg"
+    },
+    {
+      "id": 2,
+      "title": "MOCKED TITLE2",
+      "createdAt": "sfafsafafsa2",
+      "authorNickname": "ZEUS ULTUET",
+      "themeName": "NE POPAL",
+      "tagNames": ["#TAG1", "#TAG2", "#TAG3"],
+      "htmlContent": "<div>123</div>",
+      "coverImageUrl": "https://media.newyorker.com/photos/63937f9e6627f9c77e1d1ea9/master/w_2240,c_limit/Brody-Random-Acts-Of-Flyness-S2.jpg",
+      "favorite": "true"
+    },
+    {
+      "id": 3,
+      "title": "MOCKED TITLE3",
+      "createdAt": "sfafsafafsa3",
+      "authorNickname": "PRESS F",
+      "themeName": "F",
+      "tagNames": ["#TAG1", "#TAG2", "#TAG3"],
+      "htmlContent": "<div>123</div>",
+      "coverImageUrl": "https://media.newyorker.com/photos/63937f9e6627f9c77e1d1ea9/master/w_2240,c_limit/Brody-Random-Acts-Of-Flyness-S2.jpg"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "topAuthors": ["author1", "author2", "author3", "author4"],
+  "topTags": ["#tag1", "#tag2", "#tag3", "#tag4"],
+  "profile": {
+    "name": "typicode"
+  }
+}

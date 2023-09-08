@@ -1,0 +1,10 @@
+export { FavoriteIcon } from "./FavoriteIcon/FavoriteIcon";
+export { HashtagIcon } from "./HashtagIcon/HashtagIcon";
+export { HomePageIcon } from "./HomePageIcon/HomePageIcon";
+export { RulesIcon } from "./RulesIcon/RulesIcon";
+export { PassswordIcon } from "./PasswordIcon/PasswordIcon";
+export { EmailIcon } from "./EmalIcon/EmailIcon";
+export { CloseIcon } from "./CloseIcon/CloseIcon";
+export { UserIcon } from "./UserIcon/UserIcon";
+export { LogoIcon } from "./LogoIcon/LogoIcon";
+export { SearchIcon } from "./SearchIcon/SearchIcon";

@@ -9,7 +9,10 @@ export const TopAuthorsFiltering = () => {
 	const { data } = useGetTopAuthors();
 
 	const listItems = data?.map((authorName) => (
-		<ListItem disablePadding>
+		<ListItem
+			disablePadding
+			key={authorName}
+		>
 			<TopAuthor nickname={authorName} />
 		</ListItem>
 	));

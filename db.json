@@ -3,33 +3,36 @@
     {
       "id": 1,
       "title": "MOCKED TITLE",
-      "createdAt": "sfafsafafsa",
+      "createdAt": "PUCK NAZHIMAET SHIFT",
       "authorNickname": "MIRANA KIDAET ARROW",
-      "themeName": "PUCK NAZHIMAET SHIFT",
+      "themeName": "theme1",
       "tagNames": ["#TAG1", "#TAG2", "#TAG3"],
       "htmlContent": "<div>123</div>",
-      "coverImageUrl": "https://media.newyorker.com/photos/63937f9e6627f9c77e1d1ea9/master/w_2240,c_limit/Brody-Random-Acts-Of-Flyness-S2.jpg"
+      "coverImageUrl": "https://media.newyorker.com/photos/63937f9e6627f9c77e1d1ea9/master/w_2240,c_limit/Brody-Random-Acts-Of-Flyness-S2.jpg",
+      "liked": 10
     },
     {
       "id": 2,
       "title": "MOCKED TITLE2",
-      "createdAt": "sfafsafafsa2",
+      "createdAt": "NE POPAL",
       "authorNickname": "ZEUS ULTUET",
-      "themeName": "NE POPAL",
+      "themeName": "theme2",
       "tagNames": ["#TAG1", "#TAG2", "#TAG3"],
       "htmlContent": "<div>123</div>",
       "coverImageUrl": "https://media.newyorker.com/photos/63937f9e6627f9c77e1d1ea9/master/w_2240,c_limit/Brody-Random-Acts-Of-Flyness-S2.jpg",
-      "favorite": "true"
+      "favorite": "true",
+      "liked": 7
     },
     {
       "id": 3,
       "title": "MOCKED TITLE3",
-      "createdAt": "sfafsafafsa3",
+      "createdAt": "F",
       "authorNickname": "PRESS F",
-      "themeName": "F",
+      "themeName": "theme3",
       "tagNames": ["#TAG1", "#TAG2", "#TAG3"],
       "htmlContent": "<div>123</div>",
-      "coverImageUrl": "https://media.newyorker.com/photos/63937f9e6627f9c77e1d1ea9/master/w_2240,c_limit/Brody-Random-Acts-Of-Flyness-S2.jpg"
+      "coverImageUrl": "https://media.newyorker.com/photos/63937f9e6627f9c77e1d1ea9/master/w_2240,c_limit/Brody-Random-Acts-Of-Flyness-S2.jpg",
+      "liked": 35
     }
   ],
   "comments": [
@@ -38,6 +41,9 @@
       "body": "some comment",
       "postId": 1
     }
+  ],
+  "themes": [
+    "theme1", "theme2", "theme3"
   ],
   "topAuthors": ["author1", "author2", "author3", "author4"],
   "topTags": ["#tag1", "#tag2", "#tag3", "#tag4"],

@@ -1,6 +1,6 @@
 import { Link, styled } from "@mui/material";
 
-export const MainPageLink = styled(Link)(({ theme }) => {
+export const MainLink = styled(Link)(({ theme }) => {
 	const {
 		palette: {
 			mainColors: { main, graphite },

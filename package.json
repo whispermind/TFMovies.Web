@@ -39,7 +39,7 @@
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
     "fix": "eslint src --ext .js,.jsx,.ts,.tsx  --fix",
     "eject": "react-scripts eject",
-    "mock": "json-server --watch articles.json --port 3004"
+    "mock": "json-server --watch db.json --port 3004"
   },
   "browserslist": {
     "production": [

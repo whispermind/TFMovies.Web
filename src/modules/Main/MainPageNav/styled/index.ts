@@ -1,1 +1,0 @@
-export { MainPageLink } from "./MainPageLink";

@@ -9,5 +9,6 @@ export {
 	useSignOutMutation as useSignOut,
 	useGetArticlesQuery as useGetArticles,
 	useGetTopAuthorsQuery as useGetTopAuthors,
-	useGetTopTagsQuery as useGetTopTags
+	useGetTopTagsQuery as useGetTopTags,
+	useGetThemesQuery as useGetThemes
 } from "../../app/api";

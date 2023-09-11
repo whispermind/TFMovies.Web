@@ -1,12 +1,12 @@
 import { Stack, List, ListItem, ListItemIcon, Typography } from "@mui/material";
 
 import { FavoriteBorder } from "@mui/icons-material";
-import { HomePageIcon, HashtagIcon, EmailIcon, RulesIcon, UserListIcon } from "../../../common/components/Icons";
-import { useAppSelector } from "../../../common/hooks";
-import { selectAuth } from "../../Authorization/AuthSlice";
+import { HomePageIcon, HashtagIcon, EmailIcon, RulesIcon, UserListIcon } from "../Icons";
+import { useAppSelector } from "../../hooks";
+import { selectAuth } from "../../../modules/Authorization/AuthSlice";
 import * as S from "./styled";
 
-export const MainPageNav = () => {
+export const MainNav = () => {
 	const { currentUser } = useAppSelector(selectAuth);
 
 	const linksData = [
@@ -20,7 +20,7 @@ export const MainPageNav = () => {
 
 	const unsortedLinks = linksData.map(({ caption, Icon, section, href }) => ({
 		link: (
-			<S.MainPageLink
+			<S.MainLink
 				key={caption}
 				href={href}
 			>
@@ -30,7 +30,7 @@ export const MainPageNav = () => {
 					</ListItemIcon>
 					<Typography variant="HBody">{caption}</Typography>
 				</ListItem>
-			</S.MainPageLink>
+			</S.MainLink>
 		),
 		section
 	}));

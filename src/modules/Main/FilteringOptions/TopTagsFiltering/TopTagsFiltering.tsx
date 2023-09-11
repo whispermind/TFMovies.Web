@@ -8,7 +8,10 @@ export const TopTagsFiltering = () => {
 	const { data } = useGetTopTags();
 
 	const listItems = data?.map((topTag) => (
-		<ListItem disablePadding>
+		<ListItem
+			disablePadding
+			key={topTag}
+		>
 			<Link href="/">
 				<Typography variant="SectionLink">{topTag}</Typography>
 			</Link>

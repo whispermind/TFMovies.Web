@@ -7,8 +7,9 @@ interface IWithError {
 }
 
 export const errorMiddleware: Middleware = () => (next) => (action: PayloadAction<IResponse<IWithError>>) => {
-	if (isRejectedWithValue(action) && action.payload.data.errorMessage) {
-		enqueueSnackbar(action.payload.data.errorMessage, { variant: "error" });
+	if (isRejectedWithValue(action)) {
+		const errorMessage = action.payload.data?.errorMessage || action.payload.error;
+		enqueueSnackbar(errorMessage, { variant: "error" });
 	}
 	return next(action);
 };

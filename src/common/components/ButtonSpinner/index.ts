@@ -1,6 +1,6 @@
 import { styled, CircularProgress } from "@mui/material";
 
-export const Spinner = styled(CircularProgress)(({
+export const ButtonSpinner = styled(CircularProgress)(({
 	size,
 	theme: {
 		palette: {

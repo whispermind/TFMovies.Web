@@ -1,7 +1,7 @@
 import { ComponentType } from "react";
 
 import { Box, ButtonProps } from "@mui/material";
-import { Spinner } from "../../components";
+import { ButtonSpinner } from "../../components";
 
 export const withButtonLoader =
 	<P extends ButtonProps>(Button: ComponentType<P>) =>
@@ -11,7 +11,7 @@ export const withButtonLoader =
 			<Box position="relative">
 				<Button {...buttonProps} />
 				{disabled && (
-					<Spinner
+					<ButtonSpinner
 						// disableShrink
 						size={25}
 					/>

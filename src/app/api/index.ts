@@ -60,7 +60,7 @@ export const apiSlice = createApi({
 		}),
 		getArticles: builder.query<IArticle[], string>({
 			query: (query) => ({
-				url: `/posts`
+				url: `/posts${query}`
 			})
 		}),
 		getTopAuthors: builder.query<string[], void>({
@@ -68,6 +68,9 @@ export const apiSlice = createApi({
 		}),
 		getTopTags: builder.query<string[], void>({
 			query: () => ({ url: "/toptags" })
+		}),
+		getThemes: builder.query<string[], void>({
+			query: () => ({ url: "/themes" })
 		})
 	})
 });
@@ -82,5 +85,6 @@ export const {
 	useSignUpMutation,
 	useGetArticlesQuery,
 	useGetTopAuthorsQuery,
-	useGetTopTagsQuery
+	useGetTopTagsQuery,
+	useGetThemesQuery
 } = apiSlice;

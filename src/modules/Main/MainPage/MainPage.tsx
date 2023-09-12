@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Stack, Grid } from "@mui/material";
 
 import { MainNav } from "../../../common/components";
-import { Article } from "../Article/Article";
+import { Article } from "../../../common/components/Article";
 import { ArticleTopFiltering } from "../FilteringOptions/ArticleTopFiltering";
 import { useGetArticles } from "../../../common/hooks";
 import { SortingBar } from "../SortingBar";

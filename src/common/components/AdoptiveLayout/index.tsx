@@ -9,6 +9,7 @@ export const AdoptiveLayout = ({ children, ...stackProps }: PropsWithChildren<St
 			maxWidth="xl"
 			m="0 auto"
 			justifyContent="center"
+			flexGrow={1}
 		>
 			<Grid
 				item

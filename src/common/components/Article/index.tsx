@@ -1,9 +1,11 @@
 import { Card, CardMedia, CardContent, Typography, Link } from "@mui/material";
 import { FavoriteBorder } from "@mui/icons-material";
 
-import { ArticleAuthor } from "./ArticleAuthor/ArticleAuthor";
-import { ArticleTags } from "./ArticleTags/ArticleTags";
-import { FavoriteFilledIcon } from "../../../common/components/Icons";
+import { useAppSelector } from "../../hooks";
+import { selectAuth } from "../../../modules/Authorization/AuthSlice";
+import { ArticleAuthor } from "./ArticleAuthor";
+import { ArticleTags } from "./ArticleTags";
+import { FavoriteFilledIcon } from "../Icons";
 import * as S from "./styled";
 
 export interface IArticle {
@@ -16,6 +18,7 @@ export interface IArticle {
 	themeName: string;
 	tagNames: string[];
 	favorite: boolean;
+	liked: string;
 }
 
 export interface IArticleProps {
@@ -24,10 +27,11 @@ export interface IArticleProps {
 
 export const Article = ({ articleData }: IArticleProps) => {
 	const { id, coverImageUrl, title, createdAt, authorNickname, tagNames, favorite } = articleData;
+	const { accessToken } = useAppSelector(selectAuth);
 
 	return (
 		<Card>
-			<Link href={`/post/${id}`}>
+			<Link href={accessToken ? `/post/${id}` : `/signin`}>
 				<CardMedia
 					component="img"
 					alt="cover image"

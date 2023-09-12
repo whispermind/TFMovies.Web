@@ -5,3 +5,4 @@ export { ForgotPassPage } from "../modules/ForgotPassword/ForgotPassPage";
 export { MainPage } from "../modules/Main/MainPage/MainPage";
 export { SignUpPage } from "../modules/Registration/SignUpPage";
 export { SignUpSuccessPage } from "../modules/Registration/SignUpSuccessPage";
+export { SearchPage } from "../modules/Search/SearchPage";

@@ -12,8 +12,8 @@ export const TopTagsFiltering = () => {
 			disablePadding
 			key={topTag}
 		>
-			<Link href="/">
-				<Typography variant="SectionLink">{topTag}</Typography>
+			<Link href={`/search?subject=tags&query=${topTag.slice(1)}`}>
+				<Typography variant="SectionLink">{`#${topTag}`}</Typography>
 			</Link>
 		</ListItem>
 	));

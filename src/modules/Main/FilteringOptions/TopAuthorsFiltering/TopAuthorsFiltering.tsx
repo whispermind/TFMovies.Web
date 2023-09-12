@@ -1,4 +1,4 @@
-import { ListItem } from "@mui/material";
+import { ListItem, Link } from "@mui/material";
 
 import { TopAuthor } from "../TopAuthor/TopAuthor";
 import { FilteringListWrapper } from "../FilteringListWrapper";
@@ -13,7 +13,9 @@ export const TopAuthorsFiltering = () => {
 			disablePadding
 			key={authorName}
 		>
-			<TopAuthor nickname={authorName} />
+			<Link href={`/search?subject=users&query=${authorName}`}>
+				<TopAuthor nickname={authorName} />
+			</Link>
 		</ListItem>
 	));
 

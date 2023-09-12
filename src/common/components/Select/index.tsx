@@ -1,5 +1,6 @@
 import { ReactNode, useState, useCallback, SyntheticEvent } from "react";
 import { MenuItem, SelectProps, SelectChangeEvent } from "@mui/material";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 import * as S from "./styled";
 
@@ -44,7 +45,7 @@ export const Select = (props: ISelectProps) => {
 
 	const onClose = useCallback(
 		(e: SyntheticEvent) => {
-			setIsOpen(false);
+			setTimeout(() => setIsOpen(false), 500);
 			if (propsOnClose) propsOnClose(e);
 		},
 		[setIsOpen, propsOnClose]
@@ -57,6 +58,7 @@ export const Select = (props: ISelectProps) => {
 			onOpen={onOpen}
 			onClose={onClose}
 			{...restProps}
+			IconComponent={ArrowForwardIcon}
 		>
 			<MenuItem
 				value="placeholder"

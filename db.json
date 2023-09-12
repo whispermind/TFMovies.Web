@@ -2,37 +2,8 @@
   "posts": [
     {
       "id": 1,
-      "title": "MOCKED TITLE",
-      "createdAt": "PUCK NAZHIMAET SHIFT",
-      "authorNickname": "MIRANA KIDAET ARROW",
-      "themeName": "theme1",
-      "tagNames": ["#TAG1", "#TAG2", "#TAG3"],
-      "htmlContent": "<div>123</div>",
-      "coverImageUrl": "https://media.newyorker.com/photos/63937f9e6627f9c77e1d1ea9/master/w_2240,c_limit/Brody-Random-Acts-Of-Flyness-S2.jpg",
-      "liked": 10
-    },
-    {
-      "id": 2,
-      "title": "MOCKED TITLE2",
-      "createdAt": "NE POPAL",
-      "authorNickname": "ZEUS ULTUET",
-      "themeName": "theme2",
-      "tagNames": ["#TAG1", "#TAG2", "#TAG3"],
-      "htmlContent": "<div>123</div>",
-      "coverImageUrl": "https://media.newyorker.com/photos/63937f9e6627f9c77e1d1ea9/master/w_2240,c_limit/Brody-Random-Acts-Of-Flyness-S2.jpg",
-      "favorite": "true",
-      "liked": 7
-    },
-    {
-      "id": 3,
-      "title": "MOCKED TITLE3",
-      "createdAt": "F",
-      "authorNickname": "PRESS F",
-      "themeName": "theme3",
-      "tagNames": ["#TAG1", "#TAG2", "#TAG3"],
-      "htmlContent": "<div>123</div>",
-      "coverImageUrl": "https://media.newyorker.com/photos/63937f9e6627f9c77e1d1ea9/master/w_2240,c_limit/Brody-Random-Acts-Of-Flyness-S2.jpg",
-      "liked": 35
+      "title": "json-server",
+      "author": "typicode"
     }
   ],
   "comments": [
@@ -42,11 +13,6 @@
       "postId": 1
     }
   ],
-  "themes": [
-    "theme1", "theme2", "theme3"
-  ],
-  "topAuthors": ["author1", "author2", "author3", "author4"],
-  "topTags": ["#tag1", "#tag2", "#tag3", "#tag4"],
   "profile": {
     "name": "typicode"
   }

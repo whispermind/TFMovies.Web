@@ -21,6 +21,14 @@ export const Select = styled(MuiSelect)(({ theme }) => {
 			}
 		},
 
+		"& .MuiSelect-icon": {
+			transition: "transform 0.3s ease-in-out"
+		},
+
+		"& .MuiSelect-iconOpen": {
+			transform: "rotate(90deg)"
+		},
+
 		"& fieldset": {
 			border: "none"
 		},

@@ -15,9 +15,9 @@ export const ArticleTags = ({ tags }: IArticleTagsProps) => {
 				underline="none"
 				variant="HBody"
 				color="greyColors.grey"
-				href="/"
+				href={`/search?subject=tags&query=${tag}`}
 			>
-				{tag}
+				{`#${tag}`}
 			</Link>
 		</ListItem>
 	));

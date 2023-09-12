@@ -1,5 +1,5 @@
 import { useState, useCallback, MouseEvent } from "react";
-import { Button, SelectChangeEvent, Typography } from "@mui/material";
+import { Button, SelectChangeEvent } from "@mui/material";
 import { Select } from "../../../common/components";
 
 import { useGetThemes } from "../../../common/hooks";
@@ -10,7 +10,7 @@ interface ISortingBarProps {
 }
 
 export const SortingBar = ({ onSortingChange }: ISortingBarProps) => {
-	const [sorting, setSorting] = useState("createdAt");
+	const [sorting, setSorting] = useState("created");
 	const [themeSorting, setThemeSorting] = useState("");
 
 	const { data } = useGetThemes();
@@ -32,8 +32,6 @@ export const SortingBar = ({ onSortingChange }: ISortingBarProps) => {
 		[setThemeSorting, onSortingChange, sorting, themeSorting]
 	);
 
-	const isLastArticle = sorting === "createdAt";
-
 	return (
 		<S.List>
 			<S.ListItem>
@@ -43,12 +41,12 @@ export const SortingBar = ({ onSortingChange }: ISortingBarProps) => {
 					onClick={onSort}
 					data-sort="createdAt"
 				>
-					<Typography
+					<S.Typography
 						variant="Input"
-						fontWeight={isLastArticle ? "800" : ""}
+						isActive={sorting === "created"}
 					>
 						Last Articles
-					</Typography>
+					</S.Typography>
 				</Button>
 			</S.ListItem>
 			<S.ListItem>
@@ -58,12 +56,12 @@ export const SortingBar = ({ onSortingChange }: ISortingBarProps) => {
 					onClick={onSort}
 					data-sort="liked"
 				>
-					<Typography
+					<S.Typography
 						variant="Input"
-						fontWeight={isLastArticle ? "" : "800"}
+						isActive={sorting === "liked"}
 					>
 						Top Rated
-					</Typography>
+					</S.Typography>
 				</Button>
 			</S.ListItem>
 			<S.ListItem>

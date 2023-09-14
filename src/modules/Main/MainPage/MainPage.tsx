@@ -6,7 +6,7 @@ import { Article } from "../../../common/components/Article";
 import { ArticleTopFiltering } from "../FilteringOptions/ArticleTopFiltering";
 import { useGetArticles } from "../../../common/hooks";
 import { SortingBar } from "../SortingBar";
-import * as S from "./styled";
+import * as Styled from "./styled";
 
 export const MainPage = () => {
 	const [query, setQuery] = useState("");
@@ -20,7 +20,7 @@ export const MainPage = () => {
 	));
 
 	return (
-		<S.Grid container>
+		<Styled.Grid container>
 			<Grid item>
 				<MainNav />
 			</Grid>
@@ -34,6 +34,6 @@ export const MainPage = () => {
 			<Grid item>
 				<ArticleTopFiltering />
 			</Grid>
-		</S.Grid>
+		</Styled.Grid>
 	);
 };

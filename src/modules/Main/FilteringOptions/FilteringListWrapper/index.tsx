@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import { Typography } from "@mui/material";
 
-import * as S from "../styled";
+import * as Styled from "../styled";
 
 interface ITopFilteringListProps extends PropsWithChildren {
 	subject: string;
@@ -9,7 +9,7 @@ interface ITopFilteringListProps extends PropsWithChildren {
 
 export const FilteringListWrapper = ({ subject, children }: ITopFilteringListProps) => {
 	return (
-		<S.FilteringSubjectContainer>
+		<Styled.FilteringSubjectContainer>
 			<div>
 				<Typography variant="Section">
 					Top
@@ -22,6 +22,6 @@ export const FilteringListWrapper = ({ subject, children }: ITopFilteringListPro
 				</Typography>
 			</div>
 			{children}
-		</S.FilteringSubjectContainer>
+		</Styled.FilteringSubjectContainer>
 	);
 };

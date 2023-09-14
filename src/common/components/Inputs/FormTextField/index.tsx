@@ -1,7 +1,7 @@
 import { forwardRef, useState, FocusEvent, useCallback } from "react";
 import { TextFieldProps } from "@mui/material";
 
-import * as S from "./styled";
+import * as Styled from "./styled";
 
 export const FormTextField = forwardRef<HTMLInputElement, TextFieldProps>(
 	({ placeholder, onFocus: propsOnFocus, onBlur: propsOnBlur, InputProps, ...restProps }, ref) => {
@@ -24,7 +24,7 @@ export const FormTextField = forwardRef<HTMLInputElement, TextFieldProps>(
 		);
 
 		return (
-			<S.TextField
+			<Styled.TextField
 				ref={ref}
 				{...restProps}
 				variant="standard"

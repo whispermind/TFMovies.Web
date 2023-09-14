@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 
-import * as S from "./styled";
+import * as Styled from "./styled";
 
 interface ISearchHeadingProps {
 	query: string;
@@ -8,8 +8,8 @@ interface ISearchHeadingProps {
 
 export const SearchPageHeading = ({ query }: ISearchHeadingProps) => {
 	return (
-		<S.Stack>
+		<Styled.Stack>
 			<Typography variant="HHeader">{`Search Results: ${query}`}</Typography>
-		</S.Stack>
+		</Styled.Stack>
 	);
 };

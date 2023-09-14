@@ -5,14 +5,14 @@ import { UnauthorizedState, AuthorizedState } from "./HeaderStates";
 import { HeaderSearchInput } from "./HeaderSearchInput";
 import { useAppSelector } from "../../common/hooks";
 import { selectAuth } from "../Authorization/AuthSlice";
-import * as S from "./styled";
+import * as Styled from "./styled";
 
 export const Header = () => {
 	const { accessToken } = useAppSelector(selectAuth);
 
 	return (
-		<S.AppBar position="static">
-			<S.Toolbar disableGutters>
+		<Styled.AppBar position="static">
+			<Styled.Toolbar disableGutters>
 				<AdoptiveLayout
 					direction="row"
 					alignItems="center"
@@ -30,7 +30,7 @@ export const Header = () => {
 						{accessToken ? <AuthorizedState /> : <UnauthorizedState />}
 					</Stack>
 				</AdoptiveLayout>
-			</S.Toolbar>
-		</S.AppBar>
+			</Styled.Toolbar>
+		</Styled.AppBar>
 	);
 };

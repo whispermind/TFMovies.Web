@@ -8,7 +8,7 @@ import { useAppSelector, useSignOut, useAppDispatch } from "../../../common/hook
 import { Avatar } from "../../../common/components";
 import { HeaderUserInfo } from "../HeaderUserInfo";
 import { snackBarMessages } from "../../../common/utils";
-import * as S from "./styled";
+import * as Styled from "./styled";
 
 export const HeaderAccount = () => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -66,7 +66,7 @@ export const HeaderAccount = () => {
 					/>
 				)}
 			</Stack>
-			<S.Menu
+			<Styled.Menu
 				anchorEl={anchorEl}
 				id="account-menu"
 				open={open}
@@ -81,7 +81,7 @@ export const HeaderAccount = () => {
 					</ListItemIcon>
 					Exit
 				</MenuItem>
-			</S.Menu>
+			</Styled.Menu>
 		</>
 	);
 };

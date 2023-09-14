@@ -12,8 +12,11 @@ export const HeaderSearchInput = () => {
 	const navigate = useNavigate();
 
 	const onBlur = useCallback(() => {
-		if (searchQuery) navigate(`/search?query=${searchQuery}`);
-		else navigate("/");
+		if (searchQuery) {
+			navigate(`/search?query=${searchQuery}`);
+		} else {
+			navigate("/");
+		}
 	}, [navigate, searchQuery]);
 
 	const onChange = useCallback(

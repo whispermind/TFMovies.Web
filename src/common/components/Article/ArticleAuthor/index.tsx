@@ -1,7 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 
 import { Avatar } from "../../Avatar";
-import * as S from "./styled";
+import * as Styled from "./styled";
 
 interface IArticleAuthorProps {
 	nickname: string;
@@ -9,7 +9,7 @@ interface IArticleAuthorProps {
 }
 export const ArticleAuthor = ({ nickname, created }: IArticleAuthorProps) => {
 	return (
-		<S.Stack>
+		<Styled.Stack>
 			<Avatar sx={{ width: "44px", height: "44px" }}>H</Avatar>
 			<Stack direction="column">
 				<Typography variant="HBodyBold">{nickname}</Typography>
@@ -21,6 +21,6 @@ export const ArticleAuthor = ({ nickname, created }: IArticleAuthorProps) => {
 					{created}
 				</Typography>
 			</Stack>
-		</S.Stack>
+		</Styled.Stack>
 	);
 };

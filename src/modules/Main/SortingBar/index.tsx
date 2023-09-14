@@ -3,7 +3,7 @@ import { Button, SelectChangeEvent } from "@mui/material";
 import { Select } from "../../../common/components";
 
 import { useGetThemes } from "../../../common/hooks";
-import * as S from "./styled";
+import * as Styled from "./styled";
 
 interface ISortingBarProps {
 	onSortingChange: (query: string) => void;
@@ -33,44 +33,44 @@ export const SortingBar = ({ onSortingChange }: ISortingBarProps) => {
 	);
 
 	return (
-		<S.List>
-			<S.ListItem>
+		<Styled.List>
+			<Styled.ListItem>
 				<Button
 					variant="ghost"
 					fullWidth
 					onClick={onSort}
 					data-sort="createdAt"
 				>
-					<S.Typography
+					<Styled.Typography
 						variant="Input"
 						isActive={sorting === "created"}
 					>
 						Last Articles
-					</S.Typography>
+					</Styled.Typography>
 				</Button>
-			</S.ListItem>
-			<S.ListItem>
+			</Styled.ListItem>
+			<Styled.ListItem>
 				<Button
 					variant="ghost"
 					fullWidth
 					onClick={onSort}
 					data-sort="liked"
 				>
-					<S.Typography
+					<Styled.Typography
 						variant="Input"
 						isActive={sorting === "liked"}
 					>
 						Top Rated
-					</S.Typography>
+					</Styled.Typography>
 				</Button>
-			</S.ListItem>
-			<S.ListItem>
+			</Styled.ListItem>
+			<Styled.ListItem>
 				<Select
 					data={data || []}
 					placeholder="Sort by Theme"
 					onChange={onSortByTheme}
 				/>
-			</S.ListItem>
-		</S.List>
+			</Styled.ListItem>
+		</Styled.List>
 	);
 };

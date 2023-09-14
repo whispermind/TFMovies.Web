@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../../common/hooks";
 import { SearchSubjectBar, SearchPageHeading, selectSearchQuery, resetSearchQuery, setSearchQuery } from "..";
-import * as S from "./styled";
+import * as Styled from "./styled";
 
 export const SearchPage = () => {
 	const dispatch = useAppDispatch();
@@ -23,15 +23,15 @@ export const SearchPage = () => {
 	}, [dispatch, paramsQuery]);
 
 	return (
-		<S.Stack>
+		<Styled.Stack>
 			<SearchPageHeading query={searchQuery || ""} />
-			<S.Stack direction="row">
+			<Styled.Stack direction="row">
 				<SearchSubjectBar
 					onClick={setSearchSubject}
 					defaultSubject={subject}
 				/>
-				<S.ContentWrapper />
-			</S.Stack>
-		</S.Stack>
+				<Styled.ContentWrapper />
+			</Styled.Stack>
+		</Styled.Stack>
 	);
 };

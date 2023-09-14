@@ -1,5 +1,5 @@
 import { Link, ListItem } from "@mui/material";
-import * as S from "./styled";
+import * as Styled from "./styled";
 
 interface IArticleTagsProps {
 	tags: string[];
@@ -22,5 +22,5 @@ export const ArticleTags = ({ tags }: IArticleTagsProps) => {
 		</ListItem>
 	));
 
-	return <S.TagsList disablePadding>{listItems}</S.TagsList>;
+	return <Styled.TagsList disablePadding>{listItems}</Styled.TagsList>;
 };

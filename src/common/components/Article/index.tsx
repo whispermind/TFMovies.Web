@@ -6,7 +6,7 @@ import { selectAuth } from "../../../modules/Authorization/AuthSlice";
 import { ArticleAuthor } from "./ArticleAuthor";
 import { ArticleTags } from "./ArticleTags";
 import { FavoriteFilledIcon } from "../Icons";
-import * as S from "./styled";
+import * as Styled from "./styled";
 
 export interface IArticle {
 	id: string;
@@ -39,7 +39,7 @@ export const Article = ({ articleData }: IArticleProps) => {
 					image={coverImageUrl}
 				/>
 			</Link>
-			<S.CardContentContainer>
+			<Styled.CardContentContainer>
 				<ArticleAuthor
 					created={createdAt}
 					nickname={authorNickname}
@@ -47,9 +47,9 @@ export const Article = ({ articleData }: IArticleProps) => {
 				<CardContent sx={{ p: 0 }}>
 					<Typography variant="ASubheader">{title}</Typography>
 				</CardContent>
-				<S.CardActions>
+				<Styled.CardActions>
 					<ArticleTags tags={tagNames} />
-					<S.LikeButton>
+					<Styled.LikeButton>
 						<Typography
 							variant="HBody"
 							color="greyColors.grey"
@@ -57,9 +57,9 @@ export const Article = ({ articleData }: IArticleProps) => {
 							Add to Favorites
 						</Typography>
 						{favorite ? <FavoriteFilledIcon /> : <FavoriteBorder />}
-					</S.LikeButton>
-				</S.CardActions>
-			</S.CardContentContainer>
+					</Styled.LikeButton>
+				</Styled.CardActions>
+			</Styled.CardContentContainer>
 		</Card>
 	);
 };

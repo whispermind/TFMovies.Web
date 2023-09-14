@@ -4,7 +4,7 @@ import { FavoriteBorder } from "@mui/icons-material";
 import { HomePageIcon, HashtagIcon, EmailIcon, RulesIcon, UserListIcon } from "../Icons";
 import { useAppSelector } from "../../hooks";
 import { selectAuth } from "../../../modules/Authorization/AuthSlice";
-import * as S from "./styled";
+import * as Styled from "./styled";
 
 export const MainNav = () => {
 	const { currentUser } = useAppSelector(selectAuth);
@@ -20,7 +20,7 @@ export const MainNav = () => {
 
 	const unsortedLinks = linksData.map(({ caption, Icon, section, href }) => ({
 		link: (
-			<S.MainLink
+			<Styled.MainLink
 				key={caption}
 				href={href}
 			>
@@ -30,7 +30,7 @@ export const MainNav = () => {
 					</ListItemIcon>
 					<Typography variant="HBody">{caption}</Typography>
 				</ListItem>
-			</S.MainLink>
+			</Styled.MainLink>
 		),
 		section
 	}));

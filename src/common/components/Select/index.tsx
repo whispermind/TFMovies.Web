@@ -2,7 +2,7 @@ import { ReactNode, useState, useCallback, SyntheticEvent } from "react";
 import { MenuItem, SelectProps, SelectChangeEvent } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-import * as S from "./styled";
+import * as Styled from "./styled";
 
 interface ISelectProps extends SelectProps {
 	data: string[];
@@ -52,7 +52,7 @@ export const Select = (props: ISelectProps) => {
 	);
 
 	return (
-		<S.Select
+		<Styled.Select
 			value={value}
 			onChange={onChange}
 			onOpen={onOpen}
@@ -73,6 +73,6 @@ export const Select = (props: ISelectProps) => {
 				‎
 			</MenuItem>
 			{options}
-		</S.Select>
+		</Styled.Select>
 	);
 };

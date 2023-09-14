@@ -2,7 +2,7 @@ import { Link, ListItem, Typography } from "@mui/material";
 
 import { FilteringListWrapper } from "../FilteringListWrapper";
 import { useGetTopTags } from "../../../../common/hooks";
-import * as S from "./styled";
+import * as Styled from "./styled";
 
 export const TopTagsFiltering = () => {
 	const { data } = useGetTopTags();
@@ -20,7 +20,7 @@ export const TopTagsFiltering = () => {
 
 	return (
 		<FilteringListWrapper subject="Tags">
-			<S.List>{listItems}</S.List>
+			<Styled.List>{listItems}</Styled.List>
 		</FilteringListWrapper>
 	);
 };

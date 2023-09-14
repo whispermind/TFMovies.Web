@@ -1,7 +1,7 @@
 import { useState, useCallback, MouseEvent } from "react";
 import { ListItem } from "@mui/material";
 
-import * as S from "./styled";
+import * as Styled from "./styled";
 
 interface ISearchSubjectBarProps {
 	onClick: (active: string) => void;
@@ -27,15 +27,15 @@ export const SearchSubjectBar = ({ onClick: onClickCb, defaultSubject }: ISearch
 			disablePadding
 			key={description}
 		>
-			<S.Button
+			<Styled.Button
 				onClick={onClick}
 				isActive={activeButton === description}
 				data-name={description}
 			>
 				{description}
-			</S.Button>
+			</Styled.Button>
 		</ListItem>
 	));
 
-	return <S.List>{Buttons}</S.List>;
+	return <Styled.List>{Buttons}</Styled.List>;
 };

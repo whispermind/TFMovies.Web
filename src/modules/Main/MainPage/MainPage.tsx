@@ -16,7 +16,7 @@ export const MainPage = () => {
 	const [pageQuery, setPageQuery] = useState(initPage);
 	const { data, isLoading } = useGetArticles(`?page=${pageQuery}&${sortingQuery}&limit=${LIMIT_PER_PAGE}`);
 
-	const Articles = data?.articles.map((articleData) => (
+	const Articles = data?.articles?.map((articleData) => (
 		<Article
 			articleData={articleData}
 			key={articleData.id}

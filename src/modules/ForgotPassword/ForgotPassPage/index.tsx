@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Typography, Stack } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
 
-import { ForgotPassForm, IForgotPassForm } from "../forgotPasswordForm";
+import { ForgotPassForm, IForgotPassForm } from "..";
 import { LogAuthWrapper } from "../../../common/components";
 import { useForgotPassword } from "../../../common/hooks";
 import { snackBarMessages } from "../../../common/utils";

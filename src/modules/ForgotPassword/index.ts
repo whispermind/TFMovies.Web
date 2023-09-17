@@ -1,1 +1,3 @@
-export { ForgotPassForm } from "./forgotPasswordForm";
+export { ForgotPassForm } from "./ForgotPasswordForm";
+
+export type { IForgotPassForm } from "./ForgotPasswordForm";

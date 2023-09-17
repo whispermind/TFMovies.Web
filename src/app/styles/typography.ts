@@ -5,7 +5,8 @@ export const typography = {
 		fontSize: "0.9375rem",
 		lineHeight: "1.5rem",
 		fontWeight: "normal",
-		fontStyle: "normal"
+		fontStyle: "normal",
+		textTransform: "none" as const
 	},
 
 	HHeader: {

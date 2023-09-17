@@ -4,6 +4,7 @@ import { refreshBaseQuery } from "./refreshBaseQuery";
 import type { ISignUpForm } from "../../modules/Registration";
 import type { ISignInForm, IAuthState } from "../../modules/Authorization";
 import type { IPassRecoveryForm } from "../../modules/PassRecovery";
+import type { IArticle } from "../../common/components";
 
 export const apiSlice = createApi({
 	baseQuery: refreshBaseQuery,
@@ -56,6 +57,20 @@ export const apiSlice = createApi({
 				method: "POST",
 				body: credentials
 			})
+		}),
+		getArticles: builder.query<IArticle[], string>({
+			query: (query) => ({
+				url: `/posts${query}`
+			})
+		}),
+		getTopAuthors: builder.query<string[], void>({
+			query: () => ({ url: "/topauthors" })
+		}),
+		getTopTags: builder.query<string[], void>({
+			query: () => ({ url: "/toptags" })
+		}),
+		getThemes: builder.query<string[], void>({
+			query: () => ({ url: "/themes" })
 		})
 	})
 });
@@ -67,5 +82,9 @@ export const {
 	useSignOutMutation,
 	useSignUpEmailConfirmationMutation,
 	useForgotPasswordMutation,
-	useSignUpMutation
+	useSignUpMutation,
+	useGetArticlesQuery,
+	useGetTopAuthorsQuery,
+	useGetTopTagsQuery,
+	useGetThemesQuery
 } = apiSlice;

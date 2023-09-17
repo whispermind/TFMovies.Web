@@ -6,5 +6,9 @@ export {
 	useForgotPasswordMutation as useForgotPassword,
 	useValidateTokenMutation as useValidateToken,
 	useResetPasswordMutation as useResetPassword,
-	useSignOutMutation as useSignOut
+	useSignOutMutation as useSignOut,
+	useGetArticlesQuery as useGetArticles,
+	useGetTopAuthorsQuery as useGetTopAuthors,
+	useGetTopTagsQuery as useGetTopTags,
+	useGetThemesQuery as useGetThemes
 } from "../../app/api";

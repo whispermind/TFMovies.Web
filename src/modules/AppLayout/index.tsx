@@ -16,11 +16,6 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
 				justifyContent="center"
 				alignItems="center"
 			>
-				<Stack
-					maxWidth="xl"
-					justifyContent="center"
-					alignItems="center"
-				/>
 				<AdoptiveLayout>{children}</AdoptiveLayout>
 			</Stack>
 			<Footer />

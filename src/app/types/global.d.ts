@@ -18,9 +18,8 @@ declare interface StylesOverrides<T, S> {
 	}[];
 }
 
-declare interface IApiResponse {
-	status: number;
-	data?: {
-		errorMessage: string;
-	};
+declare interface IResponse<T> {
+	status: string;
+	error?: string;
+	data?: T;
 }

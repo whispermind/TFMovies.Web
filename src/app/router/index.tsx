@@ -1,7 +1,7 @@
 import { createRoutesFromElements, createBrowserRouter, Route } from "react-router-dom";
 
 import { App } from "..";
-import { ErrorPage, SignUpSuccessPage, SignUpPage, SignInPage, PassRecoveryPage, ForgotPassPage } from "../../pages";
+import { ErrorPage, SignUpSuccessPage, SignUpPage, SignInPage, PassRecoveryPage, ForgotPassPage, MainPage, SearchPage } from "../../pages";
 
 export const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -10,6 +10,10 @@ export const router = createBrowserRouter(
 			element={<App />}
 			errorElement={<ErrorPage />}
 		>
+			<Route
+				path="/"
+				element={<MainPage />}
+			/>
 			<Route
 				path="signup"
 				element={<SignUpPage />}
@@ -29,6 +33,10 @@ export const router = createBrowserRouter(
 			<Route
 				path="forgotpass"
 				element={<ForgotPassPage />}
+			/>
+			<Route
+				path="search"
+				element={<SearchPage />}
 			/>
 		</Route>
 	)

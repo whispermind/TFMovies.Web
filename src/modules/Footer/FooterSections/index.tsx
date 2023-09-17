@@ -17,6 +17,7 @@ export const FooterSections = () => {
 			variant="SectionLink"
 			href={href}
 			underline="none"
+			onClick={href === "/" ? () => window.scrollTo({ top: 0, behavior: "smooth" }) : undefined}
 		>
 			{caption}
 		</Link>

@@ -6,7 +6,8 @@ import type { RootState } from "../store";
 
 const mutex = new Mutex();
 const baseQuery = fetchBaseQuery({
-	baseUrl: process.env.REACT_APP_API_URL,
+	// baseUrl: process.env.REACT_APP_API_URL,
+	baseUrl: "http://localhost:3004/",
 	prepareHeaders: (headers, { getState }) => {
 		const { accessToken } = (getState() as RootState).auth;
 

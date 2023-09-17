@@ -1,6 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 import { refreshBaseQuery } from "./refreshBaseQuery";
+
 import type { ISignUpForm } from "../../modules/Registration";
 import type { ISignInForm, IAuthState } from "../../modules/Authorization";
 import type { IPassRecoveryForm } from "../../modules/PassRecovery";

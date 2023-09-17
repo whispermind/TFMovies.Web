@@ -1,6 +1,6 @@
 export const yupErrorMessages = {
-	requiredError() {
-		return "The field is required";
+	requiredError(subject?: string) {
+		return `The ${subject || "field"} is required`;
 	},
 	minError(minValue: number) {
 		return `Minimum field length is ${minValue}`;
@@ -20,5 +20,8 @@ export const yupErrorMessages = {
 	},
 	passwordConfirmError() {
 		return "The password must be the same";
+	},
+	attachmentSize(size: number) {
+		return `The attachment must be less than ${size}mb`;
 	}
 };

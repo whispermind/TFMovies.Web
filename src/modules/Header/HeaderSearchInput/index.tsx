@@ -28,6 +28,7 @@ export const HeaderSearchInput = () => {
 
 	return (
 		<FormTextFieldIconed
+			type="search"
 			value={searchQuery}
 			onBlur={onBlur}
 			onChange={onChange}

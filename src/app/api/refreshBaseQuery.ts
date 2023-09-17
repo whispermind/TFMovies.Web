@@ -2,12 +2,12 @@ import { fetchBaseQuery, BaseQueryFn, FetchArgs, FetchBaseQueryError } from "@re
 import { Mutex } from "async-mutex";
 
 import { signIn, signOut, IAuthState } from "../../modules/Authorization/AuthSlice";
+
 import type { RootState } from "../store";
 
 const mutex = new Mutex();
 const baseQuery = fetchBaseQuery({
-	// baseUrl: process.env.REACT_APP_API_URL,
-	baseUrl: "http://localhost:3004/",
+	baseUrl: process.env.REACT_APP_API_URL,
 	prepareHeaders: (headers, { getState }) => {
 		const { accessToken } = (getState() as RootState).auth;
 

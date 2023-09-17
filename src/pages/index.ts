@@ -1,3 +1,4 @@
+export { CreateArticlePage } from "../modules/CreateArticle/CreateArticlePage";
 export { ErrorPage } from "./ErrorPage/ErrorPage";
 export { SignInPage } from "../modules/Authorization/SignInPage";
 export { PassRecoveryPage } from "../modules/PassRecovery/PassRecoveryPage";

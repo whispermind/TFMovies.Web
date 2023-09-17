@@ -6,6 +6,12 @@ import type { ISignInForm, IAuthState } from "../../modules/Authorization";
 import type { IPassRecoveryForm } from "../../modules/PassRecovery";
 import type { IArticle } from "../../common/components";
 
+interface IGetArticleResponseData {
+	page: number;
+	pages: number;
+	articles: IArticle[];
+}
+
 export const apiSlice = createApi({
 	baseQuery: refreshBaseQuery,
 	endpoints: (builder) => ({
@@ -58,7 +64,7 @@ export const apiSlice = createApi({
 				body: credentials
 			})
 		}),
-		getArticles: builder.query<IArticle[], string>({
+		getArticles: builder.query<IGetArticleResponseData, string>({
 			query: (query) => ({
 				url: `/posts${query}`
 			})

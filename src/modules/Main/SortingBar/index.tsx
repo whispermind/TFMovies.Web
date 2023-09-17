@@ -18,7 +18,7 @@ export const SortingBar = ({ onSortingChange }: ISortingBarProps) => {
 	const onSort = useCallback(
 		(e: MouseEvent<HTMLButtonElement>) => {
 			setSorting(e.currentTarget.dataset.sort!);
-			onSortingChange(`?_sort=${sorting},theme=${themeSorting}`);
+			onSortingChange(`sort=${sorting}&theme=${themeSorting}`);
 		},
 		[setSorting, onSortingChange, sorting, themeSorting]
 	);
@@ -27,7 +27,7 @@ export const SortingBar = ({ onSortingChange }: ISortingBarProps) => {
 		({ target: { value } }: SelectChangeEvent<unknown>) => {
 			const theme = value === "placeholder" ? "" : (value as string);
 			setThemeSorting(theme);
-			onSortingChange(`?_sort=${sorting},theme=${themeSorting}`);
+			onSortingChange(`sort=${sorting}&theme=${themeSorting}`);
 		},
 		[setThemeSorting, onSortingChange, sorting, themeSorting]
 	);

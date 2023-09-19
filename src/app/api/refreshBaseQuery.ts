@@ -23,10 +23,13 @@ export const refreshBaseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBas
 	await mutex.waitForUnlock();
 	let result = await baseQuery(args, api, extraOptions);
 	if (result.error && result.error.status === 401) {
-		if (!mutex.isLocked()) {
+		const {
+			auth: { refreshToken }
+		} = api.getState() as RootState;
+		if (refreshToken && !mutex.isLocked()) {
 			const release = await mutex.acquire();
 			try {
-				const { data } = await baseQuery("/users/refresh-token", api, extraOptions);
+				const { data } = await baseQuery({ url: "/users/refresh-token", method: "POST", body: { refreshToken } }, api, extraOptions);
 				if (data) {
 					api.dispatch(signIn(data as IAuthState));
 					result = await baseQuery(args, api, extraOptions);

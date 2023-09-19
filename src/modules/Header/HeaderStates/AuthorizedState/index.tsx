@@ -7,7 +7,7 @@ import { selectAuth } from "../../../Authorization/AuthSlice";
 export const AuthorizedState = () => {
 	const { currentUser } = useAppSelector(selectAuth);
 
-	const isEditor = currentUser && (currentUser.role === "author" || currentUser.role === "admin");
+	const isEditor = currentUser && (currentUser.role === "Author" || currentUser.role === "Admin");
 	return (
 		<Stack
 			direction="row"
@@ -17,7 +17,7 @@ export const AuthorizedState = () => {
 				<Button
 					variant="customOutlined"
 					sx={{ width: "240px" }}
-					href="/createpost"
+					href="/createarticle"
 					autoCapitalize="false"
 				>
 					Create a post

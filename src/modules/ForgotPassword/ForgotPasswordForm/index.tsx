@@ -20,7 +20,7 @@ const schema = yup.object().shape({
 	email: yup.string().required(requiredError()).matches(email, emailError())
 });
 
-export const ForgotPassForm = ({ onSubmit, isLoading }: IStatedForm<IForgotPassForm>) => {
+export const ForgotPassForm = ({ onSubmit, isLoading }: ILoadingForm<IForgotPassForm>) => {
 	const { handleSubmit, control } = useForm<IForgotPassForm>({
 		defaultValues: {
 			email: ""

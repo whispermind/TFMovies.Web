@@ -1,4 +1,4 @@
-import { SyntheticEvent } from "react";
+import { SyntheticEvent, useMemo } from "react";
 import { Autocomplete } from "@mui/material";
 import { Control } from "react-hook-form";
 
@@ -16,15 +16,16 @@ interface IThemeAutocompleteProps {
 export const ThemeAutocomplete = ({ onChange: onThemeChange, control }: IThemeAutocompleteProps) => {
 	const { data } = useGetThemes();
 
-	const Themes = withController<ICreateArticleForm, TStyledInputProps>(Styled.TextField);
+	const ThemesField = withController<ICreateArticleForm, TStyledInputProps>(Styled.TextField);
+	const themes = useMemo(() => data?.map(({ name }) => name), [data]);
 
 	return (
 		<Autocomplete
-			options={data || []}
+			options={themes || []}
 			popupIcon={false}
 			onChange={onThemeChange}
 			renderInput={(props) => (
-				<Themes
+				<ThemesField
 					{...props}
 					variant="standard"
 					placeholder="Start enter the theme..."

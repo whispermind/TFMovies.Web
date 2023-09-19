@@ -13,6 +13,14 @@ interface IGetArticleResponseData {
 	articles: IArticle[];
 }
 
+interface ICreateArticleReq {
+	coverImageUrl: string;
+	theme: string;
+	title: string;
+	HtmlContent: string;
+	tags: string[];
+}
+
 export const apiSlice = createApi({
 	baseQuery: refreshBaseQuery,
 	endpoints: (builder) => ({
@@ -65,6 +73,26 @@ export const apiSlice = createApi({
 				body: credentials
 			})
 		}),
+		imageUpload: builder.mutation<{ fileUrl: string }, Blob>({
+			query: (file) => {
+				const bodyFormData = new FormData();
+				bodyFormData.append("File", file);
+
+				return {
+					url: "/files/upload-image",
+					method: "POST",
+					body: bodyFormData,
+					formData: true
+				};
+			}
+		}),
+		createArticle: builder.mutation<void, ICreateArticleReq>({
+			query: (articleData) => ({
+				url: "/posts",
+				method: "POST",
+				body: articleData
+			})
+		}),
 		getArticles: builder.query<IGetArticleResponseData, string>({
 			query: (query) => ({
 				url: `/posts${query}`
@@ -76,7 +104,7 @@ export const apiSlice = createApi({
 		getTopTags: builder.query<string[], void>({
 			query: () => ({ url: "/toptags" })
 		}),
-		getThemes: builder.query<string[], void>({
+		getThemes: builder.query<{ id: string; name: string }[], void>({
 			query: () => ({ url: "/themes" })
 		})
 	})
@@ -93,5 +121,7 @@ export const {
 	useGetArticlesQuery,
 	useGetTopAuthorsQuery,
 	useGetTopTagsQuery,
-	useGetThemesQuery
+	useGetThemesQuery,
+	useImageUploadMutation,
+	useCreateArticleMutation
 } = apiSlice;

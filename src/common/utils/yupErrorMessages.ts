@@ -23,5 +23,8 @@ export const yupErrorMessages = {
 	},
 	attachmentSize(size: number) {
 		return `The attachment must be less than ${size}mb`;
+	},
+	tagsLimit(amount: number) {
+		return `The tags limit is ${amount}`;
 	}
 };

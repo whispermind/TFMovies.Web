@@ -1,3 +1,4 @@
+export { base64toBlob } from "./base64toBlob";
 export { snackBarMessages } from "./snackbarMessages";
 export { formValidation } from "./regexp";
 export { capitalizer } from "./capitalizer";

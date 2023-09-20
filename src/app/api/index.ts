@@ -5,6 +5,12 @@ import type { ISignUpForm } from "../../modules/Registration";
 import type { ISignInForm, IAuthState } from "../../modules/Authorization";
 import type { IPassRecoveryForm } from "../../modules/PassRecovery";
 import type { IArticle } from "../../common/components";
+import { ICommentData } from "../../common/components/Comments/CommentsList";
+
+interface IFormData {
+  body: string;
+	author: string;
+}
 
 interface IGetArticleResponseData {
 	page: number;
@@ -77,7 +83,17 @@ export const apiSlice = createApi({
 		}),
 		getThemes: builder.query<string[], void>({
 			query: () => ({ url: "/themes" })
-		})
+		}),
+		getComments: builder.query<ICommentData[], void>({
+			query: () => ({ url: "http://localhost:3004/comments"})
+		}),
+		createComment: builder.mutation<void, IFormData>({
+      query: (comment) => ({
+        url: "/comments",
+        method: "POST",
+        body: comment,
+      }),
+    }),
 	})
 });
 
@@ -92,5 +108,7 @@ export const {
 	useGetArticlesQuery,
 	useGetTopAuthorsQuery,
 	useGetTopTagsQuery,
-	useGetThemesQuery
+	useGetThemesQuery,
+	useGetCommentsQuery,
+	useCreateCommentMutation,
 } = apiSlice;

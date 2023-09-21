@@ -27,6 +27,10 @@ export const ArticleCard = ({ articleData }: IArticleCardProps) => {
 	const { id, coverImageUrl, title, createdAt, author, tags, isLiked } = articleData;
 	const { accessToken } = useAppSelector(selectAuth);
 
+	const dateObject = new Date(Date.parse(createdAt));
+
+	const dateFormatted = `${dateObject.toLocaleDateString("en-GB", { month: "long" })} ${dateObject.getDate()}, ${dateObject.getFullYear()}`;
+
 	return (
 		<Card>
 			<Link href={accessToken ? `/post/${id}` : `/signin`}>
@@ -39,7 +43,7 @@ export const ArticleCard = ({ articleData }: IArticleCardProps) => {
 			</Link>
 			<Styled.CardContentContainer>
 				<ArticleAuthor
-					created={createdAt}
+					created={dateFormatted}
 					nickname={author}
 				/>
 				<CardContent sx={{ p: 0 }}>

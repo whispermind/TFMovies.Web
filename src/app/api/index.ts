@@ -32,6 +32,7 @@ export interface IGetThemeResponseData {
 
 export const apiSlice = createApi({
 	baseQuery: refreshBaseQuery,
+	tagTypes: ["Article"],
 	endpoints: (builder) => ({
 		signUp: builder.mutation<void, ISignUpForm>({
 			query: (user) => ({
@@ -100,12 +101,14 @@ export const apiSlice = createApi({
 				url: "/posts",
 				method: "POST",
 				body: articleData
-			})
+			}),
+			invalidatesTags: ["Article"]
 		}),
 		getArticles: builder.query<IGetArticleResponseData, string>({
 			query: (query) => ({
 				url: `/posts${query}`
-			})
+			}),
+			providesTags: (result) => (result ? [...result.data.map(({ id }) => ({ type: "Article" as const, id })), "Article"] : ["Article"])
 		}),
 		getTopAuthors: builder.query<string[], void>({
 			query: () => ({ url: "/topauthors" })

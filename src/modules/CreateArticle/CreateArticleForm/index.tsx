@@ -25,7 +25,7 @@ export interface ICreateArticleFormWithEditor extends ICreateArticleForm {
 
 export type TStyledInputProps = ComponentProps<typeof Styled.TextField>;
 
-const { requiredError, attachmentSize, tagsLimit } = yupErrorMessages;
+const { requiredError, attachmentSize, tagsLimit, traillingSpace } = yupErrorMessages;
 
 const MAX_ATTACHMENT_SIZE = 5;
 const TAGS_LIMIT = 5;
@@ -38,10 +38,11 @@ export const schema = yup.object().shape({
 			const maxSize = MAX_ATTACHMENT_SIZE * 1024 * 1024;
 			return file[0]?.size < maxSize || !file.length;
 		}),
-	title: yup.string().required(requiredError()),
+	title: yup.string().required(requiredError()).trim(traillingSpace()),
 	tags: yup
 		.string()
 		.required(requiredError())
+		.trim(traillingSpace())
 		.test("tagsLimit", tagsLimit(TAGS_LIMIT), (value) => {
 			const spacesAmount = value.split("").reduce((acc, symbol) => (symbol === " " ? acc + 1 : acc), 0);
 			return spacesAmount < TAGS_LIMIT;
@@ -134,6 +135,7 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 							variant="standard"
 							placeholder="Add up to 5 tags to your title"
 							control={control}
+							required
 						/>
 						<ThemeAutocomplete
 							control={control}

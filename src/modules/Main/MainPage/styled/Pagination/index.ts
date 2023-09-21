@@ -8,7 +8,7 @@ export const Pagination = styled(MuiPagination)(({ theme }) => {
 	} = theme;
 
 	return {
-		marginTop: "72px",
+		marginTop: "auto",
 		display: "flex",
 		justifyContent: "center",
 

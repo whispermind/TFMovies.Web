@@ -18,7 +18,7 @@ export const CreateArticlePage = () => {
 				try {
 					const { fileUrl } = await imageUploadReq(attachment[0]).unwrap();
 					const articleData = { coverImageUrl: fileUrl, tags: tags.split(" "), ThemeId, title, HtmlContent };
-					await createArticleReq(articleData);
+					await createArticleReq(articleData).unwrap();
 					navigate("/createarticle/success");
 					enqueueSnackbar(snackBarMessages.articleCreated, { variant: "success" });
 				} catch (e) {

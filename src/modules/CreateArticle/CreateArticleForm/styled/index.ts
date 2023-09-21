@@ -1,3 +1,4 @@
+export { FormWrapper } from "./FormWrapper";
 export { ButtonsWrapper } from "./ButtonsWrapper";
 export { FileInputWrapper } from "./FileInputWrapper";
 export { TextField } from "./TextField";

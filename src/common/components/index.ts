@@ -7,7 +7,7 @@ export { NamedLogo } from "./NamedLogo";
 export { FormDivider } from "./FormDivider";
 export { FormTextFieldIconed } from "./Inputs/FormTextFieldIconed";
 export { FormTextField } from "./Inputs/FormTextField";
-export { LogAuthWrapper } from "./LogAuthWrapper";
+export { SubPageWrapper } from "./SubPageWrapper";
 export { MuiRouterLink } from "./MuiRouterLink";
 export { AdoptiveLayout } from "./AdoptiveLayout";
 export { Avatar } from "./Avatar";

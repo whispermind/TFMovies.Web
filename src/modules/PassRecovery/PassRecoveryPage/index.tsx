@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
 
 import { PassRecoveryForm, IPassRecoveryForm } from "..";
-import { LogAuthWrapper } from "../../../common/components";
+import { SubPageWrapper } from "../../../common/components";
 import { useResetPassword } from "../../../common/hooks";
 import { TokenValidator } from "../../../common/components/TokenValidator";
 import { snackBarMessages } from "../../../common/utils";
@@ -34,8 +34,8 @@ export const PassRecoveryPage = () => {
 			token={token || ""}
 			endpoint="validate-reset-token"
 		>
-			<LogAuthWrapper
-				maxWidth="50%"
+			<SubPageWrapper
+				maxWidth="1080px"
 				flexGrow="1"
 			>
 				<Typography
@@ -49,7 +49,7 @@ export const PassRecoveryPage = () => {
 					onSubmit={onSubmit}
 					isLoading={isLoading}
 				/>
-			</LogAuthWrapper>
+			</SubPageWrapper>
 		</TokenValidator>
 	);
 };

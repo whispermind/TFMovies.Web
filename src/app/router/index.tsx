@@ -1,7 +1,18 @@
 import { createRoutesFromElements, createBrowserRouter, Route } from "react-router-dom";
 
 import { App } from "..";
-import { ErrorPage, SignUpSuccessPage, SignUpPage, SignInPage, PassRecoveryPage, ForgotPassPage, MainPage, SearchPage, CreateArticlePage } from "../../pages";
+import {
+	ErrorPage,
+	SignUpSuccessPage,
+	SignUpPage,
+	SignInPage,
+	PassRecoveryPage,
+	ForgotPassPage,
+	MainPage,
+	SearchPage,
+	CreateArticlePage,
+	CreateArticleSuccessPage
+} from "../../pages";
 
 export const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -41,6 +52,10 @@ export const router = createBrowserRouter(
 			<Route
 				path="createarticle"
 				element={<CreateArticlePage />}
+			/>
+			<Route
+				path="createarticle/success"
+				element={<CreateArticleSuccessPage />}
 			/>
 		</Route>
 	)

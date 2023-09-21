@@ -1,4 +1,4 @@
-import { ComponentProps, SyntheticEvent, useCallback, ChangeEvent, useState } from "react";
+import { ComponentProps, useCallback, ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -9,13 +9,14 @@ import { ThemeAutocomplete } from "./ThemeAutocomplete";
 import { PrimaryButton } from "../../../common/components";
 import { withController, withButtonLoader } from "../../../common/hocs";
 import { yupErrorMessages } from "../../../common/utils/yupErrorMessages";
+import { IGetThemeResponseData } from "../../../app/api";
 import * as Styled from "./styled";
 
 export interface ICreateArticleForm {
 	attachment: FileList | null;
 	title: string;
 	tags: string;
-	theme: string;
+	ThemeId: string;
 }
 
 export interface ICreateArticleFormWithEditor extends ICreateArticleForm {
@@ -45,7 +46,7 @@ export const schema = yup.object().shape({
 			const spacesAmount = value.split("").reduce((acc, symbol) => (symbol === " " ? acc + 1 : acc), 0);
 			return spacesAmount < TAGS_LIMIT;
 		}),
-	theme: yup.string().required(requiredError()).notOneOf(["placeholder"], requiredError())
+	ThemeId: yup.string().required(requiredError()).notOneOf(["placeholder"], requiredError())
 });
 
 export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<ICreateArticleFormWithEditor>) => {
@@ -56,7 +57,7 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 			attachment: null,
 			title: "",
 			tags: "",
-			theme: "placeholder"
+			ThemeId: "placeholder"
 		},
 		resolver: yupResolver<ICreateArticleForm>(schema),
 		mode: "onBlur"
@@ -67,8 +68,8 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 	const SubmitButton = withButtonLoader(PrimaryButton);
 
 	const onThemeChange = useCallback(
-		(_: SyntheticEvent, value: string | null) => {
-			setValue("theme", value || "placeholder");
+		(theme: IGetThemeResponseData) => {
+			setValue("ThemeId", theme.id || "placeholder");
 		},
 		[setValue]
 	);
@@ -108,7 +109,7 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 	);
 
 	return (
-		<div>
+		<Styled.FormWrapper>
 			<Styled.Form
 				onSubmit={handleSubmit(onSubmit)}
 				id="create-article-form"
@@ -152,6 +153,6 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 				</SubmitButton>
 				{togglePreviewButton}
 			</Styled.ButtonsWrapper>
-		</div>
+		</Styled.FormWrapper>
 	);
 };

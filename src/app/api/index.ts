@@ -15,10 +15,15 @@ interface IGetArticleResponseData {
 
 interface ICreateArticleReq {
 	coverImageUrl: string;
-	theme: string;
+	ThemeId: string;
 	title: string;
 	HtmlContent: string;
 	tags: string[];
+}
+
+export interface IGetThemeResponseData {
+	id: string;
+	name: string;
 }
 
 export const apiSlice = createApi({
@@ -104,7 +109,7 @@ export const apiSlice = createApi({
 		getTopTags: builder.query<string[], void>({
 			query: () => ({ url: "/toptags" })
 		}),
-		getThemes: builder.query<{ id: string; name: string }[], void>({
+		getThemes: builder.query<IGetThemeResponseData[], void>({
 			query: () => ({ url: "/themes" })
 		})
 	})

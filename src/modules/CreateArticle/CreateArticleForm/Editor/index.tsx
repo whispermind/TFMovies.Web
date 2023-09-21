@@ -30,17 +30,20 @@ export const Editor = ({ initialState, onChange: onChangeFromProps }: IEditorPro
 		if (ops) {
 			const imageOperation = ops.find((obj) => typeof obj?.insert === "object" && "image" in obj.insert);
 			if (imageOperation) {
-				const imageSourceRegExp = /src="data:image.+"/g;
-				const imageSource = state.match(imageSourceRegExp)![0];
-				const base64Image = imageSource.slice(imageSource.indexOf(",") + 1, imageSource.length - 1);
-				const mimeType = imageSource.slice(imageSource.indexOf(":") + 1, imageSource.indexOf(";"));
-				const blobImage = base64toBlob(base64Image, mimeType);
-				try {
-					const { fileUrl } = await imageUploadReq(blobImage).unwrap();
-					const stateWithReplacedUrl = state.replace(imageSourceRegExp, `src="${fileUrl}"`);
-					setValue(stateWithReplacedUrl);
-				} catch {
-					// handled by middleware
+				const imageSourceRegExp = /src="data:image.+?={1,2}"/;
+				const matches = state.match(imageSourceRegExp);
+				if (matches) {
+					const imageSource = matches[0];
+					const base64Image = imageSource.slice(imageSource.indexOf(",") + 1, imageSource.length - 1);
+					const mimeType = imageSource.slice(imageSource.indexOf(":") + 1, imageSource.indexOf(";"));
+					const blobImage = base64toBlob(base64Image, mimeType);
+					try {
+						const { fileUrl } = await imageUploadReq(blobImage).unwrap();
+						const stateWithReplacedUrl = state.replace(imageSourceRegExp, `src="${fileUrl}"`);
+						setValue(stateWithReplacedUrl);
+					} catch {
+						// handled by middleware
+					}
 				}
 			} else {
 				setValue(state);

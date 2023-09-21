@@ -1,6 +1,6 @@
 import { styled, Box } from "@mui/material";
 
-export const LogAuthWrapper = styled(Box)(({ theme }) => {
+export const SubPageWrapper = styled(Box)(({ theme }) => {
 	const {
 		palette: {
 			mainColors: { white },

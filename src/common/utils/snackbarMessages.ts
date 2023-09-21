@@ -3,5 +3,7 @@ export const snackBarMessages = {
 	signIn: "Successfully logged in",
 	signUp: "Successfully signed up",
 	signOut: "Successfully signed out",
-	passRecovery: "The password was successfully changed"
+	passRecovery: "The password was successfully changed",
+	sessionExpired: "The session expired. Please, login again.",
+	articleCreated: "The article was successfully published"
 };

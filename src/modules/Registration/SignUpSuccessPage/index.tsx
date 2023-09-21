@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-import { LogAuthWrapper, LogoHeading, PrimaryButton, TokenValidator } from "../../../common/components";
+import { SubPageWrapper, LogoHeading, PrimaryButton, TokenValidator } from "../../../common/components";
 
 export const SignUpSuccessPage = () => {
 	const { token } = useParams();
@@ -13,7 +13,7 @@ export const SignUpSuccessPage = () => {
 			token={token || ""}
 			endpoint="verify-email"
 		>
-			<LogAuthWrapper maxWidth="65%">
+			<SubPageWrapper maxWidth="1080px">
 				<LogoHeading
 					mb={6.5}
 					heading={heading}
@@ -27,7 +27,7 @@ export const SignUpSuccessPage = () => {
 				>
 					Back to Login In
 				</PrimaryButton>
-			</LogAuthWrapper>
+			</SubPageWrapper>
 		</TokenValidator>
 	);
 };

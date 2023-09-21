@@ -44,7 +44,7 @@ export const MainNav = () => {
 	return (
 		<Stack
 			rowGap={5}
-			width="12.5vw"
+			width="240px"
 		>
 			<div>
 				<List>{mainLinks}</List>

@@ -15,11 +15,15 @@ export const CreateArticlePage = () => {
 	const onSubmit = useCallback(
 		async ({ attachment, tags, ThemeId, title, HtmlContent }: ICreateArticleFormWithEditor) => {
 			if (attachment) {
-				const { fileUrl } = await imageUploadReq(attachment[0]).unwrap();
-				const articleData = { coverImageUrl: fileUrl, tags: tags.split(" "), ThemeId, title, HtmlContent };
-				await createArticleReq(articleData);
-				navigate("/createarticle/success");
-				enqueueSnackbar(snackBarMessages.articleCreated, { variant: "success" });
+				try {
+					const { fileUrl } = await imageUploadReq(attachment[0]).unwrap();
+					const articleData = { coverImageUrl: fileUrl, tags: tags.split(" "), ThemeId, title, HtmlContent };
+					await createArticleReq(articleData);
+					navigate("/createarticle/success");
+					enqueueSnackbar(snackBarMessages.articleCreated, { variant: "success" });
+				} catch (e) {
+					// handled by middleware
+				}
 			}
 		},
 		[imageUploadReq, createArticleReq, navigate]

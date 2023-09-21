@@ -8,25 +8,23 @@ import { ArticleTags } from "./ArticleTags";
 import { FavoriteFilledIcon } from "../Icons";
 import * as Styled from "./styled";
 
-export interface IArticle {
+export interface IArticleCard {
 	id: string;
 	coverImageUrl: string;
 	title: string;
-	htmlContent: string;
 	createdAt: string;
-	authorNickname: string;
+	author: string;
 	themeName: string;
-	tagNames: string[];
-	favorite: boolean;
-	liked: string;
+	tags: string[];
+	isLiked: boolean;
 }
 
-export interface IArticleProps {
-	articleData: IArticle;
+export interface IArticleCardProps {
+	articleData: IArticleCard;
 }
 
-export const Article = ({ articleData }: IArticleProps) => {
-	const { id, coverImageUrl, title, createdAt, authorNickname, tagNames, favorite } = articleData;
+export const ArticleCard = ({ articleData }: IArticleCardProps) => {
+	const { id, coverImageUrl, title, createdAt, author, tags, isLiked } = articleData;
 	const { accessToken } = useAppSelector(selectAuth);
 
 	return (
@@ -42,13 +40,13 @@ export const Article = ({ articleData }: IArticleProps) => {
 			<Styled.CardContentContainer>
 				<ArticleAuthor
 					created={createdAt}
-					nickname={authorNickname}
+					nickname={author}
 				/>
 				<CardContent sx={{ p: 0 }}>
 					<Typography variant="ASubheader">{title}</Typography>
 				</CardContent>
 				<Styled.CardActions>
-					<ArticleTags tags={tagNames} />
+					<ArticleTags tags={tags} />
 					<Styled.LikeButton>
 						<Typography
 							variant="HBody"
@@ -56,7 +54,7 @@ export const Article = ({ articleData }: IArticleProps) => {
 						>
 							Add to Favorites
 						</Typography>
-						{favorite ? <FavoriteFilledIcon /> : <FavoriteBorder />}
+						{isLiked ? <FavoriteFilledIcon /> : <FavoriteBorder />}
 					</Styled.LikeButton>
 				</Styled.CardActions>
 			</Styled.CardContentContainer>

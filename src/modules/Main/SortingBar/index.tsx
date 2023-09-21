@@ -7,32 +7,36 @@ import * as Styled from "./styled";
 
 interface ISortingBarProps {
 	onSortingChange: (query: string) => void;
+	initSort: string;
 }
 
-export const SortingBar = ({ onSortingChange }: ISortingBarProps) => {
-	const [sorting, setSorting] = useState("created");
-	const [themeSorting, setThemeSorting] = useState("");
+export const SortingBar = ({ onSortingChange, initSort }: ISortingBarProps) => {
+	const [sorting, setSorting] = useState(initSort);
+	const [themeFiltering, setThemeSorting] = useState("");
 
 	const { data } = useGetThemes();
 
 	const onSort = useCallback(
 		(e: MouseEvent<HTMLButtonElement>) => {
-			setSorting(e.currentTarget.dataset.sort!);
-			onSortingChange(`sort=${sorting}&theme=${themeSorting}`);
+			const datasetSorting = e.currentTarget.dataset.sort!;
+			setSorting(datasetSorting);
+			const sort = `&sort=${datasetSorting}`;
+			const filtering = (themeFiltering && themeFiltering !== "placeholder" && `&themeid=${themeFiltering}`) || "";
+			onSortingChange(`${sort}${filtering}`);
 		},
-		[setSorting, onSortingChange, sorting, themeSorting]
+		[setSorting, onSortingChange, themeFiltering]
 	);
 
 	const onSortByTheme = useCallback(
 		({ target: { value } }: SelectChangeEvent<unknown>) => {
-			const theme = value === "placeholder" ? "" : (value as string);
+			const theme = value === "setPlaceholder" ? "" : (value as string);
 			setThemeSorting(theme);
-			onSortingChange(`sort=${sorting}&theme=${themeSorting}`);
+			onSortingChange(`&sort=${sorting}&themeid=${theme}`);
 		},
-		[setThemeSorting, onSortingChange, sorting, themeSorting]
+		[setThemeSorting, onSortingChange, sorting]
 	);
 
-	const themes = useMemo(() => data?.map(({ name }) => name), [data]);
+	const themes = useMemo(() => data?.map(({ name, id }) => ({ description: name, value: id })), [data]);
 
 	return (
 		<Styled.List>
@@ -41,7 +45,7 @@ export const SortingBar = ({ onSortingChange }: ISortingBarProps) => {
 					variant="ghost"
 					fullWidth
 					onClick={onSort}
-					data-sort="createdAt"
+					data-sort="created"
 				>
 					<Styled.Typography
 						variant="Input"
@@ -56,11 +60,11 @@ export const SortingBar = ({ onSortingChange }: ISortingBarProps) => {
 					variant="ghost"
 					fullWidth
 					onClick={onSort}
-					data-sort="liked"
+					data-sort="rated"
 				>
 					<Styled.Typography
 						variant="Input"
-						isActive={sorting === "liked"}
+						isActive={sorting === "rated"}
 					>
 						Top Rated
 					</Styled.Typography>

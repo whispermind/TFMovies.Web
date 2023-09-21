@@ -1,8 +1,8 @@
-import { useState, useCallback, ChangeEvent } from "react";
+import { useState, useCallback, useMemo, ChangeEvent } from "react";
 import { Stack, Grid } from "@mui/material";
 
 import { MainNav } from "../../../common/components";
-import { Article } from "../../../common/components/Article";
+import { ArticleCard } from "../../../common/components/ArticleCard";
 import { ArticleTopFiltering } from "../FilteringOptions/ArticleTopFiltering";
 import { useGetArticles } from "../../../common/hooks";
 import { SortingBar } from "../SortingBar";
@@ -12,16 +12,21 @@ const LIMIT_PER_PAGE = 12;
 
 export const MainPage = () => {
 	const initPage = 1;
-	const [sortingQuery, setSortingQuery] = useState("");
+	const [sortingQuery, setSortingQuery] = useState("&sort=created");
 	const [pageQuery, setPageQuery] = useState(initPage);
-	const { data, isLoading } = useGetArticles(`?page=${pageQuery}&${sortingQuery}&limit=${LIMIT_PER_PAGE}`);
+	const queryString = `?page=${pageQuery}${sortingQuery}&limit=${LIMIT_PER_PAGE}`;
+	const { data, isLoading } = useGetArticles(queryString);
 
-	const Articles = data?.articles?.map((articleData) => (
-		<Article
-			articleData={articleData}
-			key={articleData.id}
-		/>
-	));
+	const Articles = useMemo(
+		() =>
+			data?.data?.map((articleData) => (
+				<ArticleCard
+					articleData={articleData}
+					key={articleData.id}
+				/>
+			)),
+		[data]
+	);
 
 	const onSortingChange = useCallback(
 		(_sortingQuery: string) => {
@@ -47,10 +52,13 @@ export const MainPage = () => {
 				rowGap={2.5}
 				flexGrow={1}
 			>
-				<SortingBar onSortingChange={onSortingChange} />
+				<SortingBar
+					onSortingChange={onSortingChange}
+					initSort="created"
+				/>
 				{isLoading ? null : Articles}
 				<Styled.Pagination
-					count={data?.pages || 10}
+					count={data?.totalPages}
 					onChange={onPageChange}
 					page={pageQuery}
 					boundaryCount={2}

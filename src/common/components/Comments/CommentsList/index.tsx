@@ -1,18 +1,12 @@
+import { ICommentData } from "..";
 import { Comment } from "../Comment";
 import { StyledCommentsList } from "./styled";
 
-export interface ICommentData {
-	id: string;
-	body: string;
-	author: string;
-	postId: number;
-}
-
 export const CommentsList = ({ comments }: { comments: ICommentData[] | undefined }) => {
 
-	const commentsList = comments?.map(( comment ) => {
+	const commentsList = comments?.map(( comment, i ) => {
 		return (
-			<Comment nickname={comment.author} key={comment.id} commentText={comment.body}/>
+			<Comment key={i} nickname={comment.author} createdAt={comment.createdAt} commentText={comment.content}/>
 		)
 	})
 

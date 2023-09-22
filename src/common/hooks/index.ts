@@ -11,6 +11,5 @@ export {
 	useGetTopAuthorsQuery as useGetTopAuthors,
 	useGetTopTagsQuery as useGetTopTags,
 	useGetThemesQuery as useGetThemes,
-	useGetCommentsQuery as useGetComments,
 	useCreateCommentMutation as useCreateComment,
 } from "../../app/api";

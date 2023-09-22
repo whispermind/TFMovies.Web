@@ -2,43 +2,42 @@ import { Box, Button, Stack, TextFieldProps } from "@mui/material"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import * as yup from 'yup'
 import { yupResolver } from "@hookform/resolvers/yup"
+import { useParams } from "react-router-dom"
 
 import { FormTextField, PrimaryButton } from "../../../components"
 import { useCreateComment } from "../../../hooks"
 import { yupErrorMessages } from "../../../utils"
 
-interface IFormData {
-  body: string;
-	author: string;
+export interface ICreateCommentForm {
+	content: string;
 }
 
 const { requiredError } = yupErrorMessages;
 
 const schema = yup.object().shape({
-  body: yup.string().required(requiredError()).trim(),
+	content: yup.string().required(requiredError()).trim(),
 });
 
-export const CommentsForm = ({ onAddComment }) => {
-	const { handleSubmit, control, reset, formState: { isDirty, errors }, setValue } = useForm({
-		defaultValues: {body: ""},
+export const CommentsForm = () => {
+	const { handleSubmit, control, formState: { isDirty, errors }, setValue } = useForm({
+		defaultValues: { content: "" },
 		resolver: yupResolver(schema),
 		mode: "onBlur"
 	});
 
-	const [createComment, { isLoading, isError, isSuccess }] = useCreateComment();
-
-	// const qwe = withController<FormData, <React.componentType<typeof FormTextField>>(FormTextField)
-
-	const clearInput = () => {
-		setValue("body", "");
+	const resetForm = () => {
+		setValue("content", "");
 	}
 
-	
-	const onSubmit: SubmitHandler<IFormData | any> = async ({body}: IFormData) => {
+	const [createComment] = useCreateComment();
+	const { postId } = useParams();
+
+	const onSubmit = async ({content}: ICreateCommentForm) => {
 		try {
-			const newComment = await createComment({ body, author: '13231' }).unwrap();
-      onAddComment(newComment);
-			clearInput();
+			const newComment = await createComment({ content, postId }).unwrap();
+			console.log(newComment);
+			console.log(content);
+			resetForm();
 		} catch (error) {
 			console.error("Error", error);
 		}
@@ -48,15 +47,15 @@ export const CommentsForm = ({ onAddComment }) => {
 		<Box mb="50px" mt="20px">
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<Controller
-					name="body"
+					name="content"
 					control={control}
-					render={({field}) => (
+					render={({ field }) => (
 						<FormTextField
 							placeholder="Write your comment here"
 							{...field}
-							fullWidth 
-							error={!!errors.body}
-							helperText={errors.body?.message} />
+							fullWidth
+							error={!!errors.content}
+							helperText={errors.content?.message} />
 					)} />
 				<Stack direction="row" gap="40px" mt="30px">
 					<PrimaryButton
@@ -69,7 +68,7 @@ export const CommentsForm = ({ onAddComment }) => {
 					<Button
 						variant="ghost"
 						sx={{ width: "216px" }}
-						onClick={clearInput}
+						onClick={resetForm}
 						disabled={!isDirty}
 					>
 						Clear input

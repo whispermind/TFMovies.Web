@@ -2,29 +2,25 @@ import { Box, Typography } from "@mui/material"
 import { useEffect, useState } from "react";
 
 import { CommentsForm } from "./CommentsForm";
-import { CommentsList, ICommentData } from "./CommentsList";
-import { useGetComments } from "../../hooks";
+import { CommentsList } from "./CommentsList";
 import { CommentsWrapper } from "./styled";
 
-export const Comments = () => {
-	const { data } = useGetComments();
-	const [commentsData, setCommentsData] = useState<ICommentData[]>([]);
+export interface ICommentData {
+  content: string;
+  createdAt: string;
+  author: string;
+}
 
-	useEffect(() => {
-    if (data) {
-      setCommentsData(data);
-    }
-  }, [data]);
+interface Props {
+  data: ICommentData[];
+}
 
-  const handleAddComment = (newComment: ICommentData) => {
-    setCommentsData((prevComments) => [ newComment, ...prevComments]);
-  };
-
+export const Comments: React.FC<Props> = ({data}) => {
 	return (
 		<CommentsWrapper>
-			<Typography variant="Section">Comments: {commentsData?.length || 0}</Typography>
-			<CommentsForm onAddComment={handleAddComment}/>
-			<CommentsList comments={commentsData} />
+			<Typography variant="Section">Comments: {data?.length || 0}</Typography>
+			<CommentsForm />
+			<CommentsList comments={data} />
 		</CommentsWrapper>
 	)
 }

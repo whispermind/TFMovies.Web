@@ -2,7 +2,7 @@ import { useCallback, PropsWithChildren } from "react";
 import { FavoriteBorder } from "@mui/icons-material";
 
 import { FavoriteFilledIcon } from "../../Icons";
-import { useLikeArticle, useUnlikeArticle } from "../../../hooks";
+import { useLikeArticle, useUnlikeArticle, useOnClickAuthorized } from "../../../hooks";
 import * as Styled from "./styled";
 
 interface ILikeButtonProps {
@@ -15,16 +15,22 @@ export const LikeButton = ({ isLiked, id, likes, children }: PropsWithChildren<I
 	const [likeReq] = useLikeArticle();
 	const [unlikeReq] = useUnlikeArticle();
 
-	const onLike = useCallback(() => likeReq(id), [likeReq, id]);
-	const onUnlike = useCallback(() => unlikeReq(id), [unlikeReq, id]);
+	const listener = useCallback(() => {
+		if (isLiked) {
+			unlikeReq(id);
+		} else {
+			likeReq(id);
+		}
+	}, [isLiked, unlikeReq, likeReq, id]);
 
-	const listener = isLiked ? onUnlike : onLike;
+	const authorizedListener = useOnClickAuthorized(listener, "/signin");
+
 	const icon = isLiked ? <FavoriteFilledIcon /> : <FavoriteBorder />;
 
 	return (
 		<Styled.Button
 			likes={likes}
-			onClick={listener}
+			onClick={authorizedListener}
 		>
 			{children}
 			{icon}

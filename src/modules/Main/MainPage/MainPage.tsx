@@ -4,7 +4,7 @@ import { Stack, Grid } from "@mui/material";
 import { MainNav } from "../../../common/components";
 import { ArticleCard } from "../../../common/components/ArticleCard";
 import { ArticleTopFiltering } from "../FilteringOptions/ArticleTopFiltering";
-import { useGetArticles } from "../../../common/hooks";
+import { useGetArticles, useOnClickAuthorized } from "../../../common/hooks";
 import { SortingBar } from "../SortingBar";
 import * as Styled from "./styled";
 
@@ -43,6 +43,9 @@ export const MainPage = () => {
 		[setPageQuery]
 	);
 
+	const onSortingChangeAuthorized = useOnClickAuthorized(onSortingChange, "/signin");
+	const onPageChangeAuthorized = useOnClickAuthorized(onPageChange, "/signin");
+
 	return (
 		<Styled.Grid container>
 			<Grid item>
@@ -53,13 +56,13 @@ export const MainPage = () => {
 				flexGrow={1}
 			>
 				<SortingBar
-					onSortingChange={onSortingChange}
+					onSortingChange={onSortingChangeAuthorized}
 					initSort="created"
 				/>
 				{isLoading ? null : Articles}
 				<Styled.Pagination
 					count={data?.totalPages}
-					onChange={onPageChange}
+					onChange={onPageChangeAuthorized}
 					page={pageQuery}
 					boundaryCount={2}
 					variant="outlined"

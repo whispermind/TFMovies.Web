@@ -104,6 +104,20 @@ export const apiSlice = createApi({
 			}),
 			invalidatesTags: ["Article"]
 		}),
+		likeArticle: builder.mutation<void, string>({
+			query: (id) => ({
+				url: `/posts/${id}/likes`,
+				method: "POST"
+			}),
+			invalidatesTags: ["Article"]
+		}),
+		unlikeArticle: builder.mutation<void, string>({
+			query: (id) => ({
+				url: `/posts/${id}/likes`,
+				method: "DELETE"
+			}),
+			invalidatesTags: ["Article"]
+		}),
 		getArticles: builder.query<IGetArticleResponseData, string>({
 			query: (query) => ({
 				url: `/posts${query}`
@@ -135,5 +149,7 @@ export const {
 	useGetTopTagsQuery,
 	useGetThemesQuery,
 	useImageUploadMutation,
-	useCreateArticleMutation
+	useCreateArticleMutation,
+	useUnlikeArticleMutation,
+	useLikeArticleMutation
 } = apiSlice;

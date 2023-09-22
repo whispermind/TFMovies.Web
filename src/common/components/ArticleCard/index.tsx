@@ -1,11 +1,10 @@
 import { Card, CardMedia, CardContent, Typography, Link } from "@mui/material";
-import { FavoriteBorder } from "@mui/icons-material";
 
 import { useAppSelector } from "../../hooks";
 import { selectAuth } from "../../../modules/Authorization/AuthSlice";
 import { ArticleAuthor } from "./ArticleAuthor";
 import { ArticleTags } from "./ArticleTags";
-import { FavoriteFilledIcon } from "../Icons";
+import { LikeButton } from "../Buttons/LikeButton";
 import * as Styled from "./styled";
 
 export interface IArticleCard {
@@ -51,15 +50,17 @@ export const ArticleCard = ({ articleData }: IArticleCardProps) => {
 				</CardContent>
 				<Styled.CardActions>
 					<ArticleTags tags={tags} />
-					<Styled.LikeButton>
-						<Typography
+					<LikeButton
+						id={id}
+						isLiked={isLiked}
+					>
+						<Styled.LikeButtonDescription
 							variant="HBody"
 							color="greyColors.grey"
 						>
 							Add to Favorites
-						</Typography>
-						{isLiked ? <FavoriteFilledIcon /> : <FavoriteBorder />}
-					</Styled.LikeButton>
+						</Styled.LikeButtonDescription>
+					</LikeButton>
 				</Styled.CardActions>
 			</Styled.CardContentContainer>
 		</Card>

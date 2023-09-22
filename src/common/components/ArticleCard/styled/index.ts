@@ -1,3 +1,3 @@
 export { CardActions } from "./CardActions";
-export { LikeButton } from "./LikeButton";
+export { LikeButtonDescription } from "./ExtendedLikeButton";
 export { CardContentContainer } from "./CardContentContainer";

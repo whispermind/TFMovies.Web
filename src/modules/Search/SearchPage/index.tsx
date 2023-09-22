@@ -8,12 +8,12 @@ import * as Styled from "./styled";
 export const SearchPage = () => {
 	const dispatch = useAppDispatch();
 	const [params] = useSearchParams();
-	const searchQuery = useAppSelector(selectSearchQuery);
+	const searchQuery = useAppSelector(selectSearchQuery) || "";
 
-	const subject = params.get("subject");
+	const subject = params.get("subject") || "articles";
 	const paramsQuery = params.get("query");
 
-	const [searchSubject, setSearchSubject] = useState(subject || "articles");
+	const [searchSubject, setSearchSubject] = useState(subject);
 
 	useEffect(() => {
 		if (paramsQuery) dispatch(setSearchQuery(paramsQuery));
@@ -24,7 +24,7 @@ export const SearchPage = () => {
 
 	return (
 		<Styled.Stack>
-			<SearchPageHeading query={searchQuery || ""} />
+			<SearchPageHeading query={searchQuery} />
 			<Styled.Stack direction="row">
 				<SearchSubjectBar
 					onClick={setSearchSubject}

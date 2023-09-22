@@ -1,3 +1,4 @@
+export { useIsAuthorized } from "./isAuthorized";
 export { useAppDispatch, useAppSelector } from "../../app/store";
 export {
 	useSignInMutation as useSignIn,
@@ -12,5 +13,7 @@ export {
 	useGetTopTagsQuery as useGetTopTags,
 	useGetThemesQuery as useGetThemes,
 	useImageUploadMutation as useImageUpload,
-	useCreateArticleMutation as useCreateArticle
+	useCreateArticleMutation as useCreateArticle,
+	useLikeArticleMutation as useLikeArticle,
+	useUnlikeArticleMutation as useUnlikeArticle
 } from "../../app/api";

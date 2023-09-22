@@ -36,7 +36,7 @@ export const SortingBar = ({ onSortingChange, initSort }: ISortingBarProps) => {
 		[setThemeSorting, onSortingChange, sorting]
 	);
 
-	const themes = useMemo(() => data?.map(({ name, id }) => ({ description: name, value: id })), [data]);
+	const themes = useMemo(() => data?.map(({ name, id }) => ({ description: name, value: id })), [data]) || [];
 
 	return (
 		<Styled.List>
@@ -72,7 +72,7 @@ export const SortingBar = ({ onSortingChange, initSort }: ISortingBarProps) => {
 			</Styled.ListItem>
 			<Styled.ListItem>
 				<Select
-					data={themes || []}
+					data={themes}
 					placeholder="Sort by Theme"
 					onChange={onSortByTheme}
 				/>

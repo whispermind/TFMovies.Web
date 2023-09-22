@@ -1,3 +1,4 @@
+export { LikeButton } from "./Buttons/LikeButton/index";
 export { PrimaryButton } from "./Buttons/PrimaryButton";
 export { SignUpButton } from "./Buttons/SignUpButton";
 export { CloseButton } from "./Buttons/CloseButton";

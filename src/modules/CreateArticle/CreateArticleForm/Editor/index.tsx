@@ -12,9 +12,9 @@ interface IEditorProps {
 	initialState?: string;
 }
 
-export const Editor = ({ initialState, onChange: onChangeFromProps }: IEditorProps) => {
+export const Editor = ({ initialState = "", onChange: onChangeFromProps }: IEditorProps) => {
 	const [imageUploadReq] = useImageUpload();
-	const [value, setValue] = useState(initialState || "");
+	const [value, setValue] = useState(initialState);
 
 	const modules = {
 		toolbar: [

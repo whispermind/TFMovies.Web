@@ -17,7 +17,7 @@ interface IThemeAutocompleteProps {
 export const ThemeAutocomplete = ({ onChange: onThemeChange, control }: IThemeAutocompleteProps) => {
 	const { data } = useGetThemes();
 
-	const themes = useMemo(() => data?.map(({ name }) => name), [data]);
+	const themes = useMemo(() => data?.map(({ name }) => name), [data]) || [];
 
 	const onChange = useCallback(
 		(e: SyntheticEvent, themeName: string | null) => {
@@ -31,7 +31,7 @@ export const ThemeAutocomplete = ({ onChange: onThemeChange, control }: IThemeAu
 
 	return (
 		<Autocomplete
-			options={themes || []}
+			options={themes}
 			popupIcon={false}
 			onChange={onChange}
 			renderInput={(props) => (

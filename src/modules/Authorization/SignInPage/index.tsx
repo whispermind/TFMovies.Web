@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { enqueueSnackbar } from "notistack";
 
 import { SignInForm, ISignInForm } from "..";
-import { FormDivider, SignUpButton, LogAuthWrapper, LogoHeading, LogoName } from "../../../common/components";
+import { FormDivider, SignUpButton, SubPageWrapper, LogoHeading, LogoName } from "../../../common/components";
 import { useSignIn, useAppDispatch } from "../../../common/hooks";
 import { signIn } from "../AuthSlice";
 import { snackBarMessages } from "../../../common/utils";
@@ -36,7 +36,7 @@ export const SignInPage = () => {
 	);
 
 	return (
-		<LogAuthWrapper maxWidth="65%">
+		<SubPageWrapper maxWidth="1080px">
 			<LogoHeading
 				mb={7.5}
 				heading={heading}
@@ -52,6 +52,6 @@ export const SignInPage = () => {
 				href="/signup"
 				fullWidth
 			/>
-		</LogAuthWrapper>
+		</SubPageWrapper>
 	);
 };

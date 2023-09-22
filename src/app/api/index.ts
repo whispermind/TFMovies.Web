@@ -1,6 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 import { refreshBaseQuery } from "./refreshBaseQuery";
+
 import type { ISignUpForm } from "../../modules/Registration";
 import type { ISignInForm, IAuthState } from "../../modules/Authorization";
 import type { IPassRecoveryForm } from "../../modules/PassRecovery";
@@ -10,6 +11,19 @@ interface IGetArticleResponseData {
 	page: number;
 	pages: number;
 	articles: IArticle[];
+}
+
+interface ICreateArticleReq {
+	coverImageUrl: string;
+	ThemeId: string;
+	title: string;
+	HtmlContent: string;
+	tags: string[];
+}
+
+export interface IGetThemeResponseData {
+	id: string;
+	name: string;
 }
 
 export const apiSlice = createApi({
@@ -64,6 +78,26 @@ export const apiSlice = createApi({
 				body: credentials
 			})
 		}),
+		imageUpload: builder.mutation<{ fileUrl: string }, Blob>({
+			query: (file) => {
+				const bodyFormData = new FormData();
+				bodyFormData.append("File", file);
+
+				return {
+					url: "/files/upload-image",
+					method: "POST",
+					body: bodyFormData,
+					formData: true
+				};
+			}
+		}),
+		createArticle: builder.mutation<void, ICreateArticleReq>({
+			query: (articleData) => ({
+				url: "/posts",
+				method: "POST",
+				body: articleData
+			})
+		}),
 		getArticles: builder.query<IGetArticleResponseData, string>({
 			query: (query) => ({
 				url: `/posts${query}`
@@ -75,7 +109,7 @@ export const apiSlice = createApi({
 		getTopTags: builder.query<string[], void>({
 			query: () => ({ url: "/toptags" })
 		}),
-		getThemes: builder.query<string[], void>({
+		getThemes: builder.query<IGetThemeResponseData[], void>({
 			query: () => ({ url: "/themes" })
 		})
 	})
@@ -92,5 +126,7 @@ export const {
 	useGetArticlesQuery,
 	useGetTopAuthorsQuery,
 	useGetTopTagsQuery,
-	useGetThemesQuery
+	useGetThemesQuery,
+	useImageUploadMutation,
+	useCreateArticleMutation
 } = apiSlice;

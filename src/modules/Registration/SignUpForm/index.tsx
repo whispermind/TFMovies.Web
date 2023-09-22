@@ -29,7 +29,7 @@ export const schema = yup.object().shape({
 		.oneOf([yup.ref("password")], passwordConfirmError())
 });
 
-export const SignUpForm = ({ onSubmit, isLoading }: IStatedForm<ISignUpForm>) => {
+export const SignUpForm = ({ onSubmit, isLoading }: ILoadingForm<ISignUpForm>) => {
 	const { handleSubmit, control } = useForm<ISignUpForm>({
 		defaultValues: {
 			nickname: "",

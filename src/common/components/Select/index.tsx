@@ -4,7 +4,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 import * as Styled from "./styled";
 
-interface ISelectProps extends SelectProps {
+export interface ISelectProps extends SelectProps {
 	data: string[];
 }
 

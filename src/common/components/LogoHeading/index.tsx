@@ -5,9 +5,10 @@ import { LogoIcon } from "../Icons";
 
 export interface ILogoHeadingProps {
 	heading?: JSX.Element | string;
+	additionals?: string;
 }
 
-export const LogoHeading = ({ heading, children, ...restProps }: PropsWithChildren<ILogoHeadingProps & StackProps>) => {
+export const LogoHeading = ({ heading, children, additionals, ...restProps }: PropsWithChildren<ILogoHeadingProps & StackProps>) => {
 	return (
 		<Stack
 			rowGap={1.5}
@@ -15,7 +16,8 @@ export const LogoHeading = ({ heading, children, ...restProps }: PropsWithChildr
 			{...restProps}
 		>
 			<LogoIcon sx={{ width: "120px", height: "115px" }} />
-			<Typography variant="HHeader">{heading}</Typography>
+			{heading && <Typography variant="HHeader">{heading}</Typography>}
+			{additionals && <Typography variant="HBody">{additionals}</Typography>}
 			<Typography variant="HBody">{children}</Typography>
 		</Stack>
 	);

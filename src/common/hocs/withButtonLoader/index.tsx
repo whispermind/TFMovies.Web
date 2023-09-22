@@ -1,10 +1,10 @@
 import { ComponentType } from "react";
 
-import { Box, ButtonProps } from "@mui/material";
+import { Box, ButtonProps, InputProps } from "@mui/material";
 import { ButtonSpinner } from "../../components";
 
 export const withButtonLoader =
-	<P extends ButtonProps>(Button: ComponentType<P>) =>
+	<P extends ButtonProps | InputProps>(Button: ComponentType<P>) =>
 	(buttonProps: P) => {
 		const { disabled } = buttonProps;
 		return (

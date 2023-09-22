@@ -10,5 +10,7 @@ export {
 	useGetArticlesQuery as useGetArticles,
 	useGetTopAuthorsQuery as useGetTopAuthors,
 	useGetTopTagsQuery as useGetTopTags,
-	useGetThemesQuery as useGetThemes
+	useGetThemesQuery as useGetThemes,
+	useImageUploadMutation as useImageUpload,
+	useCreateArticleMutation as useCreateArticle
 } from "../../app/api";

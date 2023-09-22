@@ -2,7 +2,7 @@ declare interface Tokened {
 	token: string;
 }
 
-declare interface IStatedForm<T> {
+declare interface ILoadingForm<T> {
 	onSubmit: (formData: T) => void;
 	isLoading: boolean;
 }

@@ -22,7 +22,7 @@ export const schema = yup.object().shape({
 	password: yup.string().required(requiredError())
 });
 
-export const SignInForm = ({ onSubmit, isLoading }: IStatedForm<ISignInForm>) => {
+export const SignInForm = ({ onSubmit, isLoading }: ILoadingForm<ISignInForm>) => {
 	const { handleSubmit, control } = useForm<ISignInForm>({
 		defaultValues: {
 			email: "",

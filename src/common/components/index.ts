@@ -1,4 +1,4 @@
-export { PrimaryButton } from "./Buttons/PrimaryButton/index";
+export { PrimaryButton } from "./Buttons/PrimaryButton";
 export { SignUpButton } from "./Buttons/SignUpButton";
 export { CloseButton } from "./Buttons/CloseButton";
 export { LogoName } from "./LogoName";
@@ -7,7 +7,7 @@ export { NamedLogo } from "./NamedLogo";
 export { FormDivider } from "./FormDivider";
 export { FormTextFieldIconed } from "./Inputs/FormTextFieldIconed";
 export { FormTextField } from "./Inputs/FormTextField";
-export { LogAuthWrapper } from "./LogAuthWrapper";
+export { SubPageWrapper } from "./SubPageWrapper";
 export { MuiRouterLink } from "./MuiRouterLink";
 export { AdoptiveLayout } from "./AdoptiveLayout";
 export { Avatar } from "./Avatar";
@@ -19,5 +19,6 @@ export { Article } from "./Article";
 
 export type { IArticle, IArticleProps } from "./Article";
 export type { TFormTextFieldIconedProps } from "./Inputs/FormTextFieldIconed";
-export type { IWithIconProps } from "./Inputs/FormTextFieldIconed/index";
-export type { ILogoHeadingProps } from "./LogoHeading/index";
+export type { IWithIconProps } from "./Inputs/FormTextFieldIconed";
+export type { ILogoHeadingProps } from "./LogoHeading";
+export type { ISelectProps } from "./Select";

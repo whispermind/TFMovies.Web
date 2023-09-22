@@ -1,13 +1,15 @@
 import { fetchBaseQuery, BaseQueryFn, FetchArgs, FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { Mutex } from "async-mutex";
+import { enqueueSnackbar } from "notistack";
 
-import { signIn, signOut, IAuthState } from "../../modules/Authorization/AuthSlice";
+import { signIn, signOut } from "../../modules/Authorization/AuthSlice";
+import { snackBarMessages } from "../../common/utils";
+
 import type { RootState } from "../store";
 
 const mutex = new Mutex();
 const baseQuery = fetchBaseQuery({
-	// baseUrl: process.env.REACT_APP_API_URL,
-	baseUrl: "http://localhost:3004/",
+	baseUrl: process.env.REACT_APP_API_URL,
 	prepareHeaders: (headers, { getState }) => {
 		const { accessToken } = (getState() as RootState).auth;
 
@@ -23,16 +25,19 @@ export const refreshBaseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBas
 	await mutex.waitForUnlock();
 	let result = await baseQuery(args, api, extraOptions);
 	if (result.error && result.error.status === 401) {
-		if (!mutex.isLocked()) {
+		const { auth } = api.getState() as RootState;
+		if (auth.refreshToken && !mutex.isLocked()) {
 			const release = await mutex.acquire();
 			try {
-				const { data } = await baseQuery("/users/refresh-token", api, extraOptions);
+				const { data } = await baseQuery({ url: "/users/refresh-token", method: "POST", body: { refreshToken: auth.refreshToken } }, api, extraOptions);
+
 				if (data) {
-					api.dispatch(signIn(data as IAuthState));
+					api.dispatch(signIn({ ...auth, ...data }));
 					result = await baseQuery(args, api, extraOptions);
-				} else {
-					api.dispatch(signOut());
 				}
+			} catch (e) {
+				enqueueSnackbar(snackBarMessages.sessionExpired);
+				api.dispatch(signOut());
 			} finally {
 				release();
 			}

@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { enqueueSnackbar } from "notistack";
 
 import { PrimaryButton, LogoHeading } from "../../../common/components";
-import { useSignUpEmailConfirmation } from "../../../common/hooks";
+import { useSendSignUpEmailConfirmationMutation } from "../api";
 import { snackBarMessages } from "../../../common/utils";
 
 const throttleTiming = 20000;
@@ -13,7 +13,7 @@ interface ISignUpCofnrimProps {
 
 export const SignUpConfirmation = ({ email }: ISignUpCofnrimProps) => {
 	const [throttle, setThrottle] = useState(false);
-	const [signUpEmailConfirmationReq] = useSignUpEmailConfirmation();
+	const [signUpEmailConfirmationReq] = useSendSignUpEmailConfirmationMutation();
 
 	const onClick = useCallback(async () => {
 		if (throttle) {

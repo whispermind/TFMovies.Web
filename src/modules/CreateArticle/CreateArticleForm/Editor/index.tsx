@@ -3,7 +3,7 @@ import ReactQuill from "react-quill";
 import { DeltaStatic } from "quill";
 import "react-quill/dist/quill.snow.css";
 
-import { useImageUpload } from "../../../../common/hooks";
+import { useImageUploadMutation } from "../../api";
 import { base64toBlob } from "../../../../common/utils";
 import * as Styled from "./styled";
 
@@ -13,7 +13,7 @@ interface IEditorProps {
 }
 
 export const Editor = ({ initialState = "", onChange: onChangeFromProps }: IEditorProps) => {
-	const [imageUploadReq] = useImageUpload();
+	const [imageUploadReq] = useImageUploadMutation();
 	const [value, setValue] = useState(initialState);
 
 	const modules = {

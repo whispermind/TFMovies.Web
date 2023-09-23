@@ -2,10 +2,9 @@ import { useState, useCallback, useMemo, ChangeEvent } from "react";
 import { Stack, Grid } from "@mui/material";
 
 import { MainNav } from "../../../common/components";
-import { ArticleCard } from "../../../common/components/ArticleCard";
-import { ArticleTopFiltering } from "../FilteringOptions/ArticleTopFiltering";
-import { useGetArticles, useOnClickAuthorized } from "../../../common/hooks";
-import { SortingBar } from "../SortingBar";
+import { ArticleTopFiltering, SortingBar, ArticleCard } from "..";
+import { useOnClickAuthorized } from "../../../common/hooks";
+import { useGetArticlesQuery } from "../api";
 import * as Styled from "./styled";
 
 const LIMIT_PER_PAGE = 12;
@@ -15,7 +14,7 @@ export const MainPage = () => {
 	const [sortingQuery, setSortingQuery] = useState("&sort=created");
 	const [pageQuery, setPageQuery] = useState(initPage);
 	const queryString = `?page=${pageQuery}${sortingQuery}&limit=${LIMIT_PER_PAGE}`;
-	const { data, isLoading } = useGetArticles(queryString);
+	const { data, isLoading } = useGetArticlesQuery(queryString);
 
 	const Articles = useMemo(
 		() =>

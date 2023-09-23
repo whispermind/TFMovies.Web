@@ -1,16 +1,11 @@
-import { PropsWithChildren, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { selectAuth } from "../../../modules/Authorization/AuthSlice";
-import { useAppSelector } from "../../hooks";
-import { Roles } from "../../enums";
+import { useAppSelector } from "../../../app/store";
+import { UserRoles } from "../../enums";
 
-interface IRoleValidatorProps extends PropsWithChildren {
-	role: Roles;
-	location: string;
-}
-
-export const RoleValidator = ({ children, role, location }: IRoleValidatorProps) => {
+export const useRoleValidation = (role: UserRoles, location: string) => {
 	const { currentUser } = useAppSelector(selectAuth);
 	const navigate = useNavigate();
 
@@ -19,6 +14,4 @@ export const RoleValidator = ({ children, role, location }: IRoleValidatorProps)
 	useEffect(() => {
 		if (!(userRole === role)) navigate(location);
 	}, [role, navigate, location, userRole]);
-
-	return children;
 };

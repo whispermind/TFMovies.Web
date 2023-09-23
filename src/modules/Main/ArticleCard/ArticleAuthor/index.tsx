@@ -1,6 +1,6 @@
 import { Stack, Typography } from "@mui/material";
 
-import { Avatar } from "../../Avatar";
+import { Avatar } from "../../../../common/components/Avatar";
 import * as Styled from "./styled";
 
 interface IArticleAuthorProps {

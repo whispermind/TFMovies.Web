@@ -2,19 +2,19 @@ import { ListItem, Link } from "@mui/material";
 
 import { TopAuthor } from "../TopAuthor/TopAuthor";
 import { FilteringListWrapper } from "../FilteringListWrapper";
-import { useGetTopAuthors } from "../../../../common/hooks";
+import { useGetTopAuthorsQuery } from "../../api";
 import * as Styled from "./styled";
 
 export const TopAuthorsFiltering = () => {
-	const { data } = useGetTopAuthors();
+	const { data } = useGetTopAuthorsQuery();
 
-	const listItems = data?.map((authorName) => (
+	const listItems = data?.map(({ nickname, id }) => (
 		<ListItem
 			disablePadding
-			key={authorName}
+			key={id}
 		>
-			<Link href={`/search?subject=users&query=${authorName}`}>
-				<TopAuthor nickname={authorName} />
+			<Link href={`/search?subject=users&query=${nickname}`}>
+				<TopAuthor nickname={nickname} />
 			</Link>
 		</ListItem>
 	));

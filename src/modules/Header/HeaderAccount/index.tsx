@@ -4,7 +4,8 @@ import { Logout } from "@mui/icons-material";
 import { enqueueSnackbar } from "notistack";
 
 import { selectAuth, signOut } from "../../Authorization/AuthSlice";
-import { useAppSelector, useSignOut, useAppDispatch } from "../../../common/hooks";
+import { useAppSelector, useAppDispatch } from "../../../common/hooks";
+import { useSignOutMutation } from "../../Authorization/api";
 import { Avatar } from "../../../common/components";
 import { HeaderUserInfo } from "../HeaderUserInfo";
 import { snackBarMessages } from "../../../common/utils";
@@ -12,7 +13,7 @@ import * as Styled from "./styled";
 
 export const HeaderAccount = () => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-	const [signOutReq] = useSignOut();
+	const [signOutReq] = useSignOutMutation();
 	const { currentUser, refreshToken, accessToken } = useAppSelector(selectAuth);
 	const dispatch = useAppDispatch();
 

@@ -9,7 +9,7 @@ import { ThemeAutocomplete } from "./ThemeAutocomplete";
 import { PrimaryButton } from "../../../common/components";
 import { withController, withButtonLoader } from "../../../common/hocs";
 import { yupErrorMessages } from "../../../common/utils/yupErrorMessages";
-import { IGetThemeResponseData } from "../../../app/api";
+import { IGetThemeResponseData } from "../../Main/api";
 import * as Styled from "./styled";
 
 export interface ICreateArticleForm {

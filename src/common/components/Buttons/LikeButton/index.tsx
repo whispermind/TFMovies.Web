@@ -2,7 +2,8 @@ import { useCallback, PropsWithChildren } from "react";
 import { FavoriteBorder } from "@mui/icons-material";
 
 import { FavoriteFilledIcon } from "../../Icons";
-import { useLikeArticle, useUnlikeArticle, useOnClickAuthorized } from "../../../hooks";
+import { useOnClickAuthorized } from "../../../hooks";
+import { useLikeArticleMutation, useUnlikeArticleMutation } from "../../../../modules/Main/api";
 import * as Styled from "./styled";
 
 interface ILikeButtonProps {
@@ -12,8 +13,8 @@ interface ILikeButtonProps {
 }
 
 export const LikeButton = ({ isLiked, id, likes, children }: PropsWithChildren<ILikeButtonProps>) => {
-	const [likeReq] = useLikeArticle();
-	const [unlikeReq] = useUnlikeArticle();
+	const [likeReq] = useLikeArticleMutation();
+	const [unlikeReq] = useUnlikeArticleMutation();
 
 	const listener = useCallback(() => {
 		if (isLiked) {

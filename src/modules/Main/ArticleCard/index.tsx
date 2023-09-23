@@ -1,10 +1,10 @@
 import { Card, CardMedia, CardContent, Typography, Link } from "@mui/material";
 
-import { useAppSelector } from "../../hooks";
-import { selectAuth } from "../../../modules/Authorization/AuthSlice";
+import { useAppSelector } from "../../../common/hooks";
+import { selectAuth } from "../../Authorization/AuthSlice";
 import { ArticleAuthor } from "./ArticleAuthor";
 import { ArticleTags } from "./ArticleTags";
-import { LikeButton } from "../Buttons/LikeButton";
+import { LikeButton } from "../../../common/components/Buttons/LikeButton";
 import * as Styled from "./styled";
 
 export interface IArticleCard {

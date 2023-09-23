@@ -5,14 +5,15 @@ import { enqueueSnackbar } from "notistack";
 
 import { PassRecoveryForm, IPassRecoveryForm } from "..";
 import { SubPageWrapper } from "../../../common/components";
-import { useResetPassword } from "../../../common/hooks";
-import { TokenValidator } from "../../../common/components/TokenValidator";
+import { useResetPasswordMutation } from "../api";
 import { snackBarMessages } from "../../../common/utils";
+import { useTokenValidation } from "../../../common/hooks";
 
 export const PassRecoveryPage = () => {
-	const [resetPassReq, { isLoading }] = useResetPassword();
+	const [resetPassReq, { isLoading: isReseting }] = useResetPasswordMutation();
 	const navigate = useNavigate();
 	const { token } = useParams();
+	const { isLoading: isValidating } = useTokenValidation(token || "", "validate-reset-token");
 
 	const onSubmit = useCallback(
 		async (credentials: IPassRecoveryForm) => {
@@ -30,26 +31,21 @@ export const PassRecoveryPage = () => {
 	);
 
 	return (
-		<TokenValidator
-			token={token || ""}
-			endpoint="validate-reset-token"
+		<SubPageWrapper
+			maxWidth="1080px"
+			flexGrow="1"
 		>
-			<SubPageWrapper
-				maxWidth="1080px"
-				flexGrow="1"
+			<Typography
+				display="block"
+				variant="Section"
+				mb={5}
 			>
-				<Typography
-					display="block"
-					variant="Section"
-					mb={5}
-				>
-					Password Recovery
-				</Typography>
-				<PassRecoveryForm
-					onSubmit={onSubmit}
-					isLoading={isLoading}
-				/>
-			</SubPageWrapper>
-		</TokenValidator>
+				Password Recovery
+			</Typography>
+			<PassRecoveryForm
+				onSubmit={onSubmit}
+				isLoading={isValidating || isReseting}
+			/>
+		</SubPageWrapper>
 	);
 };

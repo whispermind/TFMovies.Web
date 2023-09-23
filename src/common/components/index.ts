@@ -1,4 +1,3 @@
-export { RoleValidator } from "./RoleValidator";
 export { LikeButton } from "./Buttons/LikeButton/index";
 export { PrimaryButton } from "./Buttons/PrimaryButton";
 export { SignUpButton } from "./Buttons/SignUpButton";
@@ -14,12 +13,10 @@ export { MuiRouterLink } from "./MuiRouterLink";
 export { AdoptiveLayout } from "./AdoptiveLayout";
 export { Avatar } from "./Avatar";
 export { ButtonSpinner } from "./ButtonSpinner";
-export { TokenValidator } from "./TokenValidator";
 export { MainNav } from "./MainNav/MainNav";
 export { Select } from "./Select";
-export { ArticleCard } from "./ArticleCard";
 
-export type { IArticleCard, IArticleCardProps } from "./ArticleCard";
+export type { IArticleCard, IArticleCardProps } from "../../modules/Main/ArticleCard";
 export type { TFormTextFieldIconedProps } from "./Inputs/FormTextFieldIconed";
 export type { IWithIconProps } from "./Inputs/FormTextFieldIconed";
 export type { ILogoHeadingProps } from "./LogoHeading";

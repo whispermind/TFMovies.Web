@@ -4,7 +4,7 @@ import { FavoriteBorder } from "@mui/icons-material";
 import { HomePageIcon, HashtagIcon, EmailIcon, RulesIcon, UserListIcon } from "../Icons";
 import { useAppSelector } from "../../hooks";
 import { selectAuth } from "../../../modules/Authorization/AuthSlice";
-import { Roles } from "../../enums";
+import { UserRoles } from "../../enums";
 import * as Styled from "./styled";
 
 export const MainNav = () => {
@@ -40,7 +40,7 @@ export const MainNav = () => {
 	const otherLinks = unsortedLinks.filter(({ section }) => section === "other").map(({ link }) => link);
 	const adminLinks = unsortedLinks.filter(({ section }) => section === "admin").map(({ link }) => link);
 
-	const isAdmin = currentUser?.role === Roles.admin;
+	const isAdmin = currentUser?.role === UserRoles.admin;
 
 	return (
 		<Stack

@@ -4,12 +4,13 @@ import { enqueueSnackbar } from "notistack";
 
 import { SignInForm, ISignInForm, selectAuth } from "..";
 import { FormDivider, SignUpButton, SubPageWrapper, LogoHeading, LogoName } from "../../../common/components";
-import { useSignIn, useAppDispatch, useAppSelector } from "../../../common/hooks";
+import { useAppDispatch, useAppSelector } from "../../../common/hooks";
+import { useSignInMutation } from "../api";
 import { signIn } from "../AuthSlice";
 import { snackBarMessages } from "../../../common/utils";
 
 export const SignInPage = () => {
-	const [signInReq, { isLoading }] = useSignIn();
+	const [signInReq, { isLoading }] = useSignInMutation();
 	const { accessToken } = useAppSelector(selectAuth);
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();

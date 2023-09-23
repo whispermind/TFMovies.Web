@@ -1,8 +1,8 @@
 import { useState, useCallback, MouseEvent, useMemo } from "react";
 import { Button, SelectChangeEvent } from "@mui/material";
-import { Select } from "../../../common/components";
 
-import { useGetThemes } from "../../../common/hooks";
+import { Select } from "../../../common/components";
+import { useGetThemesQuery } from "../api";
 import * as Styled from "./styled";
 
 interface ISortingBarProps {
@@ -14,7 +14,7 @@ export const SortingBar = ({ onSortingChange, initSort }: ISortingBarProps) => {
 	const [sorting, setSorting] = useState(initSort);
 	const [themeFiltering, setThemeSorting] = useState("");
 
-	const { data } = useGetThemes();
+	const { data } = useGetThemesQuery();
 
 	const onSort = useCallback(
 		(e: MouseEvent<HTMLButtonElement>) => {

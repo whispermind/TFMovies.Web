@@ -4,11 +4,11 @@ import { enqueueSnackbar } from "notistack";
 import { SignUpConfirmation, ISignUpForm, SignUpForm } from "..";
 import { FormDivider, LogoHeading, SubPageWrapper, PrimaryButton, LogoName } from "../../../common/components";
 import { capitalizer, snackBarMessages } from "../../../common/utils";
-import { useSignUp } from "../../../common/hooks";
+import { useSignUpMutation } from "../api";
 
 export const SignUpPage = () => {
 	const [submitedMail, setSubmitedMail] = useState("");
-	const [signUpReq, { isLoading }] = useSignUp();
+	const [signUpReq, { isLoading }] = useSignUpMutation();
 
 	const description = `We are the largest society of movies enthusiasts.
   Here you are sure to find like - minded people! To create an account,

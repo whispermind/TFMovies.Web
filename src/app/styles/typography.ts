@@ -81,7 +81,8 @@ export const typography = {
 		fontSize: "2rem",
 		lineHeight: "3rem",
 		fontWeight: "bold",
-		fontStyle: "normal"
+		fontStyle: "normal",
+		textTransform: "capitalize" as const
 	},
 
 	ASecondHeader: {

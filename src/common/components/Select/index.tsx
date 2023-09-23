@@ -1,38 +1,41 @@
-import { ReactNode, useState, useCallback, SyntheticEvent } from "react";
+import { ReactNode, useState, useCallback, SyntheticEvent, useMemo } from "react";
 import { MenuItem, SelectProps, SelectChangeEvent } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 import * as Styled from "./styled";
 
 export interface ISelectProps extends SelectProps {
-	data: string[];
+	data: {
+		description: string;
+		value?: string;
+	}[];
 }
 
 export const Select = (props: ISelectProps) => {
 	const { onChange: propsOnChange, onOpen: propsOnOpen, onClose: propsOnClose, data, placeholder, ...restProps } = props;
 
-	const [value, setValue] = useState<"placeholder" | string>("placeholder");
+	const [selected, setSelected] = useState<"placeholder" | string>("placeholder");
 	const [isOpen, setIsOpen] = useState(false);
 
-	const options = data?.map((option) => (
+	const options = data?.map(({ description, value }) => (
 		<MenuItem
-			key={option}
-			value={option}
+			key={value}
+			value={value}
 		>
-			{option}
+			{description}
 		</MenuItem>
 	));
 
-	const isPlaceholder = value === "placeholder" && !isOpen;
-	const isValue = data?.includes(value);
+	const isPlaceholder = selected === "placeholder" && !isOpen;
+	const isValue = useMemo(() => data?.find(({ value }) => value === selected), [data, selected]);
 
 	const onChange = useCallback(
 		(event: SelectChangeEvent<unknown>, element: ReactNode) => {
 			const eventValue = event.target.value === "setPlaceholder" ? "placeholder" : event.target.value;
-			setValue(eventValue as string);
+			setSelected(eventValue as string);
 			if (propsOnChange) propsOnChange(event, element);
 		},
-		[setValue, propsOnChange]
+		[setSelected, propsOnChange]
 	);
 
 	const onOpen = useCallback(
@@ -53,7 +56,7 @@ export const Select = (props: ISelectProps) => {
 
 	return (
 		<Styled.Select
-			value={value}
+			value={selected}
 			onChange={onChange}
 			onOpen={onOpen}
 			onClose={onClose}

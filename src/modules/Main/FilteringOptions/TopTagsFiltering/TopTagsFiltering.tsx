@@ -1,19 +1,22 @@
 import { Link, ListItem, Typography } from "@mui/material";
 
 import { FilteringListWrapper } from "../FilteringListWrapper";
-import { useGetTopTags } from "../../../../common/hooks";
+import { useGetTopTagsQuery } from "../../api";
 import * as Styled from "./styled";
 
 export const TopTagsFiltering = () => {
-	const { data } = useGetTopTags();
+	const { data } = useGetTopTagsQuery("?limit=7&sort=rated&order=desc");
 
-	const listItems = data?.map((topTag) => (
+	const listItems = data?.map(({ name, id }) => (
 		<ListItem
 			disablePadding
-			key={topTag}
+			key={id}
 		>
-			<Link href={`/search?subject=tags&query=${topTag.slice(1)}`}>
-				<Typography variant="SectionLink">{`#${topTag}`}</Typography>
+			<Link
+				href={`/search?subject=tags&query=${name}`}
+				underline="none"
+			>
+				<Typography variant="SectionLink">{`#${name}`}</Typography>
 			</Link>
 		</ListItem>
 	));

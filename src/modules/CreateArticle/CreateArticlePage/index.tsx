@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
 
 import { CreateArticleForm, CreationAdvice, ICreateArticleFormWithEditor } from "..";
-import { useImageUpload, useCreateArticle } from "../../../common/hooks";
+import { useCreateArticleMutation, useImageUploadMutation } from "../api";
 import { snackBarMessages } from "../../../common/utils";
 import * as Styled from "./styled";
 
 export const CreateArticlePage = () => {
-	const [imageUploadReq, { isLoading: isImageLoading }] = useImageUpload();
-	const [createArticleReq, { isLoading: isArticleLoading }] = useCreateArticle();
+	const [imageUploadReq, { isLoading: isImageLoading }] = useImageUploadMutation();
+	const [createArticleReq, { isLoading: isArticleLoading }] = useCreateArticleMutation();
 	const navigate = useNavigate();
 
 	const onSubmit = useCallback(

@@ -5,11 +5,11 @@ import { enqueueSnackbar } from "notistack";
 
 import { ForgotPassForm, IForgotPassForm } from "..";
 import { SubPageWrapper } from "../../../common/components";
-import { useForgotPassword } from "../../../common/hooks";
+import { useForgotPasswordMutation } from "../api";
 import { snackBarMessages } from "../../../common/utils";
 
 export const ForgotPassPage = () => {
-	const [forgotPasswordReq, { isLoading }] = useForgotPassword();
+	const [forgotPasswordReq, { isLoading }] = useForgotPasswordMutation();
 	const navigate = useNavigate();
 
 	const heading = "Forgot your Password?";

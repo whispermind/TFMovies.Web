@@ -26,5 +26,8 @@ export const yupErrorMessages = {
 	},
 	tagsLimit(amount: number) {
 		return `The tags limit is ${amount}`;
+	},
+	traillingSpace() {
+		return "The field cannot include leading and trailing spaces";
 	}
 };

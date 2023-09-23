@@ -2,12 +2,11 @@ import { SyntheticEvent, useCallback, useMemo } from "react";
 import { Autocomplete } from "@mui/material";
 import { Control } from "react-hook-form";
 
-import { useGetThemes } from "../../../../common/hooks";
+import { useGetThemesQuery, IGetThemeResponseData } from "../../../Main/api";
 import { withController } from "../../../../common/hocs";
 import * as Styled from "../styled";
 
 import type { ICreateArticleForm, TStyledInputProps } from "../..";
-import type { IGetThemeResponseData } from "../../../../app/api";
 
 interface IThemeAutocompleteProps {
 	onChange: (theme: IGetThemeResponseData) => void;
@@ -15,9 +14,9 @@ interface IThemeAutocompleteProps {
 }
 
 export const ThemeAutocomplete = ({ onChange: onThemeChange, control }: IThemeAutocompleteProps) => {
-	const { data } = useGetThemes();
+	const { data } = useGetThemesQuery();
 
-	const themes = useMemo(() => data?.map(({ name }) => name), [data]);
+	const themes = useMemo(() => data?.map(({ name }) => name), [data]) || [];
 
 	const onChange = useCallback(
 		(e: SyntheticEvent, themeName: string | null) => {
@@ -31,7 +30,7 @@ export const ThemeAutocomplete = ({ onChange: onThemeChange, control }: IThemeAu
 
 	return (
 		<Autocomplete
-			options={themes || []}
+			options={themes}
 			popupIcon={false}
 			onChange={onChange}
 			renderInput={(props) => (

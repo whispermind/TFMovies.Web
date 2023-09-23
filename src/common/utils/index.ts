@@ -4,3 +4,4 @@ export { formValidation } from "./regexp";
 export { capitalizer } from "./capitalizer";
 export { yupErrorMessages } from "./yupErrorMessages";
 export { isApiError } from "./helpers/errorHelpers";
+export { dateFormatter } from "./dateFormatter";

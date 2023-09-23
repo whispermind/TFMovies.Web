@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo, ChangeEvent } from "react";
 import { Stack, Grid } from "@mui/material";
 
-import { MainNav } from "../../../common/components";
+import { MainNav, PageSpinner } from "../../../common/components";
 import { ArticleTopFiltering, SortingBar, ArticleCard } from "..";
 import { useOnClickAuthorized } from "../../../common/hooks";
 import { useGetArticlesQuery } from "../api";
@@ -58,7 +58,7 @@ export const MainPage = () => {
 					onSortingChange={onSortingChangeAuthorized}
 					initSort="created"
 				/>
-				{isLoading ? null : Articles}
+				{isLoading ? <PageSpinner /> : Articles}
 				<Styled.Pagination
 					count={data?.totalPages}
 					onChange={onPageChangeAuthorized}

@@ -1,1 +1,1 @@
-export { TextField } from "./TextField/TextField";
+export { TextField } from "./TextField";

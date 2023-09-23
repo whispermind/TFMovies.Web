@@ -6,7 +6,7 @@ import { useGetTopAuthorsQuery } from "../../api";
 import * as Styled from "./styled";
 
 export const TopAuthorsFiltering = () => {
-	const { data } = useGetTopAuthorsQuery();
+	const { data } = useGetTopAuthorsQuery("?limit=3&order=desc");
 
 	const listItems = data?.map(({ nickname, id }) => (
 		<ListItem

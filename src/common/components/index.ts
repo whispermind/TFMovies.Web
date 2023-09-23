@@ -15,6 +15,7 @@ export { Avatar } from "./Avatar";
 export { ButtonSpinner } from "./ButtonSpinner";
 export { MainNav } from "./MainNav/MainNav";
 export { Select } from "./Select";
+export { PageSpinner } from "./PageSpinner";
 
 export type { IArticleCard, IArticleCardProps } from "../../modules/Main/ArticleCard";
 export type { TFormTextFieldIconedProps } from "./Inputs/FormTextFieldIconed";

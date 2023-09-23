@@ -5,6 +5,7 @@ import { selectAuth } from "../../Authorization/AuthSlice";
 import { ArticleAuthor } from "./ArticleAuthor";
 import { ArticleTags } from "./ArticleTags";
 import { LikeButton } from "../../../common/components/Buttons/LikeButton";
+import { dateFormatter } from "../../../common/utils";
 import * as Styled from "./styled";
 
 export interface IArticleCard {
@@ -26,9 +27,7 @@ export const ArticleCard = ({ articleData }: IArticleCardProps) => {
 	const { id, coverImageUrl, title, createdAt, author, tags, isLiked } = articleData;
 	const { accessToken } = useAppSelector(selectAuth);
 
-	const dateObject = new Date(Date.parse(createdAt));
-
-	const dateFormatted = `${dateObject.toLocaleDateString("en-GB", { month: "long" })} ${dateObject.getDate()}, ${dateObject.getFullYear()}`;
+	const dateFormatted = dateFormatter(createdAt);
 
 	return (
 		<Card>

@@ -12,7 +12,10 @@ export const TopTagsFiltering = () => {
 			disablePadding
 			key={id}
 		>
-			<Link href={`/search?subject=tags&query=${name}`}>
+			<Link
+				href={`/search?subject=tags&query=${name}`}
+				underline="none"
+			>
 				<Typography variant="SectionLink">{`#${name}`}</Typography>
 			</Link>
 		</ListItem>

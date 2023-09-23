@@ -13,7 +13,10 @@ export const TopAuthorsFiltering = () => {
 			disablePadding
 			key={id}
 		>
-			<Link href={`/search?subject=users&query=${nickname}`}>
+			<Link
+				href={`/author/${id}`}
+				underline="none"
+			>
 				<TopAuthor nickname={nickname} />
 			</Link>
 		</ListItem>

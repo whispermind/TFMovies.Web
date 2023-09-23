@@ -44,6 +44,7 @@ export const ArticleCard = ({ articleData }: IArticleCardProps) => {
 				<ArticleAuthor
 					created={dateFormatted}
 					nickname={author}
+					id={id}
 				/>
 				<CardContent sx={{ p: 0 }}>
 					<Typography variant="ASubheader">{title}</Typography>

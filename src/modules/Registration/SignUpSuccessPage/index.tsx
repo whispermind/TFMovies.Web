@@ -5,7 +5,7 @@ import { useTokenValidation } from "../../../common/hooks";
 
 export const SignUpSuccessPage = () => {
 	const { token } = useParams();
-	const { isLoading } = useTokenValidation(token || "", "verify-email");
+	useTokenValidation(token || "", "verify-email");
 
 	const heading = "Registration confirmed";
 	const description = "Thank you, your registration has been successfully confirmed!";

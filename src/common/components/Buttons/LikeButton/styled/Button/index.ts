@@ -19,11 +19,19 @@ export const Button = styled(MuiButton)<{ amount?: number }>(({ amount = "", the
 			fill: main
 		},
 
+		"&:hover:after": {
+			color: main
+		},
+
 		":after": {
 			content: `"${amount}"`,
 			width: "100%",
 			position: "absolute",
-			bottom: "-10px"
+			bottom: "-25px",
+			fontSize: "16px",
+			lineHeight: "24px",
+			fontWeight: "bold",
+			color: black
 		}
 	};
 });

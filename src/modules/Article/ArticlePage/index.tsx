@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
+import { Grid } from "@mui/material";
 
 import { useGetArticleQuery } from "../api";
 import { PageSpinner, PageGrid } from "../../../common/components";
-import { CardContent, Comments } from "..";
+import { CardContent, Comments, ArticleActions } from "..";
 import * as Styled from "./styled";
 
 export const ArticlePage = () => {
@@ -11,6 +12,14 @@ export const ArticlePage = () => {
 
 	return (
 		<PageGrid container>
+			<Grid item>
+				<ArticleActions
+					likesAmount={data?.likesCount}
+					commentsAmount={data?.commentsCount}
+					isLiked={data?.isLiked}
+					id={data?.id}
+				/>
+			</Grid>
 			<Styled.Stack>
 				{isLoading ? (
 					<PageSpinner />

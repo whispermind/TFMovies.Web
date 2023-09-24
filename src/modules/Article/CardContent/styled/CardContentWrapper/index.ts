@@ -3,8 +3,7 @@ import { styled } from "@mui/material";
 export const CardContentWrapper = styled("div")(({ theme }) => {
 	const {
 		palette: {
-			mainColors: { main, white },
-			greyColors: { strokeGrey }
+			mainColors: { main, white }
 		}
 	} = theme;
 
@@ -12,8 +11,6 @@ export const CardContentWrapper = styled("div")(({ theme }) => {
 		maxWidth: "1080px",
 		width: "100%",
 		backgroundColor: white,
-		borderLeft: `2px solid ${strokeGrey}`,
-		borderRight: `2px solid ${strokeGrey}`,
 		wordBreak: "break-word",
 
 		blockquote: {
@@ -39,7 +36,9 @@ export const CardContentWrapper = styled("div")(({ theme }) => {
 		},
 
 		"& > img": {
-			margin: 0
+			margin: 0,
+			borderTopLeftRadius: "8px",
+			borderTopRightRadius: "8px"
 		},
 
 		h2: {

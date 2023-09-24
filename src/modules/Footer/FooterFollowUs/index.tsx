@@ -2,6 +2,7 @@ import { Link, Stack } from "@mui/material";
 import { Instagram, Twitter, Facebook } from "@mui/icons-material";
 
 import { FooterLinksWrapper } from "../FooterLinksWrapper";
+import { IconSizes } from "../../../common/enums";
 
 export const FooterFollowUs = () => {
 	const linksData = {
@@ -15,7 +16,7 @@ export const FooterFollowUs = () => {
 			href={href}
 			key={href}
 		>
-			<Icon fontSize="large" />
+			<Icon fontSize={IconSizes.large} />
 		</Link>
 	));
 

@@ -36,11 +36,11 @@ export const CommentsForm = () => {
 	};
 
 	const [createCommentReq] = useCreateCommentMutation();
-	const { postId = "" } = useParams();
+	const { id = "" } = useParams();
 
 	const onSubmit = async ({ content }: ICreateCommentForm) => {
 		try {
-			await createCommentReq({ content, postId }).unwrap();
+			await createCommentReq({ content, id }).unwrap();
 			enqueueSnackbar(snackBarMessages.addComment, { variant: "success" });
 			resetForm();
 		} catch (error) {

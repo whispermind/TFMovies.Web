@@ -30,7 +30,7 @@ export const LikeButton = ({ isLiked, id, likes, children }: PropsWithChildren<I
 
 	return (
 		<Styled.Button
-			likes={likes}
+			amount={likes}
 			onClick={authorizedListener}
 		>
 			{children}

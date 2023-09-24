@@ -29,7 +29,7 @@ const createArticleApi = apiSlice.injectEndpoints({
 				method: "POST",
 				body: articleData
 			}),
-			invalidatesTags: ["Article"]
+			invalidatesTags: ["Articles"]
 		})
 	})
 });

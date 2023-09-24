@@ -8,7 +8,7 @@ export const PageSpinner = styled(CircularProgress)(
 			}
 		}
 	}) => ({
-		marginTop: "auto",
+		margin: "auto 0",
 		alignSelf: "center",
 		color: main
 	})

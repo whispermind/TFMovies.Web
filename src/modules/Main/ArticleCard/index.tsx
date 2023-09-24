@@ -14,7 +14,6 @@ export interface IArticleCard {
 	title: string;
 	createdAt: string;
 	author: string;
-	themeName: string;
 	tags: string[];
 	isLiked: boolean;
 }
@@ -28,10 +27,10 @@ export const ArticleCard = ({ articleData }: IArticleCardProps) => {
 	const { accessToken } = useAppSelector(selectAuth);
 
 	const dateFormatted = dateFormatter(createdAt);
-
+	// TODO REPLACE AUTHOR ID REDIRECT
 	return (
 		<Card>
-			<Link href={accessToken ? `/post/${id}` : `/signin`}>
+			<Link href={accessToken ? `/article/${id}` : `/signin`}>
 				<CardMedia
 					component="img"
 					alt="cover image"

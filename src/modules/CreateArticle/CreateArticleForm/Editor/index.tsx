@@ -18,7 +18,7 @@ export const Editor = ({ initialState = "", onChange: onChangeFromProps }: IEdit
 
 	const modules = {
 		toolbar: [
-			[{ header: [1, 2, 3, false] }],
+			[{ header: [2, 3, false] }],
 			["bold", "italic", "underline"],
 			[{ background: [] }, { color: [] }],
 			[{ list: "bullet" }, "blockquote"],

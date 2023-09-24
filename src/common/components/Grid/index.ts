@@ -1,6 +1,6 @@
 import { Grid as MuiGrid, styled } from "@mui/material";
 
-export const Grid = styled(MuiGrid)(() => ({
+export const PageGrid = styled(MuiGrid)(() => ({
 	flexDirection: "row",
 	justifyContent: "space-between",
 	alignItems: "normal",

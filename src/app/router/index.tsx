@@ -11,7 +11,8 @@ import {
 	MainPage,
 	SearchPage,
 	CreateArticlePage,
-	CreateArticleSuccessPage
+	CreateArticleSuccessPage,
+	ArticlePage
 } from "../../pages";
 
 export const router = createBrowserRouter(
@@ -56,6 +57,10 @@ export const router = createBrowserRouter(
 			<Route
 				path="createarticle/success"
 				element={<CreateArticleSuccessPage />}
+			/>
+			<Route
+				path="article/:id"
+				element={<ArticlePage />}
 			/>
 		</Route>
 	)

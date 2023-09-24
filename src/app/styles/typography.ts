@@ -14,7 +14,8 @@ export const typography = {
 		lineHeight: "4.875rem",
 		fontWeight: "bold",
 		fontStyle: "normal",
-		textAlign: "center" as const
+		textAlign: "center" as const,
+		textTransform: "capitalize" as const
 	},
 
 	HBody: {

@@ -1,6 +1,6 @@
 import { Button as MuiButton, styled } from "@mui/material";
 
-export const Button = styled(MuiButton)<{ likes?: number }>(({ likes = "", theme }) => {
+export const Button = styled(MuiButton)<{ amount?: number }>(({ amount = "", theme }) => {
 	const {
 		palette: {
 			mainColors: { main, black }
@@ -20,7 +20,7 @@ export const Button = styled(MuiButton)<{ likes?: number }>(({ likes = "", theme
 		},
 
 		":after": {
-			content: `"${likes}"`,
+			content: `"${amount}"`,
 			width: "100%",
 			position: "absolute",
 			bottom: "-10px"

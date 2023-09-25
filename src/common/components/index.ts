@@ -11,14 +11,13 @@ export { FormTextField } from "./Inputs/FormTextField";
 export { SubPageWrapper } from "./SubPageWrapper";
 export { MuiRouterLink } from "./MuiRouterLink";
 export { AdoptiveLayout } from "./AdoptiveLayout";
-export { Avatar } from "./Avatar";
 export { ButtonSpinner } from "./ButtonSpinner";
 export { MainNav } from "./MainNav/MainNav";
 export { Select } from "./Select";
 export { PageSpinner } from "./PageSpinner";
-export { PageGrid } from "./Grid";
+export { PageWrapper } from "./PageWrapper";
+export { UserAvatar } from "./UserAvatar";
 
-export type { IArticleCard, IArticleCardProps } from "../../modules/Main/ArticleCard";
 export type { TFormTextFieldIconedProps } from "./Inputs/FormTextFieldIconed";
 export type { IWithIconProps } from "./Inputs/FormTextFieldIconed";
 export type { ILogoHeadingProps } from "./LogoHeading";

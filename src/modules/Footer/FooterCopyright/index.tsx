@@ -12,7 +12,6 @@ export const FooterCopyright = () => {
 			key={href}
 			href={href}
 			color="greyColors.softGrey"
-			underline="none"
 		>
 			{caption}
 		</Link>

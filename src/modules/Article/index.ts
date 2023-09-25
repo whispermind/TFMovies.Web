@@ -1,3 +1,4 @@
-export { CardContent } from "./CardContent";
-export { Comments } from "./Comments";
+export { ArticleContent } from "./ArticleContent";
+export { ArticleComments } from "./ArticleComments";
 export { ArticleActions } from "./ArticleActions";
+export { ArticleAuthorsInfo } from "./ArticleAuthorsInfo";

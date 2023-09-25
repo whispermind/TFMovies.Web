@@ -9,7 +9,7 @@ export const FilteringSubjectContainer = styled(Stack)(({ theme }) => {
 	} = theme;
 	return {
 		borderRadius: "8px",
-		width: "20vw",
+		width: "240px",
 		padding: "32px 24px",
 		border: `2px solid ${strokeGrey}`,
 		background: white,

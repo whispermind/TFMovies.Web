@@ -2,6 +2,8 @@ import { PropsWithChildren } from "react";
 
 import { Grid, Stack, StackProps } from "@mui/material";
 
+// TEMPORARY SOLUTION
+
 export const AdoptiveLayout = ({ children, ...stackProps }: PropsWithChildren<StackProps>) => {
 	return (
 		<Grid

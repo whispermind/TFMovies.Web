@@ -1,23 +1,24 @@
 import { Link, ListItem } from "@mui/material";
 import * as Styled from "./styled";
 
+import type { ITag } from "..";
+
 interface IArticleTagsProps {
-	tags: string[];
+	tags: ITag[];
 }
 
 export const ArticleTags = ({ tags }: IArticleTagsProps) => {
-	const listItems = tags.map((tag) => (
+	const listItems = tags.map(({ id, name }) => (
 		<ListItem
 			disablePadding
-			key={tag}
+			key={id}
 		>
 			<Link
-				underline="none"
 				variant="HBody"
 				color="greyColors.grey"
-				href={`/search?subject=tags&query=${tag}`}
+				href={`/search?subject=tags&query=${name}&id=${id}`}
 			>
-				{`#${tag}`}
+				{`#${name}`}
 			</Link>
 		</ListItem>
 	));

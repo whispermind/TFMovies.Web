@@ -1,6 +1,6 @@
 import { List, styled } from "@mui/material";
 
-export const TagsList = styled(List)(() => ({
+export const ArticleTagsList = styled(List)(() => ({
 	display: "flex",
 	columnGap: "12px",
 	padding: 0,

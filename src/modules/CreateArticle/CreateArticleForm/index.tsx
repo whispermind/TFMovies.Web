@@ -9,6 +9,7 @@ import { ThemeAutocomplete } from "./ThemeAutocomplete";
 import { PrimaryButton } from "../../../common/components";
 import { withController, withButtonLoader } from "../../../common/hocs";
 import { yupErrorMessages } from "../../../common/utils/yupErrorMessages";
+import { useImageUploadMutation } from "../api";
 import { IGetThemeResponseData } from "../../Main/api";
 import * as Styled from "./styled";
 
@@ -19,8 +20,9 @@ export interface ICreateArticleForm {
 	ThemeId: string;
 }
 
-export interface ICreateArticleFormWithEditor extends ICreateArticleForm {
+export interface ICreateArticleFormSubmit extends Omit<ICreateArticleForm, "attachment"> {
 	HtmlContent: string;
+	attachment: string;
 }
 
 export type TStyledInputProps = ComponentProps<typeof Styled.TextField>;
@@ -50,9 +52,12 @@ export const schema = yup.object().shape({
 	ThemeId: yup.string().required(requiredError()).notOneOf(["placeholder"], requiredError())
 });
 
-export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<ICreateArticleFormWithEditor>) => {
+export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<ICreateArticleFormSubmit>) => {
+	const [imageUploadReq] = useImageUploadMutation();
 	const [isPreview, setPreview] = useState(false);
 	const [editorState, setEditorState] = useState("");
+	const [coverImage, setCoverImage] = useState("");
+
 	const { handleSubmit, control, setValue } = useForm<ICreateArticleForm>({
 		defaultValues: {
 			attachment: null,
@@ -76,18 +81,21 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 	);
 
 	const onFileUpload = useCallback(
-		({ target }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		async ({ target }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 			const fileList = ("files" in target && target.files) || null;
-			setValue("attachment", fileList);
+			if (fileList) {
+				const { fileUrl } = await imageUploadReq(fileList[0]).unwrap();
+				setCoverImage(fileUrl);
+			}
 		},
-		[setValue]
+		[imageUploadReq, setCoverImage]
 	);
 
 	const onSubmit = useCallback(
 		(formData: ICreateArticleForm) => {
-			onSubmitFromProps({ ...formData, HtmlContent: editorState });
+			onSubmitFromProps({ ...formData, attachment: coverImage, HtmlContent: editorState });
 		},
-		[onSubmitFromProps, editorState]
+		[onSubmitFromProps, editorState, coverImage]
 	);
 
 	const togglePreview = useCallback(() => setPreview(true), [setPreview]);

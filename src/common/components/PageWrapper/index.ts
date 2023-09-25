@@ -1,6 +1,7 @@
-import { Grid as MuiGrid, styled } from "@mui/material";
+import { Stack, styled } from "@mui/material";
 
-export const PageGrid = styled(MuiGrid)(() => ({
+export const PageWrapper = styled(Stack)(() => ({
+	width: "100%",
 	flexDirection: "row",
 	justifyContent: "space-between",
 	alignItems: "normal",

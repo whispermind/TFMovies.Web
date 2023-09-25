@@ -1,4 +1,4 @@
 export { CreateArticleForm } from "./CreateArticleForm";
 export { CreationAdvice } from "./CreationAdvice";
 
-export type { ICreateArticleForm, TStyledInputProps, ICreateArticleFormWithEditor } from "./CreateArticleForm";
+export type { ICreateArticleForm, TStyledInputProps, ICreateArticleFormSubmit } from "./CreateArticleForm";

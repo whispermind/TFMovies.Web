@@ -1,24 +1,24 @@
-import { ListItem, Link } from "@mui/material";
+import { ListItem } from "@mui/material";
 
-import { TopAuthor } from "../TopAuthor/TopAuthor";
+import { UserAvatar } from "../../../../common/components";
 import { FilteringListWrapper } from "../FilteringListWrapper";
 import { useGetTopAuthorsQuery } from "../../api";
 import * as Styled from "./styled";
 
 export const TopAuthorsFiltering = () => {
-	const { data } = useGetTopAuthorsQuery("?limit=3&order=desc");
+	const { data } = useGetTopAuthorsQuery();
 
 	const listItems = data?.map(({ nickname, id }) => (
 		<ListItem
 			disablePadding
 			key={id}
 		>
-			<Link
-				href={`/author/${id}`}
-				underline="none"
-			>
-				<TopAuthor nickname={nickname} />
-			</Link>
+			<UserAvatar
+				size={72}
+				nickname={nickname}
+				nicknameStyle="Section"
+				id={id}
+			/>
 		</ListItem>
 	));
 

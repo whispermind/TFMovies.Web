@@ -14,12 +14,6 @@ export const CommentItem = styled(ListItem)(({ theme }) => {
 	};
 });
 
-export const styledAvatar = {
-	width: "44px",
-	height: "44px",
-	backgroundColor: `#${Math.floor(Math.random() * (100000 - 0) + 100000)}`
-};
-
 export const CommentAuthorWrappper = styled(Stack)({
 	display: "flex",
 	flexDirection: "row",

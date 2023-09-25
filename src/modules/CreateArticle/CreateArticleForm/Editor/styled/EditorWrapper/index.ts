@@ -22,7 +22,10 @@ export const EditorWrapper = styled("div")(({ theme }) => {
 		},
 
 		".ql-editor": {
-			flexGrow: "1"
+			flexGrow: "1",
+			"& p": {
+				wordBreak: "break-word"
+			}
 		},
 
 		".ql-editor, .ql-toolbar": {

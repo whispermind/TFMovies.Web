@@ -1,4 +1,4 @@
-import { useCallback, PropsWithChildren } from "react";
+import { useCallback, PropsWithChildren, useState, useEffect } from "react";
 import { FavoriteBorder } from "@mui/icons-material";
 
 import { FavoriteFilledIcon } from "../../Icons";
@@ -10,29 +10,37 @@ import * as Styled from "./styled";
 interface ILikeButtonProps {
 	isLiked: boolean;
 	id: string;
-	likes?: number;
+	likesAmount?: number;
 	size?: IconSizes;
 }
 
-export const LikeButton = ({ isLiked, id, likes, children, size }: PropsWithChildren<ILikeButtonProps>) => {
+export const LikeButton = ({ isLiked, id, likesAmount, children, size }: PropsWithChildren<ILikeButtonProps>) => {
+	const [likedInnerState, setLikedInnerState] = useState(isLiked);
+
 	const [likeReq] = useLikeArticleMutation();
 	const [unlikeReq] = useUnlikeArticleMutation();
+
+	useEffect(() => {
+		setLikedInnerState(isLiked);
+	}, [isLiked, setLikedInnerState]);
 
 	const listener = useCallback(() => {
 		if (isLiked) {
 			unlikeReq(id);
+			setLikedInnerState(false);
 		} else {
 			likeReq(id);
+			setLikedInnerState(true);
 		}
-	}, [isLiked, unlikeReq, likeReq, id]);
+	}, [unlikeReq, likeReq, id, isLiked, setLikedInnerState]);
 
 	const authorizedListener = useOnClickAuthorized(listener, "/signin");
 
-	const icon = isLiked ? <FavoriteFilledIcon fontSize={size} /> : <FavoriteBorder fontSize={size} />;
+	const icon = likedInnerState ? <FavoriteFilledIcon fontSize={size} /> : <FavoriteBorder fontSize={size} />;
 
 	return (
 		<Styled.Button
-			amount={likes}
+			amount={likesAmount}
 			onClick={authorizedListener}
 		>
 			{children}

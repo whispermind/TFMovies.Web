@@ -28,8 +28,8 @@ export const Button = styled(MuiButton)<{ amount?: number }>(({ amount = "", the
 			width: "100%",
 			position: "absolute",
 			bottom: "-25px",
-			fontSize: "16px",
-			lineHeight: "24px",
+			fontSize: "1rem",
+			lineHeight: "1.5rem",
 			fontWeight: "bold",
 			color: black
 		}

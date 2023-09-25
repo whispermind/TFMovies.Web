@@ -111,7 +111,8 @@ export const typography = {
 		fontSize: "1.25rem",
 		lineHeight: "1.875rem",
 		fontWeight: "600",
-		textDecoration: "none"
+		textDecoration: "none",
+		textTransform: "capitalize" as const
 	},
 
 	SBody: {

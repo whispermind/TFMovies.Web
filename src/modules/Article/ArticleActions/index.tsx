@@ -15,7 +15,7 @@ export const ArticleActions = ({ likesAmount, commentsAmount, isLiked, id }: IAr
 		<Styled.Stack>
 			<LikeButton
 				id={id || ""}
-				likes={likesAmount}
+				likesAmount={likesAmount}
 				isLiked={!!isLiked}
 				size={IconSizes.large}
 			/>

@@ -1,7 +1,7 @@
 import { styled, List } from "@mui/material";
 
 export const OrderList = styled(List)(() => ({
-	maxWidth: "520px",
+	width: "520px",
 	display: "flex",
 	flexDirection: "column",
 	rowGap: "20px",

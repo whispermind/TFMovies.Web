@@ -10,7 +10,7 @@ export const SubPageWrapper = styled(Box)(({ theme }) => {
 
 	return {
 		backgroundColor: white,
-		padding: "3.25rem 8.75rem",
+		padding: "52px 140px",
 		border: `2px solid ${strokeGrey}`
 	};
 });

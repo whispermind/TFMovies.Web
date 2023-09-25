@@ -1,6 +1,6 @@
 import { styled } from "@mui/material";
 
-export const CardContentWrapper = styled("div")(({ theme }) => {
+export const ArticleContentWrapper = styled("div")(({ theme }) => {
 	const {
 		palette: {
 			mainColors: { main, white }
@@ -23,8 +23,8 @@ export const CardContentWrapper = styled("div")(({ theme }) => {
 		p: {
 			margin: 0,
 			padding: 0,
-			fontSize: "20px",
-			lineHeight: "34px"
+			fontSize: "1.25rem",
+			lineHeight: "2.125rem"
 		},
 
 		img: {
@@ -44,16 +44,16 @@ export const CardContentWrapper = styled("div")(({ theme }) => {
 		h2: {
 			marginTop: "36px",
 			marginBottom: "16px",
-			fontSize: "32px",
-			lineHeight: "48px"
+			fontSize: "2rem",
+			lineHeight: "3rem"
 		},
 
 		h3: {
 			marginTop: "16px",
 			marginBottom: "8px",
 			color: main,
-			size: "24px",
-			lineHeight: "40px"
+			fontSize: "1.5rem",
+			lineHeight: "2.5rem"
 		},
 
 		"& > div > div:last-child ul": {

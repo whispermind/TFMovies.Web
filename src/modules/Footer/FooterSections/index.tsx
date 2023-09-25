@@ -21,7 +21,6 @@ export const FooterSections = () => {
 			key={href}
 			variant="SectionLink"
 			href={href}
-			underline="none"
 			onClick={href === "/" ? scrollToTop : undefined}
 		>
 			{caption}

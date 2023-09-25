@@ -13,15 +13,14 @@ export const CreateArticlePage = () => {
 
 	const onSubmit = useCallback(
 		async ({ attachment, tags, ThemeId, title, HtmlContent }: ICreateArticleFormSubmit) => {
-			if (attachment) {
-				try {
-					const articleData = { coverImageUrl: attachment, tags: tags.split(" "), ThemeId, title, HtmlContent };
-					await createArticleReq(articleData).unwrap();
-					navigate("/createarticle/success");
-					enqueueSnackbar(snackBarMessages.articleCreated, { variant: "success" });
-				} catch (e) {
-					// handled by middleware
-				}
+			try {
+				const optimizedTags = Array.from(new Set(tags.replaceAll(",", "").split(" ")));
+				const articleData = { coverImageUrl: attachment, tags: optimizedTags, ThemeId, title, HtmlContent };
+				await createArticleReq(articleData).unwrap();
+				navigate("/createarticle/success");
+				enqueueSnackbar(snackBarMessages.articleCreated, { variant: "success" });
+			} catch (e) {
+				// handled by middleware
 			}
 		},
 		[createArticleReq, navigate]

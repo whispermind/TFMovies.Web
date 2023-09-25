@@ -71,7 +71,7 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 	});
 
 	const { title, tags } = getValues();
-	const previewTags = tags.split(" ").map((tag) => ({ name: tag, id: "" }));
+	const previewTags = tags.split(" ").map((tag) => ({ name: tag, id: Date.now().toString() }));
 
 	const Title = withController<ICreateArticleForm, TStyledInputProps>(Styled.TextField);
 	const Tags = withController<ICreateArticleForm, TStyledInputProps>(Styled.TextField);
@@ -90,8 +90,12 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 			const fileList = ("files" in target && target.files) || null;
 			if (fileList) {
 				setValue("attachment", fileList);
-				const { fileUrl } = await imageUploadReq(fileList[0]).unwrap();
-				setCoverImage(fileUrl);
+				try {
+					const { fileUrl } = await imageUploadReq(fileList[0]).unwrap();
+					setCoverImage(fileUrl);
+				} catch {
+					// handled by middleware
+				}
 			}
 		},
 		[imageUploadReq, setCoverImage, setValue]

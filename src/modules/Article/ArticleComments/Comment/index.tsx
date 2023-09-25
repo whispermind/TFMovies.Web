@@ -3,13 +3,13 @@ import { Stack, Typography } from "@mui/material";
 import { UserAvatar } from "../../../../common/components";
 import * as Styled from "./styled";
 
-interface ICommentProp {
+interface ICommentProps {
 	nickname: string;
 	commentText: string;
 	createdAt: string;
 }
 
-export const Comment = ({ nickname, commentText, createdAt }: ICommentProp) => {
+export const Comment = ({ nickname, commentText, createdAt }: ICommentProps) => {
 	return (
 		<Styled.CommentItem>
 			<Stack columnGap="12px">

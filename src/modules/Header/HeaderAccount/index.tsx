@@ -6,7 +6,7 @@ import { enqueueSnackbar } from "notistack";
 import { selectAuth, signOut } from "../../Authorization/AuthSlice";
 import { useAppSelector, useAppDispatch } from "../../../common/hooks";
 import { useSignOutMutation } from "../../Authorization/api";
-import { Avatar } from "../../../common/components";
+import { Avatar } from "../../../common/components/UserAvatar/styled";
 import { HeaderUserInfo } from "../HeaderUserInfo";
 import { snackBarMessages } from "../../../common/utils";
 import * as Styled from "./styled";
@@ -34,10 +34,11 @@ export const HeaderAccount = () => {
 		handleClose();
 		try {
 			await signOutReq({ refreshToken, accessToken }).unwrap();
-			dispatch(signOut());
 			enqueueSnackbar(snackBarMessages.signOut, { variant: "success" });
 		} catch (e) {
 			// handled by middleware
+		} finally {
+			dispatch(signOut());
 		}
 	}, [accessToken, refreshToken, signOutReq, handleClose, dispatch]);
 

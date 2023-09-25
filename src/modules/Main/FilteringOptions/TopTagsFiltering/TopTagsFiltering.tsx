@@ -5,17 +5,14 @@ import { useGetTopTagsQuery } from "../../api";
 import * as Styled from "./styled";
 
 export const TopTagsFiltering = () => {
-	const { data } = useGetTopTagsQuery("?limit=7&sort=rated&order=desc");
+	const { data } = useGetTopTagsQuery();
 
 	const listItems = data?.map(({ name, id }) => (
 		<ListItem
 			disablePadding
 			key={id}
 		>
-			<Link
-				href={`/search?subject=tags&query=${name}`}
-				underline="none"
-			>
+			<Link href={`/search?subject=tags&query=${name}`}>
 				<Typography variant="SectionLink">{`#${name}`}</Typography>
 			</Link>
 		</ListItem>

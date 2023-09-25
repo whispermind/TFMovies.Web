@@ -8,6 +8,7 @@ import { snackBarMessages } from "../../common/utils";
 import type { RootState } from "../store";
 
 const mutex = new Mutex();
+
 const baseQuery = fetchBaseQuery({
 	baseUrl: process.env.REACT_APP_API_URL,
 	prepareHeaders: (headers, { getState }) => {

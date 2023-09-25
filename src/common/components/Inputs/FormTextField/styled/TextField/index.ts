@@ -16,7 +16,7 @@ export const TextField = styled(_TextField)(({ theme }) => {
 	return {
 		".MuiInput-root": {
 			height: "44px",
-			padding: "0.625rem 1rem",
+			padding: "10px 16px",
 			border: `2px solid ${strokeGrey}`,
 			borderRadius: `${borderRadius}px`,
 			color: black,

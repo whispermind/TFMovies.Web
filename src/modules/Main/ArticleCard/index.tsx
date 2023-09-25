@@ -2,20 +2,22 @@ import { Card, CardMedia, CardContent, Typography, Link } from "@mui/material";
 
 import { useAppSelector } from "../../../common/hooks";
 import { selectAuth } from "../../Authorization/AuthSlice";
-import { ArticleAuthor } from "./ArticleAuthor";
 import { ArticleTags } from "./ArticleTags";
-import { LikeButton } from "../../../common/components/Buttons/LikeButton";
-import { dateFormatter } from "../../../common/utils";
+import { LikeButton, UserAvatar } from "../../../common/components";
 import * as Styled from "./styled";
 
+export interface ITag {
+	id: string;
+	name: string;
+}
 export interface IArticleCard {
 	id: string;
 	coverImageUrl: string;
 	title: string;
 	createdAt: string;
 	author: string;
-	themeName: string;
-	tags: string[];
+	authorId: string;
+	tags: ITag[];
 	isLiked: boolean;
 }
 
@@ -24,14 +26,12 @@ export interface IArticleCardProps {
 }
 
 export const ArticleCard = ({ articleData }: IArticleCardProps) => {
-	const { id, coverImageUrl, title, createdAt, author, tags, isLiked } = articleData;
+	const { id, coverImageUrl, title, createdAt, author, tags, isLiked, authorId } = articleData;
 	const { accessToken } = useAppSelector(selectAuth);
-
-	const dateFormatted = dateFormatter(createdAt);
 
 	return (
 		<Card>
-			<Link href={accessToken ? `/post/${id}` : `/signin`}>
+			<Link href={accessToken ? `/article/${id}` : `/signin`}>
 				<CardMedia
 					component="img"
 					alt="cover image"
@@ -40,11 +40,20 @@ export const ArticleCard = ({ articleData }: IArticleCardProps) => {
 				/>
 			</Link>
 			<Styled.CardContentContainer>
-				<ArticleAuthor
-					created={dateFormatted}
+				<UserAvatar
+					size={44}
 					nickname={author}
-					id={id}
-				/>
+					id={authorId}
+					nicknameStyle="HBodyBold"
+				>
+					<Typography
+						variant="HBody"
+						color="greyColors.grey"
+						textAlign="start"
+					>
+						{createdAt}
+					</Typography>
+				</UserAvatar>
 				<CardContent sx={{ p: 0 }}>
 					<Typography variant="ASubheader">{title}</Typography>
 				</CardContent>

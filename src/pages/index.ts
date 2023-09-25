@@ -1,3 +1,4 @@
+export { ArticlePage } from "../modules/Article/ArticlePage";
 export { CreateArticleSuccessPage } from "../modules/CreateArticle/CreateArticleSuccessPage/index";
 export { CreateArticlePage } from "../modules/CreateArticle/CreateArticlePage";
 export { ErrorPage } from "./ErrorPage/ErrorPage";

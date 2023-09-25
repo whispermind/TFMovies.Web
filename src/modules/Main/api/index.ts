@@ -1,12 +1,13 @@
 import { apiSlice } from "../../../app/api";
 
 import type { IArticleCard } from "..";
+import { dateFormatter } from "../../../common/utils";
 
 export interface IGetThemeResponseData {
 	id: string;
 	name: string;
 }
-interface IGetArticleResponseData {
+interface IGetArticlesResponseData {
 	page: number;
 	totalPages: number;
 	totalRecords: number;
@@ -29,25 +30,29 @@ interface IGetTopTagsResponseData {
 
 const mainApi = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
-		getArticles: builder.query<IGetArticleResponseData, string>({
+		getArticles: builder.query<IGetArticlesResponseData, string>({
 			query: (query) => ({
 				url: `/posts${query}`
 			}),
-			providesTags: (result) => (result ? [...result.data.map(({ id }) => ({ type: "Article" as const, id })), "Article"] : ["Article"])
+			providesTags: (result) => (result ? [...result.data.map(({ id }) => ({ type: "Articles" as const, id })), "Articles"] : ["Articles"]),
+			transformResponse: (articles: IGetArticlesResponseData) => ({
+				...articles,
+				data: articles.data.map((article) => ({ ...article, createdAt: dateFormatter(article.createdAt) }))
+			})
 		}),
 		likeArticle: builder.mutation<void, string>({
 			query: (id) => ({
 				url: `/posts/${id}/likes`,
 				method: "POST"
 			}),
-			invalidatesTags: ["Article"]
+			invalidatesTags: ["Article", "Articles"]
 		}),
 		unlikeArticle: builder.mutation<void, string>({
 			query: (id) => ({
 				url: `/posts/${id}/likes`,
 				method: "DELETE"
 			}),
-			invalidatesTags: ["Article"]
+			invalidatesTags: ["Article", "Articles"]
 		}),
 		getTopAuthors: builder.query<IGetTopAuthorsResponseData[], string | void>({
 			query: (query = "") => ({ url: `/users/authors${query}` })

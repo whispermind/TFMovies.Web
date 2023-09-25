@@ -14,7 +14,7 @@ interface ICommentProps {
 	data: ICommentData[];
 }
 
-export const Comments = ({ data }: ICommentProps) => {
+export const ArticleComments = ({ data }: ICommentProps) => {
 	return (
 		<CommentsWrapper>
 			<Typography variant="Section">Comments: {data?.length || 0}</Typography>

@@ -10,6 +10,7 @@ export interface IAuthState {
 	currentUser: {
 		nickname: string;
 		role: UserRoles;
+		id: string;
 	} | null;
 }
 

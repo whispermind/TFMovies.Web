@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo, ChangeEvent } from "react";
-import { Stack, Grid } from "@mui/material";
+import { Stack } from "@mui/material";
 
-import { MainNav, PageSpinner } from "../../../common/components";
+import { MainNav, PageSpinner, PageWrapper } from "../../../common/components";
 import { ArticleTopFiltering, SortingBar, ArticleCard } from "..";
 import { useOnClickAuthorized } from "../../../common/hooks";
 import { useGetArticlesQuery } from "../api";
@@ -46,10 +46,10 @@ export const MainPage = () => {
 	const onPageChangeAuthorized = useOnClickAuthorized(onPageChange, "/signin");
 
 	return (
-		<Styled.Grid container>
-			<Grid item>
+		<PageWrapper>
+			<div>
 				<MainNav />
-			</Grid>
+			</div>
 			<Stack
 				rowGap={2.5}
 				flexGrow={1}
@@ -68,9 +68,9 @@ export const MainPage = () => {
 					shape="rounded"
 				/>
 			</Stack>
-			<Grid item>
+			<div>
 				<ArticleTopFiltering />
-			</Grid>
-		</Styled.Grid>
+			</div>
+		</PageWrapper>
 	);
 };

@@ -53,7 +53,7 @@ export const SignInPage = () => {
 				onSubmit={onSubmit}
 				isLoading={isLoading}
 			/>
-			<FormDivider sx={{ m: "2.25rem 0" }}>Don`t have an account?</FormDivider>
+			<FormDivider sx={{ m: "36px 0" }}>Don`t have an account?</FormDivider>
 			<SignUpButton
 				href="/signup"
 				fullWidth

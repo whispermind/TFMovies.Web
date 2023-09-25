@@ -1,6 +1,7 @@
-import { Stack, Avatar, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 
-import { CommentAuthorWrappper, CommentItem, styledAvatar } from "./styled";
+import { UserAvatar } from "../../../../common/components";
+import * as Styled from "./styled";
 
 interface ICommentProp {
 	nickname: string;
@@ -10,32 +11,30 @@ interface ICommentProp {
 
 export const Comment = ({ nickname, commentText, createdAt }: ICommentProp) => {
 	return (
-		<CommentItem>
+		<Styled.CommentItem>
 			<Stack columnGap="12px">
-				<CommentAuthorWrappper>
-					<Avatar sx={styledAvatar}>{nickname[0]}</Avatar>
-					<Stack>
-						<Typography
-							variant="HBodyBold"
-							maxWidth="100px"
-						>
-							{nickname}
-						</Typography>
+				<Styled.CommentAuthorWrappper>
+					<UserAvatar
+						nickname={nickname}
+						nicknameStyle="HBodyBold"
+						size={44}
+					>
 						<Typography
 							variant="HBody"
 							color="greyColors.grey"
 						>
 							{createdAt}
 						</Typography>
-					</Stack>
-				</CommentAuthorWrappper>
+					</UserAvatar>
+				</Styled.CommentAuthorWrappper>
 				<Typography
 					variant="HBody"
 					textAlign="start"
+					mt="12px"
 				>
 					{commentText}
 				</Typography>
 			</Stack>
-		</CommentItem>
+		</Styled.CommentItem>
 	);
 };

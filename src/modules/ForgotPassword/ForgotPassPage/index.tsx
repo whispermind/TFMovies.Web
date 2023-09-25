@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { Typography, Stack } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
 
-import { ForgotPassForm, IForgotPassForm } from "../ForgotPasswordForm";
-import { LogAuthWrapper } from "../../../common/components";
-import { useForgotPassword } from "../../../common/hooks";
+import { ForgotPassForm, IForgotPassForm } from "..";
+import { SubPageWrapper } from "../../../common/components";
+import { useForgotPasswordMutation } from "../api";
 import { snackBarMessages } from "../../../common/utils";
 
 export const ForgotPassPage = () => {
-	const [forgotPasswordReq, { isLoading }] = useForgotPassword();
+	const [forgotPasswordReq, { isLoading }] = useForgotPasswordMutation();
 	const navigate = useNavigate();
 
 	const heading = "Forgot your Password?";
@@ -29,7 +29,7 @@ export const ForgotPassPage = () => {
 	);
 
 	return (
-		<LogAuthWrapper maxWidth="50%">
+		<SubPageWrapper maxWidth="800px">
 			<Stack
 				rowGap={1.5}
 				mb={7.5}
@@ -41,6 +41,6 @@ export const ForgotPassPage = () => {
 				onSubmit={onSubmit}
 				isLoading={isLoading}
 			/>
-		</LogAuthWrapper>
+		</SubPageWrapper>
 	);
 };

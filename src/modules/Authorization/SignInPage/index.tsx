@@ -1,17 +1,23 @@
+import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCallback } from "react";
 import { enqueueSnackbar } from "notistack";
 
-import { SignInForm, ISignInForm } from "..";
-import { FormDivider, SignUpButton, LogAuthWrapper, LogoHeading, LogoName } from "../../../common/components";
-import { useSignIn, useAppDispatch } from "../../../common/hooks";
+import { SignInForm, ISignInForm, selectAuth } from "..";
+import { FormDivider, SignUpButton, SubPageWrapper, LogoHeading, LogoName } from "../../../common/components";
+import { useAppDispatch, useAppSelector } from "../../../common/hooks";
+import { useSignInMutation } from "../api";
 import { signIn } from "../AuthSlice";
 import { snackBarMessages } from "../../../common/utils";
 
 export const SignInPage = () => {
-	const [signInReq, { isLoading }] = useSignIn();
+	const [signInReq, { isLoading }] = useSignInMutation();
+	const { accessToken } = useAppSelector(selectAuth);
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (accessToken) navigate("/");
+	}, [accessToken, navigate]);
 
 	const description = `We are largest society of movies enthusiasts. 
 		Here you are sure to find like-minded people! To log into your account, enter your username and password`;
@@ -36,7 +42,7 @@ export const SignInPage = () => {
 	);
 
 	return (
-		<LogAuthWrapper maxWidth="65%">
+		<SubPageWrapper maxWidth="1080px">
 			<LogoHeading
 				mb={7.5}
 				heading={heading}
@@ -47,11 +53,11 @@ export const SignInPage = () => {
 				onSubmit={onSubmit}
 				isLoading={isLoading}
 			/>
-			<FormDivider sx={{ m: "2.25rem 0" }}>Don`t have an account?</FormDivider>
+			<FormDivider sx={{ m: "36px 0" }}>Don`t have an account?</FormDivider>
 			<SignUpButton
 				href="/signup"
 				fullWidth
 			/>
-		</LogAuthWrapper>
+		</SubPageWrapper>
 	);
 };

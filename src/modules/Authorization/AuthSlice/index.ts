@@ -1,4 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+import { UserRoles } from "../../../common/enums";
+
 import type { RootState } from "../../../app/store/index";
 
 export interface IAuthState {
@@ -6,7 +9,8 @@ export interface IAuthState {
 	refreshToken: string | null;
 	currentUser: {
 		nickname: string;
-		role: string;
+		role: UserRoles;
+		id: string;
 	} | null;
 }
 

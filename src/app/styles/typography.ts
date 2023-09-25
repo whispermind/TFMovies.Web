@@ -5,7 +5,8 @@ export const typography = {
 		fontSize: "0.9375rem",
 		lineHeight: "1.5rem",
 		fontWeight: "normal",
-		fontStyle: "normal"
+		fontStyle: "normal",
+		textTransform: "none" as const
 	},
 
 	HHeader: {
@@ -13,7 +14,8 @@ export const typography = {
 		lineHeight: "4.875rem",
 		fontWeight: "bold",
 		fontStyle: "normal",
-		textAlign: "center" as const
+		textAlign: "center" as const,
+		textTransform: "capitalize" as const
 	},
 
 	HBody: {
@@ -80,7 +82,8 @@ export const typography = {
 		fontSize: "2rem",
 		lineHeight: "3rem",
 		fontWeight: "bold",
-		fontStyle: "normal"
+		fontStyle: "normal",
+		textTransform: "capitalize" as const
 	},
 
 	ASecondHeader: {
@@ -108,7 +111,8 @@ export const typography = {
 		fontSize: "1.25rem",
 		lineHeight: "1.875rem",
 		fontWeight: "600",
-		textDecoration: "none"
+		textDecoration: "none",
+		textTransform: "capitalize" as const
 	},
 
 	SBody: {

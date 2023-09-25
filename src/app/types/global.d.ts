@@ -2,7 +2,7 @@ declare interface Tokened {
 	token: string;
 }
 
-declare interface IStatedForm<T> {
+declare interface ILoadingForm<T> {
 	onSubmit: (formData: T) => void;
 	isLoading: boolean;
 }
@@ -18,9 +18,8 @@ declare interface StylesOverrides<T, S> {
 	}[];
 }
 
-declare interface IApiResponse {
-	status: number;
-	data?: {
-		errorMessage: string;
-	};
+declare interface IResponse<T> {
+	status: string;
+	error?: string;
+	data?: T;
 }

@@ -12,6 +12,7 @@ export const MuiLink = {
 	styleOverrides: {
 		root: {
 			color: "inherit",
+			textDecoration: "none",
 			textDecorationColor: "inherit",
 			cursor: "pointer",
 			":hover": {

@@ -25,7 +25,7 @@ const schema = yup.object().shape({
 		.oneOf([yup.ref("newPassword")], passwordConfirmError())
 });
 
-export const PassRecoveryForm = ({ onSubmit, isLoading }: IStatedForm<IPassRecoveryForm>) => {
+export const PassRecoveryForm = ({ onSubmit, isLoading }: ILoadingForm<IPassRecoveryForm>) => {
 	const { handleSubmit, control } = useForm<IPassRecoveryForm>({
 		defaultValues: {
 			newPassword: "",

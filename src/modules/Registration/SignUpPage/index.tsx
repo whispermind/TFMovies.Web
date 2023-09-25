@@ -2,13 +2,13 @@ import { useState, useCallback } from "react";
 import { enqueueSnackbar } from "notistack";
 
 import { SignUpConfirmation, ISignUpForm, SignUpForm } from "..";
-import { FormDivider, LogoHeading, LogAuthWrapper, PrimaryButton, LogoName } from "../../../common/components";
+import { FormDivider, LogoHeading, SubPageWrapper, PrimaryButton, LogoName } from "../../../common/components";
 import { capitalizer, snackBarMessages } from "../../../common/utils";
-import { useSignUp } from "../../../common/hooks";
+import { useSignUpMutation } from "../api";
 
 export const SignUpPage = () => {
 	const [submitedMail, setSubmitedMail] = useState("");
-	const [signUpReq, { isLoading }] = useSignUp();
+	const [signUpReq, { isLoading }] = useSignUpMutation();
 
 	const description = `We are the largest society of movies enthusiasts.
   Here you are sure to find like - minded people! To create an account,
@@ -34,7 +34,7 @@ export const SignUpPage = () => {
 	);
 
 	return (
-		<LogAuthWrapper maxWidth="65%">
+		<SubPageWrapper maxWidth="1080px">
 			{submitedMail ? (
 				<SignUpConfirmation email={submitedMail} />
 			) : (
@@ -59,6 +59,6 @@ export const SignUpPage = () => {
 					</PrimaryButton>
 				</>
 			)}
-		</LogAuthWrapper>
+		</SubPageWrapper>
 	);
 };

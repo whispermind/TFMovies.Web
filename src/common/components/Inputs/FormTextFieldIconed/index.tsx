@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { InputAdornment, TextFieldProps, SvgIconProps } from "@mui/material";
 
-import * as S from "./styled";
+import * as Styled from "./styled";
 
 export interface IWithIconProps {
 	icon: (props: SvgIconProps) => JSX.Element;
@@ -15,7 +15,7 @@ export const FormTextFieldIconed = forwardRef<HTMLInputElement, TFormTextFieldIc
 	const { position, icon: Icon, InputProps, iconProps, ...restProps } = props;
 
 	return (
-		<S.FormTextField
+		<Styled.FormTextField
 			ref={ref}
 			{...restProps}
 			InputProps={{

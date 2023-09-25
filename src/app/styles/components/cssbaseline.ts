@@ -57,5 +57,17 @@ export const MuiCssBaseline = {
   input:-webkit-autofill:active  {
       -webkit-box-shadow: 0 0 0 30px white inset !important;
   }
+
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance:none;
+  }
+
+  input[type=file],
+  input[type=file]::-webkit-file-upload-button {
+    cursor: pointer; 
+}
 `
 };

@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { Link } from "@mui/material";
 
 import { FooterLinksWrapper } from "../FooterLinksWrapper";
@@ -11,12 +12,16 @@ export const FooterSections = () => {
 		"/rules": "Rules"
 	};
 
+	const scrollToTop = useCallback(() => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	}, []);
+
 	const links = Object.entries(linksData).map(([href, caption]) => (
 		<Link
 			key={href}
 			variant="SectionLink"
 			href={href}
-			underline="none"
+			onClick={href === "/" ? scrollToTop : undefined}
 		>
 			{caption}
 		</Link>

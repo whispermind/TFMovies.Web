@@ -4,15 +4,16 @@ import { Logout } from "@mui/icons-material";
 import { enqueueSnackbar } from "notistack";
 
 import { selectAuth, signOut } from "../../Authorization/AuthSlice";
-import { useAppSelector, useSignOut, useAppDispatch } from "../../../common/hooks";
-import { Avatar } from "../../../common/components";
+import { useAppSelector, useAppDispatch } from "../../../common/hooks";
+import { useSignOutMutation } from "../../Authorization/api";
+import { Avatar } from "../../../common/components/UserAvatar/styled";
 import { HeaderUserInfo } from "../HeaderUserInfo";
 import { snackBarMessages } from "../../../common/utils";
-import * as S from "./styled";
+import * as Styled from "./styled";
 
 export const HeaderAccount = () => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-	const [signOutReq] = useSignOut();
+	const [signOutReq] = useSignOutMutation();
 	const { currentUser, refreshToken, accessToken } = useAppSelector(selectAuth);
 	const dispatch = useAppDispatch();
 
@@ -33,10 +34,11 @@ export const HeaderAccount = () => {
 		handleClose();
 		try {
 			await signOutReq({ refreshToken, accessToken }).unwrap();
-			dispatch(signOut());
 			enqueueSnackbar(snackBarMessages.signOut, { variant: "success" });
 		} catch (e) {
 			// handled by middleware
+		} finally {
+			dispatch(signOut());
 		}
 	}, [accessToken, refreshToken, signOutReq, handleClose, dispatch]);
 
@@ -66,7 +68,7 @@ export const HeaderAccount = () => {
 					/>
 				)}
 			</Stack>
-			<S.Menu
+			<Styled.Menu
 				anchorEl={anchorEl}
 				id="account-menu"
 				open={open}
@@ -81,7 +83,7 @@ export const HeaderAccount = () => {
 					</ListItemIcon>
 					Exit
 				</MenuItem>
-			</S.Menu>
+			</Styled.Menu>
 		</>
 	);
 };

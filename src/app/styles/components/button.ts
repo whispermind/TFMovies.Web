@@ -64,8 +64,8 @@ export const MuiButton: StylesOverrides<ButtonProps["variant"], Interpolation<{ 
 			props: { variant: "signup" },
 			style: {
 				height: "44px",
-				padding: "0 0.75rem",
-				columnGap: "1.375rem",
+				padding: "0 12px",
+				columnGap: "22px",
 				fontSize: "0.9375rem",
 				color: white,
 				textTransform: "none",

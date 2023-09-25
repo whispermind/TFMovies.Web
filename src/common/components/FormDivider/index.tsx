@@ -1,12 +1,12 @@
 import { PropsWithChildren } from "react";
 import { DividerProps, Typography } from "@mui/material";
 
-import * as S from "./styled";
+import * as Styled from "./styled";
 
 export const FormDivider = ({ children, ...dividerProps }: PropsWithChildren<DividerProps>) => {
 	return (
-		<S.Divider {...dividerProps}>
+		<Styled.Divider {...dividerProps}>
 			<Typography variant="HBody">{children}</Typography>
-		</S.Divider>
+		</Styled.Divider>
 	);
 };

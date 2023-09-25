@@ -16,11 +16,11 @@ export interface ISignUpForm {
 	confirmPassword: string;
 }
 
-const { requiredError, maxError, minError, passwordError, passwordConfirmError, emailError, onlyLettersError } = yupErrorMessages;
+const { requiredError, maxError, minError, passwordError, passwordConfirmError, emailError, onlyLettersError, traillingSpace } = yupErrorMessages;
 const { email, password, nickname } = formValidation;
 
 export const schema = yup.object().shape({
-	nickname: yup.string().required(requiredError()).min(2, minError(2)).max(16, maxError(16)).matches(nickname, onlyLettersError()),
+	nickname: yup.string().required(requiredError()).min(2, minError(2)).max(16, maxError(16)).matches(nickname, onlyLettersError()).trim(traillingSpace()),
 	email: yup.string().required(requiredError()).matches(email, emailError()),
 	password: yup.string().required(requiredError()).matches(password, passwordError()),
 	confirmPassword: yup
@@ -29,7 +29,7 @@ export const schema = yup.object().shape({
 		.oneOf([yup.ref("password")], passwordConfirmError())
 });
 
-export const SignUpForm = ({ onSubmit, isLoading }: IStatedForm<ISignUpForm>) => {
+export const SignUpForm = ({ onSubmit, isLoading }: ILoadingForm<ISignUpForm>) => {
 	const { handleSubmit, control } = useForm<ISignUpForm>({
 		defaultValues: {
 			nickname: "",

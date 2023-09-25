@@ -11,6 +11,7 @@ import { withController, withButtonLoader } from "../../../common/hocs";
 import { yupErrorMessages } from "../../../common/utils/yupErrorMessages";
 import { useImageUploadMutation } from "../api";
 import { IGetThemeResponseData } from "../../Main/api";
+import { ArticleContent } from "../../Article";
 import * as Styled from "./styled";
 
 export interface ICreateArticleForm {
@@ -57,10 +58,10 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 	const [isPreview, setPreview] = useState(false);
 	const [editorState, setEditorState] = useState("");
 	const [coverImage, setCoverImage] = useState("");
+	const [previewTheme, setPreviewTheme] = useState("");
 
-	const { handleSubmit, control, setValue } = useForm<ICreateArticleForm>({
+	const { handleSubmit, control, setValue, getValues } = useForm<ICreateArticleForm>({
 		defaultValues: {
-			attachment: null,
 			title: "",
 			tags: "",
 			ThemeId: "placeholder"
@@ -69,6 +70,9 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 		mode: "onBlur"
 	});
 
+	const { title, tags } = getValues();
+	const previewTags = tags.split(" ").map((tag) => ({ name: tag, id: "" }));
+
 	const Title = withController<ICreateArticleForm, TStyledInputProps>(Styled.TextField);
 	const Tags = withController<ICreateArticleForm, TStyledInputProps>(Styled.TextField);
 	const SubmitButton = withButtonLoader(PrimaryButton);
@@ -76,6 +80,7 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 	const onThemeChange = useCallback(
 		(theme: IGetThemeResponseData) => {
 			setValue("ThemeId", theme.id || "placeholder");
+			setPreviewTheme(theme.name);
 		},
 		[setValue]
 	);
@@ -84,11 +89,12 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 		async ({ target }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 			const fileList = ("files" in target && target.files) || null;
 			if (fileList) {
+				setValue("attachment", fileList);
 				const { fileUrl } = await imageUploadReq(fileList[0]).unwrap();
 				setCoverImage(fileUrl);
 			}
 		},
-		[imageUploadReq, setCoverImage]
+		[imageUploadReq, setCoverImage, setValue]
 	);
 
 	const onSubmit = useCallback(
@@ -101,6 +107,7 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 	const togglePreview = useCallback(() => setPreview(true), [setPreview]);
 	const toggleEdit = useCallback(() => setPreview(false), [setPreview]);
 
+	const isPreviwable = !(previewTags.length && previewTheme && title && coverImage);
 	const togglePreviewButton = isPreview ? (
 		<PrimaryButton
 			variant="ghost"
@@ -112,47 +119,63 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 		<PrimaryButton
 			variant="ghost"
 			onClick={togglePreview}
+			disabled={isPreviwable}
 		>
 			Preview Article
 		</PrimaryButton>
 	);
 
 	return (
-		<Styled.FormWrapper>
-			<Styled.Form
-				onSubmit={handleSubmit(onSubmit)}
-				id="create-article-form"
-			>
-				<Styled.FieldsWrapper>
-					<Styled.TextFieldsWrapper>
-						<FileInput
-							control={control}
-							onChange={onFileUpload}
-						/>
-						<Title
-							type="text"
-							name="title"
-							placeholder="Enter the title..."
-							fontStyles="title"
-							variant="standard"
-							control={control}
-						/>
-						<Tags
-							name="tags"
-							type="text"
-							variant="standard"
-							placeholder="Add up to 5 tags to your title"
-							control={control}
-							required
-						/>
-						<ThemeAutocomplete
-							control={control}
-							onChange={onThemeChange}
-						/>
-					</Styled.TextFieldsWrapper>
-				</Styled.FieldsWrapper>
-				<Editor onChange={setEditorState} />
-			</Styled.Form>
+		<div>
+			<Styled.FormWrapper>
+				{isPreview && (
+					<ArticleContent
+						tags={previewTags}
+						title={title}
+						theme={previewTheme}
+						coverImageUrl={coverImage}
+						htmlContent={editorState}
+					/>
+				)}
+				<Styled.Form
+					sx={isPreview ? { position: "absolute", visibility: "hidden" } : {}}
+					onSubmit={handleSubmit(onSubmit)}
+					id="create-article-form"
+				>
+					<Styled.FieldsWrapper>
+						<Styled.TextFieldsWrapper>
+							<FileInput
+								control={control}
+								onChange={onFileUpload}
+							/>
+							<Title
+								type="text"
+								name="title"
+								placeholder="Enter the title..."
+								fontStyles="title"
+								variant="standard"
+								control={control}
+							/>
+							<Tags
+								name="tags"
+								type="text"
+								variant="standard"
+								placeholder="Add up to 5 tags to your title"
+								control={control}
+								required
+							/>
+							<ThemeAutocomplete
+								control={control}
+								onChange={onThemeChange}
+							/>
+						</Styled.TextFieldsWrapper>
+					</Styled.FieldsWrapper>
+					<Editor
+						formFieldState={editorState}
+						onChange={setEditorState}
+					/>
+				</Styled.Form>
+			</Styled.FormWrapper>
 			<Styled.ButtonsWrapper>
 				<SubmitButton
 					type="submit"
@@ -163,6 +186,6 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 				</SubmitButton>
 				{togglePreviewButton}
 			</Styled.ButtonsWrapper>
-		</Styled.FormWrapper>
+		</div>
 	);
 };

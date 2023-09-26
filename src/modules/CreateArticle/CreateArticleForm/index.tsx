@@ -9,7 +9,7 @@ import { FileInput } from "./FileInput";
 import { ThemeAutocomplete } from "./ThemeAutocomplete";
 import { PrimaryButton } from "../../../common/components";
 import { withController, withButtonLoader } from "../../../common/hocs";
-import { yupErrorMessages, snackBarMessages } from "../../../common/utils";
+import { yupErrorMessages, snackBarMessages, formValidation } from "../../../common/utils";
 import { useImageUploadMutation } from "../api";
 import { IGetThemeResponseData } from "../../Main/api";
 import { ArticleContent } from "../../Article";
@@ -31,7 +31,8 @@ export interface ICreateArticleFormSubmit extends Omit<ICreateArticleForm, "atta
 
 export type TStyledInputProps = ComponentProps<typeof Styled.TextField>;
 
-const { requiredError, attachmentSize, tagsLimit, traillingSpace } = yupErrorMessages;
+const { tags: tagsRegExp } = formValidation;
+const { requiredError, attachmentSize, tagsLimit, traillingSpace, tagsFormatt } = yupErrorMessages;
 
 const MAX_ATTACHMENT_SIZE = 5;
 const TAGS_LIMIT = 5;
@@ -49,6 +50,7 @@ export const schema = yup.object().shape({
 		.string()
 		.required(requiredError())
 		.trim(traillingSpace())
+		.matches(tagsRegExp, tagsFormatt())
 		.test("tagsLimit", tagsLimit(TAGS_LIMIT), (value) => {
 			const spacesAmount = value.split("").reduce((acc, symbol) => (symbol === " " ? acc + 1 : acc), 0);
 			return spacesAmount < TAGS_LIMIT;
@@ -62,8 +64,8 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 	const [previewTheme, setPreviewTheme] = useState("");
 	const [previewTags, setPreviewTags] = useState<ITag[]>([]);
 	const [previewTitle, setPreviewTitle] = useState("");
+	const [coverImageUrl, setCoverImageUrl] = useState("");
 	const [editorState, setEditorState] = useState("");
-	const [coverImage, setCoverImage] = useState("");
 
 	const { handleSubmit, control, setValue, getValues } = useForm<ICreateArticleForm>({
 		defaultValues: {
@@ -94,39 +96,35 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 				setValue("attachment", fileList);
 				try {
 					const { fileUrl } = await imageUploadReq(fileList[0]).unwrap();
-					setCoverImage(fileUrl);
+					setCoverImageUrl(fileUrl);
 				} catch {
 					// handled by middleware
 				}
 			}
 		},
-		[imageUploadReq, setCoverImage, setValue]
+		[imageUploadReq, setCoverImageUrl, setValue]
 	);
 
 	const onSubmit = useCallback(
 		(formData: ICreateArticleForm) => {
-			onSubmitFromProps({ ...formData, attachment: coverImage, HtmlContent: editorState });
+			onSubmitFromProps({ ...formData, attachment: coverImageUrl, HtmlContent: editorState });
 		},
-		[onSubmitFromProps, editorState, coverImage]
+		[onSubmitFromProps, editorState, coverImageUrl]
 	);
 
 	const togglePreview = useCallback(() => {
 		const [tags, title] = getValues(["tags", "title"]);
-		const formattedTags = tags
-			.replaceAll(",", "")
-			.split(" ")
-			.map((tag) => ({ name: tag, id: Date.now().toString() }));
+		const formattedTags = tags && tags.split(" ").map((tag) => ({ name: tag, id: Date.now().toString() }));
+		const isPreviwable = formattedTags.length && title && previewTheme && coverImageUrl && editorState;
 
-		const isPreviwable = formattedTags.length && title && previewTheme && coverImage && editorState;
-
-		if (isPreviwable) {
+		if (isPreviwable && formattedTags) {
 			setPreviewTitle(title);
 			setPreviewTags(formattedTags);
 			setPreview(true);
 		} else {
 			enqueueSnackbar(snackBarMessages.articlePreview, { variant: "info" });
 		}
-	}, [setPreview, setPreviewTags, setPreviewTitle, coverImage, previewTheme, editorState, getValues]);
+	}, [setPreview, setPreviewTags, setPreviewTitle, coverImageUrl, previewTheme, editorState, getValues]);
 	const toggleEdit = useCallback(() => setPreview(false), [setPreview]);
 
 	const togglePreviewButton = isPreview ? (
@@ -153,7 +151,7 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 						tags={previewTags}
 						title={previewTitle}
 						theme={previewTheme}
-						coverImageUrl={coverImage}
+						coverImageUrl={coverImageUrl}
 						htmlContent={editorState}
 					/>
 				)}
@@ -190,7 +188,7 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 						</Styled.TextFieldsWrapper>
 					</Styled.FieldsWrapper>
 					<Editor
-						formFieldState={editorState}
+						initState={editorState}
 						onChange={setEditorState}
 					/>
 				</Styled.Form>

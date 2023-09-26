@@ -4,8 +4,10 @@ import { FilteringListWrapper } from "../FilteringListWrapper";
 import { useGetTopTagsQuery } from "../../api";
 import * as Styled from "./styled";
 
+const TAGS_FETCH_LIMIT = 7;
+
 export const TopTagsFiltering = () => {
-	const { data } = useGetTopTagsQuery();
+	const { data } = useGetTopTagsQuery(`?limit=${TAGS_FETCH_LIMIT}`);
 
 	const listItems = data?.map(({ name, id }) => (
 		<ListItem

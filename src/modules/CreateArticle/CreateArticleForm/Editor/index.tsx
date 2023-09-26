@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import ReactQuill from "react-quill";
 import { DeltaStatic } from "quill";
 import "react-quill/dist/quill.snow.css";
@@ -9,10 +9,11 @@ import * as Styled from "./styled";
 
 interface IEditorProps {
 	onChange: (state: string) => void;
-	formFieldState: string;
+	initState: string;
 }
 
-export const Editor = ({ formFieldState = "", onChange: onChangeFromProps }: IEditorProps) => {
+export const Editor = ({ onChange: onChangeFromProps, initState }: IEditorProps) => {
+	const [editorState, setEditorState] = useState(initState);
 	const [imageUploadReq] = useImageUploadMutation();
 
 	const modules = {
@@ -26,12 +27,13 @@ export const Editor = ({ formFieldState = "", onChange: onChangeFromProps }: IEd
 	};
 
 	const onChange = useCallback(
-		async (editorState: string, { ops }: DeltaStatic) => {
+		async (state: string, { ops }: DeltaStatic) => {
+			setEditorState(state);
 			if (ops) {
 				const imageOperation = ops.find((obj) => typeof obj?.insert === "object" && "image" in obj.insert);
 				if (imageOperation) {
 					const imageSourceRegExp = /src="data:image.+?={1,2}"/;
-					const matches = editorState.match(imageSourceRegExp);
+					const matches = state.match(imageSourceRegExp);
 					if (matches) {
 						const imageSource = matches[0];
 						const base64Image = imageSource.slice(imageSource.indexOf(",") + 1, imageSource.length - 1);
@@ -39,14 +41,14 @@ export const Editor = ({ formFieldState = "", onChange: onChangeFromProps }: IEd
 						const blobImage = base64toBlob(base64Image, mimeType);
 						try {
 							const { fileUrl } = await imageUploadReq(blobImage).unwrap();
-							const stateWithReplacedUrl = editorState.replace(imageSourceRegExp, `src="${fileUrl}"`);
+							const stateWithReplacedUrl = state.replace(imageSourceRegExp, `src="${fileUrl}"`);
 							onChangeFromProps(stateWithReplacedUrl);
 						} catch {
 							// handled by middleware
 						}
 					}
 				} else {
-					onChangeFromProps(editorState);
+					onChangeFromProps(state);
 				}
 			}
 		},
@@ -57,7 +59,7 @@ export const Editor = ({ formFieldState = "", onChange: onChangeFromProps }: IEd
 		<Styled.EditorWrapper>
 			<ReactQuill
 				theme="snow"
-				value={formFieldState}
+				value={editorState}
 				modules={modules}
 				onChange={onChange}
 			/>

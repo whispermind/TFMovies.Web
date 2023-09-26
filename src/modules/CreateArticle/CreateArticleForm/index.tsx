@@ -1,6 +1,7 @@
 import { ComponentProps, useCallback, ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { enqueueSnackbar } from "notistack";
 import * as yup from "yup";
 
 import { Editor } from "./Editor";
@@ -8,11 +9,13 @@ import { FileInput } from "./FileInput";
 import { ThemeAutocomplete } from "./ThemeAutocomplete";
 import { PrimaryButton } from "../../../common/components";
 import { withController, withButtonLoader } from "../../../common/hocs";
-import { yupErrorMessages } from "../../../common/utils/yupErrorMessages";
+import { yupErrorMessages, snackBarMessages } from "../../../common/utils";
 import { useImageUploadMutation } from "../api";
 import { IGetThemeResponseData } from "../../Main/api";
 import { ArticleContent } from "../../Article";
 import * as Styled from "./styled";
+
+import type { ITag } from "../../Main/ArticleCard";
 
 export interface ICreateArticleForm {
 	attachment: FileList | null;
@@ -56,9 +59,11 @@ export const schema = yup.object().shape({
 export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<ICreateArticleFormSubmit>) => {
 	const [imageUploadReq] = useImageUploadMutation();
 	const [isPreview, setPreview] = useState(false);
+	const [previewTheme, setPreviewTheme] = useState("");
+	const [previewTags, setPreviewTags] = useState<ITag[]>([]);
+	const [previewTitle, setPreviewTitle] = useState("");
 	const [editorState, setEditorState] = useState("");
 	const [coverImage, setCoverImage] = useState("");
-	const [previewTheme, setPreviewTheme] = useState("");
 
 	const { handleSubmit, control, setValue, getValues } = useForm<ICreateArticleForm>({
 		defaultValues: {
@@ -69,9 +74,6 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 		resolver: yupResolver<ICreateArticleForm>(schema),
 		mode: "onBlur"
 	});
-
-	const { title, tags } = getValues();
-	const previewTags = tags.split(" ").map((tag) => ({ name: tag, id: Date.now().toString() }));
 
 	const Title = withController<ICreateArticleForm, TStyledInputProps>(Styled.TextField);
 	const Tags = withController<ICreateArticleForm, TStyledInputProps>(Styled.TextField);
@@ -108,10 +110,25 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 		[onSubmitFromProps, editorState, coverImage]
 	);
 
-	const togglePreview = useCallback(() => setPreview(true), [setPreview]);
+	const togglePreview = useCallback(() => {
+		const [tags, title] = getValues(["tags", "title"]);
+		const formattedTags = tags
+			.replaceAll(",", "")
+			.split(" ")
+			.map((tag) => ({ name: tag, id: Date.now().toString() }));
+
+		const isPreviwable = formattedTags.length && title && previewTheme && coverImage && editorState;
+
+		if (isPreviwable) {
+			setPreviewTitle(title);
+			setPreviewTags(formattedTags);
+			setPreview(true);
+		} else {
+			enqueueSnackbar(snackBarMessages.articlePreview, { variant: "info" });
+		}
+	}, [setPreview, setPreviewTags, setPreviewTitle, coverImage, previewTheme, editorState, getValues]);
 	const toggleEdit = useCallback(() => setPreview(false), [setPreview]);
 
-	const isPreviwable = !(previewTags.length && previewTheme && title && coverImage);
 	const togglePreviewButton = isPreview ? (
 		<PrimaryButton
 			variant="ghost"
@@ -123,7 +140,6 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 		<PrimaryButton
 			variant="ghost"
 			onClick={togglePreview}
-			disabled={isPreviwable}
 		>
 			Preview Article
 		</PrimaryButton>
@@ -135,7 +151,7 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 				{isPreview && (
 					<ArticleContent
 						tags={previewTags}
-						title={title}
+						title={previewTitle}
 						theme={previewTheme}
 						coverImageUrl={coverImage}
 						htmlContent={editorState}
@@ -166,7 +182,6 @@ export const CreateArticleForm = ({ onSubmit: onSubmitFromProps }: ILoadingForm<
 								variant="standard"
 								placeholder="Add up to 5 tags to your title"
 								control={control}
-								required
 							/>
 							<ThemeAutocomplete
 								control={control}

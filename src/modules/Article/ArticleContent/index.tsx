@@ -6,7 +6,8 @@ import * as Styled from "./styled";
 
 type TArticleContentProps = Partial<Pick<IArticleResponseData, "tags" | "coverImageUrl" | "title" | "theme" | "htmlContent">>;
 
-export const ArticleContent = ({ tags = [], coverImageUrl = "", title = "", theme = "", htmlContent = "" }: TArticleContentProps) => {
+export const ArticleContent = (props: TArticleContentProps) => {
+	const { tags = [], coverImageUrl = "", title = "", theme = "", htmlContent = "" } = props;
 	const sanitazedHtml = sanitize(htmlContent);
 
 	const tagItems = Array.from(tags).map(({ id, name }) => (

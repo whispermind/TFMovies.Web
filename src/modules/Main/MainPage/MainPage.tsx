@@ -5,6 +5,7 @@ import { MainNav, PageSpinner, PageWrapper } from "../../../common/components";
 import { ArticleTopFiltering, SortingBar, ArticleCard } from "..";
 import { useOnClickAuthorized } from "../../../common/hooks";
 import { useGetArticlesQuery } from "../api";
+import { Routes } from "../../../common/enums";
 import * as Styled from "./styled";
 
 const LIMIT_PER_PAGE = 12;
@@ -42,8 +43,8 @@ export const MainPage = () => {
 		[setPageQuery]
 	);
 
-	const onSortingChangeAuthorized = useOnClickAuthorized(onSortingChange, "/signin");
-	const onPageChangeAuthorized = useOnClickAuthorized(onPageChange, "/signin");
+	const onSortingChangeAuthorized = useOnClickAuthorized(onSortingChange, Routes.signIn);
+	const onPageChangeAuthorized = useOnClickAuthorized(onPageChange, Routes.signIn);
 
 	return (
 		<PageWrapper>

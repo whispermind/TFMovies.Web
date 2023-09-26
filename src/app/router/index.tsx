@@ -26,41 +26,50 @@ export const router = createBrowserRouter(
 				path="/"
 				element={<MainPage />}
 			/>
+
 			<Route
 				path="signup"
 				element={<SignUpPage />}
-			/>
-			<Route
-				path="signup/:token"
-				element={<SignUpSuccessPage />}
-			/>
-			<Route
-				path="signin"
-				element={<SignInPage />}
-			/>
-			<Route
-				path="passrecovery/:token"
-				element={<PassRecoveryPage />}
-			/>
-			<Route
-				path="forgotpass"
-				element={<ForgotPassPage />}
-			/>
+			>
+				<Route
+					path=":token"
+					element={<SignUpSuccessPage />}
+				/>
+			</Route>
+
+			<Route path="/auth">
+				<Route
+					path="signin"
+					element={<SignInPage />}
+				/>
+				<Route
+					path="passrecovery/:token"
+					element={<PassRecoveryPage />}
+				/>
+				<Route
+					path="forgotpass"
+					element={<ForgotPassPage />}
+				/>
+			</Route>
+
+			<Route path="/article">
+				<Route
+					path="create"
+					element={<CreateArticlePage />}
+				/>
+				<Route
+					path="published"
+					element={<CreateArticleSuccessPage />}
+				/>
+				<Route
+					path=":id"
+					element={<ArticlePage />}
+				/>
+			</Route>
+
 			<Route
 				path="search"
 				element={<SearchPage />}
-			/>
-			<Route
-				path="createarticle"
-				element={<CreateArticlePage />}
-			/>
-			<Route
-				path="createarticle/success"
-				element={<CreateArticleSuccessPage />}
-			/>
-			<Route
-				path="article/:id"
-				element={<ArticlePage />}
 			/>
 		</Route>
 	)

@@ -2,6 +2,7 @@ import { Typography, Link, ListItem } from "@mui/material";
 import { sanitize } from "dompurify";
 
 import { IArticleResponseData } from "../api";
+import { Routes } from "../../../common/enums";
 import * as Styled from "./styled";
 
 type TArticleContentProps = Partial<Pick<IArticleResponseData, "tags" | "coverImageUrl" | "title" | "theme" | "htmlContent">>;
@@ -13,7 +14,7 @@ export const ArticleContent = (props: TArticleContentProps) => {
 	const tagItems = Array.from(tags).map(({ id, name }) => (
 		<ListItem key={id}>
 			<Link
-				href={`/search?subject=tags&query=${name}&id=${id}`}
+				href={`${Routes.search}?subject=tags&query=${name}&id=${id}`}
 				underline="none"
 			>
 				<Typography

@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../../common/hooks";
 import { selectSearchQuery, setSearchQuery } from "../../Search/SearchSlice";
 import { FormTextFieldIconed } from "../../../common/components";
 import { SearchIcon } from "../../../common/components/Icons";
+import { Routes } from "../../../common/enums";
 
 export const HeaderSearchInput = () => {
 	const dispatch = useAppDispatch();
@@ -13,7 +14,7 @@ export const HeaderSearchInput = () => {
 
 	const onBlur = useCallback(() => {
 		if (searchQuery) {
-			navigate(`/search?query=${searchQuery}`);
+			navigate(`${Routes.search}?query=${searchQuery}`);
 		} else {
 			navigate("/");
 		}

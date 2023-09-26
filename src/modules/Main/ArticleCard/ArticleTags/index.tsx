@@ -1,7 +1,10 @@
 import { Link, ListItem } from "@mui/material";
+
+import { Routes } from "../../../../common/enums";
 import * as Styled from "./styled";
 
 import type { ITag } from "..";
+
 
 interface IArticleTagsProps {
 	tags: ITag[];
@@ -16,7 +19,7 @@ export const ArticleTags = ({ tags }: IArticleTagsProps) => {
 			<Link
 				variant="HBody"
 				color="greyColors.grey"
-				href={`/search?subject=tags&query=${name}&id=${id}`}
+				href={`${Routes.search}?subject=tags&query=${name}&id=${id}`}
 			>
 				{`#${name}`}
 			</Link>

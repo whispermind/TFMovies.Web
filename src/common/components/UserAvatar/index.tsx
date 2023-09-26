@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react";
 import { Stack, Typography, Link } from "@mui/material";
 
+import { Routes } from "../../enums";
 import * as Styled from "./styled";
 
 interface IUserAvatarProps extends PropsWithChildren {
@@ -14,7 +15,7 @@ export const UserAvatar = ({ nickname, size, id, nicknameStyle, children }: IUse
 	return (
 		<Styled.Stack>
 			<Link
-				href={id ? `/author/${id}` : ""}
+				href={id ? `${Routes.author}/${id}` : ""}
 				sx={{ cursor: id ? "pointer" : "default" }}
 			>
 				<Styled.Avatar sx={{ width: `${size}px`, height: `${size}px` }}>{nickname[0]}</Styled.Avatar>

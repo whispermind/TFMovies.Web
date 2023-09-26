@@ -2,6 +2,7 @@ import { Link, ListItem, Typography } from "@mui/material";
 
 import { FilteringListWrapper } from "../FilteringListWrapper";
 import { useGetTopTagsQuery } from "../../api";
+import { Routes } from "../../../../common/enums";
 import * as Styled from "./styled";
 
 const TAGS_FETCH_LIMIT = 7;
@@ -14,7 +15,7 @@ export const TopTagsFiltering = () => {
 			disablePadding
 			key={id}
 		>
-			<Link href={`/search?subject=tags&query=${name}`}>
+			<Link href={`${Routes.search}?subject=tags&query=${name}`}>
 				<Typography variant="SectionLink">{`#${name}`}</Typography>
 			</Link>
 		</ListItem>

@@ -1,5 +1,7 @@
 import { Button, Stack } from "@mui/material";
 
+import { Routes } from "../../../../common/enums";
+
 export const UnauthorizedState = () => {
 	return (
 		<Stack
@@ -9,14 +11,14 @@ export const UnauthorizedState = () => {
 			<Button
 				variant="ghost"
 				sx={{ width: "200px" }}
-				href="/signin"
+				href={Routes.signIn}
 			>
 				Log In
 			</Button>
 			<Button
 				variant="customOutlined"
 				sx={{ width: "200px" }}
-				href="/signup"
+				href={Routes.signUp}
 			>
 				Sign Up
 			</Button>

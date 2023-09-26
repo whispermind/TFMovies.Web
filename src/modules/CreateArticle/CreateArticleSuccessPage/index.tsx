@@ -1,4 +1,5 @@
 import { SubPageWrapper, LogoHeading, PrimaryButton } from "../../../common/components";
+import { Routes } from "../../../common/enums";
 
 export const CreateArticleSuccessPage = () => {
 	const heading = "Article was Published!";
@@ -16,7 +17,7 @@ export const CreateArticleSuccessPage = () => {
 			</LogoHeading>
 			<PrimaryButton
 				variant="customOutlined"
-				href="/signin"
+				href={Routes.signIn}
 				fullWidth
 			>
 				Back to Home Page

@@ -5,6 +5,7 @@ import { enqueueSnackbar } from "notistack";
 import { CreateArticleForm, CreationAdvice, ICreateArticleFormSubmit } from "..";
 import { useCreateArticleMutation } from "../api";
 import { snackBarMessages } from "../../../common/utils";
+import { Routes } from "../../../common/enums";
 import * as Styled from "./styled";
 
 export const CreateArticlePage = () => {
@@ -16,7 +17,7 @@ export const CreateArticlePage = () => {
 			try {
 				const articleData = { coverImageUrl: attachment, tags: tags.split(" "), ThemeId, title, HtmlContent };
 				await createArticleReq(articleData).unwrap();
-				navigate("/createarticle/success");
+				navigate(Routes.articlePublished);
 				enqueueSnackbar(snackBarMessages.articleCreated, { variant: "success" });
 			} catch (e) {
 				// handled by middleware

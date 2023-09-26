@@ -10,3 +10,17 @@ export enum IconSizes {
 	small = "small",
 	inherit = "inherit"
 }
+
+export enum Routes {
+	signUp = "/signup",
+	signIn = "/auth/signin",
+	forgotPass = "/auth/forgotpass",
+	passRecovery = "/auth/passrecovery",
+	article = "/article",
+	createArticle = "/article/create",
+	articlePublished = "/article/published",
+	search = "/search",
+	author = "/author",
+	favorites = "/favorites",
+	usersList = "/userslist"
+}

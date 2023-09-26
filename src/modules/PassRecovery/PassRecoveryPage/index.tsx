@@ -8,6 +8,7 @@ import { SubPageWrapper } from "../../../common/components";
 import { useResetPasswordMutation } from "../api";
 import { snackBarMessages } from "../../../common/utils";
 import { useTokenValidation } from "../../../common/hooks";
+import { Routes } from "../../../common/enums";
 
 export const PassRecoveryPage = () => {
 	const [resetPassReq, { isLoading: isReseting }] = useResetPasswordMutation();
@@ -21,7 +22,7 @@ export const PassRecoveryPage = () => {
 				try {
 					await resetPassReq({ ...credentials, token }).unwrap();
 					enqueueSnackbar(snackBarMessages.passRecovery, { variant: "success" });
-					navigate("/signin");
+					navigate(Routes.signIn);
 				} catch (e) {
 					navigate("/");
 				}

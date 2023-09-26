@@ -3,7 +3,7 @@ import { Button, Stack } from "@mui/material";
 import { HeaderAccount } from "../../HeaderAccount";
 import { useAppSelector } from "../../../../common/hooks";
 import { selectAuth } from "../../../Authorization/AuthSlice";
-import { UserRoles } from "../../../../common/enums";
+import { UserRoles, Routes } from "../../../../common/enums";
 
 export const AuthorizedState = () => {
 	const { currentUser } = useAppSelector(selectAuth);
@@ -18,7 +18,7 @@ export const AuthorizedState = () => {
 				<Button
 					variant="customOutlined"
 					sx={{ width: "240px" }}
-					href="/createarticle"
+					href={Routes.createArticle}
 					autoCapitalize="false"
 				>
 					Create a post

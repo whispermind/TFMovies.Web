@@ -4,6 +4,7 @@ import { useAppSelector } from "../../../common/hooks";
 import { selectAuth } from "../../Authorization/AuthSlice";
 import { ArticleTags } from "./ArticleTags";
 import { LikeButton, UserAvatar } from "../../../common/components";
+import { Routes } from "../../../common/enums";
 import * as Styled from "./styled";
 
 export interface ITag {
@@ -31,7 +32,7 @@ export const ArticleCard = ({ articleData }: IArticleCardProps) => {
 
 	return (
 		<Card>
-			<Link href={accessToken ? `/article/${id}` : `/signin`}>
+			<Link href={accessToken ? `${Routes.article}/${id}` : Routes.signIn}>
 				<CardMedia
 					component="img"
 					alt="cover image"

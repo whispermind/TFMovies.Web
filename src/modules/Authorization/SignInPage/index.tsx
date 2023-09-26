@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../../common/hooks";
 import { useSignInMutation } from "../api";
 import { signIn } from "../AuthSlice";
 import { snackBarMessages } from "../../../common/utils";
+import { Routes } from "../../../common/enums";
 
 export const SignInPage = () => {
 	const [signInReq, { isLoading }] = useSignInMutation();
@@ -55,7 +56,7 @@ export const SignInPage = () => {
 			/>
 			<FormDivider sx={{ m: "36px 0" }}>Don`t have an account?</FormDivider>
 			<SignUpButton
-				href="/signup"
+				href={Routes.signUp}
 				fullWidth
 			/>
 		</SubPageWrapper>

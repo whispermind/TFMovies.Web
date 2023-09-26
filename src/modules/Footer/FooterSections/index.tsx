@@ -2,12 +2,13 @@ import { useCallback } from "react";
 import { Link } from "@mui/material";
 
 import { FooterLinksWrapper } from "../FooterLinksWrapper";
+import { Routes } from "../../../common/enums";
 
 export const FooterSections = () => {
 	const linksData = {
 		"/": "Home Page",
 		"/tags": "Tags",
-		"/favorites": "Favorites",
+		[Routes.favorites]: "Favorites",
 		"/contactwithus": "Contact Us",
 		"/rules": "Rules"
 	};

@@ -4,7 +4,7 @@ import { FavoriteBorder } from "@mui/icons-material";
 import { FavoriteFilledIcon } from "../../Icons";
 import { useOnClickAuthorized } from "../../../hooks";
 import { useLikeArticleMutation, useUnlikeArticleMutation } from "../../../../modules/Main/api";
-import { IconSizes } from "../../../enums";
+import { IconSizes, Routes } from "../../../enums";
 import * as Styled from "./styled";
 
 interface ILikeButtonProps {
@@ -34,7 +34,7 @@ export const LikeButton = ({ isLiked, id, likesAmount, children, size }: PropsWi
 		}
 	}, [unlikeReq, likeReq, id, isLiked, setLikedInnerState]);
 
-	const authorizedListener = useOnClickAuthorized(listener, "/signin");
+	const authorizedListener = useOnClickAuthorized(listener, Routes.signIn);
 
 	const icon = likedInnerState ? <FavoriteFilledIcon fontSize={size} /> : <FavoriteBorder fontSize={size} />;
 

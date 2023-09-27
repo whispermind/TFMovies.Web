@@ -24,7 +24,13 @@ export const ArticlePage = () => {
 						id={data?.id}
 					/>
 					<Styled.ContentWrapper>
-						<ArticleContent {...data} />
+						<ArticleContent
+							title={data?.title}
+							theme={data?.theme}
+							htmlContent={data?.htmlContent}
+							tags={data?.tags}
+							coverImageUrl={data?.coverImageUrl}
+						/>
 						<ArticleComments data={data?.comments || []} />
 					</Styled.ContentWrapper>
 					<ArticleAuthorsInfo

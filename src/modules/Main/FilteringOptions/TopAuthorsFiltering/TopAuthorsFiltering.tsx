@@ -5,8 +5,10 @@ import { FilteringListWrapper } from "../FilteringListWrapper";
 import { useGetTopAuthorsQuery } from "../../api";
 import * as Styled from "./styled";
 
+const AUTHORS_FETCH_LIMIT = 3;
+
 export const TopAuthorsFiltering = () => {
-	const { data } = useGetTopAuthorsQuery();
+	const { data } = useGetTopAuthorsQuery(`?limit=${AUTHORS_FETCH_LIMIT}`);
 
 	const listItems = data?.map(({ nickname, id }) => (
 		<ListItem

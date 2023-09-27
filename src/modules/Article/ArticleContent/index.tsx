@@ -4,11 +4,13 @@ import { sanitize } from "dompurify";
 import { IArticleResponseData } from "../api";
 import * as Styled from "./styled";
 
-export const ArticleContent = ({ tags, coverImageUrl, title, theme, htmlContent }: Partial<IArticleResponseData>) => {
-	const sanitazedHtml = sanitize(htmlContent || "");
-	const uniqTags = new Set(tags);
+type TArticleContentProps = Partial<Pick<IArticleResponseData, "tags" | "coverImageUrl" | "title" | "theme" | "htmlContent">>;
 
-	const tagItems = Array.from(uniqTags).map(({ id, name }) => (
+export const ArticleContent = (props: TArticleContentProps) => {
+	const { tags = [], coverImageUrl = "", title = "", theme = "", htmlContent = "" } = props;
+	const sanitazedHtml = sanitize(htmlContent);
+
+	const tagItems = Array.from(tags).map(({ id, name }) => (
 		<ListItem key={id}>
 			<Link
 				href={`/search?subject=tags&query=${name}&id=${id}`}

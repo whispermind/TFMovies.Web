@@ -12,7 +12,7 @@ export const yupErrorMessages = {
 		return "The email must be correct";
 	},
 	onlyLettersError() {
-		return "The field may contain only letters";
+		return "The field may contain only  letters";
 	},
 	passwordError() {
 		return `The password field must be at least 8 characters long and contain only Latin letters, 
@@ -29,5 +29,8 @@ export const yupErrorMessages = {
 	},
 	traillingSpace() {
 		return "The field cannot include leading and trailing spaces";
+	},
+	tagsFormatt() {
+		return "The field may contain only latin letters and the space symbol";
 	}
 };

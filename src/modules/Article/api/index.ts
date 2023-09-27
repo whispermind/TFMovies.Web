@@ -2,7 +2,7 @@ import { apiSlice } from "../../../app/api";
 
 import type { IArticleCard } from "../../Main";
 import type { ICommentData } from "../ArticleComments";
-import type { ITag } from "../../Main/ArticleCard";
+import type { ITag } from "../ArticleCard";
 import { dateFormatter } from "../../../common/utils";
 
 export interface PostByAuthor {

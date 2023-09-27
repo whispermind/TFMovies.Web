@@ -17,12 +17,7 @@ export const ArticlePage = () => {
 				<PageSpinner />
 			) : (
 				<>
-					<ArticleActions
-						likesAmount={data?.likesCount}
-						commentsAmount={data?.commentsCount}
-						isLiked={data?.isLiked}
-						id={data?.id}
-					/>
+					<ArticleActions {...data} />
 					<Styled.ContentWrapper>
 						<ArticleContent
 							title={data?.title}

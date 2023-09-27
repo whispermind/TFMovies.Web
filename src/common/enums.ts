@@ -18,6 +18,7 @@ export enum Routes {
 	passRecovery = "/auth/passrecovery",
 	article = "/article",
 	createArticle = "/article/create",
+	editArticle = "/article/edit",
 	articlePublished = "/article/published",
 	search = "/search",
 	author = "/author",

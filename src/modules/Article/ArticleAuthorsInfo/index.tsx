@@ -1,7 +1,7 @@
 import { Typography, Link, Stack } from "@mui/material";
 
 import { UserAvatar } from "../../../common/components";
-import { ArticleTags } from "../../Main/ArticleCard/ArticleTags";
+import { ArticleTags } from "../ArticleCard/ArticleTags";
 import { Routes } from "../../../common/enums";
 import * as Styled from "./styled";
 

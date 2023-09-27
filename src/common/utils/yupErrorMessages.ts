@@ -31,6 +31,6 @@ export const yupErrorMessages = {
 		return "The field cannot include leading and trailing spaces";
 	},
 	tagsFormatt() {
-		return "The field may contain only latin letters and the space symbol";
+		return "The field may contain only latin letters, numbers and the space symbol";
 	}
 };

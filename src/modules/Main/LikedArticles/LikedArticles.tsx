@@ -3,17 +3,19 @@ import { Stack, Grid, Typography } from "@mui/material";
 
 import { MainNav, PageSpinner } from "../../../common/components";
 import { ArticleCard } from "..";
-import { useOnClickAuthorized } from "../../../common/hooks";
+import { useIsAuthorized } from "../../../common/hooks";
 import { useGetLikedArticlesQuery } from "../api";
 import * as Styled from "./styled";
 
-const LIMIT_PER_PAGE = 12;
+const ARTICLES_PER_PAGE_LIMIT = 12;
 
 export const LikedArticles = () => {
 	const initPage = 1;
 	const [pageQuery, setPageQuery] = useState(initPage);
-	const queryString = `me?page=${pageQuery}&limit=${LIMIT_PER_PAGE}`;
+	const queryString = `me?page=${pageQuery}&limit=${ARTICLES_PER_PAGE_LIMIT}`;
 	const { data, isLoading } = useGetLikedArticlesQuery(queryString);
+
+	useIsAuthorized();
 
 	const Articles = useMemo(
 		() =>
@@ -33,8 +35,6 @@ export const LikedArticles = () => {
 		[setPageQuery]
 	);
 
-	const onPageChangeAuthorized = useOnClickAuthorized(onPageChange, "/signin");
-
 	return (
 		<Styled.Grid container>
 			<Grid item>
@@ -53,7 +53,7 @@ export const LikedArticles = () => {
 				{isLoading ? <PageSpinner /> : Articles}
 				<Styled.Pagination
 					count={data?.totalPages}
-					onChange={onPageChangeAuthorized}
+					onChange={onPageChange}
 					page={pageQuery}
 					boundaryCount={2}
 					variant="outlined"

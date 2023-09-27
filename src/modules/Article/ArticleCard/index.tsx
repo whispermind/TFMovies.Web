@@ -1,7 +1,5 @@
 import { Card, CardMedia, CardContent, Typography, Link } from "@mui/material";
 
-import { useAppSelector } from "../../../common/hooks";
-import { selectAuth } from "../../Authorization/AuthSlice";
 import { ArticleTags } from "./ArticleTags";
 import { LikeButton, UserAvatar } from "../../../common/components";
 import { Routes } from "../../../common/enums";
@@ -28,11 +26,10 @@ export interface IArticleCardProps {
 
 export const ArticleCard = ({ articleData }: IArticleCardProps) => {
 	const { id, coverImageUrl, title, createdAt, author, tags, isLiked, authorId } = articleData;
-	const { accessToken } = useAppSelector(selectAuth);
 
 	return (
 		<Card>
-			<Link href={accessToken ? `${Routes.article}/${id}` : Routes.signIn}>
+			<Link href={`${Routes.article}/${id}`}>
 				<CardMedia
 					component="img"
 					alt="cover image"

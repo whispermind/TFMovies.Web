@@ -12,12 +12,15 @@ export interface PostByAuthor {
 	tags: ITag[];
 }
 export interface IArticleResponseData extends IArticleCard {
-	theme: string;
 	htmlContent: string;
 	likesCount: number;
 	commentsCount: number;
 	comments: ICommentData[];
 	postsByAuthor: PostByAuthor[];
+	theme: {
+		name: string;
+		id: string;
+	};
 }
 
 const articleApi = apiSlice.injectEndpoints({

@@ -2,6 +2,7 @@ import { ComponentProps, useCallback, ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { enqueueSnackbar } from "notistack";
+import { v4 as uuidv4 } from "uuid";
 import * as yup from "yup";
 
 import { Editor } from "./Editor";
@@ -73,7 +74,7 @@ export const CreateArticleForm = (props: Partial<ICreateArticleFormProps> & ILoa
 
 	const [imageUploadReq] = useImageUploadMutation();
 	const [isPreview, setPreview] = useState(false);
-	const [previewTheme, setPreviewTheme] = useState(initTheme || "");
+	const [previewTheme, setPreviewTheme] = useState(initTheme);
 	const [previewTags, setPreviewTags] = useState<ITag[]>(initTags || []);
 	const [previewTitle, setPreviewTitle] = useState(initTitle || "");
 	const [coverImageUrl, setCoverImageUrl] = useState(initCoverImageUrl || "");
@@ -83,8 +84,7 @@ export const CreateArticleForm = (props: Partial<ICreateArticleFormProps> & ILoa
 		defaultValues: {
 			title: initTitle || "",
 			tags: initTags?.map(({ name }) => name).join(" ") || "",
-			// TODO CHANGE RESPONSE TO SYNC THEME ID
-			ThemeId: "placeholder"
+			ThemeId: previewTheme?.id || "placeholder"
 		},
 		resolver: yupResolver<ICreateArticleForm>(schema),
 		mode: "onBlur"
@@ -97,7 +97,7 @@ export const CreateArticleForm = (props: Partial<ICreateArticleFormProps> & ILoa
 	const onThemeChange = useCallback(
 		(theme: IGetThemeResponseData) => {
 			setValue("ThemeId", theme.id || "placeholder");
-			setPreviewTheme(theme.name);
+			setPreviewTheme(theme);
 		},
 		[setValue]
 	);
@@ -127,7 +127,7 @@ export const CreateArticleForm = (props: Partial<ICreateArticleFormProps> & ILoa
 
 	const togglePreview = useCallback(() => {
 		const [tags, title] = getValues(["tags", "title"]);
-		const formattedTags = tags && tags.split(" ").map((tag) => ({ name: tag, id: Date.now().toString() }));
+		const formattedTags = tags && tags.split(" ").map((tag) => ({ name: tag, id: uuidv4() }));
 		const isPreviwable = formattedTags.length && title && previewTheme && coverImageUrl && editorState;
 
 		if (isPreviwable && formattedTags) {
@@ -197,6 +197,7 @@ export const CreateArticleForm = (props: Partial<ICreateArticleFormProps> & ILoa
 							<ThemeAutocomplete
 								control={control}
 								onChange={onThemeChange}
+								value={previewTheme?.name || "placeholder"}
 							/>
 						</Styled.TextFieldsWrapper>
 					</Styled.FieldsWrapper>

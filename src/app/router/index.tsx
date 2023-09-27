@@ -69,14 +69,14 @@ export const router = createBrowserRouter(
 				/>
 				<Route path="edit">
 					<Route
+						path="favorites"
+						element={<LikedArticles />}
+					/>
+					<Route
 						path=":id"
 						element={<EditArticlePage />}
 					/>
 				</Route>
-				<Route
-					path="/favorites"
-					element={<LikedArticles />}
-				/>
 			</Route>
 
 			<Route

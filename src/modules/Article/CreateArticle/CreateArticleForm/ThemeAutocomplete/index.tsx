@@ -11,9 +11,10 @@ import type { ICreateArticleForm, IStyledInputProps } from "../..";
 interface IThemeAutocompleteProps {
 	onChange: (theme: IGetThemeResponseData) => void;
 	control: Control<ICreateArticleForm>;
+	value: string;
 }
 
-export const ThemeAutocomplete = ({ onChange: onThemeChange, control }: IThemeAutocompleteProps) => {
+export const ThemeAutocomplete = ({ onChange: onThemeChange, control, value }: IThemeAutocompleteProps) => {
 	const { data } = useGetThemesQuery();
 
 	const themes = useMemo(() => data?.map(({ name }) => name), [data]) || [];
@@ -33,6 +34,7 @@ export const ThemeAutocomplete = ({ onChange: onThemeChange, control }: IThemeAu
 			options={themes}
 			popupIcon={false}
 			onChange={onChange}
+			value={value}
 			renderInput={(props) => (
 				<ThemesField
 					{...props}

@@ -19,7 +19,7 @@ declare interface StylesOverrides<T, S> {
 }
 
 declare interface IResponse<T> {
-	status: string;
+	status: number;
 	error?: string;
 	data?: T;
 }

@@ -8,13 +8,13 @@ import { useGetArticlesQuery } from "../api";
 import { Routes } from "../../../common/enums";
 import * as Styled from "./styled";
 
-const LIMIT_PER_PAGE = 12;
+const ARTICLES_PER_PAGE_LIMIT = 12;
 
 export const MainPage = () => {
 	const initPage = 1;
 	const [sortingQuery, setSortingQuery] = useState("&sort=created");
 	const [pageQuery, setPageQuery] = useState(initPage);
-	const queryString = `?page=${pageQuery}${sortingQuery}&limit=${LIMIT_PER_PAGE}`;
+	const queryString = `?page=${pageQuery}${sortingQuery}&limit=${ARTICLES_PER_PAGE_LIMIT}`;
 	const { data, isLoading } = useGetArticlesQuery(queryString);
 
 	const Articles = useMemo(

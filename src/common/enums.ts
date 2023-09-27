@@ -20,7 +20,7 @@ export enum Routes {
 	createArticle = "/article/create",
 	editArticle = "/article/edit",
 	articlePublished = "/article/published",
-	favorites = "article//favorites",
+	favorites = "article/favorites",
 	search = "/search",
 	author = "/author",
 	usersList = "/userslist"

@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 import { Comment } from "../Comment";
 import { StyledCommentsList } from "./styled";
 
@@ -7,7 +9,7 @@ export const CommentsList = ({ comments }: { comments: ICommentData[] | undefine
 	const commentsList = comments?.map((comment) => {
 		return (
 			<Comment
-				key={comment.author + comment.createdAt}
+				key={uuidv4()}
 				nickname={comment.author}
 				createdAt={comment.createdAt}
 				commentText={comment.content}

@@ -28,8 +28,8 @@ export const refreshBaseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBas
 	if (result.error && result.error.status === 401) {
 		const { auth } = api.getState() as RootState;
 		if (!mutex.isLocked()) {
-			const release = await mutex.acquire();
 			if (!auth.refreshToken) return result;
+			const release = await mutex.acquire();
 			try {
 				const { data } = await baseQuery({ url: "/users/refresh-token", method: "POST", body: { refreshToken: auth.refreshToken } }, api, extraOptions);
 

@@ -40,6 +40,12 @@ const mainApi = apiSlice.injectEndpoints({
 				data: articles.data.map((article) => ({ ...article, createdAt: dateFormatter(article.createdAt) }))
 			})
 		}),
+		getLikedArticles: builder.query<IGetArticleResponseData, string>({
+			query: (query) => ({
+				url: `/posts/liked-by/${query}`
+			}),
+			providesTags: (result) => (result ? [...result.data.map(({ id }) => ({ type: "Article" as const, id })), "Article"] : ["Article"])
+		}),
 		likeArticle: builder.mutation<void, string>({
 			query: (id) => ({
 				url: `/posts/${id}/likes`,
@@ -66,4 +72,12 @@ const mainApi = apiSlice.injectEndpoints({
 	})
 });
 
-export const { useGetTopAuthorsQuery, useGetTopTagsQuery, useGetThemesQuery, useLikeArticleMutation, useUnlikeArticleMutation, useGetArticlesQuery } = mainApi;
+export const {
+	useGetTopAuthorsQuery,
+	useGetTopTagsQuery,
+	useGetThemesQuery,
+	useLikeArticleMutation,
+	useUnlikeArticleMutation,
+	useGetArticlesQuery,
+	useGetLikedArticlesQuery
+} = mainApi;

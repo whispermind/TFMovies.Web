@@ -10,3 +10,4 @@ export { SignUpPage } from "../modules/Registration/SignUpPage";
 export { SignUpSuccessPage } from "../modules/Registration/SignUpSuccessPage";
 export { SearchPage } from "../modules/Search/SearchPage";
 export { EditArticlePage } from "../modules/Article/EditArticle/EditArticlePage";
+export { LikedArticles } from "../modules/Main/LikedArticles/LikedArticles";

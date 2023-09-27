@@ -12,7 +12,8 @@ import {
 	SearchPage,
 	CreateArticlePage,
 	CreateArticleSuccessPage,
-	ArticlePage
+	ArticlePage,
+	LikedArticles
 } from "../../pages";
 
 export const router = createBrowserRouter(
@@ -61,6 +62,10 @@ export const router = createBrowserRouter(
 			<Route
 				path="article/:id"
 				element={<ArticlePage />}
+			/>
+			<Route
+				path="/favorites"
+				element={<LikedArticles />}
 			/>
 		</Route>
 	)

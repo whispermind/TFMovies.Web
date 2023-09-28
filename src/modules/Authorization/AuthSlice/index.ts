@@ -4,14 +4,19 @@ import { UserRoles } from "../../../common/enums";
 
 import type { RootState } from "../../../app/store/index";
 
+export interface IUser {
+	id: string;
+	nickname: string;
+	role: {
+		name: UserRoles;
+		id: string;
+	};
+}
+
 export interface IAuthState {
 	accessToken: string | null;
 	refreshToken: string | null;
-	currentUser: {
-		nickname: string;
-		role: UserRoles;
-		id: string;
-	} | null;
+	currentUser: IUser | null;
 }
 
 const initialState: IAuthState = {

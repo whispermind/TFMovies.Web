@@ -15,7 +15,7 @@ export const LikedArticles = () => {
 	const queryString = `?page=${pageQuery}&limit=${ARTICLES_PER_PAGE_LIMIT}`;
 	const { data, isLoading } = useGetLikedArticlesQuery(queryString);
 
-	useIsAuthorized();
+	const access = useIsAuthorized();
 
 	const Articles = useMemo(
 		() =>
@@ -36,30 +36,33 @@ export const LikedArticles = () => {
 	);
 
 	return (
-		<Styled.Grid container>
-			<Grid item>
-				<MainNav />
-			</Grid>
-			<Stack
-				rowGap={2.5}
-				flexGrow={1}
-			>
-				<Typography
-					textAlign="start"
-					variant="HHeader"
+		(access && (
+			<Styled.Grid container>
+				<Grid item>
+					<MainNav />
+				</Grid>
+				<Stack
+					rowGap={2.5}
+					flexGrow={1}
 				>
-					Liked Articles
-				</Typography>
-				{isLoading ? <PageSpinner /> : Articles}
-				<Styled.Pagination
-					count={data?.totalPages}
-					onChange={onPageChange}
-					page={pageQuery}
-					boundaryCount={2}
-					variant="outlined"
-					shape="rounded"
-				/>
-			</Stack>
-		</Styled.Grid>
+					<Typography
+						textAlign="start"
+						variant="HHeader"
+					>
+						Liked Articles
+					</Typography>
+					{isLoading ? <PageSpinner /> : Articles}
+					<Styled.Pagination
+						count={data?.totalPages}
+						onChange={onPageChange}
+						page={pageQuery}
+						boundaryCount={2}
+						variant="outlined"
+						shape="rounded"
+					/>
+				</Stack>
+			</Styled.Grid>
+		)) ||
+		null
 	);
 };

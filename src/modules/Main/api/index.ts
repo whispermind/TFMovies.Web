@@ -1,21 +1,19 @@
 import { apiSlice } from "../../../app/api";
+import { dateFormatter } from "../../../common/utils";
 
 import type { IArticleCard } from "..";
-import { dateFormatter } from "../../../common/utils";
+import type { IUser } from "../../Authorization/AuthSlice";
 
 export interface IGetThemeResponseData {
 	id: string;
 	name: string;
 }
-interface IGetArticlesResponseData {
-	page: number;
-	totalPages: number;
-	totalRecords: number;
+interface IGetArticlesResponseData extends IPaginationResponse<IArticleCard[]> {
 	themeId: string;
 	sort: string;
-	limit: number;
-	data: IArticleCard[];
 }
+
+interface IGetUsersResponseData extends IPaginationResponse<(IUser & { email: string })[]> {}
 
 interface IGetTopAuthorsResponseData {
 	id: string;
@@ -30,6 +28,12 @@ interface IGetTopTagsResponseData {
 
 const mainApi = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
+		getUsers: builder.query<IGetUsersResponseData, string>({
+			query: (query) => ({
+				url: `/users${query}`
+			}),
+			providesTags: (result) => (result ? [...result.data.map(({ id }) => ({ type: "Users" as const, id })), "Users"] : ["Users"])
+		}),
 		getArticles: builder.query<IGetArticlesResponseData, string>({
 			query: (query) => ({
 				url: `/posts${query}`
@@ -79,5 +83,6 @@ export const {
 	useLikeArticleMutation,
 	useUnlikeArticleMutation,
 	useGetArticlesQuery,
-	useGetLikedArticlesQuery
+	useGetLikedArticlesQuery,
+	useGetUsersQuery
 } = mainApi;

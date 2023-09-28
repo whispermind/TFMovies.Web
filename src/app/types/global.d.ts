@@ -23,3 +23,11 @@ declare interface IResponse<T> {
 	error?: string;
 	data?: T;
 }
+
+declare interface IPaginationResponse<T> {
+	page: number;
+	limit: number;
+	totalPages: number;
+	totalRecords: number;
+	data: T;
+}

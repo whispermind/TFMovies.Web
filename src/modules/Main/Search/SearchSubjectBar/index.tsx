@@ -1,11 +1,12 @@
-import { useState, useCallback, MouseEvent } from "react";
+import { useState, useCallback, MouseEvent, useMemo } from "react";
 import { ListItem } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 
 import * as Styled from "./styled";
 
+const buttonsDescription = ["articles", "users", "tags", "comments"];
+
 export const SearchSubjectBar = () => {
-	const buttonsDescription = ["articles", "users", "tags", "comments"];
 	const [params, setSearchParams] = useSearchParams();
 	const subject = params.get("subject");
 	const initActiveButton = subject && buttonsDescription.includes(subject) ? subject : "articles";
@@ -21,20 +22,24 @@ export const SearchSubjectBar = () => {
 		[setSearchParams, params]
 	);
 
-	const Buttons = buttonsDescription.map((description) => (
-		<ListItem
-			disablePadding
-			key={description}
-		>
-			<Styled.Button
-				onClick={onClick}
-				isActive={activeButton === description}
-				data-name={description}
-			>
-				{description}
-			</Styled.Button>
-		</ListItem>
-	));
+	const Buttons = useMemo(
+		() =>
+			buttonsDescription.map((description) => (
+				<ListItem
+					disablePadding
+					key={description}
+				>
+					<Styled.Button
+						onClick={onClick}
+						isActive={activeButton === description}
+						data-name={description}
+					>
+						{description}
+					</Styled.Button>
+				</ListItem>
+			)),
+		[activeButton, onClick]
+	);
 
 	return <Styled.List>{Buttons}</Styled.List>;
 };

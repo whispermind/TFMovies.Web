@@ -18,7 +18,7 @@ export const HeaderSearchInput = () => {
 			if (debouncer) return;
 			debouncer = true;
 
-			if (pathname !== Routes.search) {
+			if (pathname !== Routes.search && value) {
 				navigate({ pathname: Routes.search, search: `subject=articles&query=${value}` });
 			} else {
 				params.set("query", value);
@@ -33,8 +33,10 @@ export const HeaderSearchInput = () => {
 
 	const onBlur = useCallback(
 		(e: FocusEvent<HTMLInputElement>) => {
-			debouncer = false;
-			onChange(e);
+			if (e.target.value) {
+				debouncer = false;
+				onChange(e);
+			}
 		},
 		[onChange]
 	);

@@ -4,6 +4,6 @@ import { refreshBaseQuery } from "./refreshBaseQuery";
 
 export const apiSlice = createApi({
 	baseQuery: refreshBaseQuery,
-	tagTypes: ["Article", "Articles"],
+	tagTypes: ["Article", "Articles", "Users"],
 	endpoints: () => ({})
 });

@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Typography, Link, Stack } from "@mui/material";
 
 import { UserAvatar } from "../../../common/components";
@@ -15,14 +16,18 @@ interface IArticleAuthorsInfoProps {
 }
 
 export const ArticleAuthorsInfo = ({ id: authorId, createdAt, nickname, postsByAuthor }: IArticleAuthorsInfoProps) => {
-	const otherArticles = postsByAuthor.map(({ title, tags, id: articleId }) => (
-		<Styled.ArticleData key={articleId}>
-			<Link href={`${Routes.article}/${articleId}`}>
-				<Typography variant="SectionLink">{title}</Typography>
-			</Link>
-			<ArticleTags tags={tags} />
-		</Styled.ArticleData>
-	));
+	const otherArticles = useMemo(
+		() =>
+			postsByAuthor.map(({ title, tags, id: articleId }) => (
+				<Styled.ArticleData key={articleId}>
+					<Link href={`${Routes.article}/${articleId}`}>
+						<Typography variant="SectionLink">{title}</Typography>
+					</Link>
+					<ArticleTags tags={tags} />
+				</Styled.ArticleData>
+			)),
+		[postsByAuthor]
+	);
 
 	return (
 		<Styled.Wrapper>

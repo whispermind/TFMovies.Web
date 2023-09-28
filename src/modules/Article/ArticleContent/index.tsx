@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Typography, Link, ListItem } from "@mui/material";
 import { sanitize } from "dompurify";
 
@@ -11,19 +12,23 @@ export const ArticleContent = (props: TArticleContentProps) => {
 	const { tags = [], coverImageUrl = "", title = "", theme = { name: "", id: "" }, htmlContent = "" } = props;
 	const sanitazedHtml = sanitize(htmlContent);
 
-	const tagItems = Array.from(tags).map(({ id, name }) => (
-		<ListItem key={id}>
-			<Link
-				href={`${Routes.search}?subject=tags&query=${name}&id=${id}`}
-				underline="none"
-			>
-				<Typography
-					variant="HBody"
-					color="greyColors.grey"
-				>{`#${name}`}</Typography>
-			</Link>
-		</ListItem>
-	));
+	const tagItems = useMemo(
+		() =>
+			Array.from(tags).map(({ id, name }) => (
+				<ListItem key={id}>
+					<Link
+						href={`${Routes.search}?subject=tags&query=${name}&id=${id}`}
+						underline="none"
+					>
+						<Typography
+							variant="HBody"
+							color="greyColors.grey"
+						>{`#${name}`}</Typography>
+					</Link>
+				</ListItem>
+			)),
+		[tags]
+	);
 
 	return (
 		<Styled.ArticleContentWrapper>

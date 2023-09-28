@@ -8,7 +8,7 @@ import { UserRoles, Routes } from "../../../../../common/enums";
 export const AuthorizedState = () => {
 	const { currentUser } = useAppSelector(selectAuth);
 
-	const isEditor = currentUser && (currentUser.role === UserRoles.author || currentUser.role === UserRoles.admin);
+	const isEditor = currentUser && (currentUser.role.name === UserRoles.author || currentUser.role.name === UserRoles.admin);
 	return (
 		<Stack
 			direction="row"

@@ -64,7 +64,7 @@ export const HeaderAccount = () => {
 				{currentUser && (
 					<HeaderUserInfo
 						username={currentUser.nickname}
-						access={currentUser.role}
+						access={currentUser.role.name}
 					/>
 				)}
 			</Stack>

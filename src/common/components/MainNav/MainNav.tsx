@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Stack, List, ListItem, ListItemIcon, Typography } from "@mui/material";
 
 import { FavoriteBorder } from "@mui/icons-material";
@@ -7,40 +8,44 @@ import { selectAuth } from "../../../modules/Authorization/AuthSlice";
 import { UserRoles, Routes } from "../../enums";
 import * as Styled from "./styled";
 
+const linksData = [
+	{ caption: "Home Page", Icon: HomePageIcon, section: "main", href: "/" },
+	{ caption: "Tags", Icon: HashtagIcon, section: "main", href: "/" },
+	{ caption: "Favorites", Icon: FavoriteBorder, section: "main", href: Routes.favorites },
+	{ caption: "Contact Us", Icon: EmailIcon, section: "other", href: "/" },
+	{ caption: "Rules", Icon: RulesIcon, section: "other", href: "/" },
+	{ caption: "User List", Icon: UserListIcon, section: "admin", href: Routes.usersList }
+];
+
 export const MainNav = () => {
 	const { currentUser } = useAppSelector(selectAuth);
 
-	const linksData = [
-		{ caption: "Home Page", Icon: HomePageIcon, section: "main", href: "/" },
-		{ caption: "Tags", Icon: HashtagIcon, section: "main", href: "/" },
-		{ caption: "Favorites", Icon: FavoriteBorder, section: "main", href: Routes.favorites },
-		{ caption: "Contact Us", Icon: EmailIcon, section: "other", href: "/" },
-		{ caption: "Rules", Icon: RulesIcon, section: "other", href: "/" },
-		{ caption: "User List", Icon: UserListIcon, section: "admin", href: Routes.usersList }
-	];
+	const unsortedLinks = useMemo(
+		() =>
+			linksData.map(({ caption, Icon, section, href }) => ({
+				link: (
+					<Styled.MainLink
+						key={caption}
+						href={href}
+					>
+						<ListItem>
+							<ListItemIcon>
+								<Icon />
+							</ListItemIcon>
+							<Typography variant="HBody">{caption}</Typography>
+						</ListItem>
+					</Styled.MainLink>
+				),
+				section
+			})),
+		[]
+	);
 
-	const unsortedLinks = linksData.map(({ caption, Icon, section, href }) => ({
-		link: (
-			<Styled.MainLink
-				key={caption}
-				href={href}
-			>
-				<ListItem>
-					<ListItemIcon>
-						<Icon />
-					</ListItemIcon>
-					<Typography variant="HBody">{caption}</Typography>
-				</ListItem>
-			</Styled.MainLink>
-		),
-		section
-	}));
+	const mainLinks = useMemo(() => unsortedLinks.filter(({ section }) => section === "main").map(({ link }) => link), [unsortedLinks]);
+	const otherLinks = useMemo(() => unsortedLinks.filter(({ section }) => section === "other").map(({ link }) => link), [unsortedLinks]);
+	const adminLinks = useMemo(() => unsortedLinks.filter(({ section }) => section === "admin").map(({ link }) => link), [unsortedLinks]);
 
-	const mainLinks = unsortedLinks.filter(({ section }) => section === "main").map(({ link }) => link);
-	const otherLinks = unsortedLinks.filter(({ section }) => section === "other").map(({ link }) => link);
-	const adminLinks = unsortedLinks.filter(({ section }) => section === "admin").map(({ link }) => link);
-
-	const isAdmin = currentUser?.role === UserRoles.admin;
+	const isAdmin = currentUser?.role.name === UserRoles.admin;
 
 	return (
 		<Stack

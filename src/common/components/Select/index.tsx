@@ -17,14 +17,18 @@ export const Select = (props: ISelectProps) => {
 	const [selected, setSelected] = useState<"placeholder" | string>("placeholder");
 	const [isOpen, setIsOpen] = useState(false);
 
-	const options = data?.map(({ description, value }) => (
-		<MenuItem
-			key={value}
-			value={value}
-		>
-			{description}
-		</MenuItem>
-	));
+	const options = useMemo(
+		() =>
+			data?.map(({ description, value }) => (
+				<MenuItem
+					key={value}
+					value={value}
+				>
+					{description}
+				</MenuItem>
+			)),
+		[data]
+	);
 
 	const isPlaceholder = selected === "placeholder" && !isOpen;
 	const isValue = useMemo(() => data?.find(({ value }) => value === selected), [data, selected]);

@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Link, ListItem, Typography } from "@mui/material";
 
 import { FilteringListWrapper } from "../FilteringListWrapper";
@@ -10,16 +11,20 @@ const TAGS_FETCH_LIMIT = 7;
 export const TopTagsFiltering = () => {
 	const { data } = useGetTopTagsQuery(`?limit=${TAGS_FETCH_LIMIT}`);
 
-	const listItems = data?.map(({ name, id }) => (
-		<ListItem
-			disablePadding
-			key={id}
-		>
-			<Link href={`${Routes.search}?subject=tags&query=${name}`}>
-				<Typography variant="SectionLink">{`#${name}`}</Typography>
-			</Link>
-		</ListItem>
-	));
+	const listItems = useMemo(
+		() =>
+			data?.map(({ name, id }) => (
+				<ListItem
+					disablePadding
+					key={id}
+				>
+					<Link href={`${Routes.search}?subject=tags&query=${name}`}>
+						<Typography variant="SectionLink">{`#${name}`}</Typography>
+					</Link>
+				</ListItem>
+			)),
+		[data]
+	);
 
 	return (
 		<FilteringListWrapper subject="Tags">

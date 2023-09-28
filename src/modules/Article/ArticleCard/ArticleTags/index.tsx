@@ -14,6 +14,7 @@ export const ArticleTags = ({ tags }: IArticleTagsProps) => {
 		<ListItem
 			disablePadding
 			key={id}
+			sx={{ width: "auto" }}
 		>
 			<Link
 				variant="HBody"

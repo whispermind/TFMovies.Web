@@ -12,7 +12,7 @@ const ARTICLES_PER_PAGE_LIMIT = 12;
 export const LikedArticles = () => {
 	const initPage = 1;
 	const [pageQuery, setPageQuery] = useState(initPage);
-	const queryString = `me?page=${pageQuery}&limit=${ARTICLES_PER_PAGE_LIMIT}`;
+	const queryString = `?page=${pageQuery}&limit=${ARTICLES_PER_PAGE_LIMIT}`;
 	const { data, isLoading } = useGetLikedArticlesQuery(queryString);
 
 	useIsAuthorized();

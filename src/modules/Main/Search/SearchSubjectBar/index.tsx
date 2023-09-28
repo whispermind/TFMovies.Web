@@ -1,25 +1,24 @@
 import { useState, useCallback, MouseEvent } from "react";
 import { ListItem } from "@mui/material";
+import { useSearchParams } from "react-router-dom";
 
 import * as Styled from "./styled";
 
-interface ISearchSubjectBarProps {
-	onClick: (active: string) => void;
-	defaultSubject?: string | null;
-}
-
-export const SearchSubjectBar = ({ onClick: onClickCb, defaultSubject }: ISearchSubjectBarProps) => {
+export const SearchSubjectBar = () => {
 	const buttonsDescription = ["articles", "users", "tags", "comments"];
-	const defaultState = defaultSubject ? buttonsDescription.includes(defaultSubject) && defaultSubject : "articles";
-	const [activeButton, setActiveButton] = useState(defaultState);
+	const [params, setSearchParams] = useSearchParams();
+	const subject = params.get("subject");
+	const initActiveButton = subject && buttonsDescription.includes(subject) ? subject : "articles";
+	const [activeButton, setActiveButton] = useState(initActiveButton);
 
 	const onClick = useCallback(
 		(e: MouseEvent<HTMLButtonElement>) => {
-			const buttonName = e.currentTarget.dataset.name || "";
-			onClickCb(buttonName);
+			const buttonName = e.currentTarget.dataset.name!;
+			params.set("subject", buttonName);
+			setSearchParams(params, { replace: true });
 			setActiveButton(buttonName);
 		},
-		[onClickCb]
+		[setSearchParams, params]
 	);
 
 	const Buttons = buttonsDescription.map((description) => (

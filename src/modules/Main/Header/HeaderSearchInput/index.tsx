@@ -1,38 +1,49 @@
-import { useNavigate } from "react-router-dom";
-import { ChangeEvent, useCallback } from "react";
+import { useSearchParams, useLocation, useNavigate } from "react-router-dom";
+import { ChangeEvent, FocusEvent, useCallback } from "react";
 
-import { useAppDispatch, useAppSelector } from "../../../../common/hooks";
-import { selectSearchQuery, setSearchQuery } from "../../../Search/SearchSlice";
 import { FormTextFieldIconed } from "../../../../common/components";
 import { SearchIcon } from "../../../../common/components/Icons";
 import { Routes } from "../../../../common/enums";
 
-export const HeaderSearchInput = () => {
-	const dispatch = useAppDispatch();
-	const searchQuery = useAppSelector(selectSearchQuery);
-	const navigate = useNavigate();
+let debouncer = false;
+const debounceTime = 500;
 
-	const onBlur = useCallback(() => {
-		if (searchQuery) {
-			navigate(`${Routes.search}?query=${searchQuery}`);
-		} else {
-			navigate("/");
-		}
-	}, [navigate, searchQuery]);
+export const HeaderSearchInput = () => {
+	const navigate = useNavigate();
+	const { pathname } = useLocation();
+	const [params, setSearchParams] = useSearchParams();
 
 	const onChange = useCallback(
-		(e: ChangeEvent<HTMLInputElement>) => {
-			dispatch(setSearchQuery(e.target.value));
+		({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+			if (debouncer) return;
+			debouncer = true;
+
+			if (pathname !== Routes.search) {
+				navigate({ pathname: Routes.search, search: `subject=articles&query=${value}` });
+			} else {
+				params.set("query", value);
+				setSearchParams(params, { replace: true });
+			}
+			setTimeout(() => {
+				debouncer = false;
+			}, debounceTime);
 		},
-		[dispatch]
+		[navigate, pathname, setSearchParams, params]
+	);
+
+	const onBlur = useCallback(
+		(e: FocusEvent<HTMLInputElement>) => {
+			debouncer = false;
+			onChange(e);
+		},
+		[onChange]
 	);
 
 	return (
 		<FormTextFieldIconed
 			type="search"
-			value={searchQuery}
-			onBlur={onBlur}
 			onChange={onChange}
+			onBlur={onBlur}
 			position="end"
 			placeholder="Search something..."
 			icon={SearchIcon}

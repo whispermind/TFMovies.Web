@@ -42,7 +42,7 @@ const mainApi = apiSlice.injectEndpoints({
 		}),
 		getLikedArticles: builder.query<IGetArticlesResponseData, string>({
 			query: (query) => ({
-				url: `/posts/liked-by/${query}`
+				url: `/posts/liked-by/me${query}`
 			}),
 			providesTags: (result) => (result ? [...result.data.map(({ id }) => ({ type: "Article" as const, id })), "Article"] : ["Article"])
 		}),

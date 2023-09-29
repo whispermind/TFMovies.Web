@@ -2,11 +2,11 @@ import { useMemo } from "react";
 import { Typography, Link, ListItem } from "@mui/material";
 import { sanitize } from "dompurify";
 
-import { IArticleResponseData } from "../api";
+import { IGetArticleResponseData } from "../api";
 import { Routes } from "../../../common/enums";
 import * as Styled from "./styled";
 
-type TArticleContentProps = Partial<Pick<IArticleResponseData, "tags" | "coverImageUrl" | "title" | "theme" | "htmlContent">>;
+type TArticleContentProps = Partial<Pick<IGetArticleResponseData, "tags" | "coverImageUrl" | "title" | "theme" | "htmlContent">>;
 
 export const ArticleContent = (props: TArticleContentProps) => {
 	const { tags = [], coverImageUrl = "", title = "", theme = { name: "", id: "" }, htmlContent = "" } = props;

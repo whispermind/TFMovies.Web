@@ -12,10 +12,10 @@ export const ArticlePage = () => {
 	const { id = "" } = useParams();
 	const { data, isLoading } = useGetArticleQuery({ id, limit: AUTHORS_OTHER_ARTICLES_LIMIT });
 
-	const access = useIsAuthorized();
+	useIsAuthorized();
 
 	return (
-		(access && (
+		(
 			<PageWrapper>
 				{isLoading ? (
 					<PageSpinner />
@@ -41,7 +41,6 @@ export const ArticlePage = () => {
 					</>
 				)}
 			</PageWrapper>
-		)) ||
-		null
+		) || null
 	);
 };

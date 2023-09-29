@@ -8,12 +8,9 @@ export interface IGetThemeResponseData {
 	id: string;
 	name: string;
 }
-interface IGetArticlesResponseData extends IPaginationResponse<IArticleCard[]> {
-	themeId: string;
-	sort: string;
-}
+export interface IGetArticlesResponseData extends IPaginationResponse<IArticleCard[]> {}
 
-interface IGetUsersResponseData extends IPaginationResponse<(IUser & { email: string })[]> {}
+export interface IGetUsersResponseData extends IPaginationResponse<(IUser & { email: string })[]> {}
 
 interface IGetTopAuthorsResponseData {
 	id: string;
@@ -24,6 +21,11 @@ interface IGetTopAuthorsResponseData {
 interface IGetTopTagsResponseData {
 	id: string;
 	name: string;
+}
+
+interface IGetCombinedRequest {
+	endpoint: "users" | "posts";
+	query: string;
 }
 
 const mainApi = apiSlice.injectEndpoints({
@@ -43,6 +45,12 @@ const mainApi = apiSlice.injectEndpoints({
 				...articles,
 				data: articles.data.map((article) => ({ ...article, createdAt: dateFormatter(article.createdAt) }))
 			})
+		}),
+		getUsersOrArticles: builder.query<IGetUsersResponseData | IGetArticlesResponseData, IGetCombinedRequest>({
+			query: ({ endpoint, query }) => ({
+				url: `/${endpoint}${query}`
+			}),
+			providesTags: (result) => (result ? [...result.data.map(({ id }) => ({ type: "Users" as const, id })), "Users"] : ["Users"])
 		}),
 		getLikedArticles: builder.query<IGetArticlesResponseData, string>({
 			query: (query) => ({
@@ -84,5 +92,6 @@ export const {
 	useUnlikeArticleMutation,
 	useGetArticlesQuery,
 	useGetLikedArticlesQuery,
-	useGetUsersQuery
+	useGetUsersQuery,
+	useGetUsersOrArticlesQuery
 } = mainApi;

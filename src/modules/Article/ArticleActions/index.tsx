@@ -9,9 +9,9 @@ import { useAppSelector } from "../../../app/store";
 import { selectAuth } from "../../Authorization";
 import * as Styled from "./styled";
 
-import type { IArticleResponseData } from "../api";
+import type { IGetArticleResponseData } from "../api";
 
-export const ArticleActions = (props: Partial<IArticleResponseData>) => {
+export const ArticleActions = (props: Partial<IGetArticleResponseData>) => {
 	const { likesCount, commentsCount, isLiked, id, authorId } = props;
 
 	const navigate = useNavigate();

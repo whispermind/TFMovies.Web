@@ -13,7 +13,7 @@ import { withController, withButtonLoader } from "../../../../common/hocs";
 import { yupErrorMessages, snackBarMessages, formValidation } from "../../../../common/utils";
 import { useImageUploadMutation } from "../api";
 import { IGetThemeResponseData } from "../../../Main/api";
-import { IArticleResponseData } from "../../api";
+import { IGetArticleResponseData } from "../../api";
 import { ArticleContent } from "../..";
 import * as Styled from "./styled";
 
@@ -33,7 +33,7 @@ export interface ICreateArticleFormSubmit extends Omit<ICreateArticleForm, "atta
 
 export interface IStyledInputProps extends ComponentProps<typeof Styled.TextField> {}
 
-interface ICreateArticleFormProps extends Pick<IArticleResponseData, "title" | "theme" | "coverImageUrl" | "htmlContent" | "tags"> {}
+interface ICreateArticleFormProps extends Pick<IGetArticleResponseData, "title" | "theme" | "coverImageUrl" | "htmlContent" | "tags"> {}
 
 const { tags: tagsRegExp } = formValidation;
 const { requiredError, attachmentSize, tagsLimit, traillingSpace, tagsFormatt } = yupErrorMessages;

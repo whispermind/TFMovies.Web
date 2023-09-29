@@ -6,17 +6,12 @@ import { useAppSelector } from "../../../app/store";
 import { Routes } from "../../enums";
 
 export const useIsAuthorized = () => {
-	const [access, setAccess] = useState(false);
 	const { accessToken } = useAppSelector(selectAuth);
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (!accessToken) {
 			navigate(Routes.signIn, { replace: true });
-		} else {
-			setAccess(true);
 		}
 	}, [accessToken, navigate]);
-
-	return access;
 };

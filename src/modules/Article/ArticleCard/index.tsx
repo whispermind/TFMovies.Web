@@ -1,4 +1,4 @@
-import { Card, CardMedia, CardContent, Typography, Link } from "@mui/material";
+import { CardMedia, CardContent, Typography, Link } from "@mui/material";
 
 import { ArticleTags } from "./ArticleTags";
 import { LikeButton, UserAvatar } from "../../../common/components";
@@ -28,7 +28,7 @@ export const ArticleCard = ({ articleData }: IArticleCardProps) => {
 	const { id, coverImageUrl, title, createdAt, author, tags, isLiked, authorId } = articleData;
 
 	return (
-		<Card>
+		<Styled.Card>
 			<Link href={`${Routes.article}/${id}`}>
 				<CardMedia
 					component="img"
@@ -70,6 +70,6 @@ export const ArticleCard = ({ articleData }: IArticleCardProps) => {
 					</LikeButton>
 				</Styled.CardActions>
 			</Styled.CardContentContainer>
-		</Card>
+		</Styled.Card>
 	);
 };

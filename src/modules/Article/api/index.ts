@@ -11,7 +11,7 @@ export interface PostByAuthor {
 	createdAt: string;
 	tags: ITag[];
 }
-export interface IArticleResponseData extends IArticleCard {
+export interface IGetArticleResponseData extends IArticleCard {
 	htmlContent: string;
 	likesCount: number;
 	commentsCount: number;
@@ -33,12 +33,12 @@ const articleApi = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: ["Article"]
 		}),
-		getArticle: builder.query<IArticleResponseData, { id: string; limit: number }>({
+		getArticle: builder.query<IGetArticleResponseData, { id: string; limit: number }>({
 			query: ({ id, limit }) => ({
 				url: `/posts/${id}?limit=${limit}`
 			}),
 			providesTags: ["Article"],
-			transformResponse: (article: IArticleResponseData) => ({
+			transformResponse: (article: IGetArticleResponseData) => ({
 				...article,
 				createdAt: dateFormatter(article.createdAt),
 				postsByAuthor: article.postsByAuthor.map((post) => ({ ...post, createdAt: dateFormatter(post.createdAt) })),

@@ -1,6 +1,6 @@
-import { IArticleResponseData } from "../../../modules/Article/api/index";
+import type { IGetArticleResponseData } from "../../../modules/Article/api/index";
 
-export function isArticle(article: unknown): article is IArticleResponseData {
+export function isArticle(article: unknown): article is IGetArticleResponseData {
 	return (
 		typeof article === "object" &&
 		article !== null &&

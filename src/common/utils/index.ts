@@ -5,3 +5,6 @@ export { capitalizer } from "./capitalizer";
 export { yupErrorMessages } from "./yupErrorMessages";
 export { isApiError } from "./helpers/errorHelpers";
 export { dateFormatter } from "./dateFormatter";
+export { isUser } from "./helpers/isUserHelper";
+export { isArticle } from "./helpers/isArticleHelper";
+export { isArticles } from "./helpers/isArticlesHelper";

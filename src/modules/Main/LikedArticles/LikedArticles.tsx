@@ -15,8 +15,6 @@ export const LikedArticles = () => {
 	const queryString = `?page=${pageQuery}&limit=${ARTICLES_PER_PAGE_LIMIT}`;
 	const { data, isLoading } = useGetLikedArticlesQuery(queryString);
 
-	const access = useIsAuthorized();
-
 	const Articles = useMemo(
 		() =>
 			data?.data?.map((articleData) => (
@@ -35,8 +33,10 @@ export const LikedArticles = () => {
 		[setPageQuery]
 	);
 
+	useIsAuthorized();
+
 	return (
-		(access && (
+		(
 			<Styled.Grid container>
 				<Grid item>
 					<MainNav />
@@ -62,7 +62,6 @@ export const LikedArticles = () => {
 					/>
 				</Stack>
 			</Styled.Grid>
-		)) ||
-		null
+		) || null
 	);
 };

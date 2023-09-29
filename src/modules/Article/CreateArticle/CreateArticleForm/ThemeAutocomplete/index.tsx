@@ -35,6 +35,7 @@ export const ThemeAutocomplete = ({ onChange: onThemeChange, control, value }: I
 			popupIcon={false}
 			onChange={onChange}
 			value={value}
+			defaultValue=""
 			renderInput={(props) => (
 				<ThemesField
 					{...props}

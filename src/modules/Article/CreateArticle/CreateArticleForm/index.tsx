@@ -20,7 +20,7 @@ import type { IGetThemeResponseData } from "../../../Main/api";
 import type { IArticleResponseData } from "../../api";
 
 export interface ICreateArticleForm {
-	attachment: FileList | null;
+	attachment: FileList | string | null;
 	title: string;
 	tags: string;
 	ThemeId: string;
@@ -43,11 +43,11 @@ const TAGS_LIMIT = 5;
 
 export const schema = yup.object().shape({
 	attachment: yup
-		.mixed<FileList>()
+		.mixed<FileList | string>()
 		.required(requiredError("cover image"))
 		.test("size", attachmentSize(MAX_ATTACHMENT_SIZE), (file) => {
 			const maxSize = MAX_ATTACHMENT_SIZE * 1024 * 1024;
-			return file[0]?.size < maxSize || !file.length;
+			return typeof file === "string" || file[0]?.size < maxSize || !file.length;
 		}),
 	title: yup.string().required(requiredError()).trim(traillingSpace()),
 	tags: yup
@@ -82,9 +82,10 @@ export const CreateArticleForm = ({
 
 	const { handleSubmit, control, setValue, getValues } = useForm<ICreateArticleForm>({
 		defaultValues: {
+			attachment: coverImageUrl || null,
 			title: editingState.title || "",
-			tags: editingState.tags?.map(({ name }) => name).join(" ") || "",
-			ThemeId: editingState.theme?.id || "placeholder"
+			tags: editingState.tags?.map(({ name }) => name).join(" "),
+			ThemeId: editingState.theme?.id
 		},
 		resolver: yupResolver<ICreateArticleForm>(schema),
 		mode: "onBlur"
@@ -193,12 +194,12 @@ export const CreateArticleForm = ({
 							<ThemeAutocomplete
 								control={control}
 								onChange={onThemeChange}
-								value={theme.name || "placeholder"}
+								value={theme.name || ""}
 							/>
 						</Styled.TextFieldsWrapper>
 					</Styled.FieldsWrapper>
 					<Editor
-						initState={htmlContent}
+						editorState={htmlContent}
 						onChange={setHtmlContent}
 					/>
 				</Styled.Form>

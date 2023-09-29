@@ -32,7 +32,6 @@ export const FileInput = ({ control, onChange: onFileUpload }: IFileInputProps) 
 							}}
 							inputProps={{ accept: "image/*", placeholder: "Add Cover Image" }}
 							inputRef={ref}
-							required
 						/>
 						Add Cover Image
 					</Styled.FileInputWrapper>

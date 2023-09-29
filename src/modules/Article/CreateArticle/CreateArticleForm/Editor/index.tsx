@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import ReactQuill from "react-quill";
 import { DeltaStatic } from "quill";
 import "react-quill/dist/quill.snow.css";
@@ -9,11 +9,10 @@ import * as Styled from "./styled";
 
 interface IEditorProps {
 	onChange: (state: string) => void;
-	initState: string;
+	editorState: string;
 }
 
-export const Editor = ({ onChange: onChangeFromProps, initState }: IEditorProps) => {
-	const [editorState, setEditorState] = useState(initState);
+export const Editor = ({ onChange: onChangeFromProps, editorState }: IEditorProps) => {
 	const [imageUploadReq] = useImageUploadMutation();
 
 	const modules = {
@@ -28,7 +27,6 @@ export const Editor = ({ onChange: onChangeFromProps, initState }: IEditorProps)
 
 	const onChange = useCallback(
 		async (state: string, { ops }: DeltaStatic) => {
-			setEditorState(state);
 			if (ops) {
 				const imageOperation = ops.find((obj) => typeof obj?.insert === "object" && "image" in obj.insert);
 				if (imageOperation) {

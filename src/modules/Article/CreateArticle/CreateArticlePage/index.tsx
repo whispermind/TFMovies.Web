@@ -13,9 +13,9 @@ export const CreateArticlePage = () => {
 	const navigate = useNavigate();
 
 	const onSubmit = useCallback(
-		async ({ attachment, tags, ThemeId, title, HtmlContent }: ICreateArticleFormSubmit) => {
+		async ({ attachment, tags, ThemeId, title, htmlContent }: ICreateArticleFormSubmit) => {
 			try {
-				const articleData = { coverImageUrl: attachment, tags: tags.split(" "), ThemeId, title, HtmlContent };
+				const articleData = { coverImageUrl: attachment, tags: tags.split(" "), ThemeId, title, htmlContent };
 				await createArticleReq(articleData).unwrap();
 				navigate(Routes.articlePublished);
 				enqueueSnackbar(snackBarMessages.articleCreated, { variant: "success" });

@@ -15,19 +15,13 @@ export const EditArticlePage = () => {
 	const { state } = useLocation();
 	const navigate = useNavigate();
 
-	const { title, theme, tags, coverImageUrl, htmlContent, id } = state as IArticleResponseData;
-
-	useEffect(() => {
-		if (!isArticle(state)) {
-			navigate("/");
-		}
-	}, [state, navigate]);
+	const { id } = state as IArticleResponseData;
 
 	const onUpdate = useCallback(
 		async (updatedData: ICreateArticleFormSubmit) => {
-			const { attachment, tags: updatedTags, ThemeId, title: updatedTitle, HtmlContent: updatedContent } = updatedData;
+			const { attachment, tags, ThemeId, title, htmlContent } = updatedData;
 			try {
-				const articleData = { coverImageUrl: attachment, tags: updatedTags.split(" "), ThemeId, title: updatedTitle, HtmlContent: updatedContent };
+				const articleData = { coverImageUrl: attachment, tags: tags.split(" "), ThemeId, title, htmlContent };
 				await updateArticleReq({ id, articleData }).unwrap();
 				navigate(`${Routes.article}/${id}`);
 				enqueueSnackbar(snackBarMessages.articleUpdated, { variant: "success" });
@@ -38,14 +32,16 @@ export const EditArticlePage = () => {
 		[navigate, updateArticleReq, id]
 	);
 
+	useEffect(() => {
+		if (!isArticle(state)) {
+			navigate("/");
+		}
+	}, [state, navigate]);
+
 	return (
 		<PageWrapper>
 			<CreateArticleForm
-				title={title}
-				theme={theme}
-				tags={tags}
-				coverImageUrl={coverImageUrl}
-				htmlContent={htmlContent}
+				{...state}
 				onSubmit={onUpdate}
 				isLoading={isLoading}
 			/>

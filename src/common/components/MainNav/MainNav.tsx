@@ -40,7 +40,7 @@ export const MainNav = () => {
 	const otherLinks = unsortedLinks.filter(({ section }) => section === "other").map(({ link }) => link);
 	const adminLinks = unsortedLinks.filter(({ section }) => section === "admin").map(({ link }) => link);
 
-	const isAdmin = currentUser?.role === UserRoles.admin;
+	const isAdmin = currentUser?.role.name === UserRoles.admin;
 
 	return (
 		<Stack

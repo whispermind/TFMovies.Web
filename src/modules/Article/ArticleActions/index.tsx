@@ -21,7 +21,7 @@ export const ArticleActions = (props: Partial<IArticleResponseData>) => {
 		navigate(`${Routes.editArticle}/${id}`, { state: props });
 	}, [navigate, props, id]);
 
-	const isEditable = currentUser?.id === authorId || currentUser?.role === UserRoles.admin;
+	const isEditable = currentUser?.id === authorId || currentUser?.role.name === UserRoles.admin;
 
 	return (
 		<Styled.Stack>

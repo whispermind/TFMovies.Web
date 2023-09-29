@@ -40,7 +40,7 @@ const mainApi = apiSlice.injectEndpoints({
 				data: articles.data.map((article) => ({ ...article, createdAt: dateFormatter(article.createdAt) }))
 			})
 		}),
-		getLikedArticles: builder.query<IGetArticleResponseData, string>({
+		getLikedArticles: builder.query<IGetArticlesResponseData, string>({
 			query: (query) => ({
 				url: `/posts/liked-by/${query}`
 			}),

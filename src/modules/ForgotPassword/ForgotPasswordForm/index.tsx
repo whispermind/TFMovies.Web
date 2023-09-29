@@ -40,8 +40,7 @@ export const ForgotPassForm = ({ onSubmit, isLoading }: ILoadingForm<IForgotPass
 					name="email"
 					placeholder="Enter the email..."
 					control={control}
-					icon={EmailIcon}
-					position="start"
+					startIcon={EmailIcon}
 				/>
 				<SubmitButton
 					type="submit"

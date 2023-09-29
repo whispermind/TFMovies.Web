@@ -4,15 +4,15 @@ import { InputAdornment, TextFieldProps, SvgIconProps } from "@mui/material";
 import * as Styled from "./styled";
 
 export interface IWithIconProps {
-	icon: (props: SvgIconProps) => JSX.Element;
-	position: "end" | "start";
+	startIcon?: (props: SvgIconProps) => JSX.Element;
+	endIcon?: (props: SvgIconProps) => JSX.Element | null;
 	iconProps?: SvgIconProps;
 }
 
 export type TFormTextFieldIconedProps = IWithIconProps & TextFieldProps & Reffered<HTMLInputElement>;
 
 export const FormTextFieldIconed = forwardRef<HTMLInputElement, TFormTextFieldIconedProps>((props, ref) => {
-	const { position, icon: Icon, InputProps, iconProps, ...restProps } = props;
+	const { startIcon: StartIcon, endIcon: EndIcon, InputProps, iconProps, ...restProps } = props;
 
 	return (
 		<Styled.FormTextField
@@ -20,11 +20,16 @@ export const FormTextFieldIconed = forwardRef<HTMLInputElement, TFormTextFieldIc
 			{...restProps}
 			InputProps={{
 				...InputProps,
-				[`${position}Adornment`]: (
-					<InputAdornment position={position}>
-						<Icon {...iconProps} />
+				startAdornment: StartIcon && (
+					<InputAdornment position="start">
+						<StartIcon {...iconProps} />
 					</InputAdornment>
-				)
+				),
+				endAdornment: EndIcon ? (
+					<InputAdornment position="end">
+						<EndIcon {...iconProps} />
+					</InputAdornment>
+				) : null
 			}}
 		/>
 	);

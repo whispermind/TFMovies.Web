@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
-import { Stack, Link } from "@mui/material";
+import { Stack, Link, SvgIconProps } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useState } from "react";
 
 import { FormTextFieldIconed, TFormTextFieldIconedProps, PrimaryButton } from "../../../common/components";
-import { PassswordIcon, EmailIcon } from "../../../common/components/Icons";
+import { PassswordIcon, EmailIcon, OpenedEye, ClosedEye } from "../../../common/components/Icons";
 import { withController, withButtonLoader } from "../../../common/hocs";
 import { yupErrorMessages } from "../../../common/utils/yupErrorMessages";
 import { formValidation } from "../../../common/utils";
@@ -32,6 +33,29 @@ export const SignInForm = ({ onSubmit, isLoading }: ILoadingForm<ISignInForm>) =
 		mode: "onBlur"
 	});
 
+	const [isPasswordVisible, setPasswordVisibility] = useState(false);
+
+	const togglePasswordVisibility = () => {
+		setPasswordVisibility((prev) => !prev);
+	};
+
+	const renderPasswordEndIcon = (props: SvgIconProps) => {
+		if (isPasswordVisible) {
+			return (
+				<OpenedEye
+					onClick={togglePasswordVisibility}
+					{...props}
+				/>
+			);
+		}
+		return (
+			<ClosedEye
+				onClick={togglePasswordVisibility}
+				{...props}
+			/>
+		);
+	};
+
 	const Email = withController<ISignInForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
 	const Password = withController<ISignInForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
 	const SubmitButton = withButtonLoader(PrimaryButton);
@@ -44,16 +68,15 @@ export const SignInForm = ({ onSubmit, isLoading }: ILoadingForm<ISignInForm>) =
 					name="email"
 					placeholder="Enter the email..."
 					control={control}
-					icon={EmailIcon}
-					position="start"
+					startIcon={EmailIcon}
 				/>
 				<Password
-					type="password"
+					type={isPasswordVisible ? "text" : "password"}
 					name="password"
 					placeholder="Enter the password..."
 					control={control}
-					icon={PassswordIcon}
-					position="start"
+					startIcon={PassswordIcon}
+					endIcon={renderPasswordEndIcon}
 				/>
 				<Link
 					href="/forgotpass"

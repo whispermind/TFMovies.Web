@@ -10,3 +10,5 @@ export { SearchIcon } from "./SearchIcon";
 export { UserListIcon } from "./UserListIcon";
 export { FavoriteFilledIcon } from "./FavoriteFIlledIcon";
 export { CommentsIcon } from "./CommentsIcon";
+export { OpenedEye } from "./OpenedEye";
+export { ClosedEye } from "./ClosedEye";

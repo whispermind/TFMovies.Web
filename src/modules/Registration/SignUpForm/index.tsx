@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
-import { Stack } from "@mui/material";
+import { Stack, SvgIconProps } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useState } from "react";
 
 import { FormTextFieldIconed, TFormTextFieldIconedProps, SignUpButton } from "../../../common/components";
-import { PassswordIcon, UserIcon, EmailIcon } from "../../../common/components/Icons";
+import { PassswordIcon, UserIcon, EmailIcon, OpenedEye, ClosedEye } from "../../../common/components/Icons";
 import { formValidation } from "../../../common/utils";
 import { withController, withButtonLoader } from "../../../common/hocs";
 import { yupErrorMessages } from "../../../common/utils/yupErrorMessages";
@@ -41,6 +42,51 @@ export const SignUpForm = ({ onSubmit, isLoading }: ILoadingForm<ISignUpForm>) =
 		mode: "onBlur"
 	});
 
+	const [isPasswordVisible, setPasswordVisibility] = useState(false);
+	const [isPasswordConfirmVisible, setPasswordConfirmVisibility] = useState(false);
+
+	const togglePasswordVisibility = () => {
+		setPasswordVisibility((prev) => !prev);
+	};
+
+	const togglePasswordConfirmVisibility = () => {
+		setPasswordConfirmVisibility((prev) => !prev);
+	};
+
+	const renderPasswordEndIcon = (props: SvgIconProps) => {
+		if (isPasswordVisible) {
+			return (
+				<OpenedEye
+					onClick={togglePasswordVisibility}
+					{...props}
+				/>
+			);
+		}
+		return (
+			<ClosedEye
+				onClick={togglePasswordVisibility}
+				{...props}
+			/>
+		);
+	};
+
+	const renderPasswordConfirmEndIcon = (props: SvgIconProps) => {
+		if (isPasswordConfirmVisible) {
+			return (
+				<OpenedEye
+					onClick={togglePasswordConfirmVisibility}
+					{...props}
+				/>
+			);
+		}
+		return (
+			<ClosedEye
+				onClick={togglePasswordConfirmVisibility}
+				{...props}
+			/>
+		);
+	};
+
 	const Nickname = withController<ISignUpForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
 	const Email = withController<ISignUpForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
 	const Password = withController<ISignUpForm, TFormTextFieldIconedProps>(FormTextFieldIconed);
@@ -55,32 +101,30 @@ export const SignUpForm = ({ onSubmit, isLoading }: ILoadingForm<ISignUpForm>) =
 					name="nickname"
 					placeholder="Enter the nickname..."
 					control={control}
-					icon={UserIcon}
-					position="start"
+					startIcon={UserIcon}
 				/>
 				<Email
 					type="email"
 					name="email"
 					placeholder="Enter the email..."
 					control={control}
-					icon={EmailIcon}
-					position="start"
+					startIcon={EmailIcon}
 				/>
 				<Password
-					type="password"
+					type={isPasswordVisible ? "text" : "password"}
 					name="password"
 					placeholder="Enter the password..."
 					control={control}
-					icon={PassswordIcon}
-					position="start"
+					startIcon={PassswordIcon}
+					endIcon={renderPasswordEndIcon}
 				/>
 				<PasswordConfirm
-					type="password"
+					type={isPasswordConfirmVisible ? "text" : "password"}
 					name="confirmPassword"
 					placeholder="Enter the password again..."
 					control={control}
-					icon={PassswordIcon}
-					position="start"
+					startIcon={PassswordIcon}
+					endIcon={renderPasswordConfirmEndIcon}
 				/>
 				<SubmitButton
 					type="submit"

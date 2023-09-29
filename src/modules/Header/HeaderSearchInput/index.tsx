@@ -32,9 +32,8 @@ export const HeaderSearchInput = () => {
 			value={searchQuery}
 			onBlur={onBlur}
 			onChange={onChange}
-			position="end"
 			placeholder="Search something..."
-			icon={SearchIcon}
+			endIcon={SearchIcon}
 			sx={{ maxWidth: "420px" }}
 			fullWidth
 		/>

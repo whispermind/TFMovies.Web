@@ -21,7 +21,7 @@ export const MainPage = () => {
 		() =>
 			data?.data?.map((articleData) => (
 				<ArticleCard
-					articleData={articleData}
+					{...articleData}
 					key={articleData.id}
 				/>
 			)),

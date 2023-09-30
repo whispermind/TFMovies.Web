@@ -1,5 +1,5 @@
 import { apiSlice } from "../../../app/api";
-import { dateFormatter } from "../../../common/utils";
+import { dateFormatter, isArticles } from "../../../common/utils";
 
 import type { IArticleCard } from "..";
 import type { IUser } from "../../Authorization/AuthSlice";
@@ -56,7 +56,11 @@ const mainApi = apiSlice.injectEndpoints({
 			query: (query) => ({
 				url: `/posts/liked-by/me${query}`
 			}),
-			providesTags: (result) => (result ? [...result.data.map(({ id }) => ({ type: "Article" as const, id })), "Article"] : ["Article"])
+			providesTags: (result) => (result ? [...result.data.map(({ id }) => ({ type: "Article" as const, id })), "Article"] : ["Article"]),
+			transformResponse: (articles: IGetArticlesResponseData) => ({
+				...articles,
+				data: articles.data.map((article) => ({ ...article, createdAt: dateFormatter(article.createdAt) }))
+			})
 		}),
 		likeArticle: builder.mutation<void, string>({
 			query: (id) => ({

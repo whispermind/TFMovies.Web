@@ -33,7 +33,7 @@ export const LikedArticles = () => {
 		[setPageQuery]
 	);
 
-	useIsAuthorized();
+	useIsAuthorized(true);
 
 	return (
 		(

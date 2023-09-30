@@ -1,5 +1,6 @@
 import { useMemo } from "react";
-import { Link, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
+import { AppLink } from "../../../../common/components";
 
 const linksData = {
 	"/contactus": "Contact Us",
@@ -11,13 +12,13 @@ export const FooterCopyright = () => {
 	const links = useMemo(
 		() =>
 			Object.entries(linksData).map(([href, caption]) => (
-				<Link
+				<AppLink
 					key={href}
 					href={href}
 					color="greyColors.softGrey"
 				>
 					{caption}
-				</Link>
+				</AppLink>
 			)),
 		[]
 	);

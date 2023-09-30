@@ -1,7 +1,8 @@
 import { useMemo } from "react";
-import { Link, ListItem } from "@mui/material";
+import { ListItem } from "@mui/material";
 
 import { Routes } from "../../../../common/enums";
+import { AppLink } from "../../../../common/components";
 import * as Styled from "./styled";
 
 import type { ITag } from "..";
@@ -19,13 +20,14 @@ export const ArticleTags = ({ tags }: IArticleTagsProps) => {
 					key={id}
 					sx={{ width: "auto" }}
 				>
-					<Link
+					<AppLink
 						variant="HBody"
 						color="greyColors.grey"
 						href={`${Routes.search}?subject=tags&query=${name}&id=${id}`}
+						authorized
 					>
 						{`#${name}`}
-					</Link>
+					</AppLink>
 				</ListItem>
 			)),
 		[tags]

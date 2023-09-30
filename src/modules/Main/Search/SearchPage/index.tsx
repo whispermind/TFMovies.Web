@@ -55,7 +55,7 @@ export const SearchPage = () => {
 		[setPageQuery]
 	);
 
-	useIsAuthorized();
+	useIsAuthorized(true);
 
 	return (
 		(

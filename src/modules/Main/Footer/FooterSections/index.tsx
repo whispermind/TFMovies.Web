@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from "react";
-import { Link } from "@mui/material";
 
 import { FooterLinksWrapper } from "../FooterLinksWrapper";
 import { Routes } from "../../../../common/enums";
+import { AppLink } from "../../../../common/components/AppLink";
 
 const linksData = {
 	"/": "Home Page",
@@ -20,14 +20,15 @@ export const FooterSections = () => {
 	const links = useMemo(
 		() =>
 			Object.entries(linksData).map(([href, caption]) => (
-				<Link
+				<AppLink
 					key={href}
 					variant="SectionLink"
 					href={href}
 					onClick={href === "/" ? scrollToTop : undefined}
+					authorized
 				>
 					{caption}
-				</Link>
+				</AppLink>
 			)),
 		[scrollToTop]
 	);

@@ -1,7 +1,7 @@
-import { CardMedia, CardContent, Typography, Link } from "@mui/material";
+import { CardMedia, CardContent, Typography } from "@mui/material";
 
 import { ArticleTags } from "./ArticleTags";
-import { LikeButton, UserAvatar } from "../../../common/components";
+import { LikeButton, UserAvatar, AppLink } from "../../../common/components";
 import { Routes } from "../../../common/enums";
 import * as Styled from "./styled";
 
@@ -29,14 +29,17 @@ export const ArticleCard = ({ articleData }: IArticleCardProps) => {
 
 	return (
 		<Styled.Card>
-			<Link href={`${Routes.article}/${id}`}>
+			<AppLink
+				href={`${Routes.article}/${id}`}
+				authorized
+			>
 				<CardMedia
 					component="img"
 					alt="cover image"
 					height="300"
 					image={coverImageUrl}
 				/>
-			</Link>
+			</AppLink>
 			<Styled.CardContentContainer>
 				<UserAvatar
 					size={44}

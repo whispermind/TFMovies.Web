@@ -27,6 +27,7 @@ export const MainNav = () => {
 					<Styled.MainLink
 						key={caption}
 						href={href}
+						authorized
 					>
 						<ListItem>
 							<ListItemIcon>

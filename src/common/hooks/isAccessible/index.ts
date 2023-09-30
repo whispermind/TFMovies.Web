@@ -5,18 +5,18 @@ import { selectAuth } from "../../../modules/Authorization/AuthSlice";
 import { useAppSelector } from "../../../app/store";
 import { UserRoles } from "../../enums";
 
-export const useRoleValidation = (role: UserRoles, location?: string) => {
+export const useUserAccess = (requiredAccess: UserRoles, location?: string) => {
 	const { currentUser } = useAppSelector(selectAuth);
 	const navigate = useNavigate();
 
 	const userRole = currentUser?.role.name;
-	const match = userRole === role;
+	const access = userRole === requiredAccess || userRole === UserRoles.admin;
 
 	useEffect(() => {
-		if (!match) {
+		if (!access) {
 			if (location) navigate(location, { replace: true });
 		}
-	}, [role, navigate, location, userRole, match]);
+	}, [navigate, location, userRole, access]);
 
-	return match;
+	return access;
 };

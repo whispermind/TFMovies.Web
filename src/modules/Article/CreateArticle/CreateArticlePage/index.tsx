@@ -5,7 +5,8 @@ import { enqueueSnackbar } from "notistack";
 import { CreateArticleForm, CreationAdvice, ICreateArticleFormSubmit } from "..";
 import { useCreateArticleMutation } from "../api";
 import { snackBarMessages } from "../../../../common/utils";
-import { Routes } from "../../../../common/enums";
+import { useUserAccess } from "../../../../common/hooks";
+import { Routes, UserRoles } from "../../../../common/enums";
 import * as Styled from "./styled";
 
 export const CreateArticlePage = () => {
@@ -25,6 +26,8 @@ export const CreateArticlePage = () => {
 		},
 		[createArticleReq, navigate]
 	);
+
+	useUserAccess(UserRoles.author, "/");
 
 	return (
 		<Styled.PageWrapper>

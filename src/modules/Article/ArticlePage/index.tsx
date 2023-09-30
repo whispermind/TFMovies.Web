@@ -12,7 +12,7 @@ export const ArticlePage = () => {
 	const { id = "" } = useParams();
 	const { data, isLoading } = useGetArticleQuery({ id, limit: AUTHORS_OTHER_ARTICLES_LIMIT });
 
-	useIsAuthorized();
+	useIsAuthorized(true);
 
 	return (
 		(

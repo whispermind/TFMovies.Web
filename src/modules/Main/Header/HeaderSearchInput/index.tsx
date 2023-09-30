@@ -4,6 +4,7 @@ import { ChangeEvent, FocusEvent, useCallback } from "react";
 import { FormTextFieldIconed } from "../../../../common/components";
 import { SearchIcon } from "../../../../common/components/Icons";
 import { Routes } from "../../../../common/enums";
+import { useIsAuthorized } from "../../../../common/hooks";
 
 let debouncer = false;
 const debounceTime = 500;
@@ -13,8 +14,15 @@ export const HeaderSearchInput = () => {
 	const { pathname } = useLocation();
 	const [params, setSearchParams] = useSearchParams();
 
+	const authorized = useIsAuthorized(false);
+
 	const onChange = useCallback(
 		({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+			if (!authorized) {
+				navigate(Routes.signIn);
+				return;
+			}
+
 			if (debouncer) return;
 			debouncer = true;
 
@@ -28,7 +36,7 @@ export const HeaderSearchInput = () => {
 				debouncer = false;
 			}, debounceTime);
 		},
-		[navigate, pathname, setSearchParams, params]
+		[navigate, pathname, setSearchParams, params, authorized]
 	);
 
 	const onBlur = useCallback(

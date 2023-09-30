@@ -1,9 +1,10 @@
 import { useMemo } from "react";
-import { Typography, Link, ListItem } from "@mui/material";
+import { Typography, ListItem } from "@mui/material";
 import { sanitize } from "dompurify";
 
 import { IGetArticleResponseData } from "../api";
 import { Routes } from "../../../common/enums";
+import { AppLink } from "../../../common/components";
 import * as Styled from "./styled";
 
 type TArticleContentProps = Partial<Pick<IGetArticleResponseData, "tags" | "coverImageUrl" | "title" | "theme" | "htmlContent">>;
@@ -16,15 +17,16 @@ export const ArticleContent = (props: TArticleContentProps) => {
 		() =>
 			Array.from(tags).map(({ id, name }) => (
 				<ListItem key={id}>
-					<Link
+					<AppLink
 						href={`${Routes.search}?subject=tags&query=${name}&id=${id}`}
 						underline="none"
+						authorized
 					>
 						<Typography
 							variant="HBody"
 							color="greyColors.grey"
 						>{`#${name}`}</Typography>
-					</Link>
+					</AppLink>
 				</ListItem>
 			)),
 		[tags]

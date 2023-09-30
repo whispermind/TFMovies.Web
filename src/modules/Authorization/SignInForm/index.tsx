@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
-import { Stack, Link } from "@mui/material";
+import { Stack } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import { FormTextFieldIconed, TFormTextFieldIconedProps, PrimaryButton } from "../../../common/components";
+import { FormTextFieldIconed, TFormTextFieldIconedProps, PrimaryButton, AppLink } from "../../../common/components";
 import { PassswordIcon, EmailIcon } from "../../../common/components/Icons";
 import { withController, withButtonLoader } from "../../../common/hocs";
 import { yupErrorMessages } from "../../../common/utils/yupErrorMessages";
@@ -56,13 +56,13 @@ export const SignInForm = ({ onSubmit, isLoading }: ILoadingForm<ISignInForm>) =
 					icon={PassswordIcon}
 					position="start"
 				/>
-				<Link
+				<AppLink
 					href={`${Routes.forgotPass}`}
 					variant="FormHyperLink"
 					color="mainColors.black"
 				>
 					Forgot Your Password?
-				</Link>
+				</AppLink>
 				<SubmitButton
 					variant="customOutlined"
 					type="submit"

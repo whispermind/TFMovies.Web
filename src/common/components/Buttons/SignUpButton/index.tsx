@@ -1,4 +1,4 @@
-import { ButtonProps, Button } from "@mui/material";
+import { Button, ButtonProps } from "@mui/material";
 
 import { EmailIcon } from "../../Icons";
 

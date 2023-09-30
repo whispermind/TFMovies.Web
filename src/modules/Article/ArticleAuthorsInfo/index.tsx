@@ -1,7 +1,7 @@
 import { useMemo } from "react";
-import { Typography, Link, Stack } from "@mui/material";
+import { Typography, Stack } from "@mui/material";
 
-import { UserAvatar } from "../../../common/components";
+import { UserAvatar, AppLink } from "../../../common/components";
 import { ArticleTags } from "../ArticleCard/ArticleTags";
 import { Routes } from "../../../common/enums";
 import * as Styled from "./styled";
@@ -20,9 +20,12 @@ export const ArticleAuthorsInfo = ({ id: authorId, createdAt, nickname, postsByA
 		() =>
 			postsByAuthor.map(({ title, tags, id: articleId }) => (
 				<Styled.ArticleData key={articleId}>
-					<Link href={`${Routes.article}/${articleId}`}>
+					<AppLink
+						href={`${Routes.article}/${articleId}`}
+						authorized
+					>
 						<Typography variant="SectionLink">{title}</Typography>
-					</Link>
+					</AppLink>
 					<ArticleTags tags={tags} />
 				</Styled.ArticleData>
 			)),

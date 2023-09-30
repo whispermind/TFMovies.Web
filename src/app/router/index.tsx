@@ -29,10 +29,11 @@ export const router = createBrowserRouter(
 				element={<MainPage />}
 			/>
 
-			<Route
-				path="signup"
-				element={<SignUpPage />}
-			>
+			<Route path="/signup">
+				<Route
+					path="/signup"
+					element={<SignUpPage />}
+				/>
 				<Route
 					path=":token"
 					element={<SignUpSuccessPage />}

@@ -4,7 +4,7 @@ import { ThemeProvider, CssBaseline } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 
-import { AppLayout } from "../modules/AppLayout";
+import { AppLayout } from "../common/components/AppLayout";
 import { mainTheme } from "./styles/theme";
 import { store, persistor } from "./store";
 

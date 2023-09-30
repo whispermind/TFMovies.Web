@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useGetArticleQuery } from "../api";
 import { PageSpinner, PageWrapper } from "../../../common/components";
 import { ArticleContent, ArticleComments, ArticleActions, ArticleAuthorsInfo } from "..";
+import { useIsAuthorized } from "../../../common/hooks";
 import * as Styled from "./styled";
 
 const AUTHORS_OTHER_ARTICLES_LIMIT = 7;
@@ -11,18 +12,15 @@ export const ArticlePage = () => {
 	const { id = "" } = useParams();
 	const { data, isLoading } = useGetArticleQuery({ id, limit: AUTHORS_OTHER_ARTICLES_LIMIT });
 
+	useIsAuthorized();
+
 	return (
 		<PageWrapper>
 			{isLoading ? (
 				<PageSpinner />
 			) : (
 				<>
-					<ArticleActions
-						likesAmount={data?.likesCount}
-						commentsAmount={data?.commentsCount}
-						isLiked={data?.isLiked}
-						id={data?.id}
-					/>
+					<ArticleActions {...data} />
 					<Styled.ContentWrapper>
 						<ArticleContent
 							title={data?.title}

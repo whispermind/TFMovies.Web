@@ -6,6 +6,7 @@ export const snackBarMessages = {
 	passRecovery: "The password was successfully changed",
 	sessionExpired: "The session expired. Please, login again.",
 	articleCreated: "The article was successfully published",
+	articleUpdated: "The article was successfully updated",
 	addComment: "Сomment was successfully published",
 	articlePreview: "Fill all the fields to make preview mode avaible"
 };

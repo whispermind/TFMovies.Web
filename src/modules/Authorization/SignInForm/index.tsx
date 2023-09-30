@@ -8,6 +8,7 @@ import { PassswordIcon, EmailIcon } from "../../../common/components/Icons";
 import { withController, withButtonLoader } from "../../../common/hocs";
 import { yupErrorMessages } from "../../../common/utils/yupErrorMessages";
 import { formValidation } from "../../../common/utils";
+import { Routes } from "../../../common/enums";
 
 export interface ISignInForm {
 	email: string;
@@ -56,7 +57,7 @@ export const SignInForm = ({ onSubmit, isLoading }: ILoadingForm<ISignInForm>) =
 					position="start"
 				/>
 				<Link
-					href="/forgotpass"
+					href={`${Routes.forgotPass}`}
 					variant="FormHyperLink"
 					color="mainColors.black"
 				>

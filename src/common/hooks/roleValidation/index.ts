@@ -9,7 +9,7 @@ export const useRoleValidation = (role: UserRoles, location: string) => {
 	const { currentUser } = useAppSelector(selectAuth);
 	const navigate = useNavigate();
 
-	const userRole = currentUser?.role;
+	const userRole = currentUser?.role.name;
 
 	useEffect(() => {
 		if (!(userRole === role)) navigate(location);

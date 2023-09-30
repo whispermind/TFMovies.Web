@@ -8,9 +8,12 @@ export interface IAuthState {
 	accessToken: string | null;
 	refreshToken: string | null;
 	currentUser: {
-		nickname: string;
-		role: UserRoles;
 		id: string;
+		nickname: string;
+		role: {
+			name: UserRoles;
+			id: string;
+		};
 	} | null;
 }
 

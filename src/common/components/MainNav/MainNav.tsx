@@ -4,7 +4,7 @@ import { FavoriteBorder } from "@mui/icons-material";
 import { HomePageIcon, HashtagIcon, EmailIcon, RulesIcon, UserListIcon } from "../Icons";
 import { useAppSelector } from "../../hooks";
 import { selectAuth } from "../../../modules/Authorization/AuthSlice";
-import { UserRoles } from "../../enums";
+import { UserRoles, Routes } from "../../enums";
 import * as Styled from "./styled";
 
 export const MainNav = () => {
@@ -13,10 +13,10 @@ export const MainNav = () => {
 	const linksData = [
 		{ caption: "Home Page", Icon: HomePageIcon, section: "main", href: "/" },
 		{ caption: "Tags", Icon: HashtagIcon, section: "main", href: "/" },
-		{ caption: "Favorites", Icon: FavoriteBorder, section: "main", href: "/favorites" },
+		{ caption: "Favorites", Icon: FavoriteBorder, section: "main", href: Routes.favorites },
 		{ caption: "Contact Us", Icon: EmailIcon, section: "other", href: "/" },
 		{ caption: "Rules", Icon: RulesIcon, section: "other", href: "/" },
-		{ caption: "User List", Icon: UserListIcon, section: "admin", href: "/userlist" }
+		{ caption: "User List", Icon: UserListIcon, section: "admin", href: Routes.usersList }
 	];
 
 	const unsortedLinks = linksData.map(({ caption, Icon, section, href }) => ({
@@ -40,7 +40,7 @@ export const MainNav = () => {
 	const otherLinks = unsortedLinks.filter(({ section }) => section === "other").map(({ link }) => link);
 	const adminLinks = unsortedLinks.filter(({ section }) => section === "admin").map(({ link }) => link);
 
-	const isAdmin = currentUser?.role === UserRoles.admin;
+	const isAdmin = currentUser?.role.name === UserRoles.admin;
 
 	return (
 		<Stack

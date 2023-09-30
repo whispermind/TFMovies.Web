@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 
 import { SubPageWrapper, LogoHeading, PrimaryButton } from "../../../common/components";
 import { useTokenValidation } from "../../../common/hooks";
+import { Routes } from "../../../common/enums";
 
 export const SignUpSuccessPage = () => {
 	const { token } = useParams();
@@ -20,7 +21,7 @@ export const SignUpSuccessPage = () => {
 			</LogoHeading>
 			<PrimaryButton
 				variant="customOutlined"
-				href="/signin"
+				href={Routes.signIn}
 				fullWidth
 			>
 				Back to Login In

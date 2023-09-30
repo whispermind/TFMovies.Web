@@ -1,26 +1,36 @@
-import { Typography, Link, ListItem } from "@mui/material";
+import { useMemo } from "react";
+import { Typography, ListItem } from "@mui/material";
 import { sanitize } from "dompurify";
 
-import { IArticleResponseData } from "../api";
+import { IGetArticleResponseData } from "../api";
+import { Routes } from "../../../common/enums";
+import { AppLink } from "../../../common/components";
 import * as Styled from "./styled";
 
-export const ArticleContent = ({ tags, coverImageUrl, title, theme, htmlContent }: Partial<IArticleResponseData>) => {
-	const sanitazedHtml = sanitize(htmlContent || "");
-	const uniqTags = new Set(tags);
+type TArticleContentProps = Partial<Pick<IGetArticleResponseData, "tags" | "coverImageUrl" | "title" | "theme" | "htmlContent">>;
 
-	const tagItems = Array.from(uniqTags).map(({ id, name }) => (
-		<ListItem key={id}>
-			<Link
-				href={`/search?subject=tags&query=${name}&id=${id}`}
-				underline="none"
-			>
-				<Typography
-					variant="HBody"
-					color="greyColors.grey"
-				>{`#${name}`}</Typography>
-			</Link>
-		</ListItem>
-	));
+export const ArticleContent = (props: TArticleContentProps) => {
+	const { tags = [], coverImageUrl = "", title = "", theme = { name: "", id: "" }, htmlContent = "" } = props;
+	const sanitazedHtml = sanitize(htmlContent);
+
+	const tagItems = useMemo(
+		() =>
+			Array.from(tags).map(({ id, name }) => (
+				<ListItem key={id}>
+					<AppLink
+						href={`${Routes.search}?subject=tags&query=${name}&id=${id}`}
+						underline="none"
+						authorized
+					>
+						<Typography
+							variant="HBody"
+							color="greyColors.grey"
+						>{`#${name}`}</Typography>
+					</AppLink>
+				</ListItem>
+			)),
+		[tags]
+	);
 
 	return (
 		<Styled.ArticleContentWrapper>
@@ -32,7 +42,7 @@ export const ArticleContent = ({ tags, coverImageUrl, title, theme, htmlContent 
 				<div>
 					<Typography variant="HHeader">{title}</Typography>
 					<Styled.ArticleTagsList>{tagItems}</Styled.ArticleTagsList>
-					<Typography variant="HBodyBold">{`Subject: ${theme}`}</Typography>
+					<Typography variant="HBodyBold">{`Subject: ${theme.name}`}</Typography>
 				</div>
 				<div dangerouslySetInnerHTML={{ __html: sanitazedHtml }} />
 			</Styled.Stack>

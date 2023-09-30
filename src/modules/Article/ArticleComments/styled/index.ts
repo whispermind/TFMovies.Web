@@ -13,6 +13,7 @@ export const CommentsWrapper = styled(Box)(({ theme }) => {
 		padding: "50px 25px",
 		borderRadius: "0px 0px 8px 8px",
 		border: `2px solid ${strokeGrey}`,
+		borderTop: 0,
 		backgroundColor: white
 	};
 });

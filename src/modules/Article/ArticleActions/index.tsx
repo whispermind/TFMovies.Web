@@ -1,28 +1,41 @@
+import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { LikeButton } from "../../../common/components";
-import { IconSizes } from "../../../common/enums";
+import { IconSizes, UserRoles, Routes } from "../../../common/enums";
+import { EditButton } from "./EditButton";
 import { CommentsButton } from "./CommentsButton";
+import { useAppSelector } from "../../../app/store";
+import { selectAuth } from "../../Authorization";
 import * as Styled from "./styled";
 
-interface IArticleActions {
-	likesAmount?: number;
-	commentsAmount?: number;
-	isLiked?: boolean;
-	id?: string;
-}
+import type { IGetArticleResponseData } from "../api";
 
-export const ArticleActions = ({ likesAmount, commentsAmount, isLiked, id }: IArticleActions) => {
+export const ArticleActions = (props: Partial<IGetArticleResponseData>) => {
+	const { likesCount, commentsCount, isLiked, id, authorId } = props;
+
+	const navigate = useNavigate();
+	const { currentUser } = useAppSelector(selectAuth);
+
+	const onEdit = useCallback(() => {
+		navigate(`${Routes.editArticle}/${id}`, { state: props });
+	}, [navigate, props, id]);
+
+	const isEditable = currentUser?.id === authorId || currentUser?.role.name === UserRoles.admin;
+
 	return (
 		<Styled.Stack>
 			<LikeButton
 				id={id || ""}
-				likesAmount={likesAmount}
+				likesAmount={likesCount}
 				isLiked={!!isLiked}
 				size={IconSizes.large}
 			/>
 			<CommentsButton
-				commentsAmount={commentsAmount}
+				commentsAmount={commentsCount}
 				size={IconSizes.large}
 			/>
+			{isEditable && <EditButton onClick={onEdit} />}
 		</Styled.Stack>
 	);
 };

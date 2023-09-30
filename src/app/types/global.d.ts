@@ -19,7 +19,15 @@ declare interface StylesOverrides<T, S> {
 }
 
 declare interface IResponse<T> {
-	status: string;
+	status: number;
 	error?: string;
 	data?: T;
+}
+
+declare interface IPaginationResponse<T> {
+	page: number;
+	limit: number;
+	totalPages: number;
+	totalRecords: number;
+	data: T;
 }

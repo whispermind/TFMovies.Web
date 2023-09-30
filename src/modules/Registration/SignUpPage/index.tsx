@@ -4,6 +4,7 @@ import { enqueueSnackbar } from "notistack";
 import { SignUpConfirmation, ISignUpForm, SignUpForm } from "..";
 import { FormDivider, LogoHeading, SubPageWrapper, PrimaryButton, LogoName } from "../../../common/components";
 import { capitalizer, snackBarMessages } from "../../../common/utils";
+import { Routes } from "../../../common/enums";
 import { useSignUpMutation } from "../api";
 
 export const SignUpPage = () => {
@@ -52,7 +53,7 @@ export const SignUpPage = () => {
 					<FormDivider>or</FormDivider>
 					<PrimaryButton
 						variant="ghost"
-						href="/signin"
+						href={Routes.signIn}
 						fullWidth
 					>
 						Log in

@@ -1,7 +1,9 @@
-import { Typography, Link, Stack } from "@mui/material";
+import { useMemo } from "react";
+import { Typography, Stack } from "@mui/material";
 
-import { UserAvatar } from "../../../common/components";
-import { ArticleTags } from "../../Main/ArticleCard/ArticleTags";
+import { UserAvatar, AppLink } from "../../../common/components";
+import { ArticleTags } from "../ArticleCard/ArticleTags";
+import { Routes } from "../../../common/enums";
 import * as Styled from "./styled";
 
 import type { PostByAuthor } from "../api";
@@ -14,14 +16,21 @@ interface IArticleAuthorsInfoProps {
 }
 
 export const ArticleAuthorsInfo = ({ id: authorId, createdAt, nickname, postsByAuthor }: IArticleAuthorsInfoProps) => {
-	const otherArticles = postsByAuthor.map(({ title, tags, id: articleId }) => (
-		<Styled.ArticleData key={articleId}>
-			<Link href={`/article/${articleId}`}>
-				<Typography variant="SectionLink">{title}</Typography>
-			</Link>
-			<ArticleTags tags={tags} />
-		</Styled.ArticleData>
-	));
+	const otherArticles = useMemo(
+		() =>
+			postsByAuthor.map(({ title, tags, id: articleId }) => (
+				<Styled.ArticleData key={articleId}>
+					<AppLink
+						href={`${Routes.article}/${articleId}`}
+						authorized
+					>
+						<Typography variant="SectionLink">{title}</Typography>
+					</AppLink>
+					<ArticleTags tags={tags} />
+				</Styled.ArticleData>
+			)),
+		[postsByAuthor]
+	);
 
 	return (
 		<Styled.Wrapper>

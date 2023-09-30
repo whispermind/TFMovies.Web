@@ -11,7 +11,7 @@ export const Stack = styled(MuiStack)(
 		alignItems: "start",
 		padding: "32px 24px",
 		rowGap: "40px",
-		borderLeft: `2px solid ${strokeGrey}`,
-		borderRight: `2px solid ${strokeGrey}`
+		border: `2px solid ${strokeGrey}`,
+		borderTop: 0
 	})
 );

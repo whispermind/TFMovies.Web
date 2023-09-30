@@ -1,7 +1,7 @@
 import { ButtonProps, Interpolation, Theme } from "@mui/material";
 
 import { palette } from "../palette";
-import { MuiRouterLink } from "../../../common/components";
+import { MuiRouterLink } from "./MuiRouterLink";
 
 const {
 	mainColors: { graphite, main, white, black },

@@ -2,7 +2,7 @@ import { apiSlice } from "../../../app/api";
 
 import type { IArticleCard } from "../../Main";
 import type { ICommentData } from "../ArticleComments";
-import type { ITag } from "../../Main/ArticleCard";
+import type { ITag } from "../ArticleCard";
 import { dateFormatter } from "../../../common/utils";
 
 export interface PostByAuthor {
@@ -11,13 +11,16 @@ export interface PostByAuthor {
 	createdAt: string;
 	tags: ITag[];
 }
-export interface IArticleResponseData extends IArticleCard {
-	theme: string;
+export interface IGetArticleResponseData extends IArticleCard {
 	htmlContent: string;
 	likesCount: number;
 	commentsCount: number;
 	comments: ICommentData[];
 	postsByAuthor: PostByAuthor[];
+	theme: {
+		name: string;
+		id: string;
+	};
 }
 
 const articleApi = apiSlice.injectEndpoints({
@@ -30,12 +33,12 @@ const articleApi = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: ["Article"]
 		}),
-		getArticle: builder.query<IArticleResponseData, { id: string; limit: number }>({
+		getArticle: builder.query<IGetArticleResponseData, { id: string; limit: number }>({
 			query: ({ id, limit }) => ({
 				url: `/posts/${id}?limit=${limit}`
 			}),
 			providesTags: ["Article"],
-			transformResponse: (article: IArticleResponseData) => ({
+			transformResponse: (article: IGetArticleResponseData) => ({
 				...article,
 				createdAt: dateFormatter(article.createdAt),
 				postsByAuthor: article.postsByAuthor.map((post) => ({ ...post, createdAt: dateFormatter(post.createdAt) })),

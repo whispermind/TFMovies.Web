@@ -1,4 +1,4 @@
-import { ButtonProps, Button } from "@mui/material";
+import { Button, ButtonProps } from "@mui/material";
 
 import { EmailIcon } from "../../Icons";
 
@@ -9,13 +9,7 @@ export const SignUpButton = (props: ButtonProps) => {
 			type="submit"
 			{...props}
 		>
-			<EmailIcon
-				sx={({
-					palette: {
-						mainColors: { white }
-					}
-				}) => ({ fill: white })}
-			/>
+			<EmailIcon sx={(theme) => ({ fill: theme.palette.mainColors.white })} />
 			Sign up with Email
 		</Button>
 	);

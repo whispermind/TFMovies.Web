@@ -1,4 +1,4 @@
-import { ComponentProps, useCallback, ChangeEvent, useState } from "react";
+import { ComponentProps, useCallback, ChangeEvent, useReducer } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { enqueueSnackbar } from "notistack";
@@ -12,28 +12,28 @@ import { PrimaryButton } from "../../../../common/components";
 import { withController, withButtonLoader } from "../../../../common/hocs";
 import { yupErrorMessages, snackBarMessages, formValidation } from "../../../../common/utils";
 import { useImageUploadMutation } from "../api";
-import { IGetThemeResponseData } from "../../../Main/api";
-import { IGetArticleResponseData } from "../../api";
 import { ArticleContent } from "../..";
+import { reducer } from "./Reducer";
 import * as Styled from "./styled";
 
-import type { ITag } from "../../ArticleCard";
+import type { IGetThemeResponseData } from "../../../Main/api";
+import type { IGetArticleResponseData } from "../../api";
 
 export interface ICreateArticleForm {
-	attachment: FileList | null;
+	attachment: FileList | string | null;
 	title: string;
 	tags: string;
 	ThemeId: string;
 }
 
 export interface ICreateArticleFormSubmit extends Omit<ICreateArticleForm, "attachment"> {
-	HtmlContent: string;
+	htmlContent: string;
 	attachment: string;
 }
 
 export interface IStyledInputProps extends ComponentProps<typeof Styled.TextField> {}
 
-interface ICreateArticleFormProps extends Pick<IGetArticleResponseData, "title" | "theme" | "coverImageUrl" | "htmlContent" | "tags"> {}
+export interface ICreateArticleFormProps extends Pick<IGetArticleResponseData, "title" | "theme" | "coverImageUrl" | "htmlContent" | "tags"> {}
 
 const { tags: tagsRegExp } = formValidation;
 const { requiredError, attachmentSize, tagsLimit, traillingSpace, tagsFormatt } = yupErrorMessages;
@@ -43,11 +43,11 @@ const TAGS_LIMIT = 5;
 
 export const schema = yup.object().shape({
 	attachment: yup
-		.mixed<FileList>()
+		.mixed<FileList | string>()
 		.required(requiredError("cover image"))
 		.test("size", attachmentSize(MAX_ATTACHMENT_SIZE), (file) => {
 			const maxSize = MAX_ATTACHMENT_SIZE * 1024 * 1024;
-			return file[0]?.size < maxSize || !file.length;
+			return typeof file === "string" || file[0]?.size < maxSize || !file.length;
 		}),
 	title: yup.string().required(requiredError()).trim(traillingSpace()),
 	tags: yup
@@ -62,29 +62,30 @@ export const schema = yup.object().shape({
 	ThemeId: yup.string().required(requiredError()).notOneOf(["placeholder"], requiredError())
 });
 
-export const CreateArticleForm = (props: Partial<ICreateArticleFormProps> & ILoadingForm<ICreateArticleFormSubmit>) => {
-	const {
-		onSubmit: onSubmitFromProps,
-		title: initTitle,
-		htmlContent: initHtmlContent,
-		theme: initTheme,
-		coverImageUrl: initCoverImageUrl,
-		tags: initTags
-	} = props;
-
+export const CreateArticleForm = ({
+	onSubmit: onSubmitFromProps,
+	isLoading,
+	...editingState
+}: Partial<ICreateArticleFormProps> & ILoadingForm<ICreateArticleFormSubmit>) => {
 	const [imageUploadReq] = useImageUploadMutation();
-	const [isPreview, setPreview] = useState(false);
-	const [previewTheme, setPreviewTheme] = useState(initTheme);
-	const [previewTags, setPreviewTags] = useState<ITag[]>(initTags || []);
-	const [previewTitle, setPreviewTitle] = useState(initTitle || "");
-	const [coverImageUrl, setCoverImageUrl] = useState(initCoverImageUrl || "");
-	const [editorState, setEditorState] = useState(initHtmlContent || "");
+
+	const [previewState, dispatch] = useReducer(reducer, {
+		htmlContent: "",
+		tags: [],
+		title: "",
+		theme: { id: "", name: "" },
+		coverImageUrl: "",
+		...editingState,
+		isPreview: false
+	});
+	const { isPreview, htmlContent, theme, coverImageUrl } = previewState;
 
 	const { handleSubmit, control, setValue, getValues } = useForm<ICreateArticleForm>({
 		defaultValues: {
-			title: initTitle || "",
-			tags: initTags?.map(({ name }) => name).join(" ") || "",
-			ThemeId: previewTheme?.id || "placeholder"
+			attachment: coverImageUrl || null,
+			title: editingState.title || "",
+			tags: editingState.tags?.map(({ name }) => name).join(" "),
+			ThemeId: editingState.theme?.id
 		},
 		resolver: yupResolver<ICreateArticleForm>(schema),
 		mode: "onBlur"
@@ -95,9 +96,9 @@ export const CreateArticleForm = (props: Partial<ICreateArticleFormProps> & ILoa
 	const SubmitButton = withButtonLoader(PrimaryButton);
 
 	const onThemeChange = useCallback(
-		(theme: IGetThemeResponseData) => {
-			setValue("ThemeId", theme.id || "placeholder");
-			setPreviewTheme(theme);
+		(themeUpdate: IGetThemeResponseData) => {
+			setValue("ThemeId", themeUpdate.id || "placeholder");
+			dispatch({ theme: themeUpdate });
 		},
 		[setValue]
 	);
@@ -109,36 +110,40 @@ export const CreateArticleForm = (props: Partial<ICreateArticleFormProps> & ILoa
 				setValue("attachment", fileList);
 				try {
 					const { fileUrl } = await imageUploadReq(fileList[0]).unwrap();
-					setCoverImageUrl(fileUrl);
+					dispatch({ coverImageUrl: fileUrl });
 				} catch {
 					// handled by middleware
 				}
 			}
 		},
-		[imageUploadReq, setCoverImageUrl, setValue]
-	);
-
-	const onSubmit = useCallback(
-		(formData: ICreateArticleForm) => {
-			onSubmitFromProps({ ...formData, attachment: coverImageUrl, HtmlContent: editorState });
-		},
-		[onSubmitFromProps, editorState, coverImageUrl]
+		[imageUploadReq, setValue, dispatch]
 	);
 
 	const togglePreview = useCallback(() => {
 		const [tags, title] = getValues(["tags", "title"]);
 		const formattedTags = tags && tags.split(" ").map((tag) => ({ name: tag, id: uuidv4() }));
-		const isPreviwable = formattedTags.length && title && previewTheme && coverImageUrl && editorState;
+		const isPreviwable = formattedTags.length && title && theme.id && coverImageUrl && htmlContent;
 
 		if (isPreviwable && formattedTags) {
-			setPreviewTitle(title);
-			setPreviewTags(formattedTags);
-			setPreview(true);
+			dispatch({
+				tags: formattedTags,
+				title,
+				isPreview: true
+			});
 		} else {
 			enqueueSnackbar(snackBarMessages.articlePreview, { variant: "info" });
 		}
-	}, [setPreview, setPreviewTags, setPreviewTitle, coverImageUrl, previewTheme, editorState, getValues]);
-	const toggleEdit = useCallback(() => setPreview(false), [setPreview]);
+	}, [dispatch, getValues, theme, coverImageUrl, htmlContent]);
+	const toggleEdit = useCallback(() => dispatch({ isPreview: false }), [dispatch]);
+
+	const setHtmlContent = useCallback((updatedHtmlContent: string) => dispatch({ htmlContent: updatedHtmlContent }), [dispatch]);
+
+	const onSubmit = useCallback(
+		(formData: ICreateArticleForm) => {
+			onSubmitFromProps({ ...formData, attachment: coverImageUrl || "", htmlContent: htmlContent || "" });
+		},
+		[onSubmitFromProps, coverImageUrl, htmlContent]
+	);
 
 	const togglePreviewButton = isPreview ? (
 		<PrimaryButton
@@ -159,15 +164,7 @@ export const CreateArticleForm = (props: Partial<ICreateArticleFormProps> & ILoa
 	return (
 		<div>
 			<Styled.FormWrapper>
-				{isPreview && (
-					<ArticleContent
-						tags={previewTags}
-						title={previewTitle}
-						theme={previewTheme}
-						coverImageUrl={coverImageUrl}
-						htmlContent={editorState}
-					/>
-				)}
+				{isPreview && <ArticleContent {...previewState} />}
 				<Styled.Form
 					sx={isPreview ? { position: "absolute", visibility: "hidden" } : {}}
 					onSubmit={handleSubmit(onSubmit)}
@@ -197,13 +194,13 @@ export const CreateArticleForm = (props: Partial<ICreateArticleFormProps> & ILoa
 							<ThemeAutocomplete
 								control={control}
 								onChange={onThemeChange}
-								value={previewTheme?.name || "placeholder"}
+								value={theme.name || ""}
 							/>
 						</Styled.TextFieldsWrapper>
 					</Styled.FieldsWrapper>
 					<Editor
-						initState={editorState}
-						onChange={setEditorState}
+						editorState={htmlContent}
+						onChange={setHtmlContent}
 					/>
 				</Styled.Form>
 			</Styled.FormWrapper>
@@ -212,6 +209,7 @@ export const CreateArticleForm = (props: Partial<ICreateArticleFormProps> & ILoa
 					type="submit"
 					variant="customOutlined"
 					form="create-article-form"
+					disabled={isLoading}
 				>
 					Submit
 				</SubmitButton>

@@ -20,10 +20,6 @@ export const LikeButton = ({ isLiked, id, likesAmount, children, size }: PropsWi
 	const [likeReq] = useLikeArticleMutation();
 	const [unlikeReq] = useUnlikeArticleMutation();
 
-	useEffect(() => {
-		setLikedInnerState(isLiked);
-	}, [isLiked, setLikedInnerState]);
-
 	const listener = useCallback(() => {
 		if (isLiked) {
 			unlikeReq(id);
@@ -37,6 +33,10 @@ export const LikeButton = ({ isLiked, id, likesAmount, children, size }: PropsWi
 	const authorizedListener = useOnClickAuthorized(listener, Routes.signIn);
 
 	const icon = likedInnerState ? <FavoriteFilledIcon fontSize={size} /> : <FavoriteBorder fontSize={size} />;
+
+	useEffect(() => {
+		setLikedInnerState(isLiked);
+	}, [isLiked, setLikedInnerState]);
 
 	return (
 		<Styled.Button

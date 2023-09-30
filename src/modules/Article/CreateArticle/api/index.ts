@@ -4,7 +4,7 @@ export interface ICreateArticleReq {
 	coverImageUrl: string;
 	ThemeId: string;
 	title: string;
-	HtmlContent: string;
+	htmlContent: string;
 	tags: string[];
 }
 

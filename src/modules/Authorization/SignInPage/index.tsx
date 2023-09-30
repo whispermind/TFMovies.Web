@@ -16,10 +16,6 @@ export const SignInPage = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		if (accessToken) navigate("/");
-	}, [accessToken, navigate]);
-
 	const description = `We are largest society of movies enthusiasts. 
 		Here you are sure to find like-minded people! To log into your account, enter your username and password`;
 	const heading = (
@@ -41,6 +37,10 @@ export const SignInPage = () => {
 		},
 		[navigate, dispatch, signInReq]
 	);
+
+	useEffect(() => {
+		if (accessToken) navigate("/");
+	}, [accessToken, navigate]);
 
 	return (
 		<SubPageWrapper maxWidth="1080px">

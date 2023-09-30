@@ -20,7 +20,7 @@ export const ThemeAutocomplete = ({ onChange: onThemeChange, control, value }: I
 	const themes = useMemo(() => data?.map(({ name }) => name), [data]) || [];
 
 	const onChange = useCallback(
-		(e: SyntheticEvent, themeName: string | null) => {
+		(_: SyntheticEvent, themeName: string | null) => {
 			const theme = data?.find(({ name }) => name === themeName);
 			if (theme) onThemeChange(theme);
 		},
@@ -35,6 +35,7 @@ export const ThemeAutocomplete = ({ onChange: onThemeChange, control, value }: I
 			popupIcon={false}
 			onChange={onChange}
 			value={value}
+			defaultValue=""
 			renderInput={(props) => (
 				<ThemesField
 					{...props}

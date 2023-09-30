@@ -1,21 +1,27 @@
-import { Link, Stack, Typography } from "@mui/material";
+import { useMemo } from "react";
+import { Stack, Typography } from "@mui/material";
+import { AppLink } from "../../../../common/components";
+
+const linksData = {
+	"/contactus": "Contact Us",
+	"/privacy": "Privacy Policy",
+	"/termsofuse": "Terms of Use"
+};
 
 export const FooterCopyright = () => {
-	const linksData = {
-		"/contactus": "Contact Us",
-		"/privacy": "Privacy Policy",
-		"/termsofuse": "Terms of Use"
-	};
-
-	const links = Object.entries(linksData).map(([href, caption]) => (
-		<Link
-			key={href}
-			href={href}
-			color="greyColors.softGrey"
-		>
-			{caption}
-		</Link>
-	));
+	const links = useMemo(
+		() =>
+			Object.entries(linksData).map(([href, caption]) => (
+				<AppLink
+					key={href}
+					href={href}
+					color="greyColors.softGrey"
+				>
+					{caption}
+				</AppLink>
+			)),
+		[]
+	);
 
 	return (
 		<Stack

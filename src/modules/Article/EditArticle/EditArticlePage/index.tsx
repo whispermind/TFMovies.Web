@@ -5,9 +5,8 @@ import { enqueueSnackbar } from "notistack";
 import { useUpdateArticleMutation } from "../api";
 import { PageWrapper } from "../../CreateArticle/CreateArticlePage/styled";
 import { CreateArticleForm, CreationAdvice, ICreateArticleFormSubmit } from "../../CreateArticle";
-import { isArticle } from "../../../../common/utils/helpers/isArticle";
-import { IArticleResponseData } from "../../api";
-import { snackBarMessages } from "../../../../common/utils";
+import { IGetArticleResponseData } from "../../api";
+import { snackBarMessages, isArticle } from "../../../../common/utils";
 import { Routes } from "../../../../common/enums";
 
 export const EditArticlePage = () => {
@@ -15,7 +14,13 @@ export const EditArticlePage = () => {
 	const { state } = useLocation();
 	const navigate = useNavigate();
 
-	const { id } = state as IArticleResponseData;
+	const { id } = state as IGetArticleResponseData;
+
+	useEffect(() => {
+		if (!isArticle(state)) {
+			navigate("/");
+		}
+	}, [state, navigate]);
 
 	const onUpdate = useCallback(
 		async (updatedData: ICreateArticleFormSubmit) => {

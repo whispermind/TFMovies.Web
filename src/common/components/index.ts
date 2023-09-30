@@ -9,7 +9,6 @@ export { FormDivider } from "./FormDivider";
 export { FormTextFieldIconed } from "./Inputs/FormTextFieldIconed";
 export { FormTextField } from "./Inputs/FormTextField";
 export { SubPageWrapper } from "./SubPageWrapper";
-export { MuiRouterLink } from "./MuiRouterLink";
 export { AdoptiveLayout } from "./AdoptiveLayout";
 export { ButtonSpinner } from "./ButtonSpinner";
 export { MainNav } from "./MainNav/MainNav";
@@ -17,6 +16,7 @@ export { Select } from "./Select";
 export { PageSpinner } from "./PageSpinner";
 export { PageWrapper } from "./PageWrapper";
 export { UserAvatar } from "./UserAvatar";
+export { AppLink } from "./AppLink";
 
 export type { TFormTextFieldIconedProps } from "./Inputs/FormTextFieldIconed";
 export type { IWithIconProps } from "./Inputs/FormTextFieldIconed";

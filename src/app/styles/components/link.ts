@@ -1,4 +1,4 @@
-import { MuiRouterLink } from "../../../common/components";
+import { MuiRouterLink } from "./MuiRouterLink";
 import { palette } from "../palette";
 
 const {

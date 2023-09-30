@@ -17,7 +17,7 @@ import { reducer } from "./Reducer";
 import * as Styled from "./styled";
 
 import type { IGetThemeResponseData } from "../../../Main/api";
-import type { IArticleResponseData } from "../../api";
+import type { IGetArticleResponseData } from "../../api";
 
 export interface ICreateArticleForm {
 	attachment: FileList | string | null;
@@ -33,7 +33,7 @@ export interface ICreateArticleFormSubmit extends Omit<ICreateArticleForm, "atta
 
 export interface IStyledInputProps extends ComponentProps<typeof Styled.TextField> {}
 
-export interface ICreateArticleFormProps extends Pick<IArticleResponseData, "title" | "theme" | "coverImageUrl" | "htmlContent" | "tags"> {}
+export interface ICreateArticleFormProps extends Pick<IGetArticleResponseData, "title" | "theme" | "coverImageUrl" | "htmlContent" | "tags"> {}
 
 const { tags: tagsRegExp } = formValidation;
 const { requiredError, attachmentSize, tagsLimit, traillingSpace, tagsFormatt } = yupErrorMessages;

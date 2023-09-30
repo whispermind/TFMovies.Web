@@ -1,12 +1,13 @@
 import { Typography } from "@mui/material";
+import { useSearchParams } from "react-router-dom";
 
 import * as Styled from "./styled";
 
-interface ISearchHeadingProps {
-	query: string;
-}
+export const SearchPageHeading = () => {
+	const [params] = useSearchParams();
+	const query = params.get("query");
 
-export const SearchPageHeading = ({ query }: ISearchHeadingProps) => {
+	params.get("");
 	return (
 		<Styled.Stack>
 			<Typography variant="HHeader">{`Search Results: ${query}`}</Typography>

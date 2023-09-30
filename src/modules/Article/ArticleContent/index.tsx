@@ -1,29 +1,36 @@
-import { Typography, Link, ListItem } from "@mui/material";
+import { useMemo } from "react";
+import { Typography, ListItem } from "@mui/material";
 import { sanitize } from "dompurify";
 
-import { IArticleResponseData } from "../api";
+import { IGetArticleResponseData } from "../api";
 import { Routes } from "../../../common/enums";
+import { AppLink } from "../../../common/components";
 import * as Styled from "./styled";
 
-type TArticleContentProps = Partial<Pick<IArticleResponseData, "tags" | "coverImageUrl" | "title" | "theme" | "htmlContent">>;
+type TArticleContentProps = Partial<Pick<IGetArticleResponseData, "tags" | "coverImageUrl" | "title" | "theme" | "htmlContent">>;
 
 export const ArticleContent = (props: TArticleContentProps) => {
 	const { tags = [], coverImageUrl = "", title = "", theme = { name: "", id: "" }, htmlContent = "" } = props;
 	const sanitazedHtml = sanitize(htmlContent);
 
-	const tagItems = Array.from(tags).map(({ id, name }) => (
-		<ListItem key={id}>
-			<Link
-				href={`${Routes.search}?subject=tags&query=${name}&id=${id}`}
-				underline="none"
-			>
-				<Typography
-					variant="HBody"
-					color="greyColors.grey"
-				>{`#${name}`}</Typography>
-			</Link>
-		</ListItem>
-	));
+	const tagItems = useMemo(
+		() =>
+			Array.from(tags).map(({ id, name }) => (
+				<ListItem key={id}>
+					<AppLink
+						href={`${Routes.search}?subject=tags&query=${name}&id=${id}`}
+						underline="none"
+						authorized
+					>
+						<Typography
+							variant="HBody"
+							color="greyColors.grey"
+						>{`#${name}`}</Typography>
+					</AppLink>
+				</ListItem>
+			)),
+		[tags]
+	);
 
 	return (
 		<Styled.ArticleContentWrapper>

@@ -1,21 +1,16 @@
 import { apiSlice } from "../../../app/api";
+import { dateFormatter } from "../../../common/utils";
 
 import type { IArticleCard } from "..";
-import { dateFormatter } from "../../../common/utils";
+import type { IUser } from "../../Authorization/AuthSlice";
 
 export interface IGetThemeResponseData {
 	id: string;
 	name: string;
 }
-interface IGetArticlesResponseData {
-	page: number;
-	totalPages: number;
-	totalRecords: number;
-	themeId: string;
-	sort: string;
-	limit: number;
-	data: IArticleCard[];
-}
+export interface IGetArticlesResponseData extends IPaginationResponse<IArticleCard[]> {}
+
+export interface IGetUsersResponseData extends IPaginationResponse<(IUser & { email: string })[]> {}
 
 interface IGetTopAuthorsResponseData {
 	id: string;
@@ -28,8 +23,19 @@ interface IGetTopTagsResponseData {
 	name: string;
 }
 
+interface IGetCombinedRequest {
+	endpoint: "users" | "posts";
+	query: string;
+}
+
 const mainApi = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
+		getUsers: builder.query<IGetUsersResponseData, string>({
+			query: (query) => ({
+				url: `/users${query}`
+			}),
+			providesTags: (result) => (result ? [...result.data.map(({ id }) => ({ type: "Users" as const, id })), "Users"] : ["Users"])
+		}),
 		getArticles: builder.query<IGetArticlesResponseData, string>({
 			query: (query) => ({
 				url: `/posts${query}`
@@ -40,9 +46,15 @@ const mainApi = apiSlice.injectEndpoints({
 				data: articles.data.map((article) => ({ ...article, createdAt: dateFormatter(article.createdAt) }))
 			})
 		}),
+		getUsersOrArticles: builder.query<IGetUsersResponseData | IGetArticlesResponseData, IGetCombinedRequest>({
+			query: ({ endpoint, query }) => ({
+				url: `/${endpoint}${query}`
+			}),
+			providesTags: (result) => (result ? [...result.data.map(({ id }) => ({ type: "Users" as const, id })), "Users"] : ["Users"])
+		}),
 		getLikedArticles: builder.query<IGetArticlesResponseData, string>({
 			query: (query) => ({
-				url: `/posts/liked-by/${query}`
+				url: `/posts/liked-by/me${query}`
 			}),
 			providesTags: (result) => (result ? [...result.data.map(({ id }) => ({ type: "Article" as const, id })), "Article"] : ["Article"])
 		}),
@@ -79,5 +91,7 @@ export const {
 	useLikeArticleMutation,
 	useUnlikeArticleMutation,
 	useGetArticlesQuery,
-	useGetLikedArticlesQuery
+	useGetLikedArticlesQuery,
+	useGetUsersQuery,
+	useGetUsersOrArticlesQuery
 } = mainApi;

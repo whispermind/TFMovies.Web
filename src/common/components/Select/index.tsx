@@ -4,14 +4,16 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 import * as Styled from "./styled";
 
+import type { IStyledSelectProps } from "./styled/Select";
+
 export interface ISelectProps extends SelectProps {
 	data: {
-		description: string;
-		value?: string;
+		name: string;
+		id: string;
 	}[];
 }
 
-export const Select = (props: ISelectProps) => {
+export const Select = (props: ISelectProps & IStyledSelectProps) => {
 	const { onChange: propsOnChange, onOpen: propsOnOpen, onClose: propsOnClose, data, placeholder, ...restProps } = props;
 
 	const [selected, setSelected] = useState<"placeholder" | string>("placeholder");
@@ -19,19 +21,19 @@ export const Select = (props: ISelectProps) => {
 
 	const options = useMemo(
 		() =>
-			data?.map(({ description, value }) => (
+			data?.map(({ name, id }) => (
 				<MenuItem
-					key={value}
-					value={value}
+					key={id}
+					value={id}
 				>
-					{description}
+					{name}
 				</MenuItem>
 			)),
 		[data]
 	);
 
 	const isPlaceholder = selected === "placeholder" && !isOpen;
-	const isValue = useMemo(() => data?.find(({ value }) => value === selected), [data, selected]);
+	const isValue = useMemo(() => data?.find(({ id }) => id === selected), [data, selected]);
 
 	const onChange = useCallback(
 		(event: SelectChangeEvent<unknown>, element: ReactNode) => {

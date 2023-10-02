@@ -1,5 +1,5 @@
 import { apiSlice } from "../../../app/api";
-import { dateFormatter, isArticles } from "../../../common/utils";
+import { dateFormatter } from "../../../common/utils";
 
 import type { IArticleCard } from "..";
 import type { IUser } from "../../Authorization/AuthSlice";
@@ -26,6 +26,11 @@ interface IGetTopTagsResponseData {
 interface IGetCombinedRequest {
 	endpoint: "users" | "posts";
 	query: string;
+}
+
+interface IGetUserRolesResponseData {
+	id: string;
+	name: string;
 }
 
 const mainApi = apiSlice.injectEndpoints({
@@ -56,10 +61,15 @@ const mainApi = apiSlice.injectEndpoints({
 			query: (query) => ({
 				url: `/posts/liked-by/me${query}`
 			}),
-			providesTags: (result) => (result ? [...result.data.map(({ id }) => ({ type: "Article" as const, id })), "Article"] : ["Article"]),
+			providesTags: (result) => (result ? [...result.data.map(({ id }) => ({ type: "Articles" as const, id })), "Articles"] : ["Articles"]),
 			transformResponse: (articles: IGetArticlesResponseData) => ({
 				...articles,
 				data: articles.data.map((article) => ({ ...article, createdAt: dateFormatter(article.createdAt) }))
+			})
+		}),
+		getUserRoles: builder.query<IGetUserRolesResponseData[], void>({
+			query: () => ({
+				url: "/roles"
 			})
 		}),
 		likeArticle: builder.mutation<void, string>({
@@ -77,7 +87,8 @@ const mainApi = apiSlice.injectEndpoints({
 			invalidatesTags: ["Article", "Articles"]
 		}),
 		getTopAuthors: builder.query<IGetTopAuthorsResponseData[], string | void>({
-			query: (query = "") => ({ url: `/users/authors${query}` })
+			query: (query = "") => ({ url: `/users/authors${query}` }),
+			providesTags: ["Users"]
 		}),
 		getTopTags: builder.query<IGetTopTagsResponseData[], string | void>({
 			query: (query = "") => ({ url: `/tags${query}` })
@@ -97,5 +108,6 @@ export const {
 	useGetArticlesQuery,
 	useGetLikedArticlesQuery,
 	useGetUsersQuery,
-	useGetUsersOrArticlesQuery
+	useGetUsersOrArticlesQuery,
+	useGetUserRolesQuery
 } = mainApi;

@@ -1,19 +1,35 @@
 import { Select as MuiSelect, styled } from "@mui/material";
 
-export const Select = styled(MuiSelect)(({ theme }) => {
+export interface IStyledSelectProps {
+	bordered?: boolean;
+	width?: number;
+}
+
+export const Select = styled(MuiSelect, { shouldForwardProp: (prop) => prop !== "bordered" && prop !== "width" })<IStyledSelectProps>(({
+	theme,
+	bordered,
+	width
+}) => {
 	const {
 		palette: {
 			mainColors: { main },
-			accentColors: { lightOrange }
+			accentColors: { lightOrange },
+			greyColors: { strokeGrey }
 		}
 	} = theme;
 
 	return {
-		width: "180px",
-		padding: 0,
+		height: "44px",
+		width: width ? `${width}px` : "auto",
+		border: `2px solid ${bordered ? strokeGrey : "transparent"}`,
+
+		".MuiSelect-select": {
+			padding: "10px 12px"
+		},
 
 		"&:hover": {
 			backgroundColor: lightOrange,
+			borderColor: lightOrange,
 			color: main,
 
 			"& path": {
@@ -34,7 +50,7 @@ export const Select = styled(MuiSelect)(({ theme }) => {
 		},
 
 		"&:has(.MuiSelect-iconOpen)": {
-			"& fieldset": { border: `2px solid ${main} !important` }
+			border: `2px solid ${main} !important`
 		}
 	};
 });

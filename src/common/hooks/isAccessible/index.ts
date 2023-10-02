@@ -5,7 +5,7 @@ import { selectAuth } from "../../../modules/Authorization/AuthSlice";
 import { useAppSelector } from "../../../app/store";
 import { UserRoles } from "../../enums";
 
-export const useUserAccess = (requiredAccess: UserRoles, location?: string) => {
+export const useUserAccess = (requiredAccess: UserRoles, location: string) => {
 	const { currentUser } = useAppSelector(selectAuth);
 	const navigate = useNavigate();
 

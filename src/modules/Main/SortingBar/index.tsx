@@ -1,4 +1,4 @@
-import { useState, useCallback, MouseEvent, useMemo } from "react";
+import { useState, useCallback, MouseEvent } from "react";
 import { Button, SelectChangeEvent } from "@mui/material";
 
 import { Select } from "../../../common/components";
@@ -36,8 +36,6 @@ export const SortingBar = ({ onSortingChange, initSort }: ISortingBarProps) => {
 		[setThemeSorting, onSortingChange, sorting]
 	);
 
-	const themes = useMemo(() => data?.map(({ name, id }) => ({ description: name, value: id })), [data]) || [];
-
 	return (
 		<Styled.List>
 			<Styled.ListItem>
@@ -72,9 +70,10 @@ export const SortingBar = ({ onSortingChange, initSort }: ISortingBarProps) => {
 			</Styled.ListItem>
 			<Styled.ListItem>
 				<Select
-					data={themes}
+					data={data || []}
 					placeholder="Sort by Theme"
 					onChange={onSortByTheme}
+					width={180}
 				/>
 			</Styled.ListItem>
 		</Styled.List>

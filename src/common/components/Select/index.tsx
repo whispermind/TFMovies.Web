@@ -7,14 +7,15 @@ import * as Styled from "./styled";
 import type { IStyledSelectProps } from "./styled/Select";
 
 export interface ISelectProps extends SelectProps {
-	data: {
-		name: string;
-		id: string;
+	data?: {
+		name?: string;
+		id?: string;
 	}[];
+	disableEmptyLane?: boolean;
 }
 
 export const Select = (props: ISelectProps & IStyledSelectProps) => {
-	const { onChange: propsOnChange, onOpen: propsOnOpen, onClose: propsOnClose, data, placeholder, ...restProps } = props;
+	const { onChange: propsOnChange, onOpen: propsOnOpen, onClose: propsOnClose, data, placeholder, disableEmptyLane, ...restProps } = props;
 
 	const [selected, setSelected] = useState<"placeholder" | string>("placeholder");
 	const [isOpen, setIsOpen] = useState(false);
@@ -36,10 +37,14 @@ export const Select = (props: ISelectProps & IStyledSelectProps) => {
 	const isValue = useMemo(() => data?.find(({ id }) => id === selected), [data, selected]);
 
 	const onChange = useCallback(
-		(event: SelectChangeEvent<unknown>, element: ReactNode) => {
-			const eventValue = event.target.value === "setPlaceholder" ? "placeholder" : event.target.value;
-			setSelected(eventValue as string);
-			if (propsOnChange) propsOnChange(event, element);
+		(e: SelectChangeEvent<unknown>, element: ReactNode) => {
+			if (e.target.value === "setPlaceholder") {
+				e.target.value = "";
+				setSelected("placeholder");
+			} else {
+				setSelected(e.target.value as string);
+			}
+			if (propsOnChange) propsOnChange(e, element);
 		},
 		[setSelected, propsOnChange]
 	);
@@ -54,7 +59,7 @@ export const Select = (props: ISelectProps & IStyledSelectProps) => {
 
 	const onClose = useCallback(
 		(e: SyntheticEvent) => {
-			setTimeout(() => setIsOpen(false), 500);
+			setTimeout(() => setIsOpen(false), 250);
 			if (propsOnClose) propsOnClose(e);
 		},
 		[setIsOpen, propsOnClose]
@@ -71,16 +76,18 @@ export const Select = (props: ISelectProps & IStyledSelectProps) => {
 		>
 			<MenuItem
 				value="placeholder"
-				sx={isPlaceholder && !isOpen ? null : { display: "none" }}
+				sx={isPlaceholder ? null : { display: "none" }}
 			>
 				{placeholder}
 			</MenuItem>
-			<MenuItem
-				sx={isValue ? null : { display: "none" }}
-				value="setPlaceholder"
-			>
-				‎
-			</MenuItem>
+			{!disableEmptyLane && (
+				<MenuItem
+					sx={isValue ? null : { display: "none" }}
+					value="setPlaceholder"
+				>
+					‎
+				</MenuItem>
+			)}
 			{options}
 		</Styled.Select>
 	);

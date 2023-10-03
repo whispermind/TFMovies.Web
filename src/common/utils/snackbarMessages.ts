@@ -8,5 +8,7 @@ export const snackBarMessages = {
 	articleCreated: "The article was successfully published",
 	articleUpdated: "The article was successfully updated",
 	addComment: "Сomment was successfully published",
-	articlePreview: "Fill all the fields to make preview mode avaible"
+	articlePreview: "Fill all the fields to make preview mode avaible",
+	changedUserRole: "The user role has been successfully changed",
+	deletedUser: "The user has been successfully deleted"
 };

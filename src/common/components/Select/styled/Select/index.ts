@@ -2,14 +2,14 @@ import { Select as MuiSelect, styled } from "@mui/material";
 
 export interface IStyledSelectProps {
 	bordered?: boolean;
-	width?: number;
+	width?: string;
+	maxWidth?: string;
+	disablePadding?: boolean;
 }
 
-export const Select = styled(MuiSelect, { shouldForwardProp: (prop) => prop !== "bordered" && prop !== "width" })<IStyledSelectProps>(({
-	theme,
-	bordered,
-	width
-}) => {
+export const Select = styled(MuiSelect, {
+	shouldForwardProp: (prop) => prop !== "bordered" && prop !== "width" && prop !== "disablePadding" && prop !== "maxWidth"
+})<IStyledSelectProps>(({ theme, bordered, width, disablePadding, maxWidth }) => {
 	const {
 		palette: {
 			mainColors: { main },
@@ -20,11 +20,12 @@ export const Select = styled(MuiSelect, { shouldForwardProp: (prop) => prop !== 
 
 	return {
 		height: "44px",
-		width: width ? `${width}px` : "auto",
+		width: width ? `${width}` : "auto",
+		maxWidth: maxWidth ? `${maxWidth}` : "auto",
 		border: `2px solid ${bordered ? strokeGrey : "transparent"}`,
 
 		".MuiSelect-select": {
-			padding: "10px 12px"
+			padding: disablePadding ? 0 : "10px 12px"
 		},
 
 		"&:hover": {
@@ -50,7 +51,7 @@ export const Select = styled(MuiSelect, { shouldForwardProp: (prop) => prop !== 
 		},
 
 		"&:has(.MuiSelect-iconOpen)": {
-			border: `2px solid ${main} !important`
+			border: bordered ? `2px solid ${main} !important` : ""
 		}
 	};
 });

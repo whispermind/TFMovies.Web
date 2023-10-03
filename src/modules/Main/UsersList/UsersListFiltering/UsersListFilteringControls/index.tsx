@@ -8,17 +8,17 @@ import { useGetUserRolesQuery } from "../../../api";
 import * as Styled from "./styled";
 
 export interface IUsersListFilteringControlsProps {
-	onSearchCb: (queryObj: { searchQuery: string; roleSearchQuery: string }) => void;
+	onSearchCb: (queryObj: { usersSearchQuery: string; roleSearchQuery: string }) => void;
 }
 
 export const UsersListFilteringControls = ({ onSearchCb }: IUsersListFilteringControlsProps) => {
 	const { data } = useGetUserRolesQuery();
-	const [searchQuery, setSearchQuery] = useState("");
+	const [usersSearchQuery, setSearchQuery] = useState("");
 	const [roleSearchQuery, setRoleSearchQuery] = useState("");
 
 	const onRoleChange = useCallback(({ target: { value } }: SelectChangeEvent<unknown>) => setRoleSearchQuery(value as string), [setRoleSearchQuery]);
 	const onSearchQueryChange = useCallback(({ target: { value } }: ChangeEvent<HTMLInputElement>) => setSearchQuery(value), [setSearchQuery]);
-	const onSearch = useCallback(() => onSearchCb({ searchQuery, roleSearchQuery }), [onSearchCb, roleSearchQuery, searchQuery]);
+	const onSearch = useCallback(() => onSearchCb({ usersSearchQuery, roleSearchQuery }), [onSearchCb, roleSearchQuery, usersSearchQuery]);
 
 	return (
 		<Styled.Wrapper>
@@ -27,20 +27,21 @@ export const UsersListFilteringControls = ({ onSearchCb }: IUsersListFilteringCo
 				placeholder="Enter the nickname or email..."
 				icon={UserIcon}
 				position="start"
-				sx={{ width: "420px" }}
+				sx={{ maxWidth: "420px", width: "50%" }}
 				onChange={onSearchQueryChange}
-				value={searchQuery}
+				value={usersSearchQuery}
 			/>
 			<Select
 				data={data || []}
 				placeholder="Role"
 				bordered
-				width={340}
+				width="20%"
+				maxWidth="340px"
 				onChange={onRoleChange}
 			/>
 			<PrimaryButton
 				variant="customOutlined"
-				sx={{ ml: "auto", width: "240px" }}
+				sx={{ ml: "auto", maxWidth: "240px", width: "20%" }}
 				onClick={onSearch}
 			>
 				Search

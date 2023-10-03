@@ -11,9 +11,8 @@ import * as Styled from "./styled";
 const ARTICLES_PER_PAGE_LIMIT = 12;
 
 export const MainPage = () => {
-	const initPage = 1;
 	const [sortingQuery, setSortingQuery] = useState("&sort=created");
-	const [pageQuery, setPageQuery] = useState(initPage);
+	const [pageQuery, setPageQuery] = useState(1);
 	const queryString = `?page=${pageQuery}${sortingQuery}&limit=${ARTICLES_PER_PAGE_LIMIT}`;
 	const { data, isLoading } = useGetArticlesQuery(queryString);
 
@@ -31,7 +30,7 @@ export const MainPage = () => {
 	const onSortingChange = useCallback(
 		(_sortingQuery: string) => {
 			setSortingQuery(_sortingQuery);
-			setPageQuery(initPage);
+			setPageQuery(1);
 		},
 		[setPageQuery, setSortingQuery]
 	);

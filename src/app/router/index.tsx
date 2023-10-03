@@ -26,13 +26,13 @@ export const router = createBrowserRouter(
 			errorElement={<ErrorPage />}
 		>
 			<Route
-				path="/"
+				path=""
 				element={<MainPage />}
 			/>
 
-			<Route path="/signup">
+			<Route path="signup">
 				<Route
-					path="/signup"
+					path=""
 					element={<SignUpPage />}
 				/>
 				<Route
@@ -41,7 +41,7 @@ export const router = createBrowserRouter(
 				/>
 			</Route>
 
-			<Route path="/auth">
+			<Route path="auth">
 				<Route
 					path="signin"
 					element={<SignInPage />}
@@ -56,7 +56,7 @@ export const router = createBrowserRouter(
 				/>
 			</Route>
 
-			<Route path="/article">
+			<Route path="article">
 				<Route
 					path="create"
 					element={<CreateArticlePage />}
@@ -69,12 +69,10 @@ export const router = createBrowserRouter(
 					path=":id"
 					element={<ArticlePage />}
 				/>
-				<Route path="edit">
-					<Route
-						path=":id"
-						element={<EditArticlePage />}
-					/>
-				</Route>
+				<Route
+					path="edit/:id"
+					element={<EditArticlePage />}
+				/>
 				<Route
 					path="favorites"
 					element={<LikedArticles />}

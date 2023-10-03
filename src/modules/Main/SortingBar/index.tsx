@@ -29,9 +29,8 @@ export const SortingBar = ({ onSortingChange, initSort }: ISortingBarProps) => {
 
 	const onSortByTheme = useCallback(
 		({ target: { value } }: SelectChangeEvent<unknown>) => {
-			const theme = value === "setPlaceholder" ? "" : (value as string);
-			setThemeSorting(theme);
-			onSortingChange(`&sort=${sorting}&themeid=${theme}`);
+			setThemeSorting(value as string);
+			onSortingChange(`&sort=${sorting}&themeid=${value}`);
 		},
 		[setThemeSorting, onSortingChange, sorting]
 	);
@@ -73,7 +72,7 @@ export const SortingBar = ({ onSortingChange, initSort }: ISortingBarProps) => {
 					data={data || []}
 					placeholder="Sort by Theme"
 					onChange={onSortByTheme}
-					width={180}
+					width="180px"
 				/>
 			</Styled.ListItem>
 		</Styled.List>

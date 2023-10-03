@@ -30,7 +30,12 @@ interface IGetCombinedRequest {
 
 interface IGetUserRolesResponseData {
 	id: string;
-	name: string;
+	nickname: string;
+	email: string;
+	role: {
+		id: string;
+		name: string;
+	};
 }
 
 const mainApi = apiSlice.injectEndpoints({

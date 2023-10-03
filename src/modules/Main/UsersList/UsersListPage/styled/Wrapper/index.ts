@@ -4,6 +4,7 @@ export const Wrapper = styled(Stack)(
 	({
 		theme: {
 			palette: {
+				mainColors: { white },
 				greyColors: { strokeGrey }
 			}
 		}
@@ -11,6 +12,8 @@ export const Wrapper = styled(Stack)(
 		padding: "32px 24px",
 		border: `2px solid ${strokeGrey}`,
 		alignItems: "flex-start",
-		rowGap: "36px"
+		flexGrow: 1,
+		rowGap: "36px",
+		backgroundColor: white
 	})
 );

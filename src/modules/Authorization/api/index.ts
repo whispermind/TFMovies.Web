@@ -12,11 +12,11 @@ const authApi = apiSlice.injectEndpoints({
 				body: credentials
 			})
 		}),
-		signOut: builder.mutation<void, Omit<IAuthState, "currentUser">>({
-			query: (tokens) => ({
+		signOut: builder.mutation<void, string>({
+			query: (refreshToken) => ({
 				url: "/users/logout",
 				method: "POST",
-				body: tokens
+				body: { refreshToken }
 			})
 		})
 	})

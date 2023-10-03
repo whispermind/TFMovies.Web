@@ -28,6 +28,16 @@ interface IGetCombinedRequest {
 	query: string;
 }
 
+interface IGetUserRolesResponseData {
+	id: string;
+	nickname: string;
+	email: string;
+	role: {
+		id: string;
+		name: string;
+	};
+}
+
 const mainApi = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		getUsers: builder.query<IGetUsersResponseData, string>({
@@ -56,6 +66,21 @@ const mainApi = apiSlice.injectEndpoints({
 			query: (query) => ({
 				url: `/posts/liked-by/me${query}`
 			}),
+			providesTags: (result) => (result ? [...result.data.map(({ id }) => ({ type: "Articles" as const, id })), "Articles"] : ["Articles"]),
+			transformResponse: (articles: IGetArticlesResponseData) => ({
+				...articles,
+				data: articles.data.map((article) => ({ ...article, createdAt: dateFormatter(article.createdAt) }))
+			})
+		}),
+		getUserRoles: builder.query<IGetUserRolesResponseData[], void>({
+			query: () => ({
+				url: "/roles"
+			})
+		}),
+		getArticlesByAuthor: builder.query<IGetArticlesResponseData, string>({
+			query: (query) => ({
+				url: `/posts${query}`
+			}),
 			providesTags: (result) => (result ? [...result.data.map(({ id }) => ({ type: "Article" as const, id })), "Article"] : ["Article"])
 		}),
 		likeArticle: builder.mutation<void, string>({
@@ -73,7 +98,8 @@ const mainApi = apiSlice.injectEndpoints({
 			invalidatesTags: ["Article", "Articles"]
 		}),
 		getTopAuthors: builder.query<IGetTopAuthorsResponseData[], string | void>({
-			query: (query = "") => ({ url: `/users/authors${query}` })
+			query: (query = "") => ({ url: `/users/authors${query}` }),
+			providesTags: ["Users"]
 		}),
 		getTopTags: builder.query<IGetTopTagsResponseData[], string | void>({
 			query: (query = "") => ({ url: `/tags${query}` })
@@ -93,5 +119,7 @@ export const {
 	useGetArticlesQuery,
 	useGetLikedArticlesQuery,
 	useGetUsersQuery,
-	useGetUsersOrArticlesQuery
+	useGetUsersOrArticlesQuery,
+	useGetUserRolesQuery,
+	useGetArticlesByAuthorQuery
 } = mainApi;

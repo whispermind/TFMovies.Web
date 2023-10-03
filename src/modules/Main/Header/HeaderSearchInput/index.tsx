@@ -6,8 +6,8 @@ import { SearchIcon } from "../../../../common/components/Icons";
 import { Routes } from "../../../../common/enums";
 import { useIsAuthorized } from "../../../../common/hooks";
 
-let debouncer = false;
-const debounceTime = 500;
+const updateTime = 500;
+let userLastInputTime = 0;
 
 export const HeaderSearchInput = () => {
 	const navigate = useNavigate();
@@ -23,18 +23,18 @@ export const HeaderSearchInput = () => {
 				return;
 			}
 
-			if (debouncer) return;
-			debouncer = true;
+			userLastInputTime = Date.now();
 
 			if (pathname !== Routes.search && value) {
 				navigate({ pathname: Routes.search, search: `subject=articles&query=${value}` });
 			} else {
-				params.set("query", value);
-				setSearchParams(params, { replace: true });
+				setTimeout(() => {
+					if (Date.now() - userLastInputTime >= 500) {
+						params.set("query", value);
+						setSearchParams(params, { replace: true });
+					}
+				}, updateTime);
 			}
-			setTimeout(() => {
-				debouncer = false;
-			}, debounceTime);
 		},
 		[navigate, pathname, setSearchParams, params, authorized]
 	);
@@ -42,7 +42,6 @@ export const HeaderSearchInput = () => {
 	const onBlur = useCallback(
 		(e: FocusEvent<HTMLInputElement>) => {
 			if (e.target.value) {
-				debouncer = false;
 				onChange(e);
 			}
 		},

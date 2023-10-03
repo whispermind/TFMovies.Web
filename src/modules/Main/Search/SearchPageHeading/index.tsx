@@ -10,7 +10,10 @@ export const SearchPageHeading = () => {
 	params.get("");
 	return (
 		<Styled.Stack>
-			<Typography variant="HHeader">{`Search Results: ${query}`}</Typography>
+			<Typography
+				variant="HHeader"
+				textTransform="none"
+			>{`Search Results: ${query}`}</Typography>
 		</Styled.Stack>
 	);
 };

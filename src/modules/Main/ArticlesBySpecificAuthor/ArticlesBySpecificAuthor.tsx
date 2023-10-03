@@ -1,18 +1,20 @@
 import { useState, useCallback, useMemo, ChangeEvent } from "react";
 import { Stack, Grid, Typography } from "@mui/material";
+import { useParams } from "react-router-dom";
 
 import { MainNav, PageSpinner } from "../../../common/components";
 import { ArticleCard } from "..";
 import { useIsAuthorized } from "../../../common/hooks";
-import { useGetLikedArticlesQuery } from "../api";
+import { useGetArticlesByAuthorQuery } from "../api";
 import * as Styled from "./styled";
 
 const ARTICLES_PER_PAGE_LIMIT = 12;
 
-export const LikedArticles = () => {
+export const ArticlesBySpecificAuthor = () => {
 	const [pageQuery, setPageQuery] = useState(1);
-	const queryString = `?page=${pageQuery}&limit=${ARTICLES_PER_PAGE_LIMIT}`;
-	const { data, isLoading } = useGetLikedArticlesQuery(queryString);
+	const { id } = useParams();
+	const queryString = `?page=${pageQuery}&limit=${ARTICLES_PER_PAGE_LIMIT}&userId=${id}`;
+	const { data, isLoading } = useGetArticlesByAuthorQuery(queryString);
 
 	const Articles = useMemo(
 		() =>
@@ -47,8 +49,9 @@ export const LikedArticles = () => {
 					<Typography
 						textAlign="start"
 						variant="HHeader"
+						textTransform="none"
 					>
-						Liked Articles
+						The articles are written by the author {data?.data[0].author}
 					</Typography>
 					{isLoading ? <PageSpinner /> : Articles}
 					<Styled.Pagination

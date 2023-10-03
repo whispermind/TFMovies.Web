@@ -21,7 +21,7 @@ export enum Routes {
 	editArticle = "/article/edit",
 	articlePublished = "/article/published",
 	favorites = "/article/favorites",
+	author = "article/author",
 	search = "/search",
-	author = "/author",
 	usersList = "/userslist"
 }

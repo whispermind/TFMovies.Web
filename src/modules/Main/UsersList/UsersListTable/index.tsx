@@ -5,7 +5,7 @@ import { enqueueSnackbar } from "notistack";
 
 import { useGetUsersQuery, useGetUserRolesQuery } from "../../api";
 import { useDeleteUserMutation, useChangeUserRoleMutation } from "../api";
-import { Select, PageSpinner } from "../../../../common/components";
+import { Select, PageSpinner, ConfirmationModal } from "../../../../common/components";
 import { snackBarMessages } from "../../../../common/utils";
 import * as Styled from "./styled";
 
@@ -24,6 +24,10 @@ const columnsData = [
 export const UsersListTable = ({ usersSearchQuery, roleSearchQuery }: IUsersListTableProps) => {
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(10);
+
+	const [isModalOpen, setModalOpen] = useState(false);
+	const [deleteUserId, setDeleteUserId] = useState("");
+
 	const { data: roles } = useGetUserRolesQuery();
 	const [deleteUserReq] = useDeleteUserMutation();
 	const [changeUserRoleReq] = useChangeUserRoleMutation();
@@ -68,13 +72,9 @@ export const UsersListTable = ({ usersSearchQuery, roleSearchQuery }: IUsersList
 					}
 				};
 
-				const onUserDelete = async () => {
-					try {
-						await deleteUserReq(id);
-						enqueueSnackbar(snackBarMessages.deletedUser, { variant: "success" });
-					} catch {
-						// handled by middleware
-					}
+				const showModal = () => {
+					setModalOpen(true);
+					setDeleteUserId(id);
 				};
 
 				return (
@@ -95,13 +95,13 @@ export const UsersListTable = ({ usersSearchQuery, roleSearchQuery }: IUsersList
 								disableEmptyLane
 							/>
 						</Styled.TableCell>
-						<Styled.TableCell onClick={onUserDelete}>
+						<Styled.TableCell onClick={showModal}>
 							<DeleteForeverIcon />
 						</Styled.TableCell>
 					</TableRow>
 				);
 			}),
-		[roles, users, changeUserRoleReq, deleteUserReq]
+		[roles, users, changeUserRoleReq, setDeleteUserId]
 	);
 
 	const handleChangePage = useCallback(
@@ -115,6 +115,23 @@ export const UsersListTable = ({ usersSearchQuery, roleSearchQuery }: IUsersList
 		setRowsPerPage(Number(e.target.value));
 		setPage(0);
 	}, []);
+
+	const closeModal = useCallback(() => {
+		setModalOpen(false);
+	}, [setModalOpen]);
+
+	const onUserDelete = useCallback(
+		async (confirmation: boolean) => {
+			if (!confirmation) return;
+			try {
+				await deleteUserReq(deleteUserId);
+				enqueueSnackbar(snackBarMessages.deletedUser, { variant: "success" });
+			} catch {
+				// handled by middleware
+			}
+		},
+		[deleteUserReq, deleteUserId]
+	);
 
 	return (
 		<Paper sx={{ width: "100%" }}>
@@ -137,6 +154,12 @@ export const UsersListTable = ({ usersSearchQuery, roleSearchQuery }: IUsersList
 				page={(users?.page && users.page - 1) || 0}
 				onPageChange={handleChangePage}
 				onRowsPerPageChange={handleChangeRowsPerPage}
+			/>
+			<ConfirmationModal
+				isOpen={isModalOpen}
+				title="Are you sure you want to delete this user?"
+				onConfrim={onUserDelete}
+				handleClose={closeModal}
 			/>
 		</Paper>
 	);

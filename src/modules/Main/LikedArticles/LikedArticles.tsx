@@ -18,7 +18,7 @@ export const LikedArticles = () => {
 		() =>
 			data?.data?.map((articleData) => (
 				<ArticleCard
-					articleData={articleData}
+					{...articleData}
 					key={articleData.id}
 				/>
 			)),

@@ -11,4 +11,5 @@ export { SignUpSuccessPage } from "../modules/Registration/SignUpSuccessPage";
 export { SearchPage } from "../modules/Main/Search/SearchPage";
 export { EditArticlePage } from "../modules/Article/EditArticle/EditArticlePage";
 export { LikedArticles } from "../modules/Main/LikedArticles/LikedArticles";
+export { UserListPage } from "../modules/Main/UsersList/UsersListPage";
 export { ArticlesBySpecificAuthor } from "../modules/Main/ArticlesBySpecificAuthor/ArticlesBySpecificAuthor";

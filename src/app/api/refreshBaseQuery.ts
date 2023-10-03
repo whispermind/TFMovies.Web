@@ -31,15 +31,14 @@ export const refreshBaseQuery: BaseQueryFn<string | FetchArgs, unknown, FetchBas
 			if (!auth.refreshToken) return result;
 			const release = await mutex.acquire();
 			try {
-				const { data } = await baseQuery({ url: "/users/refresh-token", method: "POST", body: { refreshToken: auth.refreshToken } }, api, extraOptions);
-
-				if (data) {
-					api.dispatch(signIn({ ...auth, ...data }));
+				const response = await baseQuery({ url: "/users/refresh-token", method: "POST", body: { refreshToken: auth.refreshToken } }, api, extraOptions);
+				if (response.data) {
+					api.dispatch(signIn({ ...auth, ...response.data }));
 					result = await baseQuery(args, api, extraOptions);
+				} else {
+					enqueueSnackbar(snackBarMessages.sessionExpired);
+					api.dispatch(signOut());
 				}
-			} catch (e) {
-				enqueueSnackbar(snackBarMessages.sessionExpired);
-				api.dispatch(signOut());
 			} finally {
 				release();
 			}

@@ -4,40 +4,47 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 import * as Styled from "./styled";
 
+import type { IStyledSelectProps } from "./styled/Select";
+
 export interface ISelectProps extends SelectProps {
-	data: {
-		description: string;
-		value?: string;
+	data?: {
+		name?: string;
+		id?: string;
 	}[];
+	disableEmptyLane?: boolean;
 }
 
-export const Select = (props: ISelectProps) => {
-	const { onChange: propsOnChange, onOpen: propsOnOpen, onClose: propsOnClose, data, placeholder, ...restProps } = props;
+export const Select = (props: ISelectProps & IStyledSelectProps) => {
+	const { onChange: propsOnChange, onOpen: propsOnOpen, onClose: propsOnClose, data, placeholder, disableEmptyLane, ...restProps } = props;
 
 	const [selected, setSelected] = useState<"placeholder" | string>("placeholder");
 	const [isOpen, setIsOpen] = useState(false);
 
 	const options = useMemo(
 		() =>
-			data?.map(({ description, value }) => (
+			data?.map(({ name, id }) => (
 				<MenuItem
-					key={value}
-					value={value}
+					key={id}
+					value={id}
 				>
-					{description}
+					{name}
 				</MenuItem>
 			)),
 		[data]
 	);
 
 	const isPlaceholder = selected === "placeholder" && !isOpen;
-	const isValue = useMemo(() => data?.find(({ value }) => value === selected), [data, selected]);
+	const isValue = useMemo(() => data?.find(({ id }) => id === selected), [data, selected]);
 
 	const onChange = useCallback(
-		(event: SelectChangeEvent<unknown>, element: ReactNode) => {
-			const eventValue = event.target.value === "setPlaceholder" ? "placeholder" : event.target.value;
-			setSelected(eventValue as string);
-			if (propsOnChange) propsOnChange(event, element);
+		(e: SelectChangeEvent<unknown>, element: ReactNode) => {
+			if (e.target.value === "setPlaceholder") {
+				e.target.value = "";
+				setSelected("placeholder");
+			} else {
+				setSelected(e.target.value as string);
+			}
+			if (propsOnChange) propsOnChange(e, element);
 		},
 		[setSelected, propsOnChange]
 	);
@@ -52,7 +59,7 @@ export const Select = (props: ISelectProps) => {
 
 	const onClose = useCallback(
 		(e: SyntheticEvent) => {
-			setTimeout(() => setIsOpen(false), 500);
+			setTimeout(() => setIsOpen(false), 250);
 			if (propsOnClose) propsOnClose(e);
 		},
 		[setIsOpen, propsOnClose]
@@ -69,16 +76,18 @@ export const Select = (props: ISelectProps) => {
 		>
 			<MenuItem
 				value="placeholder"
-				sx={isPlaceholder && !isOpen ? null : { display: "none" }}
+				sx={isPlaceholder ? null : { display: "none" }}
 			>
 				{placeholder}
 			</MenuItem>
-			<MenuItem
-				sx={isValue ? null : { display: "none" }}
-				value="setPlaceholder"
-			>
-				‎
-			</MenuItem>
+			{!disableEmptyLane && (
+				<MenuItem
+					sx={isValue ? null : { display: "none" }}
+					value="setPlaceholder"
+				>
+					‎
+				</MenuItem>
+			)}
 			{options}
 		</Styled.Select>
 	);

@@ -16,7 +16,7 @@ export const UserAvatar = ({ nickname, size, id, nicknameStyle, children }: IUse
 	return (
 		<Styled.Stack>
 			<AppLink
-				href={id ? `${Routes.article}${Routes.author}/${id}` : ""}
+				href={id ? `${Routes.author}/${id}` : ""}
 				sx={{ cursor: id ? "pointer" : "default" }}
 				authorized
 			>

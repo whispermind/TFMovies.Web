@@ -6,7 +6,7 @@ import { useIsAuthorized } from "../../../../common/hooks";
 import { SearchSubjectBar, SearchPageHeading, UserCard } from "..";
 import { ArticleCard } from "../../../Article/ArticleCard";
 import { Pagination } from "../../MainPage/styled";
-import { isUser, isArticles } from "../../../../common/utils";
+import { isUser, isArticles, dateFormatter } from "../../../../common/utils";
 import { PageSpinner } from "../../../../common/components";
 import * as Styled from "./styled";
 
@@ -39,8 +39,9 @@ export const SearchPage = () => {
 		if (isArticles(data)) {
 			content = data?.data.map((article) => (
 				<ArticleCard
+					{...article}
+					createdAt={dateFormatter(article.createdAt)}
 					key={article.id}
-					articleData={article}
 				/>
 			));
 		}

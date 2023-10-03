@@ -17,6 +17,7 @@ export { PageSpinner } from "./PageSpinner";
 export { PageWrapper } from "./PageWrapper";
 export { UserAvatar } from "./UserAvatar";
 export { AppLink } from "./AppLink";
+export { ConfirmationModal } from "./ConfirmationModal";
 
 export type { TFormTextFieldIconedProps } from "./Inputs/FormTextFieldIconed";
 export type { IWithIconProps } from "./Inputs/FormTextFieldIconed";

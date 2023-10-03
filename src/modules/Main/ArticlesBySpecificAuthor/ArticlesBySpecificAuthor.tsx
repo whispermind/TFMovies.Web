@@ -20,7 +20,7 @@ export const ArticlesBySpecificAuthor = () => {
 		() =>
 			data?.data?.map((articleData) => (
 				<ArticleCard
-					articleData={articleData}
+					{...articleData}
 					key={articleData.id}
 				/>
 			)),
@@ -51,7 +51,7 @@ export const ArticlesBySpecificAuthor = () => {
 						variant="HHeader"
 						textTransform="none"
 					>
-						The articles are written by the author {data?.data[0].author}
+						{`The ${data?.data[0].author}'s articles`}
 					</Typography>
 					{isLoading ? <PageSpinner /> : Articles}
 					<Styled.Pagination

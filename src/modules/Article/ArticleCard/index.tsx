@@ -20,12 +20,8 @@ export interface IArticleCard {
 	isLiked: boolean;
 }
 
-export interface IArticleCardProps {
-	articleData: IArticleCard;
-}
-
-export const ArticleCard = ({ articleData }: IArticleCardProps) => {
-	const { id, coverImageUrl, title, createdAt, author, tags, isLiked, authorId } = articleData;
+export const ArticleCard = (props: IArticleCard) => {
+	const { id, coverImageUrl, title, createdAt, author, tags, isLiked, authorId } = props;
 
 	return (
 		<Styled.Card>

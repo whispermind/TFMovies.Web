@@ -14,7 +14,7 @@ import * as Styled from "./styled";
 export const HeaderAccount = () => {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const [signOutReq] = useSignOutMutation();
-	const { currentUser, refreshToken, accessToken } = useAppSelector(selectAuth);
+	const { currentUser, refreshToken } = useAppSelector(selectAuth);
 	const dispatch = useAppDispatch();
 
 	const open = Boolean(anchorEl);
@@ -33,14 +33,14 @@ export const HeaderAccount = () => {
 	const onSignOut = useCallback(async () => {
 		handleClose();
 		try {
-			await signOutReq({ refreshToken, accessToken }).unwrap();
+			await signOutReq(refreshToken || "").unwrap();
 			enqueueSnackbar(snackBarMessages.signOut, { variant: "success" });
 		} catch (e) {
 			// handled by middleware
 		} finally {
 			dispatch(signOut());
 		}
-	}, [accessToken, refreshToken, signOutReq, handleClose, dispatch]);
+	}, [refreshToken, signOutReq, handleClose, dispatch]);
 
 	return (
 		<>

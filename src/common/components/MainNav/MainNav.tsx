@@ -10,7 +10,7 @@ import * as Styled from "./styled";
 
 const linksData = [
 	{ caption: "Home Page", Icon: HomePageIcon, section: "main", href: "/" },
-	{ caption: "Tags", Icon: HashtagIcon, section: "main", href: "/" },
+	{ caption: "Tags", Icon: HashtagIcon, section: "main", href: "/search?subject=tags" },
 	{ caption: "Favorites", Icon: FavoriteBorder, section: "main", href: Routes.favorites },
 	{ caption: "Contact Us", Icon: EmailIcon, section: "other", href: "/" },
 	{ caption: "Rules", Icon: RulesIcon, section: "other", href: "/" },

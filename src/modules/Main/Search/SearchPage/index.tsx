@@ -8,6 +8,7 @@ import { ArticleCard } from "../../../Article/ArticleCard";
 import { Pagination } from "../../MainPage/styled";
 import { isUser, isArticles, dateFormatter } from "../../../../common/utils";
 import { PageSpinner } from "../../../../common/components";
+import { NoDataIcon } from "../../../../common/components/Icons";
 import * as Styled from "./styled";
 
 const SEARCH_RESULTS_PER_PAGE_LIMIT = 16;
@@ -66,13 +67,14 @@ export const SearchPage = () => {
 					<SearchSubjectBar />
 					<Styled.ContentWrapper>
 						{isLoading && <PageSpinner />}
-						{isSuccess && searchResults}
+						{isSuccess && !!query && !!searchResults?.length && searchResults}
+						{(!query || !searchResults?.length) && isSuccess && <NoDataIcon />}
 					</Styled.ContentWrapper>
 				</Styled.Stack>
 				<Pagination
-					count={data?.totalPages}
+					count={(query && data?.totalPages) || 0}
 					onChange={onPageChange}
-					page={pageQuery}
+					page={(query && pageQuery) || 0}
 					boundaryCount={2}
 					variant="outlined"
 					shape="rounded"

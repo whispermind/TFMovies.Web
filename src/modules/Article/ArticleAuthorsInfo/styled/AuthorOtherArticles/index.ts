@@ -8,6 +8,8 @@ export const AuthorOtherArticles = styled(Stack)(
 			}
 		}
 	}) => ({
+		width: "100%",
+		maxWidth: "380px",
 		border: `2px solid ${strokeGrey}`,
 		borderRadius: "8px",
 		alignItems: "start"

@@ -34,6 +34,8 @@ export const ArticlesBySpecificAuthor = () => {
 		[setPageQuery]
 	);
 
+	const authorName = data?.data[0].author;
+
 	useIsAuthorized(true);
 
 	return (
@@ -51,7 +53,7 @@ export const ArticlesBySpecificAuthor = () => {
 						variant="HHeader"
 						textTransform="none"
 					>
-						{`The ${data?.data[0].author}'s articles`}
+						{authorName && `The ${authorName}'s articles`}
 					</Typography>
 					{isLoading ? <PageSpinner /> : Articles}
 					<Styled.Pagination

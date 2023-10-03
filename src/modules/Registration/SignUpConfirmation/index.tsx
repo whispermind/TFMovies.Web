@@ -33,7 +33,7 @@ export const SignUpConfirmation = ({ email }: ISignUpCofnrimProps) => {
 
 	const heading = "Thank you for Registering";
 	const description = `Thank you for registering on the Portal! We are sure that together with you we can be even better.
-  We have sent a letter confirming your registration to the specified email. If you didn't receive it,
+  We have sent a letter confirming your registration to the specified e-mail. If you didn't receive it,
   please check your spam folder or click the "Send again" button below`;
 
 	return (

@@ -8,7 +8,7 @@ export const AuthorDataWrapper = styled(Stack)(
 			}
 		}
 	}) => ({
-		minWidth: "300px",
+		width: "100%",
 		maxWidth: "380px",
 		minHeight: "180px",
 		padding: "32px 24px",

@@ -24,7 +24,7 @@ export const UsersListFilteringControls = ({ onSearchCb }: IUsersListFilteringCo
 		<Styled.Wrapper>
 			<FormTextFieldIconed
 				type="text"
-				placeholder="Enter the nickname or email..."
+				placeholder="Enter the nickname or e-mail..."
 				icon={UserIcon}
 				position="start"
 				sx={{ maxWidth: "420px", width: "50%" }}

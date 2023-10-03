@@ -16,8 +16,8 @@ export const SignInPage = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
-	const description = `We are largest society of movies enthusiasts. 
-		Here you are sure to find like-minded people! To log into your account, enter your username and password`;
+	const description = `We are the largest society of movie enthusiasts. 
+		Here you are sure to find like-minded people! To log into your account, enter your e-mail and password`;
 	const heading = (
 		<>
 			Welcome back to the <LogoName variant="HHeader" />

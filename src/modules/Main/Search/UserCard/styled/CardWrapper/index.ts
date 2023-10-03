@@ -10,6 +10,7 @@ export const CardWrapper = styled(Stack)(
 	}) => ({
 		width: "380px",
 		minHeight: "120px",
+		height: "max-content",
 		padding: "24px",
 		border: `solid 2px ${strokeGrey}`,
 		borderRadius: "8px",

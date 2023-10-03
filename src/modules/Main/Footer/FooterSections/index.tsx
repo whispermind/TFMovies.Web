@@ -6,7 +6,7 @@ import { AppLink } from "../../../../common/components/AppLink";
 
 const linksData = {
 	"/": "Home Page",
-	"/tags": "Tags",
+	"/search?subject=tags": "Tags",
 	[Routes.favorites]: "Favorites",
 	"/contactwithus": "Contact Us",
 	"/rules": "Rules"

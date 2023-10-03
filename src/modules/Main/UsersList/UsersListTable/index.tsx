@@ -15,8 +15,8 @@ interface IUsersListTableProps {
 }
 
 const columnsData = [
-	{ id: "email", label: "Email" },
 	{ id: "nickname", label: "Nickname" },
+	{ id: "email", label: "E-mail" },
 	{ id: "role", label: "Role", styles: { ml: "12px" } },
 	{ id: "delete", label: "", align: "right" as const }
 ];

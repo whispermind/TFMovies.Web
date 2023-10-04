@@ -8,6 +8,7 @@ export const CommentItem = styled(ListItem)(({ theme }) => {
 	} = theme;
 
 	return {
+		position: "relative",
 		borderRadius: "8px",
 		border: `1px solid ${strokeGrey}`,
 		padding: "16px"

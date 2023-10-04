@@ -12,5 +12,6 @@ export const snackBarMessages = {
 	changedUserRole: "The user role has been successfully changed",
 	deletedUser: "The user has been successfully deleted",
 	becomeAuthor: "The request to become an author has been sent",
-	articleDelete: "The article was sucessfully deleted"
+	articleDelete: "The article was sucessfully deleted",
+	commentDelete: "The comment was sucessfully deleted"
 };

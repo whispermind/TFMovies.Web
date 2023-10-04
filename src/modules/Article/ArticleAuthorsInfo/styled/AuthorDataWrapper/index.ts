@@ -10,6 +10,7 @@ export const AuthorDataWrapper = styled(Stack)(
 	}) => ({
 		maxWidth: "380px",
 		minHeight: "180px",
+		borderRadius: "8px",
 		flexGrow: 1,
 		padding: "32px 24px",
 		border: `2px solid ${strokeGrey}`,

@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { ListItem, Typography } from "@mui/material";
 
 import { FilteringListWrapper } from "../FilteringListWrapper";
-import { useGetTopTagsQuery } from "../../api";
+import { useGetTopTagsQuery } from "../../../../app/api/Tags";
 import { Routes } from "../../../../common/enums";
 import { AppLink } from "../../../../common/components";
 import * as Styled from "./styled";

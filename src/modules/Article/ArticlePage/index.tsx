@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-import { useGetArticleQuery } from "../api";
+import { useGetArticleQuery } from "../../../app/api/Articles";
 import { PageSpinner, PageWrapper } from "../../../common/components";
 import { ArticleContent, ArticleComments, ArticleActions, ArticleAuthorsInfo } from "..";
 import { useIsAuthorized } from "../../../common/hooks";

@@ -1,7 +1,6 @@
 export { LikeButton } from "./Buttons/LikeButton/index";
 export { PrimaryButton } from "./Buttons/PrimaryButton";
 export { SignUpButton } from "./Buttons/SignUpButton";
-export { CloseButton } from "./Buttons/CloseButton";
 export { LogoName } from "./LogoName";
 export { LogoHeading } from "./LogoHeading";
 export { NamedLogo } from "./NamedLogo";

@@ -11,13 +11,13 @@ import { ThemeAutocomplete } from "./ThemeAutocomplete";
 import { PrimaryButton } from "../../../../common/components";
 import { withController, withButtonLoader } from "../../../../common/hocs";
 import { yupErrorMessages, snackBarMessages, formValidation } from "../../../../common/utils";
-import { useImageUploadMutation } from "../api";
+import { useImageUploadMutation } from "../../../../app/api/Files";
 import { ArticleContent } from "../..";
 import { reducer } from "./Reducer";
 import * as Styled from "./styled";
 
-import type { IGetThemeResponseData } from "../../../Main/api";
-import type { IGetArticleResponseData } from "../../api";
+import type { IGetThemeResponseData } from "../../../../app/api/Themes";
+import type { IGetArticleResponseData } from "../../../../app/api/Articles";
 
 export interface ICreateArticleForm {
 	attachment: FileList | string | null;

@@ -3,7 +3,7 @@ import { FavoriteBorder } from "@mui/icons-material";
 
 import { FavoriteFilledIcon } from "../../Icons";
 import { useOnClickAuthorized } from "../../../hooks";
-import { useLikeArticleMutation, useUnlikeArticleMutation } from "../../../../modules/Main/api";
+import { useLikeArticleMutation, useUnlikeArticleMutation } from "../../../../app/api/Articles";
 import { IconSizes, Routes } from "../../../enums";
 import * as Styled from "./styled";
 

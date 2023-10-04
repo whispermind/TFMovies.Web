@@ -13,9 +13,7 @@ export const CommentsList = ({ comments }: { comments: ICommentData[] | undefine
 				return (
 					<Comment
 						key={uuidv4()}
-						nickname={comment.author}
-						createdAt={comment.createdAt}
-						commentText={comment.content}
+						{...comment}
 					/>
 				);
 			}),

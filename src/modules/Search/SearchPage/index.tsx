@@ -10,6 +10,7 @@ import { isUser, isArticles, dateFormatter } from "../../../common/utils";
 import { PageSpinner } from "../../../common/components";
 import { NoDataIcon } from "../../../common/components/Icons";
 import * as Styled from "./styled";
+import { UserRoles } from "../../../common/enums";
 
 const SEARCH_RESULTS_PER_PAGE_LIMIT = 16;
 
@@ -33,6 +34,7 @@ export const SearchPage = () => {
 				<UserCard
 					key={user.id}
 					{...user}
+					id={user.role.name === UserRoles.author || user.role.name === UserRoles.admin ? user.id : ""}
 				/>
 			));
 		}

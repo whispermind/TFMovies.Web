@@ -20,7 +20,7 @@ export const MuiRouterLink = forwardRef<HTMLAnchorElement, Omit<LinkProps, "to">
 			}
 
 			if ((authorized && currentUser) || !authorized) {
-				if ((href as string).startsWith("http")) {
+				if ((href as string)?.startsWith("http")) {
 					window.open(href as string, "blank");
 					return;
 				}

@@ -29,6 +29,7 @@ export const AuthorizedState = () => {
 		<Stack
 			direction="row"
 			columnGap={3.5}
+			alignItems="center"
 		>
 			{isEditor ? (
 				<Button

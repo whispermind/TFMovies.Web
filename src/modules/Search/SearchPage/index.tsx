@@ -1,5 +1,6 @@
 import { useState, useMemo, useCallback, ChangeEvent } from "react";
 import { useSearchParams } from "react-router-dom";
+import { Stack } from "@mui/material";
 
 import { useGetUsersOrArticlesQuery } from "../../../app/api/Combined";
 import { useIsAuthorized } from "../../../common/hooks";
@@ -10,6 +11,7 @@ import { isUser, isArticles, dateFormatter } from "../../../common/utils";
 import { PageSpinner } from "../../../common/components";
 import { NoDataIcon } from "../../../common/components/Icons";
 import * as Styled from "./styled";
+import { UserRoles } from "../../../common/enums";
 
 const SEARCH_RESULTS_PER_PAGE_LIMIT = 16;
 
@@ -33,6 +35,7 @@ export const SearchPage = () => {
 				<UserCard
 					key={user.id}
 					{...user}
+					id={user.role.name === UserRoles.author || user.role.name === UserRoles.admin ? user.id : ""}
 				/>
 			));
 		}
@@ -63,14 +66,20 @@ export const SearchPage = () => {
 		(
 			<Styled.Stack>
 				<SearchPageHeading />
-				<Styled.Stack direction="row">
+				<Styled.ContentWrapper>
 					<SearchSubjectBar />
-					<Styled.ContentWrapper>
-						{isLoading && <PageSpinner />}
-						{isSuccess && !!query && !!searchResults?.length && searchResults}
-						{(!query || !searchResults?.length) && isSuccess && <NoDataIcon />}
-					</Styled.ContentWrapper>
-				</Styled.Stack>
+					{(!query || !searchResults?.length) && isSuccess ? (
+						<NoDataIcon />
+					) : (
+						<Styled.Stack
+							direction="row"
+							flexWrap="wrap"
+						>
+							{isLoading && <PageSpinner />}
+							{isSuccess && !!query && !!searchResults?.length && searchResults}
+						</Styled.Stack>
+					)}
+				</Styled.ContentWrapper>
 				<Pagination
 					count={(query && data?.totalPages) || 0}
 					onChange={onPageChange}

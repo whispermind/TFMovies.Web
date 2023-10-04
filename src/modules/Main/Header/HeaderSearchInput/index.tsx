@@ -6,7 +6,7 @@ import { SearchIcon } from "../../../../common/components/Icons";
 import { Routes } from "../../../../common/enums";
 import { useIsAuthorized } from "../../../../common/hooks";
 
-const updateTime = 500;
+const updateTime = 1000;
 let userLastInputTime = 0;
 
 export const HeaderSearchInput = () => {
@@ -29,8 +29,10 @@ export const HeaderSearchInput = () => {
 				navigate({ pathname: Routes.search, search: `subject=articles&query=${value}` });
 			} else {
 				setTimeout(() => {
-					if (Date.now() - userLastInputTime >= 500) {
+					if (Date.now() - userLastInputTime >= 1000) {
+						const subject = new URLSearchParams(window.location.search).get("subject");
 						params.set("query", value);
+						params.set("subject", subject || "articles");
 						setSearchParams(params, { replace: true });
 					}
 				}, updateTime);

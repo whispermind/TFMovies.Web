@@ -11,9 +11,8 @@ export const SignUpPage = () => {
 	const [submitedMail, setSubmitedMail] = useState("");
 	const [signUpReq, { isLoading }] = useSignUpMutation();
 
-	const description = `We are the largest society of movies enthusiasts.
-  Here you are sure to find like - minded people! To create an account,
-    choose to register via social network or e - mail.`;
+	const description = `We are the largest society of movie enthusiasts.
+  Here you are sure to find like - minded people!`;
 	const heading = (
 		<>
 			Welcome to the <LogoName variant="HHeader" />

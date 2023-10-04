@@ -9,9 +9,10 @@ import * as Styled from "./styled";
 
 export interface IUsersListFilteringControlsProps {
 	onSearchCb: (queryObj: { usersSearchQuery: string; roleSearchQuery: string }) => void;
+	requestsTable?: boolean;
 }
 
-export const UsersListFilteringControls = ({ onSearchCb }: IUsersListFilteringControlsProps) => {
+export const UsersListFilteringControls = ({ onSearchCb, requestsTable }: IUsersListFilteringControlsProps) => {
 	const { data } = useGetUserRolesQuery();
 	const [usersSearchQuery, setSearchQuery] = useState("");
 	const [roleSearchQuery, setRoleSearchQuery] = useState("");
@@ -24,21 +25,23 @@ export const UsersListFilteringControls = ({ onSearchCb }: IUsersListFilteringCo
 		<Styled.Wrapper>
 			<FormTextFieldIconed
 				type="text"
-				placeholder="Enter the nickname or email..."
+				placeholder="Enter the nickname or e-mail..."
 				icon={UserIcon}
 				position="start"
 				sx={{ maxWidth: "420px", width: "50%" }}
 				onChange={onSearchQueryChange}
 				value={usersSearchQuery}
 			/>
-			<Select
-				data={data || []}
-				placeholder="Role"
-				bordered
-				width="20%"
-				maxWidth="340px"
-				onChange={onRoleChange}
-			/>
+			{!requestsTable && (
+				<Select
+					data={data || []}
+					placeholder="Role"
+					bordered
+					width="20%"
+					maxWidth="340px"
+					onChange={onRoleChange}
+				/>
+			)}
 			<PrimaryButton
 				variant="customOutlined"
 				sx={{ ml: "auto", maxWidth: "240px", width: "20%" }}

@@ -7,6 +7,7 @@ import type { RootState } from "../../../app/store/index";
 export interface IUser {
 	id: string;
 	nickname: string;
+	roleChangeRequested: boolean;
 	role: {
 		name: UserRoles;
 		id: string;

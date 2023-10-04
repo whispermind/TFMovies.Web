@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { Stack, List, ListItem, ListItemIcon, Typography } from "@mui/material";
 
-import { FavoriteBorder } from "@mui/icons-material";
+import { FavoriteBorder, PersonAddOutlined } from "@mui/icons-material";
 import { HomePageIcon, HashtagIcon, EmailIcon, RulesIcon, UserListIcon } from "../Icons";
 import { useAppSelector } from "../../hooks";
 import { selectAuth } from "../../../modules/Authorization/AuthSlice";
@@ -10,11 +10,12 @@ import * as Styled from "./styled";
 
 const linksData = [
 	{ caption: "Home Page", Icon: HomePageIcon, section: "main", href: "/" },
-	{ caption: "Tags", Icon: HashtagIcon, section: "main", href: "/" },
+	{ caption: "Tags", Icon: HashtagIcon, section: "main", href: "/search?subject=tags" },
 	{ caption: "Favorites", Icon: FavoriteBorder, section: "main", href: Routes.favorites },
 	{ caption: "Contact Us", Icon: EmailIcon, section: "other", href: "/" },
 	{ caption: "Rules", Icon: RulesIcon, section: "other", href: "/" },
-	{ caption: "User List", Icon: UserListIcon, section: "admin", href: Routes.usersList }
+	{ caption: "Users List", Icon: UserListIcon, section: "admin", href: Routes.usersList },
+	{ caption: "Users Requests", Icon: PersonAddOutlined, section: "admin", href: Routes.authorsRequests }
 ];
 
 export const MainNav = () => {

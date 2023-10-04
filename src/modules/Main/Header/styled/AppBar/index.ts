@@ -7,5 +7,5 @@ export const AppBar = styled(_AppBar)(
 				mainColors: { white }
 			}
 		}
-	}) => ({ "&.MuiAppBar-root": { backgroundColor: white } })
+	}) => ({ alignSelf: "flex-end", "&.MuiAppBar-root": { backgroundColor: white } })
 );

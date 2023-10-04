@@ -12,7 +12,6 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
 			<Stack
 				p="50px 0"
 				bgcolor="mainColors.lightGrey"
-				flexGrow={1}
 				justifyContent="center"
 				alignItems="center"
 			>

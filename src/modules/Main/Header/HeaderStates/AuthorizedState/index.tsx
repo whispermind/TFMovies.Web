@@ -7,7 +7,7 @@ import { useAppSelector } from "../../../../../common/hooks";
 import { selectAuth } from "../../../../Authorization/AuthSlice";
 import { UserRoles, Routes } from "../../../../../common/enums";
 import { snackBarMessages } from "../../../../../common/utils";
-import { useRequestAuthorRoleMutation } from "../../api";
+import { useRequestAuthorRoleMutation } from "../../../../../app/api/Users";
 
 export const AuthorizedState = () => {
 	const auth = useAppSelector(selectAuth);

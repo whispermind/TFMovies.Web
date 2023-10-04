@@ -9,7 +9,7 @@ import { useAppSelector } from "../../../app/store";
 import { selectAuth } from "../../Authorization";
 import * as Styled from "./styled";
 
-import type { IGetArticleResponseData } from "../api";
+import type { IGetArticleResponseData } from "../../../app/api/Articles";
 
 export const ArticleActions = (props: Partial<IGetArticleResponseData>) => {
 	const { likesCount, commentsCount, isLiked, id, authorId } = props;

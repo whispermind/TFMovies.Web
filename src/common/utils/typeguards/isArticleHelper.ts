@@ -1,4 +1,4 @@
-import type { IGetArticleResponseData } from "../../../modules/Article/api/index";
+import type { IGetArticleResponseData } from "../../../app/api/Articles";
 
 export function isArticle(article: unknown): article is IGetArticleResponseData {
 	return (

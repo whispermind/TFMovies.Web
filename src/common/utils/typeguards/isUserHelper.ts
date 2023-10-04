@@ -1,4 +1,4 @@
-import type { IGetUsersResponseData } from "../../../modules/Main/api";
+import type { IGetUsersResponseData } from "../../../app/api/Users";
 
 export function isUser(user: unknown): user is IGetUsersResponseData {
 	return (

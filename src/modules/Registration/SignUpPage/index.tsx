@@ -5,7 +5,7 @@ import { SignUpConfirmation, ISignUpForm, SignUpForm } from "..";
 import { FormDivider, LogoHeading, SubPageWrapper, PrimaryButton, LogoName } from "../../../common/components";
 import { capitalizer, snackBarMessages } from "../../../common/utils";
 import { Routes } from "../../../common/enums";
-import { useSignUpMutation } from "../api";
+import { useSignUpMutation } from "../../../app/api/Users";
 
 export const SignUpPage = () => {
 	const [submitedMail, setSubmitedMail] = useState("");

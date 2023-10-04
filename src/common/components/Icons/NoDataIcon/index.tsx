@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { SvgIcon, SvgIconProps } from "@mui/material";
+import { SvgIconProps } from "@mui/material";
 
 import * as Styled from "./styled";
 

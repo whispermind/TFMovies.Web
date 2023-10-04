@@ -1,9 +1,9 @@
 import { Typography } from "@mui/material";
 
-import { UserAvatar } from "../../../../common/components";
+import { UserAvatar } from "../../../common/components";
 import * as Styled from "./styled";
 
-import type { IUser } from "../../../Authorization/AuthSlice";
+import type { IUser } from "../../Authorization/AuthSlice";
 
 export const UserCard = ({ nickname, role }: Pick<IUser, "nickname" | "role">) => {
 	return (

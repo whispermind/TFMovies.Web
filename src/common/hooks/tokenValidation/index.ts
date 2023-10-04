@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useValidateTokenMutation, TTokenValidationEndpoints } from "../../../modules/Registration/api";
+import { useValidateTokenMutation, TTokenValidationEndpoints } from "../../../app/api/Users";
 
 export const useTokenValidation = (token: string, endpoint: TTokenValidationEndpoints) => {
 	const [validateTokenReq, { isLoading, isSuccess, isError }] = useValidateTokenMutation();

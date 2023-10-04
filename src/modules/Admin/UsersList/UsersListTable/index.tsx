@@ -3,8 +3,8 @@ import { Button, Table, TableBody, TableHead, TablePagination, TableRow, Typogra
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { enqueueSnackbar } from "notistack";
 
-import { useGetUsersQuery, useGetUserRolesQuery } from "../../api";
-import { useDeleteUserMutation, useChangeUserRoleMutation } from "../api";
+import { useDeleteUserMutation, useChangeUserRoleMutation, useGetUsersQuery } from "../../../../app/api/Users";
+import { useGetUserRolesQuery } from "../../../../app/api/Roles";
 import { Select, PageSpinner, ConfirmationModal } from "../../../../common/components";
 import { snackBarMessages } from "../../../../common/utils";
 import * as Styled from "./styled";

@@ -4,7 +4,7 @@ import { Stack } from "@mui/material";
 import { MainNav, PageSpinner, PageWrapper } from "../../../common/components";
 import { ArticleTopFiltering, SortingBar, ArticleCard } from "..";
 import { useOnClickAuthorized } from "../../../common/hooks";
-import { useGetArticlesQuery } from "../api";
+import { useGetArticlesQuery } from "../../../app/api/Articles";
 import { Routes } from "../../../common/enums";
 import * as Styled from "./styled";
 

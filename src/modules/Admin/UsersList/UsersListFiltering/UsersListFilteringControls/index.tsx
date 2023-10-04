@@ -4,7 +4,7 @@ import { SelectChangeEvent } from "@mui/material";
 import { PrimaryButton, FormTextFieldIconed, Select } from "../../../../../common/components";
 import { UserIcon } from "../../../../../common/components/Icons";
 
-import { useGetUserRolesQuery } from "../../../api";
+import { useGetUserRolesQuery } from "../../../../../app/api/Roles";
 import * as Styled from "./styled";
 
 export interface IUsersListFilteringControlsProps {

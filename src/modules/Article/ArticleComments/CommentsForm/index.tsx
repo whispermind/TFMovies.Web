@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
 
 import { FormTextField, PrimaryButton } from "../../../../common/components";
-import { useCreateCommentMutation } from "../../api";
+import { useCreateCommentMutation } from "../../../../app/api/Articles";
 import { snackBarMessages, yupErrorMessages } from "../../../../common/utils";
 
 export interface ICreateCommentForm {

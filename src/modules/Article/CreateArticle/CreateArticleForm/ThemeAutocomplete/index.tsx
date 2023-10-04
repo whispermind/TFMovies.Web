@@ -2,7 +2,7 @@ import { SyntheticEvent, useCallback, useMemo } from "react";
 import { Autocomplete } from "@mui/material";
 import { Control } from "react-hook-form";
 
-import { useGetThemesQuery, IGetThemeResponseData } from "../../../../Main/api";
+import { useGetThemesQuery, IGetThemeResponseData } from "../../../../../app/api/Themes";
 import { withController } from "../../../../../common/hocs";
 import * as Styled from "../styled";
 

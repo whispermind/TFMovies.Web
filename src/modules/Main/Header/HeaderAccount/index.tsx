@@ -5,7 +5,7 @@ import { enqueueSnackbar } from "notistack";
 
 import { selectAuth, signOut } from "../../../Authorization/AuthSlice";
 import { useAppSelector, useAppDispatch } from "../../../../common/hooks";
-import { useSignOutMutation } from "../../../Authorization/api";
+import { useSignOutMutation } from "../../../../app/api/Users";
 import { Avatar } from "../../../../common/components/UserAvatar/styled";
 import { HeaderUserInfo } from "../HeaderUserInfo";
 import { snackBarMessages } from "../../../../common/utils";

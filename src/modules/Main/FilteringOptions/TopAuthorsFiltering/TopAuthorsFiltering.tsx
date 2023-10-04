@@ -3,7 +3,7 @@ import { ListItem } from "@mui/material";
 
 import { UserAvatar } from "../../../../common/components";
 import { FilteringListWrapper } from "../FilteringListWrapper";
-import { useGetTopAuthorsQuery } from "../../api";
+import { useGetTopAuthorsQuery } from "../../../../app/api/Users";
 import * as Styled from "./styled";
 
 const AUTHORS_FETCH_LIMIT = 3;

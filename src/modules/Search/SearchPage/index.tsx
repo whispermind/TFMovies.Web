@@ -1,14 +1,14 @@
 import { useState, useMemo, useCallback, ChangeEvent } from "react";
 import { useSearchParams } from "react-router-dom";
 
-import { useGetUsersOrArticlesQuery } from "../../api";
-import { useIsAuthorized } from "../../../../common/hooks";
+import { useGetUsersOrArticlesQuery } from "../../../app/api/Combined";
+import { useIsAuthorized } from "../../../common/hooks";
 import { SearchSubjectBar, SearchPageHeading, UserCard } from "..";
-import { ArticleCard } from "../../../Article/ArticleCard";
-import { Pagination } from "../../MainPage/styled";
-import { isUser, isArticles, dateFormatter } from "../../../../common/utils";
-import { PageSpinner } from "../../../../common/components";
-import { NoDataIcon } from "../../../../common/components/Icons";
+import { ArticleCard } from "../../Article/ArticleCard";
+import { Pagination } from "../../Main/MainPage/styled";
+import { isUser, isArticles, dateFormatter } from "../../../common/utils";
+import { PageSpinner } from "../../../common/components";
+import { NoDataIcon } from "../../../common/components/Icons";
 import * as Styled from "./styled";
 
 const SEARCH_RESULTS_PER_PAGE_LIMIT = 16;

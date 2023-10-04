@@ -2,10 +2,11 @@ import { useMemo } from "react";
 import { Typography, ListItem } from "@mui/material";
 import { sanitize } from "dompurify";
 
-import { IGetArticleResponseData } from "../api";
 import { Routes } from "../../../common/enums";
 import { AppLink } from "../../../common/components";
 import * as Styled from "./styled";
+
+import type { IGetArticleResponseData } from "../../../app/api/Articles";
 
 type TArticleContentProps = Partial<Pick<IGetArticleResponseData, "tags" | "coverImageUrl" | "title" | "theme" | "htmlContent">>;
 

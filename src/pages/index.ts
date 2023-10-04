@@ -1,3 +1,4 @@
+export { EditArticlePage } from "../modules/Article/EditArticle";
 export { ArticlePage } from "../modules/Article/ArticlePage";
 export { CreateArticleSuccessPage } from "../modules/Article/CreateArticle/CreateArticleSuccessPage/index";
 export { CreateArticlePage } from "../modules/Article/CreateArticle/CreateArticlePage";
@@ -8,8 +9,7 @@ export { ForgotPassPage } from "../modules/Authorization/ForgotPassword/ForgotPa
 export { MainPage } from "../modules/Main/MainPage/MainPage";
 export { SignUpPage } from "../modules/Registration/SignUpPage";
 export { SignUpSuccessPage } from "../modules/Registration/SignUpSuccessPage";
-export { SearchPage } from "../modules/Main/Search/SearchPage";
-export { EditArticlePage } from "../modules/Article/EditArticle/EditArticlePage";
+export { SearchPage } from "../modules/Search/SearchPage";
 export { LikedArticles } from "../modules/Main/LikedArticles/LikedArticles";
-export { UserListPage } from "../modules/Main/UsersList/UsersListPage";
+export { UserListPage } from "../modules/Admin/UsersList/UsersListPage";
 export { ArticlesBySpecificAuthor } from "../modules/Main/ArticlesBySpecificAuthor/ArticlesBySpecificAuthor";

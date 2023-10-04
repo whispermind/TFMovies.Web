@@ -6,7 +6,7 @@ import { ArticleTags } from "../ArticleCard/ArticleTags";
 import { Routes } from "../../../common/enums";
 import * as Styled from "./styled";
 
-import type { PostByAuthor } from "../api";
+import type { PostByAuthor } from "../../../app/api/Articles";
 
 interface IArticleAuthorsInfoProps {
 	createdAt: string;

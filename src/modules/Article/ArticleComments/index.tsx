@@ -5,9 +5,11 @@ import { CommentsList } from "./CommentsList";
 import { CommentsWrapper } from "./styled";
 
 export interface ICommentData {
+	id: string;
 	content: string;
 	createdAt: string;
 	author: string;
+	authorId: string;
 }
 
 interface ICommentProps {

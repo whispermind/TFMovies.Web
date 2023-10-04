@@ -2,7 +2,7 @@ import { useState, useCallback, MouseEvent } from "react";
 import { Button, SelectChangeEvent } from "@mui/material";
 
 import { Select } from "../../../common/components";
-import { useGetThemesQuery } from "../api";
+import { useGetThemesQuery } from "../../../app/api/Themes";
 import * as Styled from "./styled";
 
 interface ISortingBarProps {

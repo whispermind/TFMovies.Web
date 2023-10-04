@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
 
 import { CreateArticleForm, CreationAdvice, ICreateArticleFormSubmit } from "..";
-import { useCreateArticleMutation } from "../api";
+import { useCreateArticleMutation } from "../../../../app/api/Articles";
 import { snackBarMessages } from "../../../../common/utils";
 import { useUserAccess } from "../../../../common/hooks";
 import { Routes, UserRoles } from "../../../../common/enums";

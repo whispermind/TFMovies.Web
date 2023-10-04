@@ -2,10 +2,9 @@ import { useEffect, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
 
-import { useUpdateArticleMutation } from "../api";
+import { useUpdateArticleMutation, IGetArticleResponseData } from "../../../../app/api/Articles";
 import { PageWrapper } from "../../CreateArticle/CreateArticlePage/styled";
 import { CreateArticleForm, CreationAdvice, ICreateArticleFormSubmit } from "../../CreateArticle";
-import { IGetArticleResponseData } from "../../api";
 import { snackBarMessages, isArticle } from "../../../../common/utils";
 import { Routes } from "../../../../common/enums";
 

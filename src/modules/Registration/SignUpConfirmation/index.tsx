@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { enqueueSnackbar } from "notistack";
 
 import { PrimaryButton, LogoHeading } from "../../../common/components";
-import { useSendSignUpEmailConfirmationMutation } from "../api";
+import { useSendSignUpEmailConfirmationMutation } from "../../../app/api/Users";
 import { snackBarMessages } from "../../../common/utils";
 
 const throttleTiming = 20000;

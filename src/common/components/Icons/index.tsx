@@ -3,7 +3,6 @@ export { HomePageIcon } from "./HomePageIcon";
 export { RulesIcon } from "./RulesIcon";
 export { PassswordIcon } from "./PasswordIcon";
 export { EmailIcon } from "./EmalIcon";
-export { CloseIcon } from "./CloseIcon";
 export { UserIcon } from "./UserIcon";
 export { LogoIcon } from "./LogoIcon";
 export { SearchIcon } from "./SearchIcon";

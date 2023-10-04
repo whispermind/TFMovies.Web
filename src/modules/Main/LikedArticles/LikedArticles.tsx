@@ -4,7 +4,7 @@ import { Stack, Typography } from "@mui/material";
 import { MainNav, PageSpinner, PageWrapper } from "../../../common/components";
 import { ArticleCard } from "..";
 import { useIsAuthorized } from "../../../common/hooks";
-import { useGetLikedArticlesQuery } from "../api";
+import { useGetLikedArticlesQuery } from "../../../app/api/Articles";
 import { Pagination } from "../MainPage/styled";
 
 const ARTICLES_PER_PAGE_LIMIT = 12;

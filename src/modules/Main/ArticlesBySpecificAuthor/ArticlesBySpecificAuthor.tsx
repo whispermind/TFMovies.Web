@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { MainNav, PageSpinner, PageWrapper } from "../../../common/components";
 import { ArticleCard } from "..";
 import { useIsAuthorized } from "../../../common/hooks";
-import { useGetArticlesByAuthorQuery } from "../api";
+import { useGetArticlesByAuthorQuery } from "../../../app/api/Articles";
 import { Pagination } from "../MainPage/styled";
 
 const ARTICLES_PER_PAGE_LIMIT = 12;

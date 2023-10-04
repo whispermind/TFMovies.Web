@@ -117,11 +117,19 @@ const articleApi = apiSlice.injectEndpoints({
 				...articles,
 				data: articles.data.map((article) => ({ ...article, createdAt: dateFormatter(article.createdAt) }))
 			})
+		}),
+		deleteArticle: builder.mutation<void, string>({
+			query: (id) => ({
+				url: `/posts/${id}`,
+				method: "DELETE"
+			}),
+			invalidatesTags: ["Article", "Articles"]
 		})
 	})
 });
 
 export const {
+	useDeleteArticleMutation,
 	useCreateCommentMutation,
 	useLikeArticleMutation,
 	useUnlikeArticleMutation,

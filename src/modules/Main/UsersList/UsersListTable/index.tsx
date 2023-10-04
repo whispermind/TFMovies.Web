@@ -1,5 +1,5 @@
 import { useMemo, ChangeEvent, useState, useCallback } from "react";
-import { Table, TableBody, TableHead, TablePagination, TableRow, Typography, SelectChangeEvent } from "@mui/material";
+import { Button, Table, TableBody, TableHead, TablePagination, TableRow, Typography, SelectChangeEvent } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { enqueueSnackbar } from "notistack";
 
@@ -84,6 +84,8 @@ export const UsersListTable = ({ usersSearchQuery, roleSearchQuery, requestsTabl
 					setDeleteUserId(id);
 				};
 
+				const isAdmin = name === UserRoles.admin;
+
 				return (
 					<TableRow key={id}>
 						<Styled.TableCell>
@@ -100,10 +102,19 @@ export const UsersListTable = ({ usersSearchQuery, roleSearchQuery, requestsTabl
 								sx={{ fontWeight: "bold" }}
 								onChange={onRoleChange}
 								disableEmptyLane
-								disabled={name === UserRoles.admin}
+								disabled={isAdmin}
 							/>
 						</Styled.TableCell>
-						<Styled.TableCell onClick={showModal}>{!requestsTable && <DeleteForeverIcon />}</Styled.TableCell>
+						<Styled.TableCell>
+							{!requestsTable && (
+								<Button
+									onClick={showModal}
+									disabled={isAdmin}
+								>
+									<DeleteForeverIcon />
+								</Button>
+							)}
+						</Styled.TableCell>
 					</TableRow>
 				);
 			}),

@@ -166,7 +166,7 @@ export const CreateArticleForm = ({
 			<Styled.FormWrapper>
 				{isPreview && <ArticleContent {...previewState} />}
 				<Styled.Form
-					sx={isPreview ? { position: "absolute", visibility: "hidden" } : {}}
+					sx={isPreview ? { position: "absolute", visibility: "hidden", left: "-1000%" } : {}}
 					onSubmit={handleSubmit(onSubmit)}
 					id="create-article-form"
 				>

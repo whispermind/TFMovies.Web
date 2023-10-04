@@ -38,7 +38,7 @@ export const ForgotPassForm = ({ onSubmit, isLoading }: ILoadingForm<IForgotPass
 				<Email
 					type="email"
 					name="email"
-					placeholder="Enter the email..."
+					placeholder="Enter the e-mail..."
 					control={control}
 					icon={EmailIcon}
 					position="start"

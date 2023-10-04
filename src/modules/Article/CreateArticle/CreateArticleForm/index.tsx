@@ -47,7 +47,7 @@ export const schema = yup.object().shape({
 		.required(requiredError("cover image"))
 		.test("size", attachmentSize(MAX_ATTACHMENT_SIZE), (file) => {
 			const maxSize = MAX_ATTACHMENT_SIZE * 1024 * 1024;
-			return typeof file === "string" || file[0]?.size < maxSize || !file.length;
+			return typeof file === "string" || file[0]?.size < maxSize || !file?.length;
 		}),
 	title: yup.string().required(requiredError()).trim(traillingSpace()),
 	tags: yup
@@ -84,8 +84,8 @@ export const CreateArticleForm = ({
 		defaultValues: {
 			attachment: coverImageUrl || null,
 			title: editingState.title || "",
-			tags: editingState.tags?.map(({ name }) => name).join(" "),
-			ThemeId: editingState.theme?.id
+			tags: (editingState && editingState.tags?.map(({ name }) => name).join(" ")) || "",
+			ThemeId: editingState.theme?.id || ""
 		},
 		resolver: yupResolver<ICreateArticleForm>(schema),
 		mode: "onBlur"
@@ -122,7 +122,7 @@ export const CreateArticleForm = ({
 	const togglePreview = useCallback(() => {
 		const [tags, title] = getValues(["tags", "title"]);
 		const formattedTags = tags && tags.split(" ").map((tag) => ({ name: tag, id: uuidv4() }));
-		const isPreviwable = formattedTags.length && title && theme.id && coverImageUrl && htmlContent;
+		const isPreviwable = formattedTags?.length && title && theme.id && coverImageUrl && htmlContent;
 
 		if (isPreviwable && formattedTags) {
 			dispatch({
@@ -166,7 +166,7 @@ export const CreateArticleForm = ({
 			<Styled.FormWrapper>
 				{isPreview && <ArticleContent {...previewState} />}
 				<Styled.Form
-					sx={isPreview ? { position: "absolute", visibility: "hidden" } : {}}
+					sx={isPreview ? { position: "absolute", visibility: "hidden", left: "-1000%" } : {}}
 					onSubmit={handleSubmit(onSubmit)}
 					id="create-article-form"
 				>
@@ -185,22 +185,22 @@ export const CreateArticleForm = ({
 								control={control}
 							/>
 							<Tags
-								name="tags"
 								type="text"
-								variant="standard"
+								name="tags"
 								placeholder="Add up to 5 tags to your title"
+								variant="standard"
 								control={control}
 							/>
 							<ThemeAutocomplete
-								control={control}
 								onChange={onThemeChange}
 								value={theme.name || ""}
+								control={control}
 							/>
 						</Styled.TextFieldsWrapper>
 					</Styled.FieldsWrapper>
 					<Editor
-						editorState={htmlContent}
 						onChange={setHtmlContent}
+						editorState={htmlContent}
 					/>
 				</Styled.Form>
 			</Styled.FormWrapper>

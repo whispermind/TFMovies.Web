@@ -13,7 +13,7 @@ export const ForgotPassPage = () => {
 	const navigate = useNavigate();
 
 	const heading = "Forgot your Password?";
-	const description = "You need to enter your email to recover your password. We will send an instruction with password recovery to your e-mail.";
+	const description = "You need to enter your e-mail to recover your password. We will send an instruction with password recovery to your e-mail.";
 
 	const onSubmit = useCallback(
 		async ({ email }: IForgotPassForm) => {

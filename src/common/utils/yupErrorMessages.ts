@@ -9,7 +9,7 @@ export const yupErrorMessages = {
 		return `Maximum field length is ${maxValue}`;
 	},
 	emailError() {
-		return "The email must be correct";
+		return "The e-mail must be correct";
 	},
 	onlyLettersError() {
 		return "The field may contain only  letters";

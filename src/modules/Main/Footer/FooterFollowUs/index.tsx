@@ -8,7 +8,7 @@ import { AppLink } from "../../../../common/components";
 
 const linksData = {
 	"https://facebook.com/": Facebook,
-	"https://www.instagram.com": Instagram,
+	"https://instagram.com": Instagram,
 	"https://twitter.com/": Twitter
 };
 
@@ -18,6 +18,7 @@ export const FooterFollowUs = () => {
 			Object.entries(linksData).map(([href, Icon]) => (
 				<AppLink
 					href={href}
+					target="blank"
 					key={href}
 				>
 					<Icon fontSize={IconSizes.large} />

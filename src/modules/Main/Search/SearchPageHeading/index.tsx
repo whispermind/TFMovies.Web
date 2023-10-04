@@ -13,7 +13,7 @@ export const SearchPageHeading = () => {
 			<Typography
 				variant="HHeader"
 				textTransform="none"
-			>{`Search Results: ${query}`}</Typography>
+			>{`Search Results: ${query || ""}`}</Typography>
 		</Styled.Stack>
 	);
 };

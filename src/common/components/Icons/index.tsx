@@ -10,3 +10,4 @@ export { SearchIcon } from "./SearchIcon";
 export { UserListIcon } from "./UserListIcon";
 export { FavoriteFilledIcon } from "./FavoriteFIlledIcon";
 export { CommentsIcon } from "./CommentsIcon";
+export { NoDataIcon } from "./NoDataIcon";

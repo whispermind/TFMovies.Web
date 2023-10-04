@@ -1,11 +1,11 @@
 import { useState, useCallback, useMemo, ChangeEvent } from "react";
-import { Stack, Grid, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 
-import { MainNav, PageSpinner } from "../../../common/components";
+import { MainNav, PageSpinner, PageWrapper } from "../../../common/components";
 import { ArticleCard } from "..";
 import { useIsAuthorized } from "../../../common/hooks";
 import { useGetLikedArticlesQuery } from "../api";
-import * as Styled from "./styled";
+import { Pagination } from "../MainPage/styled";
 
 const ARTICLES_PER_PAGE_LIMIT = 12;
 
@@ -36,10 +36,10 @@ export const LikedArticles = () => {
 
 	return (
 		(
-			<Styled.Grid container>
-				<Grid item>
+			<PageWrapper>
+				<div>
 					<MainNav />
-				</Grid>
+				</div>
 				<Stack
 					rowGap={2.5}
 					flexGrow={1}
@@ -51,7 +51,7 @@ export const LikedArticles = () => {
 						Liked Articles
 					</Typography>
 					{isLoading ? <PageSpinner /> : Articles}
-					<Styled.Pagination
+					<Pagination
 						count={data?.totalPages}
 						onChange={onPageChange}
 						page={pageQuery}
@@ -60,7 +60,7 @@ export const LikedArticles = () => {
 						shape="rounded"
 					/>
 				</Stack>
-			</Styled.Grid>
+			</PageWrapper>
 		) || null
 	);
 };

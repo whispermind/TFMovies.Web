@@ -10,7 +10,7 @@ export const SignUpButton = (props: ButtonProps) => {
 			{...props}
 		>
 			<EmailIcon sx={(theme) => ({ fill: theme.palette.mainColors.white })} />
-			Sign up with Email
+			Sign up with E-mail
 		</Button>
 	);
 };

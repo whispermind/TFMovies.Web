@@ -30,7 +30,7 @@ export const Editor = ({ onChange: onChangeFromProps, editorState }: IEditorProp
 			if (ops) {
 				const imageOperation = ops.find((obj) => typeof obj?.insert === "object" && "image" in obj.insert);
 				if (imageOperation) {
-					const imageSourceRegExp = /src="data:image.+?={1,2}"/;
+					const imageSourceRegExp = /src="data:image.+?"/;
 					const matches = state.match(imageSourceRegExp);
 					if (matches) {
 						const imageSource = matches[0];

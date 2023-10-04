@@ -43,7 +43,7 @@ export const SignInForm = ({ onSubmit, isLoading }: ILoadingForm<ISignInForm>) =
 				<Email
 					type="email"
 					name="email"
-					placeholder="Enter the email..."
+					placeholder="Enter the e-mail..."
 					control={control}
 					icon={EmailIcon}
 					position="start"

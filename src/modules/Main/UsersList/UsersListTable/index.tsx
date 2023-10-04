@@ -1,5 +1,5 @@
 import { useMemo, ChangeEvent, useState, useCallback } from "react";
-import { Paper, Table, TableBody, TableHead, TablePagination, TableRow, Typography, SelectChangeEvent } from "@mui/material";
+import { Button, Table, TableBody, TableHead, TablePagination, TableRow, Typography, SelectChangeEvent } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { enqueueSnackbar } from "notistack";
 
@@ -8,20 +8,22 @@ import { useDeleteUserMutation, useChangeUserRoleMutation } from "../api";
 import { Select, PageSpinner, ConfirmationModal } from "../../../../common/components";
 import { snackBarMessages } from "../../../../common/utils";
 import * as Styled from "./styled";
+import { UserRoles } from "../../../../common/enums";
 
 interface IUsersListTableProps {
 	usersSearchQuery: string;
 	roleSearchQuery: string;
+	requestsTable?: boolean;
 }
 
 const columnsData = [
-	{ id: "email", label: "Email" },
 	{ id: "nickname", label: "Nickname" },
+	{ id: "email", label: "E-mail" },
 	{ id: "role", label: "Role", styles: { ml: "12px" } },
 	{ id: "delete", label: "", align: "right" as const }
 ];
 
-export const UsersListTable = ({ usersSearchQuery, roleSearchQuery }: IUsersListTableProps) => {
+export const UsersListTable = ({ usersSearchQuery, roleSearchQuery, requestsTable }: IUsersListTableProps) => {
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -32,31 +34,35 @@ export const UsersListTable = ({ usersSearchQuery, roleSearchQuery }: IUsersList
 	const [deleteUserReq] = useDeleteUserMutation();
 	const [changeUserRoleReq] = useChangeUserRoleMutation();
 
-	const queryString = `?page=${page + 1}&limit=${rowsPerPage}&users=${usersSearchQuery}&roleId=${roleSearchQuery}`;
+	const queryString = `?page=${page + 1}&limit=${rowsPerPage}&users=${usersSearchQuery}&roleId=${roleSearchQuery}&RoleRequest=${!!requestsTable}`;
 	const { data: users, isLoading, isSuccess } = useGetUsersQuery(queryString);
+
+	const filteredRoles = useMemo(() => roles?.filter((userRole) => userRole.name !== UserRoles.admin), [roles]);
 
 	const columns = useMemo(
 		() =>
-			columnsData.map(({ id, label, styles, align }) => (
-				<Styled.TableCell
-					key={id}
-					align={align}
-				>
-					<Typography
-						variant="HBodyBold"
-						sx={styles || {}}
+			columnsData.map(({ id, label, styles, align }) => {
+				return (
+					<Styled.TableCell
+						key={id}
+						align={align}
 					>
-						{" "}
-						{label}
-					</Typography>
-				</Styled.TableCell>
-			)),
+						<Typography
+							variant="HBodyBold"
+							sx={styles || {}}
+						>
+							{" "}
+							{label}
+						</Typography>
+					</Styled.TableCell>
+				);
+			}),
 		[]
 	);
 
 	const rows = useMemo(
 		() =>
-			users?.data.map(({ id, email, nickname, role }) => {
+			users?.data.map(({ id, email, nickname, role: { name } }) => {
 				const onRoleChange = async ({ target: { value } }: SelectChangeEvent<unknown>) => {
 					if (value) {
 						const requestData = {
@@ -73,9 +79,12 @@ export const UsersListTable = ({ usersSearchQuery, roleSearchQuery }: IUsersList
 				};
 
 				const showModal = () => {
+					if (requestsTable) return;
 					setModalOpen(true);
 					setDeleteUserId(id);
 				};
+
+				const isAdmin = name === UserRoles.admin;
 
 				return (
 					<TableRow key={id}>
@@ -87,21 +96,29 @@ export const UsersListTable = ({ usersSearchQuery, roleSearchQuery }: IUsersList
 						</Styled.TableCell>
 						<Styled.TableCell>
 							<Select
-								data={roles}
-								placeholder={role.name}
+								data={filteredRoles}
+								placeholder={name}
 								width="110px"
 								sx={{ fontWeight: "bold" }}
 								onChange={onRoleChange}
 								disableEmptyLane
+								disabled={isAdmin}
 							/>
 						</Styled.TableCell>
-						<Styled.TableCell onClick={showModal}>
-							<DeleteForeverIcon />
+						<Styled.TableCell>
+							{!requestsTable && (
+								<Button
+									onClick={showModal}
+									disabled={isAdmin}
+								>
+									<DeleteForeverIcon />
+								</Button>
+							)}
 						</Styled.TableCell>
 					</TableRow>
 				);
 			}),
-		[roles, users, changeUserRoleReq, setDeleteUserId]
+		[users, changeUserRoleReq, requestsTable, setDeleteUserId, filteredRoles]
 	);
 
 	const handleChangePage = useCallback(
@@ -134,7 +151,7 @@ export const UsersListTable = ({ usersSearchQuery, roleSearchQuery }: IUsersList
 	);
 
 	return (
-		<Paper sx={{ width: "100%" }}>
+		<Styled.Paper>
 			<Styled.TableContainer>
 				{isLoading && <PageSpinner />}
 				{isSuccess && (
@@ -154,6 +171,7 @@ export const UsersListTable = ({ usersSearchQuery, roleSearchQuery }: IUsersList
 				page={(users?.page && users.page - 1) || 0}
 				onPageChange={handleChangePage}
 				onRowsPerPageChange={handleChangeRowsPerPage}
+				sx={{ alignSelf: "flex-end" }}
 			/>
 			<ConfirmationModal
 				isOpen={isModalOpen}
@@ -161,6 +179,6 @@ export const UsersListTable = ({ usersSearchQuery, roleSearchQuery }: IUsersList
 				onConfrim={onUserDelete}
 				handleClose={closeModal}
 			/>
-		</Paper>
+		</Styled.Paper>
 	);
 };

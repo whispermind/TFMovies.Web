@@ -7,8 +7,14 @@ import { UsersListFiltering, UsersListTable } from "..";
 import { PageWrapper, MainNav } from "../../../../common/components";
 import * as Styled from "./styled";
 
-export const UserListPage = () => {
+interface IUserListPage {
+	requestsTable?: boolean;
+}
+
+export const UserListPage = ({ requestsTable }: IUserListPage) => {
 	const [searchParams, setSerchParams] = useState({ usersSearchQuery: "", roleSearchQuery: "" });
+
+	const pageCaption = requestsTable ? "Requests List" : "Users List";
 
 	useUserAccess(UserRoles.admin, "/");
 
@@ -16,9 +22,15 @@ export const UserListPage = () => {
 		<PageWrapper justifyContent="flex-start">
 			<MainNav />
 			<Styled.Wrapper>
-				<Typography variant="HHeader">Users List</Typography>
-				<UsersListFiltering onSearchCb={setSerchParams} />
-				<UsersListTable {...searchParams} />
+				<Typography variant="HHeader">{pageCaption}</Typography>
+				<UsersListFiltering
+					onSearchCb={setSerchParams}
+					requestsTable={requestsTable}
+				/>
+				<UsersListTable
+					{...searchParams}
+					requestsTable={requestsTable}
+				/>
 			</Styled.Wrapper>
 		</PageWrapper>
 	);

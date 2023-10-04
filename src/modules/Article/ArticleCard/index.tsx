@@ -23,6 +23,7 @@ export interface IArticleCard {
 export const ArticleCard = (props: IArticleCard) => {
 	const { id, coverImageUrl, title, createdAt, author, tags, isLiked, authorId } = props;
 
+	const caption = isLiked ? "Remove from favorites" : "Add to favorites";
 	return (
 		<Styled.Card>
 			<AppLink
@@ -64,7 +65,7 @@ export const ArticleCard = (props: IArticleCard) => {
 							variant="HBody"
 							color="greyColors.grey"
 						>
-							Add to Favorites
+							{caption}
 						</Styled.LikeButtonDescription>
 					</LikeButton>
 				</Styled.CardActions>

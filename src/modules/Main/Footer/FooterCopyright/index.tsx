@@ -3,9 +3,9 @@ import { Stack, Typography } from "@mui/material";
 import { AppLink } from "../../../../common/components";
 
 const linksData = {
-	"/contactus": "Contact Us",
-	"/privacy": "Privacy Policy",
-	"/termsofuse": "Terms of Use"
+	" ": "Contact Us",
+	"  ": "Privacy Policy",
+	"   ": "Terms of Use"
 };
 
 export const FooterCopyright = () => {

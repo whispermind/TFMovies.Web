@@ -30,12 +30,7 @@ interface IGetCombinedRequest {
 
 interface IGetUserRolesResponseData {
 	id: string;
-	nickname: string;
-	email: string;
-	role: {
-		id: string;
-		name: string;
-	};
+	name: string;
 }
 
 const mainApi = apiSlice.injectEndpoints({
@@ -60,7 +55,7 @@ const mainApi = apiSlice.injectEndpoints({
 			query: ({ endpoint, query }) => ({
 				url: `/${endpoint}${query}`
 			}),
-			providesTags: (result) => (result ? [...result.data.map(({ id }) => ({ type: "Users" as const, id })), "Users"] : ["Users"])
+			providesTags: ["Users", "Articles"]
 		}),
 		getLikedArticles: builder.query<IGetArticlesResponseData, string>({
 			query: (query) => ({
@@ -81,7 +76,7 @@ const mainApi = apiSlice.injectEndpoints({
 			query: (query) => ({
 				url: `/posts${query}`
 			}),
-			providesTags: (result) => (result ? [...result.data.map(({ id }) => ({ type: "Article" as const, id })), "Article"] : ["Article"]),
+			providesTags: (result) => (result ? [...result.data.map(({ id }) => ({ type: "Articles" as const, id })), "Articles"] : ["Articles"]),
 			transformResponse: (articles: IGetArticlesResponseData) => ({
 				...articles,
 				data: articles.data.map((article) => ({ ...article, createdAt: dateFormatter(article.createdAt) }))

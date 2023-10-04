@@ -87,11 +87,16 @@ export const router = createBrowserRouter(
 				path="/search"
 				element={<SearchPage />}
 			/>
-
-			<Route
-				path="userslist"
-				element={<UserListPage />}
-			/>
+			<Route path="admin">
+				<Route
+					path="userslist"
+					element={<UserListPage />}
+				/>
+				<Route
+					path="requests"
+					element={<UserListPage requestsTable />}
+				/>
+			</Route>
 		</Route>
 	)
 );

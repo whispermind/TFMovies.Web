@@ -8,8 +8,8 @@ const linksData = {
 	"/": "Home Page",
 	"/search?subject=tags": "Tags",
 	[Routes.favorites]: "Favorites",
-	"/contactwithus": "Contact Us",
-	"/rules": "Rules"
+	"": "Contact Us",
+	" ": "Rules"
 };
 
 export const FooterSections = () => {

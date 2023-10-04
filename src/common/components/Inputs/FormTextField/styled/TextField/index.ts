@@ -46,11 +46,11 @@ export const TextField = styled(_TextField)(({ theme }) => {
 			},
 
 			"&.Mui-focused": {
-				borderColor: "#ffbfbf"
+				borderColor: "#3e3f40"
 			},
 
 			"&:has(input:active)": {
-				borderColor: "#ffbfbf"
+				borderColor: "#3e3f40"
 			}
 		}
 	};

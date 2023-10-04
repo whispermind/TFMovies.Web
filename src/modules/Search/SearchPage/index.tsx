@@ -1,5 +1,6 @@
 import { useState, useMemo, useCallback, ChangeEvent } from "react";
 import { useSearchParams } from "react-router-dom";
+import { Stack } from "@mui/material";
 
 import { useGetUsersOrArticlesQuery } from "../../../app/api/Combined";
 import { useIsAuthorized } from "../../../common/hooks";
@@ -65,14 +66,20 @@ export const SearchPage = () => {
 		(
 			<Styled.Stack>
 				<SearchPageHeading />
-				<Styled.Stack direction="row">
+				<Styled.ContentWrapper>
 					<SearchSubjectBar />
-					<Styled.ContentWrapper>
-						{isLoading && <PageSpinner />}
-						{isSuccess && !!query && !!searchResults?.length && searchResults}
-						{(!query || !searchResults?.length) && isSuccess && <NoDataIcon />}
-					</Styled.ContentWrapper>
-				</Styled.Stack>
+					{(!query || !searchResults?.length) && isSuccess ? (
+						<NoDataIcon />
+					) : (
+						<Styled.Stack
+							direction="row"
+							flexWrap="wrap"
+						>
+							{isLoading && <PageSpinner />}
+							{isSuccess && !!query && !!searchResults?.length && searchResults}
+						</Styled.Stack>
+					)}
+				</Styled.ContentWrapper>
 				<Pagination
 					count={(query && data?.totalPages) || 0}
 					onChange={onPageChange}

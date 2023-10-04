@@ -32,7 +32,8 @@ export const ArticleContentWrapper = styled("div")(({ theme }) => {
 			width: "100%",
 			margin: "36px 0",
 			maxHeight: "420px",
-			objectPosition: "center center"
+			objectPosition: "center center",
+			objectFit: "cover"
 		},
 
 		"& > img": {

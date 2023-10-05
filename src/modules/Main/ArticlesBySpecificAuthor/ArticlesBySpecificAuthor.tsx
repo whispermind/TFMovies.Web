@@ -48,7 +48,7 @@ export const ArticlesBySpecificAuthor = () => {
 				<Stack
 					rowGap={2.5}
 					flexGrow={1}
-					alignItems="center"
+					alignItems={authorName ? "" : "center"}
 				>
 					<Typography
 						textAlign="start"

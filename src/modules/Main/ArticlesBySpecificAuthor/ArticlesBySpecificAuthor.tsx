@@ -7,6 +7,7 @@ import { ArticleCard } from "..";
 import { useIsAuthorized } from "../../../common/hooks";
 import { useGetArticlesByAuthorQuery } from "../../../app/api/Articles";
 import { Pagination } from "../MainPage/styled";
+import { NoDataIcon } from "../../../common/components/Icons";
 
 const ARTICLES_PER_PAGE_LIMIT = 12;
 
@@ -14,7 +15,7 @@ export const ArticlesBySpecificAuthor = () => {
 	const [pageQuery, setPageQuery] = useState(1);
 	const { id } = useParams();
 	const queryString = `?page=${pageQuery}&limit=${ARTICLES_PER_PAGE_LIMIT}&userId=${id}`;
-	const { data, isLoading } = useGetArticlesByAuthorQuery(queryString);
+	const { data, isLoading, isSuccess } = useGetArticlesByAuthorQuery(queryString);
 
 	const Articles = useMemo(
 		() =>
@@ -34,7 +35,7 @@ export const ArticlesBySpecificAuthor = () => {
 		[setPageQuery]
 	);
 
-	const authorName = data?.data[0].author;
+	const authorName = data?.data.length && data.data[0].author;
 
 	useIsAuthorized(true);
 
@@ -47,14 +48,16 @@ export const ArticlesBySpecificAuthor = () => {
 				<Stack
 					rowGap={2.5}
 					flexGrow={1}
+					alignItems="center"
 				>
 					<Typography
 						textAlign="start"
 						variant="HHeader"
 						textTransform="none"
 					>
-						{authorName && `The ${authorName}'s articles`}
+						{authorName ? `The ${authorName}'s articles` : ""}
 					</Typography>
+					{isSuccess && !authorName && <NoDataIcon />}
 					{isLoading ? <PageSpinner /> : Articles}
 					<Pagination
 						count={data?.totalPages}

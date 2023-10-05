@@ -1,6 +1,5 @@
 import { useState, useMemo, useCallback, ChangeEvent } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Stack } from "@mui/material";
 
 import { useGetUsersOrArticlesQuery } from "../../../app/api/Combined";
 import { useIsAuthorized } from "../../../common/hooks";

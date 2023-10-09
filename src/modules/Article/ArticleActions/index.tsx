@@ -32,8 +32,8 @@ export const ArticleActions = (props: Partial<IGetArticleResponseData>) => {
 		async (confirmed: boolean) => {
 			if (!confirmed) return;
 			try {
+				await deleteArticleReq(id || "").unwrap();
 				navigate("/");
-				await deleteArticleReq(id || "");
 				enqueueSnackbar(snackBarMessages.articleDelete, { variant: "success" });
 			} catch {
 				// handled by middleware

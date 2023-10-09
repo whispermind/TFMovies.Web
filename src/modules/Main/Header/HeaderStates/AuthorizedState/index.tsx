@@ -18,7 +18,7 @@ export const AuthorizedState = () => {
 
 	const becomeAuthor = useCallback(async () => {
 		try {
-			await requestAuthorRoleReq();
+			await requestAuthorRoleReq().unwrap();
 			enqueueSnackbar(snackBarMessages.becomeAuthor, { variant: "success" });
 		} catch {
 			// handled by middleware

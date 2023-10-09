@@ -20,7 +20,7 @@ export const Comment = ({ content, author, createdAt, id, authorId }: ICommentDa
 
 	const onDelete = useCallback(async () => {
 		try {
-			await deleteCommentReq(id);
+			await deleteCommentReq(id).unwrap();
 			enqueueSnackbar(snackBarMessages.commentDelete, { variant: "success" });
 		} catch {
 			// handled by middleware

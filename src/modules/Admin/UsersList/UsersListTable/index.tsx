@@ -70,7 +70,7 @@ export const UsersListTable = ({ usersSearchQuery, roleSearchQuery, requestsTabl
 							newRoleId: value as string
 						};
 						try {
-							await changeUserRoleReq(requestData);
+							await changeUserRoleReq(requestData).unwrap();
 							enqueueSnackbar(snackBarMessages.changedUserRole, { variant: "success" });
 						} catch {
 							// handled by middleware
@@ -141,7 +141,7 @@ export const UsersListTable = ({ usersSearchQuery, roleSearchQuery, requestsTabl
 		async (confirmation: boolean) => {
 			if (!confirmation) return;
 			try {
-				await deleteUserReq(deleteUserId);
+				await deleteUserReq(deleteUserId).unwrap();
 				enqueueSnackbar(snackBarMessages.deletedUser, { variant: "success" });
 			} catch {
 				// handled by middleware

@@ -3,16 +3,18 @@ import { Button, Stack } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
 
 import { HeaderAccount } from "../../HeaderAccount";
-import { useAppSelector } from "../../../../../common/hooks";
-import { selectAuth } from "../../../../Authorization/AuthSlice";
+import { useAppSelector, useAppDispatch } from "../../../../../common/hooks";
+import { selectAuth, signIn } from "../../../../Authorization/AuthSlice";
 import { UserRoles, Routes } from "../../../../../common/enums";
 import { snackBarMessages } from "../../../../../common/utils";
 import { useRequestAuthorRoleMutation } from "../../../../../app/api/Users";
 
 export const AuthorizedState = () => {
+	const dispatch = useAppDispatch();
 	const auth = useAppSelector(selectAuth);
-	const { currentUser } = auth;
 	const [requestAuthorRoleReq] = useRequestAuthorRoleMutation();
+
+	const { currentUser } = auth;
 	const userRole = currentUser?.role.name;
 	const isEditor = currentUser && (userRole === UserRoles.author || userRole === UserRoles.admin);
 
@@ -20,10 +22,11 @@ export const AuthorizedState = () => {
 		try {
 			await requestAuthorRoleReq().unwrap();
 			enqueueSnackbar(snackBarMessages.becomeAuthor, { variant: "success" });
+			dispatch(signIn({ ...auth, currentUser: { ...auth.currentUser!, roleChangeRequested: true } }));
 		} catch {
 			// handled by middleware
 		}
-	}, [requestAuthorRoleReq]);
+	}, [requestAuthorRoleReq, auth, dispatch]);
 
 	return (
 		<Stack

@@ -94,7 +94,6 @@ export const SearchPage = () => {
 					boundaryCount={2}
 					variant="outlined"
 					shape="rounded"
-					sx={{ maxWidth: "1220px" }}
 				/>
 			</Styled.PageWrapper>
 		) || null

@@ -25,18 +25,18 @@ export const MainNav = () => {
 		() =>
 			linksData.map(({ caption, Icon, section, href }) => ({
 				link: (
-					<Styled.MainLink
-						key={caption}
-						href={href}
-						authorized
-					>
-						<ListItem>
+					<ListItem>
+						<Styled.MainLink
+							key={caption}
+							href={href}
+							authorized
+						>
 							<ListItemIcon>
 								<Icon />
 							</ListItemIcon>
 							<Typography variant="HBody">{caption}</Typography>
-						</ListItem>
-					</Styled.MainLink>
+						</Styled.MainLink>
+					</ListItem>
 				),
 				section
 			})),

@@ -12,8 +12,6 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
 			<Stack
 				p="50px 0"
 				bgcolor="mainColors.lightGrey"
-				justifyContent="center"
-				alignItems="center"
 				flexGrow={1}
 			>
 				<AdoptiveLayout>{children}</AdoptiveLayout>
